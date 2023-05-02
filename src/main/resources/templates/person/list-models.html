@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Все телефоны</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<header>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <h1>Mobile shop</h1>
+                <p>Ваш магазин смартфонів</p>
+            </td>
+            <td><a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a></td>
+            <td>
+                <ul>
+                    <li><a href="/mobileshop/aboutus" style="color: blue">Про нас</a></li>
+                    <li><a href="/mobileshop/contacts" style="color: blue">Контакти</a></li>
+                    <li><a href="/mobileshop/delivery" style="color: blue">Умови доставки</a></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</header>
+<nav>
+    <a href="/mobileshop/" style="color: black">Головна</a> >
+</nav>
+<nav>
+    <!--    <h3>Виберіть бренд що цікавить</h3>-->
+    <table>
+        <tbody>
+        <tr>
+            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/apple">
+                <img th:src="@{/img/site/iphone.png}" style="text-align: center" width="30" height="30" alt="iphone"></a>
+                <p><a href="/mobileshop/phones/apple">Apple</a></p></td>
+            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/xiaomi">
+                <img th:src="@{/img/site/mi.png}" style="text-align: center" width="30" height="30" alt="xiaomi"></a>
+                <p><a href="/mobileshop/phones/xiaomi">Xiaomi</a></p></td>
+            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/samsung">
+                <img th:src="@{/img/site/samsung.png}" style="text-align: center" width="120" height="29" alt="samsung"></a>
+                <p><a href="/mobileshop/phones/samsung">Samsung</a></p></td>
+        </tr>
+        </tbody>
+    </table>
+</nav>
+<hr>
+<!--<h3>Виберіть модель, що цікавить:</h3>-->
+<table>
+    <tr>
+        <td style="width: auto">
+            <div th:each="phones : ${phone}">
+                <p>
+                    <!--        <img th:src="@{/img/phones/foto_phone.png}" align="center" width="44" height="83">-->
+                    <a style="font-family: Arial,serif" th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}"
+                       th:text="${phones.getBrand()}">text</a>
+                    <a style="font-family: Arial,serif" th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}"
+                       th:text="${phones.getModel()}">text</a>
+                    <br><b><a th:text="${phones.getPrice()}">text</a></b> ₴</p>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

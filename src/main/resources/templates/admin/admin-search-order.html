@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Телефон</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<nav>
+    <h3>За кодом <a th:text="${order.getId()}">VALUE</a> Знайдено заказ:</h3>
+    <table>
+        <tbody>
+        <tr>
+            <td style="width: auto">
+                Виробник: <a th:text="${order.getBrand()}">VALUE</a>
+                <br>
+                Модель: <a th:text="${order.getModel()}">VALUE</a>
+                <br>
+                Вбудована пам'ять: <a th:text="${order.getMemorySize()}">VALUE</a> ГБ
+                <br>
+                Ціна: <a th:text="${order.getPrice()}">VALUE</a> грн.
+                <br><br>
+                Ім'я клієнта: <a th:text="${order.getPersonName()}">VALUE</a>
+                <br>
+                Телефон клієнта: <a th:text="${order.getPersonPhone()}">VALUE</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</nav>
+<hr>
+<br><br>
+<div th:align="center">
+    <form th:method="DELETE" th:action="@{/mobileshop/delete/order/{id}(id=${order.getId()})}">
+        <input style="color: red" type="submit" value="Видалити заказ">
+    </form>
+</div>
+<br><br>
+<p>
+    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>
+</p>
+</body>
+</html>

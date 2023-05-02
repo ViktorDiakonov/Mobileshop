@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Сторінка замовлень</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<nav>
+    <h3>Особистий кабінет</h3>
+    <table th:align="center" style="background-color: skyblue">
+        <tbody th:align="center" style="background-color: lightgoldenrodyellow">
+        <tr>
+            <td height="5px" style="padding:10px; width: 400px"><b>Вашi покупки</b></td>
+        </tr>
+        <tr>
+            <td height="50px" style="padding:15px">
+                <div th:align="left" th:each="orders : ${order}">
+                    № Замовлення: <a th:text="${orders.getId()}">text</a><br>
+                    Бренд: <a th:text="${orders.getBrand()}">text</a><br>
+                    Модель: <a th:text="${orders.getModel()}">text</a><br>
+                    Розмiр пам'яті: <a th:text="${orders.getMemorySize()}">text</a><br>
+                    Цiна: <a th:text="${orders.getPrice()}">text</a><br>
+                    Мiсце отримання: <a th:text="${orders.getPoint()}">text</a><br>
+                    Дата та час замовлення: <a th:text="${orders.getDate()}">text</a>
+                    <hr>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</nav>
+</body>
+</html>

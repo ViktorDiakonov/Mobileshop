@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказ подтвержден</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<header>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <h1>Mobile shop</h1>
+                <p>Ваш магазин смартфонів</p>
+            </td>
+            <td><a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a></td>
+            <td>
+                <ul>
+                    <li><a href="/mobileshop/aboutus" style="color: blue; text-decoration: none">Про нас</a></li>
+                    <li><a href="/mobileshop/contacts" style="color: blue; text-decoration: none">Контакти</a></li>
+                    <li><a href="/mobileshop/delivery" style="color: blue; text-decoration: none">Умови доставки</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</header>
+<h3 style="color: green">Ваше замовлення прийнято!</h3>
+<table>
+    <tr>
+        <td style="width: auto">
+<!--            <div th:each="orders : ${order}">-->
+<!--                <b>Номер вашого замовлення № <a th:text="${order.getId()}">VALUE</a></b>:-->
+<!--            </div>-->
+            <br><br>
+            Виробник: <a th:text="${order.getBrand()}">VALUE</a>
+            <br>
+            Модель: <a th:text="${order.getModel()}">VALUE</a>
+            <br>
+            Вбудована пам'ять: <a th:text="${order.getMemorySize()}">VALUE</a> ГБ
+            <br>
+            Ціна: <a th:text="${order.getPrice()}">VALUE</a> грн.
+            <br><br>
+            Ваше ім'я: <a th:text="${order.getPersonName()}">VALUE</a>
+            <br>
+            Ваш контактний телефон: <a th:text="${order.getPersonPhone()}">VALUE</a>
+            <br><br>
+            Замовлення отримувати за адресою: <a th:text="${order.getPoint()}">VALUE</a>
+            <br><br>
+            <b style="color: green">Чекайте на дзвінок оператора на вказаний Вами номер</b>
+        </td>
+    </tr>
+</table>
+<hr>
+<br>
+<p>
+    <button><a href="/mobileshop/" style="color: blue">Повернутися на головну сторінку</a></button>
+</p>
+</body>
+</html>

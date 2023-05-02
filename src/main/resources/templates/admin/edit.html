@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Phone</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<nav>
+    <h3>Форма оновлення телефону за кодом: <a th:text="${phone.getId()}">VALUE</a></h3>
+    <table>
+        <tr>
+            <td style="width: auto">
+                <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}" th:object="${phone}">
+                    <label for="brand">Введіть бренд</label>
+                    <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>
+                    <span></span>
+                    <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>
+                    <br><br>
+                    <label for="model">Введіть модель телефону</label>
+                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="15" required>
+                    <span></span>
+                    <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>
+                    <br><br>
+                    <label for="memorySize">Введіть обсяг пам'яті</label>
+                    <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb
+                    <span></span>
+                    <div style="color: red" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">
+                        MemorySize Error</div>
+                    <br><br>
+                    <label for="price">Введіть ціну</label>
+                    <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> грн
+                    <span></span>
+                    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>
+                    <br><br>
+                    <input type="submit" value="Оновити">
+                </form>
+            </td>
+        </tr>
+    </table>
+</nav>
+<hr>
+<br>
+<p>
+    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>
+</p>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страница заказа</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<header>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <h1>Mobile shop</h1>
+                <p>Ваш магазин смартфонів</p>
+            </td>
+            <td><a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a></td>
+            <td>
+                <ul>
+                    <li><a href="/mobileshop/aboutus" style="color: blue">Про нас</a></li>
+                    <li><a href="/mobileshop/contacts" style="color: blue">Контакти</a></li>
+                    <li><a href="/mobileshop/delivery" style="color: blue">Умови доставки</a></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</header>
+<nav>
+    <a href="/mobileshop/" style="color: black">Головна</a>  >
+    <a th:href="@{/mobileshop/phones/{id}(id=${phone.getBrand().toLowerCase()})}" style="color: black">Смартфони</a>
+    <a th:text="${phone.getBrand()}">VALUE</a>  >
+    <a th:href="@{/mobileshop/phone/{id}(id=${phone.getId()})}" style="color: black">Смартфон</a>
+    <a th:text="${phone.getBrand()}">VALUE</a> <a th:text="${phone.getModel()}">VALUE</a>  >
+    Оформлення покупки:
+</nav>
+<h3>Ви оформляєте замовлення на телефон:</h3>
+<table>
+    <tr>
+        <td style="width: auto">
+            <form method="POST" th:action="@{/mobileshop/{id}/order(id=${phone.getId()})}" th:object="${phone}">
+                Виробник: <a th:text="${phone.getBrand()}">VALUE</a>
+                <label hidden for="brand">Виробник</label>
+                <input hidden type="text" th:field="*{brand}" id="brand">
+                <br>
+                Модель: <a th:text="${phone.getModel()}">VALUE</a>
+                <label hidden for="model">Модель</label>
+                <input hidden type="text" th:field="*{model}" id="model">
+                <br>
+                Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> ГБ
+                <label hidden for="memorySize">Об'єм внутрішньої пам'яті (Gb)</label>
+                <input hidden type="text" th:field="*{memorySize}" id="memorySize">
+                <br>
+                Цена: <a th:text="${phone.getPrice()}">VALUE</a> грн.
+                <label hidden for="price">Цена (грн)</label>
+                <input hidden type="text" th:field="*{price}" id="price">
+                <br><br><br>
+                <label for="personName">Введіть ваше ім'я</label>
+                <input type="text" size="21" th:field="*{personName}" id="personName"
+                       placeholder="вiд 2 до 20 лiтер" minlength="2" maxlength="20" required>
+                <span></span>
+<!--                <div style="color: red" th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}">personName-->
+<!--                    Error-->
+<!--                </div>-->
+                <br><br>
+                <label for="personPhone">Введіть свiй номер телефону</label>
+                <input type="text" th:field="*{personPhone}" id="personPhone"
+                       placeholder="вiд 9 до 14 цифр" pattern="\d{9,14}" required>
+                    <span></span>
+<!--                <div style="color: red" th:if="${#fields.hasErrors('personPhone')}" th:errors="*{personPhone}">-->
+<!--                    personPhone Error-->
+<!--                </div>-->
+                <br><br><br>
+                <fieldset>
+                    <legend>Виберіть, де вам зручно забрати замовлення:</legend>
+                    <br>
+                    <div>
+                        <input type="radio" id="Kyiv" name="point" value="Київ, вул. Антоновича, 50 ( з 10:00 до 21:00 )" required checked>
+                        <label for="Kyiv">Київ, вул. Антоновича, 50 <small>( з 10:00 до 21:00 )</small></label>
+                    </div>
+                    <br>
+                    <div>
+                        <input type="radio" id="Dnipro" name="point" value="Днiпро, вул. Магнітогорська, 1А ( з 10:00 до 21:00 )">
+                        <label for="Dnipro">Днiпро, вул. Магнітогорська, 1А <small>( з 10:00 до 21:00 )</small></label>
+                    </div>
+                    <br>
+                    <div>
+                        <input type="radio" id="Odessa" name="point" value="Одесса, вул.Дерибасiвська 3Д ( з 9:00 до 22:00 )">
+                        <label for="Odessa">Одесса, вул. Дерибасiвська 3Д <small>( з 9:00 до 22:00 )</small></label>
+                    </div>
+                </fieldset>
+                <br><br>
+                <input type="submit" style="color: green" value="Підтвердити заказ">
+            </form>
+        </td>
+    </tr>
+</table>
+<!--<hr>-->
+<!--<br>-->
+<!--<p>-->
+<!--    <button><a href="/mobileshop/" style="color: blue">Повернутися на головну сторінку</a></button>-->
+<!--</p>-->
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <style>
+        input + span {
+            position: relative;
+        }
+
+        input + span::before {
+            position: absolute;
+            right: -20px;
+        }
+
+        input:invalid {
+            border: 1px solid gray;
+        }
+
+        input:invalid + span::before {
+            min-font-size: 9;
+        }
+
+        input:valid + span::before {
+            color: green;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        tbody {
+            background-color: lightgoldenrodyellow;
+        }
+
+        td {
+            border: 2mm ridge rgba(87, 148, 247, .7);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h3>Кабінет адміністратора</h3>
+<table>
+    <tbody>
+    <tr>
+        <td style="width:275px" height="5px"><b>Робота із замовленнями</b></td>
+        <td style="padding:5px; width: 270px"><b>Робота з продукцією</b></td>
+    </tr>
+    <tr>
+        <td height="50px" style="padding:15px">
+            <br>
+            <button><a href="/mobileshop/orders">Дивитись всi замовлення</a></button>
+            <br><br><br>
+            <form name="ff" method="get" action="/mobileshop/orders/p">
+                <label for="size"></label>
+                <input type="text" name="size" id="size" placeholder="останнi 1-9 замовлень" minlength="1"
+                       pattern="[1-9]" required>
+                <input type="submit" value="Показати">
+                <!--<div th:if="${param.error}" style="color: red">Неправильный код замовлення</div>-->
+            </form>
+            <br>
+        </td>
+        <td height="100px">
+            <button><a href="/mobileshop/new_phone">Додавання нового телефону</a></button>
+        </td>
+    </tr>
+    <tr>
+        <td height="100px" style="padding:15px">
+            <form name="cc" method="get" action="/mobileshop/admin_page/search_order">
+                <label for="id">Знайти / Видалити</label>
+                <br>
+                <input type="text" name="id" id="id" size="21" placeholder="Введіть номер замовлення" pattern="\d{1,5}"
+                       required>
+                <input type="submit" value="Шукати">
+                <!--<div th:if="${param.error}" style="color: red">Неправильный код замовлення</div>-->
+            </form>
+        </td>
+        <td height="100px" style="padding:15px">
+            <form name="dd" method="get" action="/mobileshop/admin_page/search_phone">
+                <label for="id2">Оновити / Видалити</label>
+                <br>
+                <input type="text" name="id" id="id2" placeholder="Введіть код телефону" pattern="\d{1,5}" required>
+                <input type="submit" value="Шукати">
+                <!--<div th:if="${param.error}" style="color: red">Неправильный id</div>-->
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br><br>
+<hr>
+<br>
+<p>
+    <button><a href="/mobileshop/" style="color: blue">Головна сторінка сайту</a></button>
+</p>
+<br><br>
+<!--<a href="/logout">Выйти из учетной записи</a>-->
+</body>
+</html>

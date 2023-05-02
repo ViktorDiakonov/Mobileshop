@@ -1,0 +1,87 @@
+body {
+    background-color: lightgoldenrodyellow;
+}
+
+header {
+    background-color: skyblue;
+    height: 185px
+}
+
+table {
+    margin: auto;
+}
+
+td {
+    width: 200px;
+    font-family: "Grava Display", serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+    font-family: "Arial", serif;
+}
+
+h4 {
+    text-align: center;
+    font-family: "Arial", serif;
+}
+
+button {
+    font-family: "Arial", serif;
+}
+
+p {
+    text-align: center;
+    font-family: "Grava Display", serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+li {
+    font-family: "Grava Display", serif;
+}
+
+aside {
+    float:right;
+    width:200px;
+    background-color: skyblue;
+}
+
+input {
+    text-decoration: none;
+}
+
+
+input + span {
+    position: relative;
+}
+
+input + span::before {
+    position: absolute;
+    right: -20px;
+}
+
+input:invalid {
+    border: 2px solid coral;
+}
+
+
+
+input:invalid + span::before {
+    min-font-size: 9;
+    /*content: "✖";*/
+    content: "*";
+    color: red;
+}
+
+input:valid + span::before {
+    content: "✓";
+    color: green;
+}

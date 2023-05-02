@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Mobile shop</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <style>
+        div{
+
+        }
+        #header{
+            background-color: skyblue;
+            height: 185px
+        }
+        #leftSidebar{
+            background-color: white;
+            float: left;
+            width: 200px;
+            height: 271px;
+        }
+        #rightSidebar{
+            background-color: white;
+            float: right;
+            width: 200px;
+        }
+        #main{
+            height: 200px;
+            margin-left: 170px;
+            margin-right: 170px;
+        }
+        #footer{
+            position: absolute;
+            bottom: 0;
+            height: 35px;
+            min-width: 98%;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <table>
+        <tbody>
+        <tr>
+            <td style="width: 200px">
+                <h1>Mobile shop</h1>
+                <p>Ваш магазин смартфонів</p>
+            </td>
+            <td>
+                <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
+            </td>
+            <td>
+                <ul>
+                    <li><a href="/mobileshop/aboutus" style="color: blue">Про нас</a></li>
+                    <li><a href="/mobileshop/contacts" style="color: blue">Контакти</a></li>
+                    <li><a href="/mobileshop/delivery" style="color: blue">Умови доставки</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div id="leftSidebar" style="border: skyblue 2mm solid">
+    <p><b>Новинка iPhone 14 !</b></p>
+    <a href="/mobileshop/phone/38"><img src="/img/site/iphone-14-pro-max-2.gif" alt="banner" width="200" height="220"></a>
+</div>
+<div id="rightSidebar" style="border: skyblue 2mm solid">
+    <p>Отримуй інформацію
+        <br>про:<br></p>
+    <p><b>Акції</b></p>
+    <p><b>Знижки</b></p>
+    <p><b>Новинки</b></p>
+    <p>пройди просту реєстрацію</p>
+    <p><button><a href="/mobileshop/auth/registration">Зареєструватись</a></button></p>
+</div>
+<div id="main">
+    <h3>Виберіть бренд що цікавить</h3>
+    <table>
+        <tbody>
+        <tr>
+            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/apple">
+                <img src="/img/site/iphone.png" style="text-align: center" width="30" height="30" alt="Apple"></a>
+                <p><a href="/mobileshop/phones/apple">Apple</a></p></td>
+            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/xiaomi">
+                <img src="/img/site/mi.png" style="text-align: center" width="30" height="30" alt="Xiaomi"></a>
+                <p><a href="/mobileshop/phones/xiaomi">Xiaomi</a></p></td>
+            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/samsung">
+                <img src="/img/site/samsung.png" style="text-align: center" width="120" height="29" alt="Samsung"></a>
+                <p><a href="/mobileshop/phones/samsung">Samsung</a></p></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--<div id="footer" align="center"><a href="/mobileshop/" >Mobileshop.ua</a><br>2023г</div>-->
+</body>
+</html>

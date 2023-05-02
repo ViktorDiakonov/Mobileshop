@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Телефон</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<header>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                <h1>Mobile shop</h1>
+                <p>Ваш магазин смартфонів</p>
+            </td>
+            <td><a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a></td>
+            <td>
+                <ul>
+                    <li><a href="/mobileshop/aboutus" style="color: blue">Про нас</a></li>
+                    <li><a href="/mobileshop/contacts" style="color: blue">Контакти</a></li>
+                    <li><a href="/mobileshop/delivery" style="color: blue">Умови доставки</a></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</header>
+<nav>
+    <a href="/mobileshop/" style="color: black">Головна</a>  >
+    <a th:href="@{/mobileshop/phones/{id}(id=${phone.getBrand().toLowerCase()})}" style="color: black">Смартфони</a>
+    <a th:text="${phone.getBrand()}">VALUE</a>  >
+<!--    Смартфон <a th:text="${phone.getModel()}">VALUE</a>-->
+</nav>
+<nav>
+    <!--    <h3>Виберіть бренд що цікавить</h3>-->
+    <table>
+        <tbody>
+        <tr>
+            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/apple">
+                <img src="/img/site/iphone.png" style="text-align: center" alt="Apple" width="30" height="30"></a>
+                <p><a href="/mobileshop/phones/apple">Apple</a></p></td>
+            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/xiaomi">
+                <img src="/img/site/mi.png" style="text-align: center" alt="Xiaomi" width="30" height="30"></a>
+                <p><a href="/mobileshop/phones/xiaomi">Xiaomi</a></p></td>
+            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/samsung">
+                <img src="/img/site/samsung.png" style="text-align: center" alt="Samsung" width="120" height="29"></a>
+                <p><a href="/mobileshop/phones/samsung">Samsung</a></p></td>
+        </tr>
+        </tbody>
+    </table>
+</nav>
+<hr>
+<h3>Смартфон:</h3>
+<table>
+    <tr>
+        <td style="width: 220px">
+            Код товару: <a th:text="${phone.getId()}">VALUE</a>
+            <br><br>
+            Виробник: <a th:text="${phone.getBrand()}">VALUE</a>
+            <br>
+            Модель: <a th:text="${phone.getModel()}">VALUE</a>
+            <br>
+            Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> Gb
+            <br>
+            Ціна: <b><a th:text="${phone.getPrice()}">VALUE</a></b> грн.
+        </td>
+    </tr>
+</table>
+<p>
+    <button>
+        <a style="color: green" th:href="@{/mobileshop/{id}/new_order(id=${phone.getId()})}">Придбати</a>
+    </button>
+</p>
+<!--<hr>-->
+<!--<br>-->
+<!--<p>-->
+<!--    <button><a href="/mobileshop/" style="color: blue">Повернутися на головну сторінку</a></button>-->
+<!--</p>-->
+</body>
+</html>

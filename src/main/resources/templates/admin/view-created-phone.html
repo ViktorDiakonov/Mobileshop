@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Створено новий телефон</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<nav>
+    <h3>Було створено новий телефон:</h3>
+    <table>
+        <tbody>
+        <tr>
+            <td style="width: auto">
+                Код товара: <a th:text="${phone.getId()}">VALUE</a>
+                <br>
+                Виробник: <a th:text="${phone.getBrand()}">VALUE</a>
+                <br>
+                Модель: <a th:text="${phone.getModel()}">VALUE</a>
+                <br>
+                Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> Гб
+                <br>
+                Ціна: <a th:text="${phone.getPrice()}">VALUE</a> грн.
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</nav>
+<hr>
+<br>
+<p>
+    <button>
+        <a style="color: blue" th:href="@{/mobileshop/{id}/edit_phone(id=${phone.getId()})}">Корегувати</a>
+    </button>
+</p>
+<br><br>
+<div th:align="center">
+    <form th:method="DELETE" th:action="@{/mobileshop/delete_phone/{id}(id=${phone.getId()})}">
+        <input style="color: red" type="submit" value="Видалити телефон">
+    </form>
+</div>
+<br><br>
+<p>
+    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>
+</p>
+</body>
+</html>

@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // конфигурируем spring Security и авторизацию
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable() // защита меж сайтовой подделки запросов
+        http.csrf().disable() // защита от меж сайтовой подделки запросов
                 .authorizeRequests()
                 .antMatchers("/mobileshop/admin_page").hasRole("ADMIN") //для этой страницы нужна роль Админ
                 //.antMatchers("/mobileshop/{id}/neworder").hasRole("USER") //для этой страницы нужна роль Юзер
@@ -34,8 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/mobileshop/auth/login?error") //адрес, куда перенаправит, если не верный логин или пароль
                 .and()
                 .logout()
-                .logoutUrl("/logout") // страница разлогинивания
-                .logoutSuccessUrl("/auth/login");
+                .logoutUrl("/logout") // страница разлогинивания (удаляются cookie и сессия)
+                .logoutSuccessUrl("/auth/login"); // страница перехода после разлогинивания
     }
 
     // настраивает аутентификацию

@@ -22,48 +22,48 @@ public class AdminController {
     private final PhoneService phoneService;
     private final AdminService adminService;
 
-    // страница для админа
+    // admin page
     @GetMapping("/admin_page")
     public String adminPage() {
         return "admin/admin-page";
     }
 
-    // удаление телефона по id
+    // delete phone by id
     @DeleteMapping("/delete_phone/{id}")
     public String deletePhone(@PathVariable("id") int id) {
         adminService.deletePhoneById(id);
         return "redirect:/mobileshop/admin_page";
     }
 
-    // удаление заказа по id
+    // delete order by id
     @DeleteMapping("/delete/order/{id}")
     public String deleteOrder(@PathVariable("id") int id) {
         adminService.deleteOrderById(id);
         return "redirect:/mobileshop/admin_page";
     }
 
-    // поиск телефона по id
+    // search phone by id
     @GetMapping("/admin_page/search_phone")
     public String searchPhone(@RequestParam(value = "id") int id, Model model) {
         model.addAttribute("phone", phoneService.findPhone(id));
         return "admin/admin-search-phone";
     }
 
-    // поиск заказа по id
+    // search order by id
     @GetMapping("/admin_page/search_order")
     public String searchOrder(@RequestParam(value = "id") int id, Model model) {
         model.addAttribute("order", adminService.findOrder(id));
         return "admin/admin-search-order";
     }
 
-    // просмотреть все заказы
+    // see all orders
     @GetMapping("/orders")
     public String viewAllOrders(Model model) {
         model.addAttribute("order", adminService.findAllOrders());
         return "admin/orders";
     }
 
-    // просмотреть все заказы с пагинацией
+    // see all orders with pagination
     @GetMapping("/orders/p")
     public String viewAllOrdersWithPagination(Model model, @RequestParam(defaultValue = "0") int page,
                                                            @RequestParam(value = "size") int size) {
@@ -71,7 +71,7 @@ public class AdminController {
         return "admin/orders";
     }
 
-    // отображает конкретный заказ
+    // see specific order
     @GetMapping("/{id}/order")
     public String viewOrderById(@PathVariable("id") int id, Model model) {
         model.addAttribute("order", adminService.findOrder(id));
@@ -79,13 +79,13 @@ public class AdminController {
     }
 
     //---------------------------------------------------------------
-    // добавление нового телефона
+    // add new phone
     @GetMapping("/new_phone")
     public String addNewPhone(@ModelAttribute("phone") Phone phone) {
         return "admin/new-phone";
     }
 
-    // сохранение нового телефона
+    // save new phone
     @PostMapping()
     public String createNewPhone(@ModelAttribute("phone") @Valid Phone phone, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "admin/new-phone";
@@ -95,14 +95,14 @@ public class AdminController {
     //---------------------------------------------------------------
 
     //---------------------------------------------------------------
-    // страница редактирования телефона
+    // phone edit page
     @GetMapping("/{id}/edit_phone")
     public String editPhone(Model model, @PathVariable("id") int id) {
         model.addAttribute("phone", adminService.readById(id));
         return "admin/edit";
     }
 
-    // сохранение отредактированного телефона
+    // save edit phone
     @PatchMapping("/{id}")
     public String updatePhone(@ModelAttribute("phone") @Valid Phone phone, BindingResult bindingResult,
                               @PathVariable("id") int id) {

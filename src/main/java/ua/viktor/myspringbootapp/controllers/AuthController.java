@@ -21,13 +21,13 @@ public class AuthController {
     private final AuthService authService;
     private final PersonValidator personValidator;
 
-    // страница регистрации пользователя
+    // user`s registration page
     @GetMapping("/registration")
     public String registrationPage(@ModelAttribute("person") Person person) {
         return "auth/registration";
     }
 
-    // сохранение нового пользователя
+    // save new user
     @PostMapping("/registration")
     public String performRegistrationPage(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
         personValidator.validate(person, bindingResult);
@@ -38,7 +38,7 @@ public class AuthController {
         return "redirect:/mobileshop/auth/login";
     }
 
-    // страница аутентификации пользователя
+    // user`s authentication page
     @GetMapping("/login")
     public String loginPage() {
         return "auth/login";

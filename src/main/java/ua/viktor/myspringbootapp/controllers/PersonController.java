@@ -21,34 +21,34 @@ public class PersonController {
     private final PhoneService phoneService;
     private final AdminService adminService;
 
-    // главная страница
+    // main page
     @GetMapping("/")
     public String mainPage() {
         return "person/main-page";
     }
 
-    // отображение телефонов apple
+    // show Apple phones
     @GetMapping("/phones/apple")
     public String phonesApple(Model model) {
         model.addAttribute("phone", phoneService.readAllPhonesByBrandApple("apple"));
         return "person/list-models";
     }
 
-    // отображение телефонов samsung
+    // show phones samsung
     @GetMapping("/phones/samsung")
     public String phonesSamsung(Model model) {
         model.addAttribute("phone", phoneService.readAllPhonesByBrandSamsung("samsung"));
         return "person/list-models";
     }
 
-    // отображение телефонов xiaomi
+    // show phones xiaomi
     @GetMapping("/phones/xiaomi")
     public String phonesXiaomi(Model model) {
         model.addAttribute("phone", phoneService.readAllPhonesByBrandXiaomi("xiaomi"));
         return "person/list-models";
     }
 
-    // отображение конкретного телефона
+    // show specific phone
     @GetMapping("/phone/{id}")
     public String viewPhoneById(@PathVariable("id") int id, Model model) {
         model.addAttribute("phone", phoneService.findPhone(id));
@@ -56,14 +56,14 @@ public class PersonController {
     }
 
 //----------------------------------------------------------------------
-    // страница создания заказа
+    // order creation page
     @GetMapping("/{id}/new_order")
     public String createNewOrder(@PathVariable("id") int id, Model model) {
         model.addAttribute("phone", adminService.readById(id));
         return "person/order";
     }
 
-    // сохранение нового заказа
+    // saving a new order
     @PostMapping("/{id}/order")
     public String createOrder(@ModelAttribute("order") @Valid Order order, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) return "redirect:/mobileshop/{id}/new_order";
@@ -72,19 +72,19 @@ public class PersonController {
     }
 //---------------------------------------------------------------------
 
-    // возвращает страничку "О нас"
+    // returns the page "About us"
     @GetMapping("/aboutus")
     public String aboutUs(){
         return "person/aboutus";
     }
 
-    // возвращает страничку "Контакты"
+    // returns the page "Contacts"
     @GetMapping("/contacts")
     public String contacts(){
         return "person/contacts";
     }
 
-    // возвращает страничку "Условия доставки"
+    // returns the page "Conditions of delivery"
     @GetMapping("/delivery")
     public String delivery(){
         return "person/delivery";

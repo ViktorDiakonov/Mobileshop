@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PersonDetailsService personDetailsService;
 
-    // конфигурируем spring Security и авторизацию
+    // configure spring security and authorization
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable() // защита от меж сайтовой подделки запросов
@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/mobileshop/auth/login") // моя форма регистрации
                 .loginProcessingUrl("/process_login") // адрес, где обрабатываются данные с формы
-                .defaultSuccessUrl("/mobileshop/", true) // страница куда перенаправляет потом
+                .defaultSuccessUrl("/mobileshop/admin_page", true) // страница куда перенаправляет потом
                 .failureUrl("/mobileshop/auth/login?error") //адрес, куда перенаправит, если не верный логин или пароль
                 .and()
                 .logout()
@@ -38,13 +38,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/auth/login"); // страница перехода после разлогинивания
     }
 
-    // настраивает аутентификацию
+    // configure authentication
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(personDetailsService).passwordEncoder(getPasswordEncoder());
     }
 
-    // настраивает BCrypt шифрование
+    // configure BCrypt coding
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();

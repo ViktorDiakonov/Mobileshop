@@ -25,19 +25,19 @@ public class PhoneServiceBean implements PhoneService {
     @Override
     public List<Phone> readAllPhonesByBrandApple(String phone) {
         log.info("Просмотр телефонов бренда = {}", phone);
-        return phoneRepository.findAllPhonesApple(phone);
+        return phoneRepository.findByBrandOrderByModelAsc("Apple");
     }
 
     @Override
     public List<Phone> readAllPhonesByBrandXiaomi(String phone) {
         log.info("Просмотр телефонов бренда = {}", phone);
-        return phoneRepository.findAllPhonesXiaomi(phone);
+        return phoneRepository.findByBrandOrderByModelAsc("Xiaomi");
     }
 
     @Override
     public List<Phone> readAllPhonesByBrandSamsung(String phone) {
         log.info("Просмотр телефонов бренда = {}", phone);
-        return phoneRepository.findAllPhonesSamsung(phone);
+        return phoneRepository.findByBrandOrderByModelAsc("Samsung");
     }
 
     public Phone findPhone(int id) {

@@ -12,6 +12,13 @@
         <tr>
             <td style="width: auto">
                 <form novalidate th:method="POST" th:action="@{/mobileshop}" th:object="${phone}">
+
+                    <label for="foto">Введіть бренд</label>
+                    <input type="file" accept="image/png" th:field="*{brand}" id="foto" pattern="[a-z,A-Z]{2,15}" required>
+                    <span></span>
+                    <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>
+                    <br><br>
+
                     <label for="brand">Введіть бренд</label>
                     <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>
                     <span></span>

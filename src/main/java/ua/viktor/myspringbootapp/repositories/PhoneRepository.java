@@ -12,7 +12,8 @@ import java.util.List;
 public interface PhoneRepository extends JpaRepository<Phone, Integer> {
 
 //    @Query(value = "select * from phones where brand = 'Apple' ORDER BY model asc", nativeQuery = true)
-    List<Phone> findByBrandOrderByModelAsc(String brand);
+
+        List<Phone> findByBrandOrderByModelAsc(String brand);
 
 //    @Query(value = "select * from phones where brand = 'Xiaomi' ORDER BY model asc", nativeQuery = true)
 //    List<Phone> findAllPhonesXiaomi(String brand);

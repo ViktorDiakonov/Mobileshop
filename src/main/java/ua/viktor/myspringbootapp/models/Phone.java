@@ -14,12 +14,22 @@ import javax.validation.constraints.*;
 @Setter
 public class Phone {
 
+    private String imagePath; // Путь к файлу изображения
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min = 2, max = 15, message = "Бренд має бути від 2 до 15 лiтер")
+    @Size(min = 2, max = 15, message = "Бренд має бути від 2 до 15 літер")
     @Column(name = "brand")
     private String brand;
 
@@ -44,7 +54,4 @@ public class Phone {
     @Size(min = 12, max = 12, message = "Номер телефону має бути довжиною 12 цифр і починатися з 380")
     @Column(name = "person_phone")
     private String personPhone;
-
-//    @Column(name = "point")
-//    private String point;
 }

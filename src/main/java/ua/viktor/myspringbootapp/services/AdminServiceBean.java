@@ -35,8 +35,7 @@ public class AdminServiceBean implements AdminService{
     @Override
     public void deleteOrderById(Integer id) {
         log.info("Удален Заказ с id = {}", id);
-        Order order = orderRepository.findById(id).orElseThrow(PhoneNotFoundException::new);
-        orderRepository.delete(order);
+        orderRepository.deleteById(id);
     }
 
     @Override
@@ -53,14 +52,14 @@ public class AdminServiceBean implements AdminService{
     }
 
     @Override
-    public Phone updateById(Integer id, Phone updatedPhone) {
+    public void updateById(Integer id, Phone updatedPhone) {
         log.info("Обновлен телефон с Id = {}", id);
         Phone phoneToBeUpdated = readById(id);
         phoneToBeUpdated.setBrand(updatedPhone.getBrand());
         phoneToBeUpdated.setModel(updatedPhone.getModel());
         phoneToBeUpdated.setMemorySize(updatedPhone.getMemorySize());
         phoneToBeUpdated.setPrice(updatedPhone.getPrice());
-        return phoneRepository.save(phoneToBeUpdated);
+        phoneRepository.save(phoneToBeUpdated);
     }
 
     @Override

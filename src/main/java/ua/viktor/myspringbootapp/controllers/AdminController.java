@@ -6,14 +6,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.services.AdminService;
 import ua.viktor.myspringbootapp.services.PhoneService;
 
 import javax.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
+
 /**
  * @author Diakonov Viktor
  */
+
+@Slf4j
 @Controller
 @AllArgsConstructor
 @RequestMapping("/mobileshop")
@@ -31,6 +42,7 @@ public class AdminController {
     // delete phone by id
     @DeleteMapping("/delete_phone/{id}")
     public String deletePhone(@PathVariable("id") int id) {
+        log.info("Удаление телефона с id={}", id);
         adminService.deletePhoneById(id);
         return "redirect:/mobileshop/admin_page";
     }
@@ -86,12 +98,43 @@ public class AdminController {
     }
 
     // save new phone
+//    @PostMapping()
+//    public String createNewPhone(@ModelAttribute("phone") @Valid Phone phone, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) return "admin/new-phone";
+//        adminService.create(phone);
+//        return "admin/view-created-phone";
+//    }
     @PostMapping()
-    public String createNewPhone(@ModelAttribute("phone") @Valid Phone phone, BindingResult bindingResult) {
+    public String createNewPhone(@ModelAttribute("phone") @Valid Phone phone,
+                                 BindingResult bindingResult,
+                                 @RequestParam(value = "image", required = false) MultipartFile file) {
         if (bindingResult.hasErrors()) return "admin/new-phone";
-        adminService.create(phone);
+
+        if (file != null && !file.isEmpty()) {
+            try {
+                String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                Path uploadPath = Paths.get("src/main/resources/static/uploads");
+
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                Path filePath = uploadPath.resolve(filename);
+                Files.write(filePath, file.getBytes());
+
+                // Сохраняем путь к изображению в БД
+                phone.setImagePath("/uploads/" + filename);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        adminService.create(phone); // Сохраняем телефон в БД
+
         return "admin/view-created-phone";
     }
+
+
     //---------------------------------------------------------------
 
     //---------------------------------------------------------------

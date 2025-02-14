@@ -4,42 +4,45 @@
     <meta charset="UTF-8">
     <title>Сторінка додавання нового телефону</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
-    </head>
+</head>
 <body>
 <nav>
     <h3>Форма додавання нового телефону</h3>
     <table>
         <tr>
             <td style="width: auto">
-                <form novalidate th:method="POST" th:action="@{/mobileshop}" th:object="${phone}">
-
-                    <label for="foto">Введіть бренд</label>
-                    <input type="file" accept="image/png" th:field="*{brand}" id="foto" pattern="[a-z,A-Z]{2,15}" required>
-                    <span></span>
-                    <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>
-                    <br><br>
-
+                <form novalidate th:method="POST" th:action="@{/mobileshop}" th:object="${phone}"
+                      enctype="multipart/form-data">
                     <label for="brand">Введіть бренд</label>
                     <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>
                     <span></span>
                     <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>
                     <br><br>
+
                     <label for="model">Введіть модель телефону</label>
                     <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="15" required>
                     <span></span>
                     <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>
                     <br><br>
+
                     <label for="memorySize">Введіть обсяг пам'яті</label>
                     <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb
                     <span></span>
                     <div style="color: red" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">
-                        MemorySize Error</div>
+                        MemorySize Error
+                    </div>
                     <br><br>
+
                     <label for="price">Введіть ціну</label>
                     <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> .грн
                     <span></span>
                     <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>
                     <br><br>
+
+                    <label for="image">Завантажте фото</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                    <br><br>
+
                     <input type="submit" value="Відправити">
                 </form>
             </td>
@@ -53,3 +56,35 @@
 </p>
 </body>
 </html>
+<!--<form novalidate th:method="POST" th:action="@{/mobileshop}" th:object="${phone}" enctype="multipart/form-data">-->
+<!--    <label for="brand">Введіть бренд</label>-->
+<!--    <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>-->
+<!--    <span></span>-->
+<!--    <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>-->
+<!--    <br><br>-->
+
+<!--    <label for="model">Введіть модель телефону</label>-->
+<!--    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="15" required>-->
+<!--    <span></span>-->
+<!--    <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>-->
+<!--    <br><br>-->
+
+<!--    <label for="memorySize">Введіть обсяг пам'яті</label>-->
+<!--    <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb-->
+<!--    <span></span>-->
+<!--    <div style="color: red" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">MemorySize Error</div>-->
+<!--    <br><br>-->
+
+<!--    <label for="price">Введіть ціну</label>-->
+<!--    <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> .грн-->
+<!--    <span></span>-->
+<!--    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>-->
+<!--    <br><br>-->
+
+<!--    &lt;!&ndash; Поле загрузки фото &ndash;&gt;-->
+<!--    <label for="image">Завантажте фото</label>-->
+<!--    <input type="file" id="image" name="image" accept="image/*">-->
+<!--    <br><br>-->
+
+<!--    <input type="submit" value="Відправити">-->
+<!--</form>-->

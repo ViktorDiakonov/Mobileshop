@@ -49,20 +49,108 @@
 </nav>
 <hr>
 <!--<h3>Виберіть модель, що цікавить:</h3>-->
-<table>
-    <tr>
-        <td style="width: auto">
-            <div th:each="phones : ${phone}">
+<!--<table>-->
+<!--    <tr>-->
+<!--        <td style="width: auto">-->
+<!--            <div th:each="phones : ${phone}" style="display: flex; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #ccc;">-->
+<!--                <a th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}" style="display: flex; align-items: center; text-decoration: none; color: inherit;">-->
+<!--                    <img th:src="@{${phones.imagePath}}" alt="Фото телефону" style="max-height: 100px; margin-right: 15px;">-->
+<!--                    <div>-->
+<!--                        <p>-->
+<!--                            <span th:text="${phones.getBrand()}">text</span>-->
+<!--                            <span th:text="${phones.getModel()}">text</span>-->
+<!--                            <br><b><span th:text="${phones.getPrice()}">text</span></b> ₴-->
+<!--                        </p>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+<div style="text-align: center; margin-bottom: 10px;">
+    <button onclick="toggleView()">Список / Таблиця</button>
+</div>
+
+<!-- Контейнер для телефонов -->
+<div id="phones-container" class="grid-view">
+    <div th:each="phones : ${phone}" class="phone-item">
+        <a th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}">
+            <img th:src="@{${phones.imagePath}}" alt="Фото телефону" style="max-height: 100px;">
+            <div>
                 <p>
-                    <!--        <img th:src="@{/img/phones/foto_phone.png}" align="center" width="44" height="83">-->
-                    <a style="font-family: Arial,serif" th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}"
-                       th:text="${phones.getBrand()}">text</a>
-                    <a style="font-family: Arial,serif" th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}"
-                       th:text="${phones.getModel()}">text</a>
-                    <br><b><a th:text="${phones.getPrice()}">text</a></b> ₴</p>
+                    <span th:text="${phones.getBrand()}">text</span>
+                    <span th:text="${phones.getModel()}">text</span>
+                    <br><b><span th:text="${phones.getPrice()}">text</span></b> ₴
+                </p>
             </div>
-        </td>
-    </tr>
-</table>
+        </a>
+    </div>
+</div>
+
+<!-- JavaScript для переключения видов -->
+<script>
+    function toggleView() {
+        let container = document.getElementById("phones-container");
+        container.classList.toggle("grid-view");
+        container.classList.toggle("list-view");
+    }
+</script>
+
+<!-- CSS стили -->
+<style>
+    /* Ограничиваем ширину и центрируем */
+    #phones-container {
+        max-width: 900px; /* Или другое значение в зависимости от дизайна */
+        margin: 0 auto;
+    }
+
+    /* Сетка с центровкой */
+    .grid-view {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 3 в ряд */
+        gap: 20px;
+        justify-content: center; /* Центрируем */
+    }
+
+    /* Карточки телефонов */
+    .grid-view .phone-item {
+        text-align: center;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    /* Список - обычный вертикальный вывод */
+
+    .list-view {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Центрирует все элементы */
+    }
+
+    .list-view .phone-item {
+        display: flex;
+        flex-direction: column; /* Чтобы текст шел под картинкой */
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .phone-item {
+        border: 2px solid transparent; /* По умолчанию нет рамки */
+        transition: border-color 0.3s ease-in-out; /* Плавное изменение */
+        display: inline-block; /* Оставляем размер блока соответствующим контенту */
+        padding: 10px; /* Небольшие отступы */
+    }
+
+    .phone-item:hover {
+        border: 3px solid #007bff; /* Синяя рамка */
+        padding: 5px; /* Уменьшаем padding, чтобы рамка не увеличивала блок */
+        border-radius: 10px; /* Закругленные углы */
+    }
+
+</style>
+
+
 </body>
 </html>

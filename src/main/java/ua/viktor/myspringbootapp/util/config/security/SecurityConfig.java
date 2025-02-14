@@ -8,13 +8,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import ua.viktor.myspringbootapp.services.PersonDetailsService;
 /**
  * @author Diakonov Viktor
  */
 @EnableWebSecurity
 @AllArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final PersonDetailsService personDetailsService;
 
@@ -38,11 +39,44 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/auth/login"); // страница перехода после разлогинивания
     }
 
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .csrf().disable()
+//                .authorizeHttpRequests(auth -> auth
+//                        .antMatchers("/mobileshop/admin_page").hasRole("ADMIN")
+//                        .antMatchers("/**").permitAll()
+//                        .anyRequest().hasAnyRole("USER", "ADMIN")
+//                )
+//                .formLogin(login -> login
+//                        .loginPage("/mobileshop/auth/login")
+//                        .loginProcessingUrl("/process_login")
+//                        .defaultSuccessUrl("/mobileshop/admin_page", true)
+//                        .failureUrl("/mobileshop/auth/login?error")
+//                )
+//                .logout(logout -> logout
+//                        .logoutUrl("/logout")
+//                        .logoutSuccessUrl("/auth/login")
+//                );
+//        return http.build();
+//    }
+
     // configure authentication
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(personDetailsService).passwordEncoder(getPasswordEncoder());
     }
+
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+//        return authenticationConfiguration.getAuthenticationManager();
+//    }
+//
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        return personDetailsService;
+//    }
+
 
     // configure BCrypt coding
     @Bean

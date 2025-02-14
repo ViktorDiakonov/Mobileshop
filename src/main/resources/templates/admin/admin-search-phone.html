@@ -9,19 +9,22 @@
 <nav>
     <h3>За кодом <a th:text="${phone.getId()}">VALUE</a> знайдено телефон:</h3>
     <table>
-        <tbody>
         <tr>
-            <td style="width: auto">
+            <td style="width: 220px; text-align: center;">
+                <img th:src="${phone.imagePath}" alt="Фото телефону" style="max-width: 200px;">
+            </td>
+            <td style="padding-left: 20px;">
+                Код товару: <a th:text="${phone.getId()}">VALUE</a>
+                <br><br>
                 Виробник: <a th:text="${phone.getBrand()}">VALUE</a>
                 <br>
                 Модель: <a th:text="${phone.getModel()}">VALUE</a>
                 <br>
-                Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> ГБ
+                Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> Gb
                 <br>
-                Ціна: <a th:text="${phone.getPrice()}">VALUE</a> грн.
+                Ціна: <b><a th:text="${phone.getPrice()}">VALUE</a></b> грн.
             </td>
         </tr>
-        </tbody>
     </table>
 </nav>
 <hr>

@@ -50,5 +50,16 @@ public class Order {
     @Column(name = "point")
     private String point;
 
+    private String imagePath; // Новый параметр для фото
+
+    // Геттер для imagePath
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     private Date date = Date.from(Instant.now());
 }

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.viktor.myspringbootapp.models.Order;
+import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.services.AdminService;
 import ua.viktor.myspringbootapp.services.PhoneService;
 import javax.validation.Valid;
@@ -64,12 +65,40 @@ public class PersonController {
     }
 
     // saving a new order
+//    @PostMapping("/{id}/order")
+//    public String createOrder(@ModelAttribute("order") @Valid Order order, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) return "redirect:/mobileshop/{id}/new_order";
+//        phoneService.createOrder(order);
+//        return "person/buy";
+//    }
     @PostMapping("/{id}/order")
-    public String createOrder(@ModelAttribute("order") @Valid Order order, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return "redirect:/mobileshop/{id}/new_order";
+    public String createOrder(@PathVariable int id, @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/mobileshop/" + id + "/new_order";
+        }
+
+        // Получаем данные о телефоне по его id
+        Phone phone = phoneService.findPhone(id);
+        if (phone == null) {
+            return "redirect:/mobileshop"; // Перенаправляем на главную, если телефона нет
+        }
+
+        // Устанавливаем данные телефона в заказ
+        order.setBrand(phone.getBrand());
+        order.setModel(phone.getModel());
+        order.setMemorySize(phone.getMemorySize());
+        order.setPrice(phone.getPrice());
+        order.setImagePath(phone.getImagePath()); // Заполняем путь к изображению
+
+        // Сохраняем заказ
         phoneService.createOrder(order);
+
+        // Передаем заказ в модель для отображения на странице "buy"
+        model.addAttribute("order", order);
+
         return "person/buy";
     }
+
 //---------------------------------------------------------------------
 
     // returns the page "About us"

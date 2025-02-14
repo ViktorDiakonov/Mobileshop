@@ -33,6 +33,10 @@
                     <span></span>
                     <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>
                     <br><br>
+                    <!-- Загрузка нового файла -->
+                    <label for="file">Оновити фото:</label>
+                    <input type="file" id="file" name="file">
+                    <br><br>
                     <input type="submit" value="Оновити">
                 </form>
             </td>

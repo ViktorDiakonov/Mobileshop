@@ -22,7 +22,7 @@ public interface AdminService {
     Phone create(Phone phone);
 
     // сохранение обновленного телефона
-    Phone updateById(Integer id, Phone phone);
+    void updateById(Integer id, Phone phone);
 
     // страница создания заказа
     Phone readById(Integer id);

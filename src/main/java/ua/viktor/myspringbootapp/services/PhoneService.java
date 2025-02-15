@@ -8,14 +8,14 @@ import java.util.List;
  */
 public interface PhoneService {
 
-    // отображение телефонов apple
-    List<Phone> readAllPhonesByBrandApple(String phone);
-
-    // отображение телефонов xiaomi
-    List<Phone> readAllPhonesByBrandXiaomi(String phone);
-
-    // отображение телефонов samsung
-    List<Phone> readAllPhonesByBrandSamsung(String phone);
+//    // отображение телефонов apple
+//    List<Phone> readAllPhonesByBrandApple(String phone);
+//
+//    // отображение телефонов xiaomi
+//    List<Phone> readAllPhonesByBrandXiaomi(String phone);
+//
+//    // отображение телефонов samsung
+//    List<Phone> readAllPhonesByBrandSamsung(String phone);
 
     // отображение одного телефона на странице
     Phone findPhone(int id);
@@ -25,4 +25,9 @@ public interface PhoneService {
 
     // todo тест для личного кабинета пользователя
     List<Order> readAllOrdersByPersonPhone(String phone);
+
+    List<Phone> findAllPhones();
+
+    List<Phone> readPhonesByBrandSorted(String brand, String sort);
+
 }

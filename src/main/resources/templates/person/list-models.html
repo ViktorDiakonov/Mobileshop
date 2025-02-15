@@ -10,16 +10,19 @@
     <table>
         <tbody>
         <tr>
-            <td>
+            <td style="width: 190px">
                 <h1>Mobile shop</h1>
                 <p>Ваш магазин смартфонів</p>
             </td>
-            <td><a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a></td>
+            <td>
+                <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
+            </td>
             <td>
                 <ul>
                     <li><a href="/mobileshop/aboutus" style="color: blue">Про нас</a></li>
                     <li><a href="/mobileshop/contacts" style="color: blue">Контакти</a></li>
-                    <li><a href="/mobileshop/delivery" style="color: blue">Умови доставки</a></li>
+                    <li><a href="/mobileshop/delivery" style="color: blue; width: 180px">Умови доставки&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    </li>
                 </ul>
             </td>
         </tr>
@@ -34,15 +37,26 @@
     <table>
         <tbody>
         <tr>
-            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/apple">
-                <img th:src="@{/img/site/iphone.png}" style="text-align: center" width="30" height="30" alt="iphone"></a>
-                <p><a href="/mobileshop/phones/apple">Apple</a></p></td>
-            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/xiaomi">
-                <img th:src="@{/img/site/mi.png}" style="text-align: center" width="30" height="30" alt="xiaomi"></a>
-                <p><a href="/mobileshop/phones/xiaomi">Xiaomi</a></p></td>
-            <td style="width: 200px; text-align: center"><a href="/mobileshop/phones/samsung">
-                <img th:src="@{/img/site/samsung.png}" style="text-align: center" width="120" height="29" alt="samsung"></a>
-                <p><a href="/mobileshop/phones/samsung">Samsung</a></p></td>
+            <td style="width: 200px; text-align: center; border-right: 1px solid black;">
+                <a href="/mobileshop/phones/apple">
+                    <img src="/img/site/iphone.png" style="text-align: center" width="30" height="30" alt="Apple">
+                </a>
+                <p><a href="/mobileshop/phones/apple">Apple</a></p>
+            </td> <!-- "1" -->
+
+            <td style="width: 200px; text-align: center; border-right: 1px solid black;">
+                <a href="/mobileshop/phones/xiaomi">
+                    <img src="/img/site/mi.png" style="text-align: center" width="30" height="30" alt="Xiaomi">
+                </a>
+                <p><a href="/mobileshop/phones/xiaomi">Xiaomi</a></p>
+            </td> <!-- "1" -->
+
+            <td style="width: 200px; text-align: center;">
+                <a href="/mobileshop/phones/samsung">
+                    <img src="/img/site/samsung.png" style="text-align: center" width="120" height="29" alt="Samsung">
+                </a>
+                <p><a href="/mobileshop/phones/samsung">Samsung</a></p>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -69,11 +83,39 @@
 <!--    </tr>-->
 <!--</table>-->
 
-<div style="text-align: center; margin-bottom: 10px;">
-    <button onclick="toggleView()">Список / Таблиця</button>
-</div>
+<!--<div style="text-align: center; margin-bottom: 10px;">-->
+<!--    <button onclick="toggleView()">Список / Таблиця</button>-->
+<!--</div>-->
 
 <!-- Контейнер для телефонов -->
+<!--<div id="phones-container" class="grid-view">-->
+<!--    <div th:each="phones : ${phone}" class="phone-item">-->
+<!--        <a th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}">-->
+<!--            <img th:src="@{${phones.imagePath}}" alt="Фото телефону" style="max-height: 100px;">-->
+<!--            <div>-->
+<!--                <p>-->
+<!--                    <span th:text="${phones.getBrand()}">text</span>-->
+<!--                    <span th:text="${phones.getModel()}">text</span>-->
+<!--                    <br><b><span th:text="${phones.getPrice()}">text</span></b> ₴-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; JavaScript для переключения видов &ndash;&gt;-->
+<!--<script>-->
+<!--    function toggleView() {-->
+<!--        let container = document.getElementById("phones-container");-->
+<!--        container.classList.toggle("grid-view");-->
+<!--        container.classList.toggle("list-view");-->
+<!--    }-->
+<!--</script>-->
+
+<div style="text-align: center; margin-bottom: 10px;">
+    <button onclick="toggleSort()">Сортувати за ціною</button>
+</div>
+
 <div id="phones-container" class="grid-view">
     <div th:each="phones : ${phone}" class="phone-item">
         <a th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}">
@@ -89,14 +131,16 @@
     </div>
 </div>
 
-<!-- JavaScript для переключения видов -->
 <script>
-    function toggleView() {
-        let container = document.getElementById("phones-container");
-        container.classList.toggle("grid-view");
-        container.classList.toggle("list-view");
+    function toggleSort() {
+        window.location.href = window.location.href.includes('sort=desc')
+            ? window.location.href.replace('sort=desc', 'sort=asc')
+            : window.location.href.includes('sort=asc')
+                ? window.location.href.replace('sort=asc', 'sort=desc')
+                : window.location.href + '?sort=asc';
     }
 </script>
+</body>
 
 <!-- CSS стили -->
 <style>
@@ -123,11 +167,11 @@
 
     /* Список - обычный вертикальный вывод */
 
-    .list-view {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Центрирует все элементы */
-    }
+    /*.list-view {*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    align-items: center; !* Центрирует все элементы *!*/
+    /*}*/
 
     .list-view .phone-item {
         display: flex;
@@ -150,7 +194,4 @@
     }
 
 </style>
-
-
-</body>
 </html>

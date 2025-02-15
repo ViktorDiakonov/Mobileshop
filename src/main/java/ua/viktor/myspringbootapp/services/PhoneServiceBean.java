@@ -11,6 +11,7 @@ import ua.viktor.myspringbootapp.util.exeption.PhoneNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
+
 /**
  * @author Diakonov Viktor
  */
@@ -22,23 +23,23 @@ public class PhoneServiceBean implements PhoneService {
     private final PhoneRepository phoneRepository;
     private final OrderRepository orderRepository;
 
-    @Override
-    public List<Phone> readAllPhonesByBrandApple(String phone) {
-        log.info("Просмотр телефонов бренда = {}", phone);
-        return phoneRepository.findByBrandOrderByModelAsc("Apple");
-    }
-
-    @Override
-    public List<Phone> readAllPhonesByBrandXiaomi(String phone) {
-        log.info("Просмотр телефонов бренда = {}", phone);
-        return phoneRepository.findByBrandOrderByModelAsc("Xiaomi");
-    }
-
-    @Override
-    public List<Phone> readAllPhonesByBrandSamsung(String phone) {
-        log.info("Просмотр телефонов бренда = {}", phone);
-        return phoneRepository.findByBrandOrderByModelAsc("Samsung");
-    }
+//    @Override
+//    public List<Phone> readAllPhonesByBrandApple(String phone) {
+//        log.info("Просмотр телефонов бренда = {}", phone);
+//        return phoneRepository.findByBrandOrderByModelAsc("Apple");
+//    }
+//
+//    @Override
+//    public List<Phone> readAllPhonesByBrandXiaomi(String phone) {
+//        log.info("Просмотр телефонов бренда = {}", phone);
+//        return phoneRepository.findByBrandOrderByModelAsc("Xiaomi");
+//    }
+//
+//    @Override
+//    public List<Phone> readAllPhonesByBrandSamsung(String phone) {
+//        log.info("Просмотр телефонов бренда = {}", phone);
+//        return phoneRepository.findByBrandOrderByModelAsc("Samsung");
+//    }
 
     public Phone findPhone(int id) {
         log.info("Запрос - найти телефон с id = {} начало", id);
@@ -53,10 +54,25 @@ public class PhoneServiceBean implements PhoneService {
         orderRepository.save(order);
     }
 
-// тест
+    // тест
     @Override
     public List<Order> readAllOrdersByPersonPhone(String phone) {
         return orderRepository.findOrdersByPersonPhone(phone);
+    }
+
+    @Override
+    public List<Phone> findAllPhones() {
+        log.info("Просмотр всех телефонов");
+        return phoneRepository.findAll();
+    }
+
+    @Override
+    public List<Phone> readPhonesByBrandSorted(String brand, String sort) {
+        String formattedBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1).toLowerCase();
+        if ("asc".equalsIgnoreCase(sort)) {
+            return phoneRepository.findByBrandOrderByPriceDesc(formattedBrand);
+        }
+        return phoneRepository.findByBrandOrderByPriceAsc(formattedBrand);
     }
 }
 

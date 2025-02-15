@@ -10,7 +10,11 @@ import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.services.AdminService;
 import ua.viktor.myspringbootapp.services.PhoneService;
+import ua.viktor.myspringbootapp.services.PhoneServiceBean;
+
 import javax.validation.Valid;
+import java.util.List;
+
 /**
  * @author Diakonov Viktor
  */
@@ -21,31 +25,53 @@ public class PersonController {
 
     private final PhoneService phoneService;
     private final AdminService adminService;
+    private final PhoneServiceBean phoneServiceBean;
 
-    // main page
+    //    // main page
+//    @GetMapping("/")
+//    public String mainPage() {
+//        return "person/main-page";
+//    }
+// main page with all phones
     @GetMapping("/")
-    public String mainPage() {
+    public String mainPage(Model model) {
+        model.addAttribute("phone", phoneService.findAllPhones());
         return "person/main-page";
     }
 
     // show Apple phones
-    @GetMapping("/phones/apple")
-    public String phonesApple(Model model) {
-        model.addAttribute("phone", phoneService.readAllPhonesByBrandApple("apple"));
-        return "person/list-models";
-    }
+//    @GetMapping("/phones/apple")
+//    public String phonesApple(Model model) {
+//        model.addAttribute("phone", phoneService.readAllPhonesByBrandApple("apple"));
+//        return "person/list-models";
+//    }
+//    @GetMapping("/phones/apple")
+//    public String phonesApple(@RequestParam(value = "sort", required = false, defaultValue = "asc") String sort,
+//                              Model model) {
+//        model.addAttribute("phone", phoneServiceBean.readAllPhonesByBrandAppleSorted(sort));
+//        return "person/list-models";
+//    }
+//
+//
+//    // show phones samsung
+//    @GetMapping("/phones/samsung")
+//    public String phonesSamsung(Model model) {
+//        model.addAttribute("phone", phoneService.readAllPhonesByBrandSamsung("samsung"));
+//        return "person/list-models";
+//    }
+//
+//    // show phones xiaomi
+//    @GetMapping("/phones/xiaomi")
+//    public String phonesXiaomi(Model model) {
+//        model.addAttribute("phone", phoneService.readAllPhonesByBrandXiaomi("xiaomi"));
+//        return "person/list-models";
+//    }
 
-    // show phones samsung
-    @GetMapping("/phones/samsung")
-    public String phonesSamsung(Model model) {
-        model.addAttribute("phone", phoneService.readAllPhonesByBrandSamsung("samsung"));
-        return "person/list-models";
-    }
-
-    // show phones xiaomi
-    @GetMapping("/phones/xiaomi")
-    public String phonesXiaomi(Model model) {
-        model.addAttribute("phone", phoneService.readAllPhonesByBrandXiaomi("xiaomi"));
+    @GetMapping("/phones/{brand}")
+    public String getPhonesByBrand(@PathVariable String brand,
+                                   @RequestParam(value = "sort", required = false, defaultValue = "desc") String sort,
+                                   Model model) {
+        model.addAttribute("phone", phoneServiceBean.readPhonesByBrandSorted(brand, sort));
         return "person/list-models";
     }
 
@@ -56,7 +82,7 @@ public class PersonController {
         return "person/show-phone";
     }
 
-//----------------------------------------------------------------------
+    //----------------------------------------------------------------------
     // order creation page
     @GetMapping("/{id}/new_order")
     public String createNewOrder(@PathVariable("id") int id, Model model) {
@@ -103,19 +129,19 @@ public class PersonController {
 
     // returns the page "About us"
     @GetMapping("/aboutus")
-    public String aboutUs(){
+    public String aboutUs() {
         return "person/aboutus";
     }
 
     // returns the page "Contacts"
     @GetMapping("/contacts")
-    public String contacts(){
+    public String contacts() {
         return "person/contacts";
     }
 
     // returns the page "Conditions of delivery"
     @GetMapping("/delivery")
-    public String delivery(){
+    public String delivery() {
         return "person/delivery";
     }
 

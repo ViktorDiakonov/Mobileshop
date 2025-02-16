@@ -23,7 +23,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min = 2, max = 15, message = "Бренд має бути від 2 до 15 лiтер")
+    @Size(min = 2, max = 15, message = "Бренд має бути від 2 до 15 літер")
     @Column(name = "brand")
     private String brand;
 
@@ -51,15 +51,6 @@ public class Order {
     private String point;
 
     private String imagePath; // Новый параметр для фото
-
-    // Геттер для imagePath
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
 
     private Date date = Date.from(Instant.now());
 }

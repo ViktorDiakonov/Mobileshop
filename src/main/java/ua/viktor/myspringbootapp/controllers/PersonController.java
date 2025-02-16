@@ -13,6 +13,7 @@ import ua.viktor.myspringbootapp.services.PhoneService;
 import ua.viktor.myspringbootapp.services.PhoneServiceBean;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,9 +34,16 @@ public class PersonController {
 //        return "person/main-page";
 //    }
 // main page with all phones
+//    @GetMapping("/")
+//    public String mainPage(Model model) {
+//        model.addAttribute("phone", phoneService.findAllPhones());
+//        return "person/main-page";
+//    }
     @GetMapping("/")
     public String mainPage(Model model) {
-        model.addAttribute("phone", phoneService.findAllPhones());
+        List<Phone> phones = phoneService.findAllPhones();
+        Collections.shuffle(phones); // Перемешиваем список в случайном порядке
+        model.addAttribute("phone", phones);
         return "person/main-page";
     }
 
@@ -90,13 +98,6 @@ public class PersonController {
         return "person/order";
     }
 
-    // saving a new order
-//    @PostMapping("/{id}/order")
-//    public String createOrder(@ModelAttribute("order") @Valid Order order, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) return "redirect:/mobileshop/{id}/new_order";
-//        phoneService.createOrder(order);
-//        return "person/buy";
-//    }
     @PostMapping("/{id}/order")
     public String createOrder(@PathVariable int id, @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -145,12 +146,6 @@ public class PersonController {
         return "person/delivery";
     }
 
-    // todo тест - нужен "RestController"
-//    @GetMapping(value = "/my_orders", params = {"person_phone"})
-//    public List<Order> myOrders(@RequestParam(value = "person_phone") String person_phone) {
-//        return phoneService.readAllOrdersByPersonPhone(person_phone);
-//    }
-//
     // todo тест для личного кабинета
     @GetMapping("/my_orders2")
     public String myOrders2(Model model) {

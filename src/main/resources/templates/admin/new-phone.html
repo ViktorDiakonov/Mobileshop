@@ -20,7 +20,7 @@
                     <br><br>
 
                     <label for="model">Введіть модель телефону</label>
-                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="15" required>
+                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="20" required>
                     <span></span>
                     <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>
                     <br><br>

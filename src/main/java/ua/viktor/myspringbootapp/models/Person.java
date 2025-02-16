@@ -21,7 +21,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min = 2, max = 20, message = "Iм'я має бути від 2 до 15 лiтер")
+    @Size(min = 2, max = 20, message = "Iм'я має бути від 2 до 15 літер")
     @Column(name = "name")
     private String userName;
 
@@ -35,9 +35,4 @@ public class Person {
 
     @Column(name = "role")
     private String role;
-
-    // -------------------------костыль, переделать----------------------------------
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "person_id")
-//    private List<Phone>phones = new ArrayList<>();
 }

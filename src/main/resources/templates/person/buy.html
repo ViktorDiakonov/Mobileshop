@@ -6,54 +6,23 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
-<header>
-    <table>
-        <tbody>
-        <tr>
-            <td style="width: 190px">
-                <h1>Mobile shop</h1>
-                <p>Ваш магазин смартфонів</p>
-            </td>
-            <td>
-                <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
-            </td>
-            <td>
-                <ul>
-                    <li><a href="/mobileshop/aboutus" style="color: blue">Про нас</a></li>
-                    <li><a href="/mobileshop/contacts" style="color: blue">Контакти</a></li>
-                    <li><a href="/mobileshop/delivery" style="color: blue; width: 180px">Умови доставки&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</header>
+<div id="header" class="flex-container">
+    <div id="leftHeader" class="sidebar">
+        <h1>Mobile Shop</h1>
+        <p>Ваш магазин смартфонів</p>
+    </div>
+    <div class="logo">
+        <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
+    </div>
+    <div id="rightHeader" class="sidebar">
+        <ul>
+            <li><a href="/mobileshop/aboutus">Про нас</a></li>
+            <li><a href="/mobileshop/contacts">Контакти</a></li>
+            <li><a href="/mobileshop/delivery">Умови доставки</a></li>
+        </ul>
+    </div>
+</div>
 <h3 style="color: green">Ваше замовлення прийнято!</h3>
-<!--<table>-->
-<!--    <tr>-->
-<!--        <td style="width: auto">-->
-<!--            <img th:src="${order.getImagePath()}" alt="Фото телефону" style="max-width: 120px;">-->
-<!--            <br><br>-->
-<!--            Виробник: <a th:text="${order.getBrand()}">VALUE</a>-->
-<!--            <br>-->
-<!--            Модель: <a th:text="${order.getModel()}">VALUE</a>-->
-<!--            <br>-->
-<!--            Вбудована пам'ять: <a th:text="${order.getMemorySize()}">VALUE</a> ГБ-->
-<!--            <br>-->
-<!--            Ціна: <a th:text="${order.getPrice()}">VALUE</a> грн.-->
-<!--            <br><br>-->
-<!--            Ваше ім'я: <a th:text="${order.getPersonName()}">VALUE</a>-->
-<!--            <br>-->
-<!--            Ваш контактний телефон: <a th:text="${order.getPersonPhone()}">VALUE</a>-->
-<!--            <br><br>-->
-<!--            Замовлення отримувати за адресою: <a th:text="${order.getPoint()}">VALUE</a>-->
-<!--            <br><br>-->
-<!--            <b style="color: green">Чекайте на дзвінок оператора на вказаний Вами номер</b>-->
-<!--        </td>-->
-<!--    </tr>-->
-<!--</table>-->
-
 <table>
     <tr>
         <td style="width: 220px; text-align: center;">
@@ -76,7 +45,7 @@
 <hr>
 <br>
 <p>
-    <button><a href="/mobileshop/" style="color: blue">Повернутися на головну сторінку</a></button>
+    <button><a href="/mobileshop/" style="color: blue">Повернутись на головну сторінку</a></button>
 </p>
 </body>
 </html>

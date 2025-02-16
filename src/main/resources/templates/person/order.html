@@ -6,29 +6,22 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
-<header>
-    <table>
-        <tbody>
-        <tr>
-            <td style="width: 190px">
-                <h1>Mobile shop</h1>
-                <p>Ваш магазин смартфонів</p>
-            </td>
-            <td>
-                <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
-            </td>
-            <td>
-                <ul>
-                    <li><a href="/mobileshop/aboutus" style="color: blue">Про нас</a></li>
-                    <li><a href="/mobileshop/contacts" style="color: blue">Контакти</a></li>
-                    <li><a href="/mobileshop/delivery" style="color: blue; width: 180px">Умови доставки&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</header>
+<div id="header" class="flex-container">
+    <div id="leftHeader" class="sidebar">
+        <h1>Mobile Shop</h1>
+        <p>Ваш магазин смартфонів</p>
+    </div>
+    <div class="logo">
+        <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
+    </div>
+    <div id="rightHeader" class="sidebar">
+        <ul>
+            <li><a href="/mobileshop/aboutus">Про нас</a></li>
+            <li><a href="/mobileshop/contacts">Контакти</a></li>
+            <li><a href="/mobileshop/delivery">Умови доставки</a></li>
+        </ul>
+    </div>
+</div>
 <nav>
     <a href="/mobileshop/" style="color: black; text-decoration: none;">Головна</a>
     <span style="color: gray;"> &gt; </span>
@@ -43,26 +36,25 @@
 <table>
     <tr>
         <form method="POST" th:action="@{/mobileshop/{id}/order(id=${phone.getId()})}" th:object="${phone}">
-            <!-- Правая колонка: Характеристики + Форма -->
             <div class="order-container">
                 <div class="phone-details">
                     <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону">
                     <div class="phone-info">
                         <p>Виробник: <a th:text="${phone.getBrand()}">VALUE</a>
-                        <label hidden for="brand">Виробник</label>
-                        <input hidden type="text" th:field="*{brand}" id="brand">
+                            <label hidden for="brand">Виробник</label>
+                            <input hidden type="text" th:field="*{brand}" id="brand">
                         </p>
                         <p>Модель: <a th:text="${phone.getModel()}">VALUE</a>
-                        <label hidden for="model">Модель</label>
-                        <input hidden type="text" th:field="*{model}" id="model">
+                            <label hidden for="model">Модель</label>
+                            <input hidden type="text" th:field="*{model}" id="model">
                         </p>
                         <p>Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> ГБ
-                        <label hidden for="memorySize">Об'єм внутрішньої пам'яті (Gb)</label>
-                        <input hidden type="text" th:field="*{memorySize}" id="memorySize">
+                            <label hidden for="memorySize">Об'єм внутрішньої пам'яті (Gb)</label>
+                            <input hidden type="text" th:field="*{memorySize}" id="memorySize">
                         </p>
                         <p>Цена: <b><a th:text="${phone.getPrice()}">VALUE</a></b> грн.
-                        <label hidden for="price">Ціна (грн)</label>
-                        <input hidden type="text" th:field="*{price}" id="price">
+                            <label hidden for="price">Ціна (грн)</label>
+                            <input hidden type="text" th:field="*{price}" id="price">
                         </p>
                     </div>
                 </div>
@@ -103,12 +95,5 @@
         </form>
     </tr>
 </table>
-
-
-<!--<hr>-->
-<!--<br>-->
-<!--<p>-->
-<!--    <button><a href="/mobileshop/" style="color: blue">Повернутися на головну сторінку</a></button>-->
-<!--</p>-->
 </body>
 </html>

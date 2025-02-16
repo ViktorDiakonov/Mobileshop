@@ -6,36 +6,29 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
-<header>
-    <table>
-        <tbody>
-        <tr>
-            <td style="width: 190px">
-                <h1>Mobile shop</h1>
-                <p>Ваш магазин смартфонів</p>
-            </td>
-            <td>
-                <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
-            </td>
-            <td>
-                <ul>
-                    <li><a href="/mobileshop/aboutus" style="color: blue">Про нас</a></li>
-                    <li><a href="/mobileshop/contacts" style="color: blue">Контакти</a></li>
-                    <li><a href="/mobileshop/delivery" style="color: blue; width: 180px">Умови доставки&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</header>
+<div id="header" class="flex-container">
+    <div id="leftHeader" class="sidebar">
+        <h1>Mobile Shop</h1>
+        <p>Ваш магазин смартфонів</p>
+    </div>
+    <div class="logo">
+        <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
+    </div>
+    <div id="rightHeader" class="sidebar">
+        <ul>
+            <li><a href="/mobileshop/aboutus">Про нас</a></li>
+            <li><a href="/mobileshop/contacts">Контакти</a></li>
+            <li><a href="/mobileshop/delivery">Умови доставки</a></li>
+        </ul>
+    </div>
+</div>
 <h3>Заповніть форму реєстрації</h3>
 <table>
     <tr>
         <td style="width: auto">
             <form th:method="POST" th:action="@{/mobileshop/auth/registration}" th:object="${person}">
                 <label for="userName">Введіть ім'я користувача</label>
-                <input type="text" th:field="*{userName}" id="userName" placeholder="цифри, лiтери, символи"
+                <input type="text" th:field="*{userName}" id="userName" placeholder="цифри, літери, символи"
                        minlength="2" maxlength="20" required/>
                 <span></span>
                 <div style="color: lightcoral" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username
@@ -51,7 +44,7 @@
                 </div>
                 <br><br>
                 <label for="password">Введіть пароль</label>
-                <input type="password" th:field="*{password}" id="password" placeholder="4-10 символiв"
+                <input type="password" th:field="*{password}" id="password" placeholder="4-10 символів"
                        minlength="4" maxlength="10" required>
                 <span></span>
                 <div style="color: lightcoral" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password

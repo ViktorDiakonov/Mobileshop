@@ -3,9 +3,175 @@ body {
 
 }
 
-header {
+/*header {*/
+/*    background-color: skyblue;*/
+/*    height: 185px*/
+/*}*/
+
+
+#header {
     background-color: skyblue;
-    height: 185px
+    height: 150px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#leftSidebar {
+    background-color: white;
+    float: left;
+    width: 200px;
+    height: 271px;
+}
+
+#rightSidebar {
+    background-color: white;
+    float: right;
+    width: 200px;
+}
+
+#main {
+    height: 150px;
+    margin-left: 170px;
+    margin-right: 170px;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    height: 35px;
+    min-width: 98%;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: skyblue;
+}
+
+/* Ограничиваем ширину и центрируем */
+#phones-container {
+    max-width: 900px; /* Или другое значение в зависимости от дизайна */
+    margin: 0 auto;
+}
+
+/* Сетка с центровкой */
+.grid-view {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 3 в ряд */
+    gap: 20px;
+    justify-content: center; /* Центрируем */
+}
+
+/* Карточки телефонов */
+.grid-view .phone-item {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+
+.list-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирует все элементы */
+}
+
+.list-view .phone-item {
+    display: flex;
+    flex-direction: column; /* Чтобы текст шел под картинкой */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.phone-item {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.phone-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.flex-container {
+    display: flex;
+    align-items: stretch;
+    height: 185px; /* Можно задать любую высоту */
+}
+
+.sidebar {
+    background-color: skyblue;
+    flex: 1;
+    padding: 1px;
+    box-sizing: border-box;
+}
+
+.logo {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*стили карточки товара начало*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    margin: auto;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: red;
+}
+/*стили карточки товара конец*/
+
+.logo img {
+    height: 150px;
+    margin-top: 25px;
+}
+
+header.logo {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header.logo img {
+    height: 150px;
+    margin-top: 25px;
 }
 
 table {

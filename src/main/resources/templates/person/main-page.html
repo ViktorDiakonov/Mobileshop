@@ -6,32 +6,26 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
-<div id="header">
-    <table>
-        <tbody>
-        <tr>
-            <td style="width: 190px">
-                <h1>Mobile shop</h1>
-                <p>Ваш магазин смартфонів</p>
-            </td>
-            <td>
-                <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
-            </td>
-            <td>
-                <ul>
-                    <li><a href="/mobileshop/aboutus" style="color: blue">Про нас</a></li>
-                    <li><a href="/mobileshop/contacts" style="color: blue">Контакти</a></li>
-                    <li><a href="/mobileshop/delivery" style="color: blue; width: 180px">Умови доставки&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div id="header" class="flex-container">
+    <div id="leftHeader" class="sidebar">
+        <h1>Mobile Shop</h1>
+        <p>Ваш магазин смартфонів</p>
+    </div>
+    <div class="logo">
+        <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
+    </div>
+    <div id="rightHeader" class="sidebar">
+        <ul>
+            <li><a href="/mobileshop/aboutus">Про нас</a></li>
+            <li><a href="/mobileshop/contacts">Контакти</a></li>
+            <li><a href="/mobileshop/delivery">Умови доставки</a></li>
+        </ul>
+    </div>
 </div>
 <div id="leftSidebar" style="border: skyblue 2mm solid">
     <p><b>Новинка iPhone 14 !</b></p>
-    <a href="/mobileshop/phone/38"><img src="/img/site/iphone-14-pro-max-2.gif" alt="banner" width="200" height="220"></a>
+    <a href="/mobileshop/phone/38"><img src="/img/site/iphone-14-pro-max-2.gif" alt="banner" width="200"
+                                        height="220"></a>
 </div>
 <div id="rightSidebar" style="border: skyblue 2mm solid">
     <p>Отримуй інформацію
@@ -40,11 +34,12 @@
     <p><b>Знижки</b></p>
     <p><b>Новинки</b></p>
     <p>пройди просту реєстрацію</p>
-    <p><button><a href="/mobileshop/auth/registration">Зареєструватись</a></button></p>
+    <p>
+        <button><a href="/mobileshop/auth/registration">Зареєструватись</a></button>
+    </p>
 </div>
-<div id="main">
-<!--    <h3>Виберіть бренд що цікавить</h3>-->
-    <br>
+<br>
+<nav>
     <table>
         <tbody>
         <tr>
@@ -53,14 +48,14 @@
                     <img src="/img/site/iphone.png" style="text-align: center" width="30" height="30" alt="Apple">
                 </a>
                 <p><a href="/mobileshop/phones/apple">Apple</a></p>
-            </td> <!-- "1" -->
+            </td>
 
             <td style="width: 200px; text-align: center; border-right: 1px solid black;">
                 <a href="/mobileshop/phones/xiaomi">
                     <img src="/img/site/mi.png" style="text-align: center" width="30" height="30" alt="Xiaomi">
                 </a>
                 <p><a href="/mobileshop/phones/xiaomi">Xiaomi</a></p>
-            </td> <!-- "1" -->
+            </td>
 
             <td style="width: 200px; text-align: center;">
                 <a href="/mobileshop/phones/samsung">
@@ -71,36 +66,11 @@
         </tr>
         </tbody>
     </table>
-    <hr>
-</div>
-<!--<div id="main">-->
-<!--    <h2>Всі телефони</h2>-->
-<!--    <table>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>Фото</th>-->
-<!--            <th>Бренд</th>-->
-<!--            <th>Модель</th>-->
-<!--            <th>Пам'ять (ГБ)</th>-->
-<!--            <th>Ціна (грн)</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="phone : ${phones}">-->
-<!--            <td><img th:src="${phone.imagePath}" alt="Фото телефону" style="max-height: 100px;"></td>-->
-<!--            <td th:text="${phone.brand}"></td>-->
-<!--            <td th:text="${phone.model}"></td>-->
-<!--            <td th:text="${phone.memorySize}"></td>-->
-<!--            <td th:text="${phone.price}"></td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-<!--    </table>-->
-<!--</div>-->
-
-<!-- Контейнер для телефонов -->
+</nav>
+<hr>
+<br>
 <div id="phones-container" class="grid-view">
     <div th:each="phones : ${phone}" class="phone-item">
-        <!-- Используем th:href для генерации ссылки с параметром id -->
         <a th:href="@{/mobileshop/phone/{id}(id=${phones.id})}">
             <img th:src="@{${phones.imagePath}}" alt="Фото телефону" style="max-height: 100px;">
             <div>
@@ -116,91 +86,5 @@
         </a>
     </div>
 </div>
-
-<!-- CSS стили -->
-<style>
-    div{
-
-    }
-    #header{
-        background-color: skyblue;
-        height: 185px
-    }
-    #leftSidebar{
-        background-color: white;
-        float: left;
-        width: 200px;
-        height: 271px;
-    }
-    #rightSidebar{
-        background-color: white;
-        float: right;
-        width: 200px;
-    }
-    #main{
-        height: 200px;
-        margin-left: 170px;
-        margin-right: 170px;
-    }
-    #footer{
-        position: absolute;
-        bottom: 0;
-        height: 35px;
-        min-width: 98%;
-        margin: 0 auto;
-        padding: 10px;
-        background-color: skyblue;
-    }
-    /* Ограничиваем ширину и центрируем */
-    #phones-container {
-        max-width: 900px; /* Или другое значение в зависимости от дизайна */
-        margin: 0 auto;
-    }
-
-    /* Сетка с центровкой */
-    .grid-view {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 3 в ряд */
-        gap: 20px;
-        justify-content: center; /* Центрируем */
-    }
-
-    /* Карточки телефонов */
-    .grid-view .phone-item {
-        text-align: center;
-        border: 1px solid #ddd;
-        padding: 10px;
-    }
-
-    /* Список - обычный вертикальный вывод */
-
-    .list-view {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Центрирует все элементы */
-    }
-
-    .list-view .phone-item {
-        display: flex;
-        flex-direction: column; /* Чтобы текст шел под картинкой */
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-    .phone-item {
-        border: 2px solid transparent; /* По умолчанию нет рамки */
-        transition: border-color 0.3s ease-in-out; /* Плавное изменение */
-        display: inline-block; /* Оставляем размер блока соответствующим контенту */
-        padding: 10px; /* Небольшие отступы */
-    }
-
-    .phone-item:hover {
-        border: 3px solid #007bff; /* Синяя рамка */
-        padding: 5px; /* Уменьшаем padding, чтобы рамка не увеличивала блок */
-        border-radius: 10px; /* Закругленные углы */
-    }
-
-</style>
-<!--<div id="footer" align="center"><a href="/mobileshop/" >Mobileshop.ua</a><br>2023г</div>-->
 </body>
 </html>

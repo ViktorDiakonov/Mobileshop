@@ -98,34 +98,59 @@ public class PersonController {
         return "person/order";
     }
 
+//    @PostMapping("/{id}/order")
+//    public String createOrder(@PathVariable int id, @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            return "redirect:/mobileshop/" + id + "/new_order";
+//        }
+//
+//        // Получаем данные о телефоне по его id
+//        Phone phone = phoneService.findPhone(id);
+//        if (phone == null) {
+//            return "redirect:/mobileshop"; // Перенаправляем на главную, если телефона нет
+//        }
+//
+//        // Устанавливаем данные телефона в заказ
+//        order.setBrand(phone.getBrand());
+//        order.setModel(phone.getModel());
+//        order.setMemorySize(phone.getMemorySize());
+//        order.setPrice(phone.getPrice());
+//        order.setImagePath(phone.getImagePath()); // Заполняем путь к изображению
+//
+//        // Сохраняем заказ
+//        phoneService.createOrder(order);
+//
+//        // Передаем заказ в модель для отображения на странице "buy"
+//        model.addAttribute("order", order);
+//
+//        return "person/buy";
+//    }
+
     @PostMapping("/{id}/order")
-    public String createOrder(@PathVariable int id, @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
+    public String createOrder(@PathVariable int id,
+                              @RequestParam("quantity") int quantity,
+                              @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "redirect:/mobileshop/" + id + "/new_order";
         }
 
-        // Получаем данные о телефоне по его id
         Phone phone = phoneService.findPhone(id);
         if (phone == null) {
-            return "redirect:/mobileshop"; // Перенаправляем на главную, если телефона нет
+            return "redirect:/mobileshop";
         }
 
-        // Устанавливаем данные телефона в заказ
         order.setBrand(phone.getBrand());
         order.setModel(phone.getModel());
         order.setMemorySize(phone.getMemorySize());
-        order.setPrice(phone.getPrice());
-        order.setImagePath(phone.getImagePath()); // Заполняем путь к изображению
+        order.setPrice(phone.getPrice() * quantity); // Общая стоимость
+        order.setImagePath(phone.getImagePath());
+        order.setQuantity(quantity);
 
-        // Сохраняем заказ
         phoneService.createOrder(order);
 
-        // Передаем заказ в модель для отображения на странице "buy"
         model.addAttribute("order", order);
-
         return "person/buy";
     }
-
 //---------------------------------------------------------------------
 
     // returns the page "About us"

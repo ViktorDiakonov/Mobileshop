@@ -22,7 +22,7 @@
                 <br>
                 Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> Gb
                 <br>
-                Ціна: <b><a th:text="${phone.getPrice()}">VALUE</a></b> грн.
+                Ціна: <b><span th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">text</span></b> ₴
             </td>
         </tr>
     </table>

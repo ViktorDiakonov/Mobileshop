@@ -52,10 +52,50 @@
                             <label hidden for="memorySize">Об'єм внутрішньої пам'яті (Gb)</label>
                             <input hidden type="text" th:field="*{memorySize}" id="memorySize">
                         </p>
-                        <p>Цена: <b><a th:text="${phone.getPrice()}">VALUE</a></b> грн.
-                            <label hidden for="price">Ціна (грн)</label>
-                            <input hidden type="text" th:field="*{price}" id="price">
-                        </p>
+                        <p>Ціна: <b><span id="priceDisplay" th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</span></b> грн.</p>
+                        <label hidden for="price">Ціна (грн)</label>
+                        <input hidden type="text" th:field="*{price}" id="price">
+
+                        <p><label for="quantity">Кількість телефонів:
+                            <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" step="1" required>
+                        </label></p>
+
+                        <p>Загальна сума: <b><span id="totalPrice">VALUE</span></b> грн.</p>
+
+                        <script>
+                            const priceText = document.getElementById("priceDisplay").innerText; // Получаем текст с ценой
+                            const price = parseFloat(priceText.replace(/\s/g, '').replace('грн', '').trim()); // Убираем пробелы и 'грн', оставляем только число
+                            const quantityInput = document.getElementById("quantity");
+                            const totalPriceDisplay = document.getElementById("totalPrice");
+
+                            // Функция для форматирования числа с пробелами
+                            function formatNumber(number) {
+                                return number.toLocaleString('uk-UA'); // Форматируем число для Украины с пробелами для тысяч
+                            }
+
+                            // Функция для пересчета общей суммы
+                            function updateTotalPrice() {
+                                const quantity = parseInt(quantityInput.value); // Получаем количество
+                                const total = price * quantity; // Вычисляем сумму
+                                totalPriceDisplay.innerText = formatNumber(total); // Обновляем отображение общей суммы с пробелами
+                            }
+
+                            // Слушаем изменение количества
+                            quantityInput.addEventListener("input", function(event) {
+                                if (quantityInput.value < 1) {
+                                    quantityInput.value = 1; // Устанавливаем минимальное значение
+                                }
+                                updateTotalPrice();
+                            });
+
+                            // Слушаем изменения количества через стрелки
+                            quantityInput.addEventListener("change", updateTotalPrice);
+
+                            // Инициализируем отображение суммы при загрузке страницы
+                            updateTotalPrice();
+                        </script>
+
+
                     </div>
                 </div>
 

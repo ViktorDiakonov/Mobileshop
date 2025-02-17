@@ -71,7 +71,7 @@
                     <span th:text="${phones.getModel()}">text</span>
                     <br>
                     <td th:text="${phones.memorySize}"></td>&nbsp;Gb
-                    <br><b><span th:text="${phones.getPrice()}">text</span></b> ₴
+                    <br><b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')}">text</span></b> ₴
                 </p>
             </div>
         </a>

@@ -34,8 +34,10 @@
             Модель: <a th:text="${order.getModel()}">VALUE</a>
             <br>
             Вбудована пам'ять: <a th:text="${order.getMemorySize()}">VALUE</a> ГБ
+            <br><br>
+            Кількість: <a th:text="${order.getQuantity()}">VALUE</a> шт.
             <br>
-            Ціна: <a th:text="${order.getPrice()}">VALUE</a> грн.
+            До сплати: <a th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}">VALUE</a> грн.
         </td>
     </tr>
 </table>

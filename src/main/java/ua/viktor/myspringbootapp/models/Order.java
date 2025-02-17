@@ -52,5 +52,8 @@ public class Order {
 
     private String imagePath; // Новый параметр для фото
 
+    @Column(name = "quantity")
+    private Integer quantity;
+
     private Date date = Date.from(Instant.now());
 }

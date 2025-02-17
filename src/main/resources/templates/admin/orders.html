@@ -1,3 +1,59 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Сторінка замовлень</title>-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav>-->
+<!--    <h3>Сторінка замовлень (сортування за датою)</h3>-->
+<!--    <p>-->
+<!--        <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>-->
+<!--    </p>-->
+<!--    <h4>Виберіть замовлення за номером</h4>-->
+<!--    <table th:align="center" style="background-color: skyblue">-->
+<!--        <tbody th:align="center" style="background-color: lightgoldenrodyellow">-->
+<!--        <tr>-->
+<!--            <td height="5px" style="padding:10px"><b>Номер замовлення</b></td>-->
+<!--            <td height="5px" style="padding:10px"><b>Товар</b></td>-->
+<!--            <td height="5px" style="padding:10px"><b>Дата та час замовлення</b></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td height="50px" style="padding:15px">-->
+<!--                <div th:align="center" th:each="orders : ${order}">-->
+<!--                    № <a style="color: blue; text-decoration: none"-->
+<!--                         th:href="@{/mobileshop/{id}/order(id=${orders.getId()})}"-->
+<!--                         th:text="${orders.getId()}">text</a>-->
+<!--                    <hr>-->
+<!--                </div>-->
+<!--            </td>-->
+<!--            <td height="50px" style="padding:15px">-->
+<!--                <div th:align="left" th:each="orders : ${order}">-->
+<!--                    <a th:text="${orders.getBrand()}">text</a>-->
+<!--                    <a th:text="${orders.getModel()}">text</a>-->
+<!--                    <hr>-->
+<!--                </div>-->
+<!--            </td>-->
+<!--            <td th:align="center" height="50px" style="padding:15px">-->
+<!--                <div th:align="left" th:each="orders : ${order}">-->
+<!--                    <a>(<a th:text="${orders.getDate()}">text</a>)</a>-->
+<!--                    <hr>-->
+<!--                </div>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</nav>-->
+<!--<br><br>-->
+<!--<hr>-->
+<!--<br>-->
+<!--<p>-->
+<!--    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>-->
+<!--</p>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -9,47 +65,50 @@
 <nav>
     <h3>Сторінка замовлень (сортування за датою)</h3>
     <p>
-        <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>
+        <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>
     </p>
     <h4>Виберіть замовлення за номером</h4>
-    <table th:align="center" style="background-color: skyblue">
-        <tbody th:align="center" style="background-color: lightgoldenrodyellow">
+    <table class="order-table">
+        <thead>
         <tr>
-            <td height="5px" style="padding:10px"><b>Номер замовлення</b></td>
-            <td height="5px" style="padding:10px"><b>Товар</b></td>
-            <td height="5px" style="padding:10px"><b>Дата та час замовлення</b></td>
+            <th class="header-text">Номер замовлення</th>
+            <th class="header-text">Товар</th>
+            <th class="header-text">Кількість</th>
+            <th class="header-text">Ціна за одиницю</th>
+            <th class="header-text">До сплати</th>
+            <th class="header-text">Дата та час замовлення</th>
         </tr>
-        <tr>
-            <td height="50px" style="padding:15px">
-                <div th:align="center" th:each="orders : ${order}">
-                    № <a style="color: blue; text-decoration: none"
-                         th:href="@{/mobileshop/{id}/order(id=${orders.getId()})}"
-                         th:text="${orders.getId()}">text</a>
-                    <hr>
-                </div>
+        </thead>
+
+        <tbody>
+        <tr th:each="orders : ${order}">
+            <td>
+                <a class="order-link" th:href="@{/mobileshop/{id}/order(id=${orders.id})}" th:text="${orders.id}"></a>
             </td>
-            <td height="50px" style="padding:15px">
-                <div th:align="left" th:each="orders : ${order}">
-                    <a th:text="${orders.getBrand()}">text</a>
-                    <a th:text="${orders.getModel()}">text</a>
-                    <hr>
-                </div>
+            <td>
+                <span th:text="${orders.brand}"></span> <span th:text="${orders.model}"></span>
             </td>
-            <td th:align="center" height="50px" style="padding:15px">
-                <div th:align="left" th:each="orders : ${order}">
-                    <a>(<a th:text="${orders.getDate()}">text</a>)</a>
-                    <hr>
-                </div>
+            <td>
+                <span th:text="${orders.getQuantity()}"></span>
+            </td>
+            <td>
+                <span th:if="${orders.quantity > 0}"
+                      th:text="${#numbers.formatDecimal(orders.price / orders.quantity, 1, 'DEFAULT', 0, 'DEFAULT')}"></span>
+                <span th:unless="${orders.quantity > 0}">-</span>
+            </td>
+            <td>
+                <span th:text="${#numbers.formatInteger(orders.getPrice(), 0, 'DEFAULT')}"></span>
+            </td>
+            <td>
+                <span th:text="${#dates.format(orders.getDate(), 'dd.MM.yyyy - HH:mm')}"></span>
             </td>
         </tr>
         </tbody>
     </table>
 </nav>
-<br><br>
-<hr>
 <br>
 <p>
-    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>
+    <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>
 </p>
 </body>
 </html>

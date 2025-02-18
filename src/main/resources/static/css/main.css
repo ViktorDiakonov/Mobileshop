@@ -188,6 +188,11 @@ h3 {
     font-family: "Arial", serif;
 }
 
+h2 {
+    text-align: center;
+    font-family: "Arial", serif;
+}
+
 h4 {
     text-align: center;
     font-family: "Arial", serif;
@@ -278,7 +283,7 @@ input:valid + span::before {
 }
 
 #phoneImage {
-    max-width: 150px;
+    max-width: 160px;
 }
 
 .submit-button {
@@ -353,18 +358,21 @@ input:valid + span::before {
     text-decoration: none;
 }
 
-.btn {
+
+.btn {           /*дизайн большой кнопки*/
     padding: 10px 15px;
     text-decoration: none;
     color: #fff;
     border-radius: 5px;
 }
 
-.btn-success {
+
+.btn-success {   /*дизайн большой кнопки*/
     background-color: forestgreen;
 }
 
-.btn-success:hover {
+
+.btn-success:hover {    /*дизайн большой кнопки*/
     background-color: darkgreen;
 }
 

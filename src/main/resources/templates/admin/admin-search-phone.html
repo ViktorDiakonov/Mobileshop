@@ -1,3 +1,76 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Телефон</title>-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav>-->
+<!--    <h3>За кодом <a th:text="${phone.getId()}">VALUE</a> знайдено телефон:</h3>-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td style="width: 220px; text-align: center;">-->
+<!--                <img th:src="${phone.imagePath}" alt="Фото телефону" style="max-width: 200px;">-->
+<!--            </td>-->
+<!--            <td style="padding-left: 20px;">-->
+<!--                Код товару: <a th:text="${phone.getId()}">VALUE</a>-->
+<!--                <br><br>-->
+<!--                Виробник: <a th:text="${phone.getBrand()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Модель: <a th:text="${phone.getModel()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> Gb-->
+<!--                <br>-->
+<!--                Ціна: <b><span th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">text</span></b> ₴-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</nav>-->
+<!--<hr>-->
+<!--<br>-->
+<!--<p>-->
+<!--    <a style="padding: 10px 15px; text-decoration: none; background-color: royalblue; border-radius: 5px; color: #fff;"-->
+<!--       th:href="@{/mobileshop/{id}/edit_phone(id=${phone.getId()})}">Оновити</a>-->
+<!--</p>-->
+<!--<br><br>-->
+<!--<div th:align="center">-->
+<!--&lt;!&ndash;    <form th:method="DELETE" th:action="@{/mobileshop/delete_phone/{id}(id=${phone.getId()})}">&ndash;&gt;-->
+<!--&lt;!&ndash;        <input style="padding: 10px 15px; background-color: red; border-radius: 5px; color: #fff;" type="submit" value="Видалити телефон">&ndash;&gt;-->
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+<!--    <form th:method="DELETE" th:action="@{/mobileshop/delete_phone/{id}(id=${phone.getId()})}">-->
+<!--        <label for="confirmDelete">-->
+<!--            <input type="checkbox" id="confirmDelete" onchange="toggleDeleteButton()"> Підтверджую видалення-->
+<!--        </label>-->
+
+<!--        <input id="deleteButton" style="padding: 10px 15px; background-color: #d3d3d3; border-radius: 5px; color: #fff; cursor: not-allowed; font-family: Arial, sans-serif; font-size: 15px; border: none;" type="submit" value="Видалити телефон" disabled>-->
+<!--    </form>-->
+
+<!--    <script>-->
+<!--        function toggleDeleteButton() {-->
+<!--            const deleteButton = document.getElementById('deleteButton');-->
+<!--            const confirmDelete = document.getElementById('confirmDelete');-->
+
+<!--            // Если галочка поставлена, делаем кнопку активной-->
+<!--            if (confirmDelete.checked) {-->
+<!--                deleteButton.disabled = false;-->
+<!--                deleteButton.style.backgroundColor = 'red'; // Цвет активной кнопки-->
+<!--                deleteButton.style.cursor = 'pointer'; // Изменяем курсор на обычный-->
+<!--            } else {-->
+<!--                deleteButton.disabled = true;-->
+<!--                deleteButton.style.backgroundColor = '#d3d3d3'; // Светло-серый цвет-->
+<!--                deleteButton.style.cursor = 'not-allowed'; // Курсор неактивен-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
+
+<!--</div>-->
+<!--<br><br>-->
+<!--<p>-->
+<!--    <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>-->
+<!--</p>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -6,43 +79,67 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
-<nav>
-    <h3>За кодом <a th:text="${phone.getId()}">VALUE</a> знайдено телефон:</h3>
-    <table>
-        <tr>
-            <td style="width: 220px; text-align: center;">
-                <img th:src="${phone.imagePath}" alt="Фото телефону" style="max-width: 200px;">
-            </td>
-            <td style="padding-left: 20px;">
-                Код товару: <a th:text="${phone.getId()}">VALUE</a>
-                <br><br>
-                Виробник: <a th:text="${phone.getBrand()}">VALUE</a>
-                <br>
-                Модель: <a th:text="${phone.getModel()}">VALUE</a>
-                <br>
-                Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> Gb
-                <br>
-                Ціна: <b><span th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">text</span></b> ₴
-            </td>
-        </tr>
-    </table>
-</nav>
-<hr>
-<br>
-<p>
-    <button>
-        <a style="color: blue" th:href="@{/mobileshop/{id}/edit_phone(id=${phone.getId()})}">Оновити</a>
-    </button>
-</p>
-<br><br>
-<div th:align="center">
-    <form th:method="DELETE" th:action="@{/mobileshop/delete_phone/{id}(id=${phone.getId()})}">
-        <input style="color: red" type="submit" value="Видалити телефон">
-    </form>
+
+<div class="phone-container"
+     style="max-width: 600px; margin: 30px auto; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <!-- Заголовок -->
+    <h3 style="text-align: center; margin-bottom: 20px;">Телефон за кодом: <span th:text="${phone.getId()}"></span></h3>
+
+    <!-- Информация о телефоне -->
+    <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+        <img th:src="${phone.imagePath}" alt="Фото телефону" style="max-width: 180px; border-radius: 5px;">
+        <div style="flex: 1;">
+            <p style="text-align: left"><strong>Код товару:</strong> <span th:text="${phone.getId()}"></span></p>
+            <p style="text-align: left"><strong>Виробник:</strong> <span th:text="${phone.getBrand()}"></span></p>
+            <p style="text-align: left"><strong>Модель:</strong> <span th:text="${phone.getModel()}"></span></p>
+            <p style="text-align: left"><strong>Пам'ять:</strong> <span th:text="${phone.getMemorySize()}"></span> GB
+            </p>
+            <p style="text-align: left"><strong>Ціна:</strong> <span
+                    th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}"></span> ₴</p>
+        </div>
+    </div>
+
+    <!-- Кнопки действий -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+        <!-- Кнопка обновления -->
+        <a style="padding: 10px 20px; background-color: royalblue; color: #fff; text-decoration: none; border-radius: 5px; font-size: 15px; text-align: center; flex: 1; margin-right: 10px;"
+           th:href="@{/mobileshop/{id}/edit_phone(id=${phone.getId()})}">Оновити</a>
+
+        <!-- Кнопка удаления с подтверждением -->
+        <form th:method="DELETE" th:action="@{/mobileshop/delete_phone/{id}(id=${phone.getId()})}"
+              style="flex: 2; display: flex; flex-direction: column; align-items: center;">
+            <label for="confirmDelete" style="margin-bottom: 10px;">
+                <input type="checkbox" id="confirmDelete" onchange="toggleDeleteButton()"> Підтверджую видалення
+            </label>
+            <input id="deleteButton" type="submit" value="Видалити телефон" disabled
+                   style="padding: 10px 20px; background-color: #d3d3d3; border: none; border-radius: 5px; color: #fff; cursor: not-allowed; font-family: Arial, sans-serif; font-size: 15px;">
+        </form>
+    </div>
+
+    <!-- Возврат на страницу администратора -->
+    <div style="text-align: center; margin-top: 30px;">
+        <a class="btn btn-success" href="/mobileshop/admin_page"
+           style="padding: 10px 20px; background-color: green; color: #fff; text-decoration: none; border-radius: 5px;">
+            Сторінка адміністратора</a>
+    </div>
 </div>
-<br><br>
-<p>
-    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>
-</p>
+
+<script>
+    function toggleDeleteButton() {
+        const deleteButton = document.getElementById('deleteButton');
+        const confirmDelete = document.getElementById('confirmDelete');
+
+        if (confirmDelete.checked) {
+            deleteButton.disabled = false;
+            deleteButton.style.backgroundColor = 'red';
+            deleteButton.style.cursor = 'pointer';
+        } else {
+            deleteButton.disabled = true;
+            deleteButton.style.backgroundColor = '#d3d3d3';
+            deleteButton.style.cursor = 'not-allowed';
+        }
+    }
+</script>
+
 </body>
 </html>

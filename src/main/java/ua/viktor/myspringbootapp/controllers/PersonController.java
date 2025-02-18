@@ -1,7 +1,6 @@
 package ua.viktor.myspringbootapp.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,17 +27,6 @@ public class PersonController {
     private final AdminService adminService;
     private final PhoneServiceBean phoneServiceBean;
 
-    //    // main page
-//    @GetMapping("/")
-//    public String mainPage() {
-//        return "person/main-page";
-//    }
-// main page with all phones
-//    @GetMapping("/")
-//    public String mainPage(Model model) {
-//        model.addAttribute("phone", phoneService.findAllPhones());
-//        return "person/main-page";
-//    }
     @GetMapping("/")
     public String mainPage(Model model) {
         List<Phone> phones = phoneService.findAllPhones();
@@ -46,34 +34,6 @@ public class PersonController {
         model.addAttribute("phone", phones);
         return "person/main-page";
     }
-
-    // show Apple phones
-//    @GetMapping("/phones/apple")
-//    public String phonesApple(Model model) {
-//        model.addAttribute("phone", phoneService.readAllPhonesByBrandApple("apple"));
-//        return "person/list-models";
-//    }
-//    @GetMapping("/phones/apple")
-//    public String phonesApple(@RequestParam(value = "sort", required = false, defaultValue = "asc") String sort,
-//                              Model model) {
-//        model.addAttribute("phone", phoneServiceBean.readAllPhonesByBrandAppleSorted(sort));
-//        return "person/list-models";
-//    }
-//
-//
-//    // show phones samsung
-//    @GetMapping("/phones/samsung")
-//    public String phonesSamsung(Model model) {
-//        model.addAttribute("phone", phoneService.readAllPhonesByBrandSamsung("samsung"));
-//        return "person/list-models";
-//    }
-//
-//    // show phones xiaomi
-//    @GetMapping("/phones/xiaomi")
-//    public String phonesXiaomi(Model model) {
-//        model.addAttribute("phone", phoneService.readAllPhonesByBrandXiaomi("xiaomi"));
-//        return "person/list-models";
-//    }
 
     @GetMapping("/phones/{brand}")
     public String getPhonesByBrand(@PathVariable String brand,
@@ -97,34 +57,6 @@ public class PersonController {
         model.addAttribute("phone", adminService.readById(id));
         return "person/order";
     }
-
-//    @PostMapping("/{id}/order")
-//    public String createOrder(@PathVariable int id, @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            return "redirect:/mobileshop/" + id + "/new_order";
-//        }
-//
-//        // Получаем данные о телефоне по его id
-//        Phone phone = phoneService.findPhone(id);
-//        if (phone == null) {
-//            return "redirect:/mobileshop"; // Перенаправляем на главную, если телефона нет
-//        }
-//
-//        // Устанавливаем данные телефона в заказ
-//        order.setBrand(phone.getBrand());
-//        order.setModel(phone.getModel());
-//        order.setMemorySize(phone.getMemorySize());
-//        order.setPrice(phone.getPrice());
-//        order.setImagePath(phone.getImagePath()); // Заполняем путь к изображению
-//
-//        // Сохраняем заказ
-//        phoneService.createOrder(order);
-//
-//        // Передаем заказ в модель для отображения на странице "buy"
-//        model.addAttribute("order", order);
-//
-//        return "person/buy";
-//    }
 
     @PostMapping("/{id}/order")
     public String createOrder(@PathVariable int id,

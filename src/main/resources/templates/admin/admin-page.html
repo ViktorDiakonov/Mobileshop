@@ -74,7 +74,6 @@
                 <input type="text" name="id" id="id" size="21" placeholder="Введіть номер замовлення" pattern="\d{1,5}"
                        required>
                 <input type="submit" value="Шукати">
-                <!--<div th:if="${param.error}" style="color: red">Неправильный код замовлення</div>-->
             </form>
         </td>
         <td height="100px" style="padding:15px">
@@ -83,7 +82,6 @@
                 <br>
                 <input type="text" name="id" id="id2" placeholder="Введіть код телефону" pattern="\d{1,5}" required>
                 <input type="submit" value="Шукати">
-                <!--<div th:if="${param.error}" style="color: red">Неправильный id</div>-->
             </form>
         </td>
     </tr>
@@ -93,9 +91,8 @@
 <hr>
 <br>
 <p>
-    <button><a href="/mobileshop/" style="color: blue">Головна сторінка сайту</a></button>
+    <a class="btn btn-success" href="/mobileshop/">Головна сторінка сайту</a>
 </p>
 <br><br>
-<!--<a href="/logout">Выйти из учетной записи</a>-->
 </body>
 </html>

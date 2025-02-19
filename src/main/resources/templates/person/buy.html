@@ -22,32 +22,27 @@
         </ul>
     </div>
 </div>
-<h3 style="color: green">Ваше замовлення прийнято!</h3>
-<table>
-    <tr>
-        <td style="width: 220px; text-align: center;">
-            <img th:src="${order.getImagePath()}" alt="Фото телефону" style="max-width: 120px;">
-        </td>
-        <td style="padding-left: 20px;">
-            Виробник: <a th:text="${order.getBrand()}">VALUE</a>
-            <br>
-            Модель: <a th:text="${order.getModel()}">VALUE</a>
-            <br>
-            Вбудована пам'ять: <a th:text="${order.getMemorySize()}">VALUE</a> ГБ
-            <br><br>
-            Кількість: <a th:text="${order.getQuantity()}">VALUE</a> шт.
-            <br>
-            До сплати: <a th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}">VALUE</a> грн.
-        </td>
-    </tr>
-</table>
-<br><br>
-<p style="text-align: center">Замовлення отримувати за адресою: <a th:text="${order.getPoint()}">VALUE</a></p>
-<p style="text-align: center"><b style="color: green">Чекайте на дзвінок оператора на вказаний Вами номер</b></p>
+<h2 style="color: green">Ваше замовлення прийнято!</h2>
+
+<div class="buy-container">
+    <div class="buy-image">
+        <img th:src="${order.getImagePath()}" alt="Фото телефону">
+    </div>
+    <div class="buy-details">
+        <p><strong>Виробник:</strong> <a th:text="${order.getBrand()}">VALUE</a></p>
+        <p><strong>Модель:</strong> <a th:text="${order.getModel()}">VALUE</a></p>
+        <p><strong>Вбудована пам'ять:</strong> <a th:text="${order.getMemorySize()}">VALUE</a> ГБ</p>
+        <p><strong>Кількість:</strong> <a th:text="${order.getQuantity()}">VALUE</a> шт.</p>
+        <p><strong>До сплати:</strong> <a th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}">VALUE</a> грн.</p>
+    </div>
+</div>
+
+<p class="buy-info">Замовлення отримувати за адресою: <a th:text="${order.getPoint()}">VALUE</a></p>
+<p class="buy-info"><b style="color: green">Чекайте на дзвінок оператора на вказаний Вами номер</b></p>
 <hr>
 <br>
 <p>
-    <button><a href="/mobileshop/" style="color: blue">Повернутись на головну сторінку</a></button>
+    <a class="btn btn-success" href="/mobileshop/">Повернутись на головну сторінку</a>
 </p>
 </body>
 </html>

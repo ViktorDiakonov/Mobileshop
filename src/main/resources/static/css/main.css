@@ -1,5 +1,4 @@
-
-/*заголовок*/
+/*заголовок начало*/
 #header {
     background-color: skyblue;
     height: 150px;
@@ -25,26 +24,145 @@
 #rightHeader li {
     margin-bottom: 15px; /* Увеличиваем отступ между элементами списка */
 }
-/*заголовок*/
-/*----------------------------------------------------------------*/
 
-/*#main {*/
-/*    height: 150px;*/
-/*    margin-left: 170px;*/
-/*    margin-right: 170px;*/
-/*}*/
+/*заголовок конец*/
+/*-------------------------------------------------------------------------------------------------------------------*/
+/* Контейнер навигации брендов начало*/
+.brand-nav {
+    display: flex; /* Используем flex для горизонтального расположения элементов */
+    justify-content: center; /* Центрируем элементы по горизонтали */
+    gap: 20px; /* Промежуток между элементами */
+    height: 60px; /* Фиксированная высота блока */
+    align-items: center; /* Выравнивание по вертикали */
+    margin: 12px 0; /* Отступ сверху и снизу */
+}
 
-/*#footer {*/
-/*    position: absolute;*/
-/*    bottom: 0;*/
-/*    height: 35px;*/
-/*    min-width: 98%;*/
-/*    margin: 0 auto;*/
-/*    padding: 10px;*/
-/*    background-color: skyblue;*/
-/*}*/
+/* Элемент бренда */
+.brand-item {
+    text-align: center; /* Центрируем содержимое */
+    padding: 5px 10px; /* Внутренние отступы */
+    border-right: 1px solid black; /* Разделительная линия между элементами */
+    flex: 1 1 200px; /* Гибкая ширина с минимальным размером 200px */
+}
 
-/* Ограничиваем ширину и центрируем */
+/* Убираем границу у последнего элемента */
+.brand-item:last-child {
+    border-right: none; /* Удаляем правую границу у последнего элемента */
+}
+
+/* Стили для изображений */
+.brand-item img {
+    height: 30px; /* Задаем высоту изображения */
+    object-fit: contain; /* Гарантируем корректное отображение логотипа */
+}
+
+/* Стили для подписей */
+.brand-item p {
+    margin: 3px 0; /* Небольшие отступы сверху и снизу */
+    font-size: 15px; /* Размер текста */
+}
+
+/* Стили для ссылок */
+.brand-item a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: inherit; /* Наследуем цвет текста */
+    transition: color 0.3s ease; /* Плавное изменение цвета при наведении */
+}
+
+/* Эффект наведения */
+.brand-item a:hover {
+    color: #007BFF; /* Меняем цвет текста при наведении */
+}
+
+/* Контейнер навигации брендов конец*/
+/*--------------------------------------------------------------------------------------------------------------------*/
+/*заказ телефона начало*/
+/* Стилизуем поле для чисел */
+#quantity {
+    width: 60px;
+    text-align: center;
+    margin-left: 20px;
+
+    /* Показываем стрелки всегда */
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Для Chrome, Edge, Safari */
+#quantity::-webkit-inner-spin-button,
+#quantity::-webkit-outer-spin-button {
+    opacity: 1;
+    display: block;
+}
+
+.form-group {
+    margin: 15px 0;
+    text-align: center;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 2px;
+}
+
+.phone-info p {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+/*поле выбора количества телефонов*/
+#quantity {
+    width: 50px;
+    text-align: center;
+    font-size: 16px;
+
+    /* Показываем стрелки всегда */
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Для Chrome, Edge, Safari */
+#quantity::-webkit-inner-spin-button,
+#quantity::-webkit-outer-spin-button {
+    opacity: 1;
+    display: block;
+}
+
+/*поле выбора количества телефонов*/
+
+#totalPrice {
+    font-weight: bold;
+    color: #2e7d32;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.btn-submit {
+    background-color: forestgreen;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #388e3c;
+}
+
+.pickup-options div {
+    margin: 10px 0;
+}
+
+/*заказ телефона конец*/
+/*--------------------------------------------------------------------------------------------------------------------*/
+/*главная админ страница начало*/
+
+
+/*главная админ страница конец*/
+/*--------------------------------------------------------------------------------------------------------------------*/
 #phones-container {
     max-width: 900px; /* Или другое значение в зависимости от дизайна */
     margin: 0 auto;
@@ -111,8 +229,36 @@
     align-items: center;
     justify-content: center;
 }
+
 /*----------------------------------------------------------------*/
 /*стили карточки товара начало*/
+
+.phone-container-show-phone {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Центрирует блок по горизонтали */
+    gap: 20px;
+    width: 100%; /* Растягиваем контейнер на всю ширину */
+}
+
+.phone-image-show-phone img {
+    max-height: 250px;
+    width: auto; /* Можно указать ширину вручную */
+    cursor: pointer;
+}
+
+.phone-details-show-phone {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Выравнивает текст влево */
+}
+
+.phone-details-show-phone p {
+    margin: 5px 0;
+    font-size: 18px; /* размер шрифта*/
+}
+
+/*увеличенное фото*/
 .modal {
     display: none;
     position: fixed;
@@ -151,6 +297,7 @@
     cursor: pointer;
     color: red;
 }
+
 /*стили карточки товара конец*/
 
 .logo img {
@@ -217,8 +364,8 @@ li {
 }
 
 aside {
-    float:right;
-    width:200px;
+    float: right;
+    width: 200px;
     background-color: skyblue;
 }
 
@@ -251,6 +398,7 @@ input:valid + span::before {
     content: "✓";
     color: green;
 }
+
 /*----------------------------------------------------------------*/
 /*страница заказа*/
 .order-container {
@@ -283,63 +431,38 @@ input:valid + span::before {
 }
 
 #phoneImage {
-    max-width: 160px;
+    max-height: 200px;
 }
 
 .submit-button {
     display: block;
     margin: 20px auto;
 }
+
 /*страница заказа*/
 /*----------------------------------------------------------------*/
-/* Контейнер навигации брендов начало*/
-.brand-nav {
-    display: flex; /* Используем flex для горизонтального расположения элементов */
-    justify-content: center; /* Центрируем элементы по горизонтали */
-    gap: 20px; /* Промежуток между элементами */
-    height: 60px; /* Фиксированная высота блока */
-    align-items: center; /* Выравнивание по вертикали */
-    margin: 12px 0; /* Отступ сверху и снизу */
+/*заказ подтвержден начало*/
+.buy-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
-/* Элемент бренда */
-.brand-item {
-    text-align: center; /* Центрируем содержимое */
-    padding: 5px 10px; /* Внутренние отступы */
-    border-right: 1px solid black; /* Разделительная линия между элементами */
-    flex: 1 1 200px; /* Гибкая ширина с минимальным размером 200px */
+.buy-image img {
+    max-height: 250px;
 }
 
-/* Убираем границу у последнего элемента */
-.brand-item:last-child {
-    border-right: none; /* Удаляем правую границу у последнего элемента */
+.buy-details p {
+    margin: 5px 0;
+    text-align: left; /* Выравниваем текст влево */
 }
 
-/* Стили для изображений */
-.brand-item img {
-    height: 30px; /* Задаем высоту изображения */
-    object-fit: contain; /* Гарантируем корректное отображение логотипа */
+.buy-info {
+    text-align: center;
 }
+/*заказ подтвержден конец*/
 
-/* Стили для подписей */
-.brand-item p {
-    margin: 3px 0; /* Небольшие отступы сверху и снизу */
-    font-size: 15px; /* Размер текста */
-}
-
-/* Стили для ссылок */
-.brand-item a {
-    text-decoration: none; /* Убираем подчеркивание */
-    color: inherit; /* Наследуем цвет текста */
-    transition: color 0.3s ease; /* Плавное изменение цвета при наведении */
-}
-
-/* Эффект наведения */
-.brand-item a:hover {
-    color: #007BFF; /* Меняем цвет текста при наведении */
-}
-/* Контейнер навигации брендов */
-/*---------------------------------------------------------------------------------*/
 /*Таблица заказов администратора*/
 .order-table {
     width: 70%;
@@ -359,7 +482,7 @@ input:valid + span::before {
 }
 
 
-.btn {           /*дизайн большой кнопки*/
+.btn { /*дизайн большой кнопки*/
     padding: 10px 15px;
     text-decoration: none;
     color: #fff;
@@ -367,12 +490,12 @@ input:valid + span::before {
 }
 
 
-.btn-success {   /*дизайн большой кнопки*/
+.btn-success { /*дизайн большой кнопки*/
     background-color: forestgreen;
 }
 
 
-.btn-success:hover {    /*дизайн большой кнопки*/
+.btn-success:hover { /*дизайн большой кнопки*/
     background-color: darkgreen;
 }
 
@@ -381,4 +504,5 @@ input:valid + span::before {
     font-family: "Arial", serif;
     text-transform: uppercase; /* если хотите заглавные буквы */
 }
+
 /*Таблица заказов администратора*/

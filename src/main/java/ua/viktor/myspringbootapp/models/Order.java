@@ -27,7 +27,7 @@ public class Order {
     @Column(name = "brand")
     private String brand;
 
-    @Size(min = 2, max = 15, message = "Модель має бути від 2 до 15 символів")
+    @Size(min = 2, max = 20, message = "Модель має бути від 2 до 20 символів")
     @Column(name = "model")
     private String model;
 

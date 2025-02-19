@@ -32,114 +32,8 @@
     <span style="color: gray;"> &gt; </span>
     <span th:text="${phone.getModel()}" style="font-weight: bold; color: black;"></span>
 </nav>
-<!--<h3>Ви оформляєте замовлення на телефон:</h3>-->
-<!--<table>-->
-<!--    <tr>-->
-<!--        <form method="POST" th:action="@{/mobileshop/{id}/order(id=${phone.getId()})}" th:object="${phone}">-->
-<!--            <div class="order-container">-->
-<!--                <div class="phone-details">-->
-<!--                    <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону">-->
-<!--                    <div class="phone-info">-->
-<!--                        <p>Виробник: <a th:text="${phone.getBrand()}">VALUE</a>-->
-<!--                            <label hidden for="brand">Виробник</label>-->
-<!--                            <input hidden type="text" th:field="*{brand}" id="brand">-->
-<!--                        </p>-->
-<!--                        <p>Модель: <a th:text="${phone.getModel()}">VALUE</a>-->
-<!--                            <label hidden for="model">Модель</label>-->
-<!--                            <input hidden type="text" th:field="*{model}" id="model">-->
-<!--                        </p>-->
-<!--                        <p>Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> ГБ-->
-<!--                            <label hidden for="memorySize">Об'єм внутрішньої пам'яті (Gb)</label>-->
-<!--                            <input hidden type="text" th:field="*{memorySize}" id="memorySize">-->
-<!--                        </p>-->
-<!--                        <p>Ціна: <b><span id="priceDisplay" th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</span></b> грн.</p>-->
-<!--                        <label hidden for="price">Ціна (грн)</label>-->
-<!--                        <input hidden type="text" th:field="*{price}" id="price">-->
-
-<!--                        <p><label for="quantity">Кількість телефонів:-->
-<!--                            <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" step="1" required>-->
-<!--                        </label></p>-->
-
-<!--                        <p>Загальна сума: <b><span id="totalPrice">VALUE</span></b> грн.</p>-->
-
-<!--                        <script>-->
-<!--                            const priceText = document.getElementById("priceDisplay").innerText; // Получаем текст с ценой-->
-<!--                            const price = parseFloat(priceText.replace(/\s/g, '').replace('грн', '').trim()); // Убираем пробелы и 'грн', оставляем только число-->
-<!--                            const quantityInput = document.getElementById("quantity");-->
-<!--                            const totalPriceDisplay = document.getElementById("totalPrice");-->
-
-<!--                            // Функция для форматирования числа с пробелами-->
-<!--                            function formatNumber(number) {-->
-<!--                                return number.toLocaleString('uk-UA'); // Форматируем число для Украины с пробелами для тысяч-->
-<!--                            }-->
-
-<!--                            // Функция для пересчета общей суммы-->
-<!--                            function updateTotalPrice() {-->
-<!--                                const quantity = parseInt(quantityInput.value); // Получаем количество-->
-<!--                                const total = price * quantity; // Вычисляем сумму-->
-<!--                                totalPriceDisplay.innerText = formatNumber(total); // Обновляем отображение общей суммы с пробелами-->
-<!--                            }-->
-
-<!--                            // Слушаем изменение количества-->
-<!--                            quantityInput.addEventListener("input", function(event) {-->
-<!--                                if (quantityInput.value < 1) {-->
-<!--                                    quantityInput.value = 1; // Устанавливаем минимальное значение-->
-<!--                                }-->
-<!--                                updateTotalPrice();-->
-<!--                            });-->
-
-<!--                            // Слушаем изменения количества через стрелки-->
-<!--                            quantityInput.addEventListener("change", updateTotalPrice);-->
-
-<!--                            // Инициализируем отображение суммы при загрузке страницы-->
-<!--                            updateTotalPrice();-->
-<!--                        </script>-->
-
-
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                <p><label for="personName">Введіть ваше ім'я: <input type="text" size="21" th:field="*{personName}"-->
-<!--                                                                     id="personName"-->
-<!--                                                                     placeholder="вiд 2 до 20 літер" minlength="2"-->
-<!--                                                                     maxlength="20" required></label></p>-->
-
-<!--                <p><label for="personPhone">Введіть свій номер телефону: <input type="text" th:field="*{personPhone}"-->
-<!--                                                                                id="personPhone"-->
-<!--                                                                                placeholder="вiд 9 до 14 цифр"-->
-<!--                                                                                pattern="\d{9,14}" required></label></p>-->
-
-<!--                <fieldset>-->
-<!--                    <legend>Виберіть, де вам зручно забрати замовлення:</legend>-->
-<!--                    <br>-->
-<!--                    <div>-->
-<!--                        <input type="radio" id="Kyiv" name="point"-->
-<!--                               value="Київ, вул. Антоновича, 50 ( з 10:00 до 21:00 )" required checked>-->
-<!--                        <label for="Kyiv">Київ, вул. Антоновича, 50 <small>(з 10:00 до 21:00)</small></label>-->
-<!--                    </div>-->
-<!--                    <br>-->
-<!--                    <div>-->
-<!--                        <input type="radio" id="Dnipro" name="point"-->
-<!--                               value="Дніпро, вул. Магнітогорська, 1А ( з 10:00 до 21:00 )">-->
-<!--                        <label for="Dnipro">Дніпро, вул. Магнітогорська, 1А <small>(з 10:00 до 21:00)</small></label>-->
-<!--                    </div>-->
-<!--                    <br>-->
-<!--                    <div>-->
-<!--                        <input type="radio" id="Odessa" name="point"-->
-<!--                               value="Одесса, вул.Дерибасівська 3Д ( з 9:00 до 22:00 )">-->
-<!--                        <label for="Odessa">Одесса, вул. Дерибасівська 3Д <small>(з 9:00 до 22:00)</small></label>-->
-<!--                    </div>-->
-<!--                </fieldset>-->
-<!--                <input type="submit" class="btn btn-success" value="Підтвердити заказ">-->
-<!--            </div>-->
-<!--        </form>-->
-<!--    </tr>-->
-<!--</table>-->
-<!--</body>-->
-<!--</html>-->
-
-
-<div class="order-container">
+<div class="order-container"
+     style="max-width: 600px; margin: 30px auto; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
     <h2>Оформлення замовлення</h2>
 
     <form method="POST" th:action="@{/mobileshop/{id}/order(id=${phone.getId()})}" th:object="${phone}">
@@ -149,24 +43,26 @@
             <div class="phone-info">
                 <p><strong>Виробник:</strong> <span th:text="${phone.brand}"></span></p>
                 <p><strong>Модель:</strong> <span th:text="${phone.model}"></span></p>
-                <p><strong>Пам'ять:</strong> <span th:text="${phone.memorySize}"></span> ГБ</p>
-                <p><strong>Ціна:</strong> <span id="priceDisplay" th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴
+                <p><strong>Вбудована пам'ять:</strong> <span th:text="${phone.memorySize}"></span> ГБ</p>
+                <p><strong>Ціна:</strong> <span id="priceDisplay"
+                                                th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴
                     <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required>
                     <label for="quantity">шт.</label>
 
                 </p>
-                    <p>Сума до сплати: <span id="totalPrice">0</span> ₴</p>
+                <p><strong>Сума до сплати:</strong> <span id="totalPrice">0</span> ₴</p>
             </div>
         </div>
-        <!-- Поля ввода информации о покупателе -->
         <p>
             <label for="personName">Ім'я покупця:</label>
-            <input type="text" id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2" maxlength="20">
+            <input type="text" id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"
+                   maxlength="20">
 
         </p>
         <p>
             <label for="personPhone">Номер телефону:</label>
-            <input type="tel" id="personPhone" name="personPhone" pattern="\+\d{12}" placeholder="+380XXXXXXXXX" required value="+380">
+            <input type="tel" id="personPhone" name="personPhone" pattern="\+\d{12}" placeholder="+380XXXXXXXXX"
+                   required value="+380">
         </p>
 
         <script>
@@ -178,40 +74,6 @@
                 }
             });
         </script>
-
-<!--        &lt;!&ndash; Поле для выбора количества &ndash;&gt;-->
-<!--        <div class="form-group">-->
-<!--            <label for="quantity">Кількість телефонів:</label>-->
-<!--            <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required>-->
-<!--        </div>-->
-
-        <!-- Отображение общей суммы -->
-<!--        <div class="form-group">-->
-<!--            <p>Сума до сплати: <span id="totalPrice">0</span> ₴</p>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Поля ввода информации о покупателе &ndash;&gt;-->
-<!--        <div class="form-group">-->
-<!--            <label for="personName">Ім'я покупця:</label>-->
-<!--            <input type="text" id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2" maxlength="20">-->
-<!--        </div>-->
-
-<!--        <div class="form-group">-->
-<!--            <label for="personPhone">Номер телефону:</label>-->
-<!--            <input type="tel" id="personPhone" name="personPhone" pattern="\+\d{12}" placeholder="+380XXXXXXXXX" required value="+380">-->
-<!--        </div>-->
-
-<!--        <script>-->
-<!--            const phoneInput = document.getElementById('personPhone');-->
-
-<!--            phoneInput.addEventListener('input', function () {-->
-<!--                if (!phoneInput.value.startsWith('+380')) {-->
-<!--                    phoneInput.value = '+380';-->
-<!--                }-->
-<!--            });-->
-<!--        </script>-->
-
-        <!-- Выбор точки выдачи -->
         <p>
             <label for="pickupPoint">Виберіть точку видачі:</label>
             <select id="pickupPoint" name="point" required>
@@ -220,8 +82,6 @@
                 <option value="Одеса, вул. Дерибасівська 3Д">Одеса, вул. Дерибасівська 3Д (09:00-22:00)</option>
             </select>
         </p>
-
-        <!-- Кнопка отправки -->
         <div class="form-group">
             <button type="submit" class="btn-submit">Підтвердити замовлення</button>
         </div>
@@ -249,89 +109,5 @@
 
 </body>
 <style>
-    /* Группируем текст и поле в один ряд */
-    .quantity-container {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    /* Стилизуем поле для чисел */
-    #quantity {
-        width: 60px;
-        text-align: center;
-        margin-left: 20px;
-
-            /* Показываем стрелки всегда */
-        -moz-appearance: textfield;
-        appearance: textfield;
-    }
-
-    /* Для Chrome, Edge, Safari */
-    #quantity::-webkit-inner-spin-button,
-    #quantity::-webkit-outer-spin-button {
-        opacity: 1;
-        display: block;
-    }
-
-    .form-group {
-        margin: 15px 0;
-        text-align: center;
-        flex-direction: column;
-    }
-
-    .form-group label {
-        margin-bottom: 2px;
-    }
-
-    .phone-info p {
-        margin: 5px 0;
-        font-size: 18px;
-    }
-
-/*поле выбора количества телефонов*/
-    #quantity {
-        width: 50px;
-        text-align: center;
-        font-size: 16px;
-
-        /* Показываем стрелки всегда */
-        -moz-appearance: textfield;
-        appearance: textfield;
-    }
-
-    /* Для Chrome, Edge, Safari */
-    #quantity::-webkit-inner-spin-button,
-    #quantity::-webkit-outer-spin-button {
-        opacity: 1;
-        display: block;
-    }
-    /*поле выбора количества телефонов*/
-
-    #totalPrice {
-        font-weight: bold;
-        color: #2e7d32;
-        font-size: 20px;
-        transition: color 0.3s;
-    }
-
-    .btn-submit {
-        background-color: forestgreen;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
-    }
-
-    .btn-submit:hover {
-        background-color: #388e3c;
-    }
-
-    .pickup-options div {
-        margin: 10px 0;
-    }
 </style>
 </html>

@@ -54,29 +54,23 @@
     <span th:text="${phone.getModel()}" style="font-weight: bold; color: black;"></span>
 </nav>
 <h3>Смартфон:</h3>
-<table>
-    <tr>
-        <td style="width: 220px; text-align: center;">
-            <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону" style="max-width: 200px; cursor: pointer;">
-        </td>
-        <td style="padding-left: 20px;">
-            Код товару: <a th:text="${phone.getId()}">VALUE</a>
-            <br><br>
-            Виробник: <a th:text="${phone.getBrand()}">VALUE</a>
-            <br>
-            Модель: <a th:text="${phone.getModel()}">VALUE</a>
-            <br>
-            Вбудована&nbsp;пам'ять:&nbsp;<a th:text="${phone.getMemorySize()}">VALUE</a>&nbsp;Gb
-            <br><br>
-            Ціна: <b><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a></b> грн.
-        </td>
-    </tr>
-</table>
+<div class="phone-container-show-phone">
+    <div class="phone-image-show-phone">
+        <img id="phoneImage-show-phone" th:src="${phone.imagePath}" alt="Фото телефону">
+    </div>
+    <div class="phone-details-show-phone">
+        <p><strong>Код товару:</strong> <a th:text="${phone.getId()}">VALUE</a></p>
+        <br>
+        <p><strong>Виробник:</strong> <a th:text="${phone.getBrand()}">VALUE</a></p>
+        <p><strong>Модель:</strong> <a th:text="${phone.getModel()}">VALUE</a></p>
+        <p><strong>Вбудована пам'ять:</strong> <a th:text="${phone.getMemorySize()}">VALUE</a> Gb</p>
+        <p><strong>Ціна:</strong> <b><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a></b> ₴</p>
+    </div>
+</div>
 <br>
 <p>
     <a class="btn btn-success" th:href="@{/mobileshop/{id}/new_order(id=${phone.getId()})}">Придбати</a>
 </p>
-
 <div id="imageModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -85,7 +79,7 @@
 </div>
 
 <script>
-    const phoneImage = document.getElementById("phoneImage");
+    const phoneImage = document.getElementById("phoneImage-show-phone");
     const modal = document.getElementById("imageModal");
     const modalImage = document.getElementById("modalImage");
     const closeBtn = document.querySelector(".close");

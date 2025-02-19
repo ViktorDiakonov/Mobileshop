@@ -5,94 +5,147 @@
     <title>Admin page</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <style>
-        input + span {
-            position: relative;
-        }
-
-        input + span::before {
-            position: absolute;
-            right: -20px;
-        }
-
-        input:invalid {
-            border: 1px solid gray;
-        }
-
-        input:invalid + span::before {
-            min-font-size: 9;
-        }
-
-        input:valid + span::before {
-            color: green;
-        }
-
-        table {
-            margin: auto;
-        }
-
-        tbody {
-            background-color: lightgoldenrodyellow;
-        }
-
-        td {
-            border: 2mm ridge rgba(87, 148, 247, .7);
+        body {
             text-align: center;
+            font-family: "Grava Display", serif;
+            background-color: #E7D48D;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .admin-panel {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .admin-section {
+            flex: 1;
+            background-color: beige;
+            border: 2px solid green;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button, input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: darkgreen;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            width: 90%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #ffffcc;
+            border: 2px solid green;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-success {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .btn-success:hover {
+            background-color: #0073a6;
         }
     </style>
 </head>
 <body>
-<h3>Кабінет адміністратора</h3>
-<table>
-    <tbody>
-    <tr>
-        <td style="width:275px" height="5px"><b>Робота із замовленнями</b></td>
-        <td style="padding:5px; width: 270px"><b>Робота з продукцією</b></td>
-    </tr>
-    <tr>
-        <td height="50px" style="padding:15px">
-            <br>
-            <button><a href="/mobileshop/orders">Дивитись всі замовлення</a></button>
-            <br><br><br>
-            <form name="ff" method="get" action="/mobileshop/orders/p">
-                <label for="size"></label>
-                <input type="text" name="size" id="size" placeholder="останні 1-9 замовлень" minlength="1"
-                       pattern="[1-9]" required>
+
+<div class="container">
+    <h2>Кабінет адміністратора</h2>
+
+    <div class="admin-panel">
+        <div class="admin-section">
+            <div class="section-title">Робота із замовленнями</div>
+            <br><br>
+            <a href="/mobileshop/orders" class="button">Дивитись всі замовлення</a>
+            <br><br><hr><br>
+            <label>Останні замовлення</label><br>
+            <form method="get" action="/mobileshop/orders/p" style="display: flex; align-items: center; gap: 10px;">
+                <input type="text" name="size" placeholder="Введіть кількість 1-15" pattern="([1-9]|1[0-5])" required>
                 <input type="submit" value="Показати">
-                <!--<div th:if="${param.error}" style="color: red">Неправильный код замовлення</div>-->
+            </form>
+            <br><br><hr><br>
+            <label>Знайти / Видалити</label><br>
+            <form method="get" action="/mobileshop/admin_page/search_order"
+                  style="display: flex; align-items: center; gap: 10px;">
+                <input type="text" name="id" placeholder="Введіть номер замовлення" pattern="\d{1,5}" required>
+                <input type="submit" value="Шукати">
             </form>
             <br>
-        </td>
-        <td height="100px">
-            <button><a href="/mobileshop/new_phone">Додавання нового телефону</a></button>
-        </td>
-    </tr>
-    <tr>
-        <td height="100px" style="padding:15px">
-            <form name="cc" method="get" action="/mobileshop/admin_page/search_order">
-                <label for="id">Знайти / Видалити</label>
-                <br>
-                <input type="text" name="id" id="id" size="21" placeholder="Введіть номер замовлення" pattern="\d{1,5}"
-                       required>
+        </div>
+
+        <div class="admin-section">
+            <div class="section-title">Робота з продукцією</div>
+            <br><br>
+            <a href="/mobileshop/new_phone" class="button">Додавання нового телефону</a>
+            <br><br><hr><br>
+            <label>Оновити / Видалити</label><br>
+            <form method="get" action="/mobileshop/admin_page/search_phone"
+                  style="display: flex; align-items: center; gap: 10px;">
+                <input type="text" name="id" placeholder="Введіть код телефону" pattern="\d{1,5}" required>
                 <input type="submit" value="Шукати">
             </form>
-        </td>
-        <td height="100px" style="padding:15px">
-            <form name="dd" method="get" action="/mobileshop/admin_page/search_phone">
-                <label for="id2">Оновити / Видалити</label>
-                <br>
-                <input type="text" name="id" id="id2" placeholder="Введіть код телефону" pattern="\d{1,5}" required>
-                <input type="submit" value="Шукати">
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+        </div>
+    </div>
+</div>
 <br><br>
-<hr>
-<br>
-<p>
-    <a class="btn btn-success" href="/mobileshop/">Головна сторінка сайту</a>
-</p>
-<br><br>
+<a class="btn-success" href="/mobileshop/">Головна сторінка сайту</a>
 </body>
 </html>
+

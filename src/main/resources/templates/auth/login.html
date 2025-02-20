@@ -23,31 +23,47 @@
     </div>
 </div>
 <h3>Підтвердьте свій обліковий запис</h3>
-<table>
-    <tr>
-        <td>
-            <form novalidate name="f" method="post" action="/process_login">
-                <label for="username">Введіть ім'я користувача:</label>
-                <input type="text" name="username" id="username" minlength="2" maxlength="20" required>
-                <span></span>
-                <br><br>
-                <label for="password">Введіть пароль:</label>
-                <input type="password" name="password" id="password" minlength="4" maxlength="10" required>
-                <span></span>
-                <br><br>
-                <input type="submit" value="Вхід">
-                <div th:if="${param.error}" style="color: red">
-                    Неправильне ім'я або пароль
-                </div>
-            </form>
-        </td>
-    </tr>
-</table>
+<!--<table>-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--            <form novalidate name="f" method="post" action="/process_login">-->
+<!--                <label for="username">Введіть ім'я користувача:</label>-->
+<!--                <input type="text" name="username" id="username" minlength="2" maxlength="20" required>-->
+<!--                <span></span>-->
+<!--                <br><br>-->
+<!--                <label for="password">Введіть пароль:</label>-->
+<!--                <input type="password" name="password" id="password" minlength="4" maxlength="10" required>-->
+<!--                <span></span>-->
+<!--                <br><br>-->
+<!--                <input type="submit" value="Вхід">-->
+<!--                <div th:if="${param.error}" style="color: red">-->
+<!--                    Неправильне ім'я або пароль-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+<div style="font-family: 'Grava Display', serif; max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <form novalidate name="f" method="post" action="/process_login" style="display: flex; flex-direction: column;">
+        <label for="username">Введіть ім'я користувача:</label>
+        <input type="text" name="username" id="username" minlength="2" maxlength="20" required style="margin-bottom: 10px; padding: 5px;">
+
+        <label for="password">Введіть пароль:</label>
+        <input type="password" name="password" id="password" minlength="4" maxlength="10" required style="margin-bottom: 10px; padding: 5px;">
+
+        <input type="submit" value="Вхід" style="background-color: green; color: white; padding: 8px; border: none; cursor: pointer; border-radius: 5px;">
+
+        <div th:if="${param.error}" style="color: red; margin-top: 10px;">
+            Неправильне ім'я або пароль
+        </div>
+    </form>
+</div>
+
 <br><br>
 <hr>
 <br>
 <p>
-    <button><a href="/mobileshop/" style="color: blue">Повернутися на головну сторінку</a></button>
+    <a class="btn btn-success" href="/mobileshop/">Повернутись на головну сторінку</a>
 </p>
 </body>
 </html>

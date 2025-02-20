@@ -86,7 +86,7 @@ public class AdminController {
     @GetMapping("/{id}/order")
     public String viewOrderById(@PathVariable("id") int id, Model model) {
         model.addAttribute("order", adminService.findOrder(id));
-        return "admin/show-order";
+        return "admin/admin-search-order";
     }
 
     //---------------------------------------------------------------

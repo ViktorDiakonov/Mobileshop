@@ -1,60 +1,58 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Заказ</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-</head>
-<body>
-<nav>
-    <h3>Замовлення №<a th:text="${order.getId()}">VALUE</a></h3>
-    <table>
-        <tr>
-            <td style="width: 220px; text-align: center;">
-                <img th:src="${order.getImagePath()}" alt="Фото телефону" style="max-width: 260px;">
-            </td>
-            <td style="padding-left: 20px;">
-                Код товару: <a th:text="${order.getId()}">VALUE</a>
-                <br>
-                Виробник: <a th:text="${order.getBrand()}">VALUE</a>
-                <br>
-                Модель: <a th:text="${order.getModel()}">VALUE</a>
-                <br>
-                Вбудована пам'ять: <a th:text="${order.getMemorySize()}">VALUE</a> ГБ
-                <br><br>
-                Кількість: <a th:text="${order.getQuantity()}">VALUE</a> шт.
-                <br>
-                Загальна ціна: <a th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴
-                <br><br>
-                <hr>
-                Ім'я покупця: <b><a th:text="${order.getPersonName()}">VALUE</a></b>
-                <br>
-                Телефон покупця: <b><a th:text="${order.getPersonPhone()}">VALUE</a></b>
-                <br><br>
-                Точка видачі: <a th:text="${order.getPoint()}">VALUE</a>
-                <br>
-                Дата замовлення: <span th:text="${#dates.format(order.getDate(), 'dd.MM.yyyy HH:mm')}"></span>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Заказ</title>-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav>-->
+<!--    <h3>Замовлення №<a th:text="${order.getId()}">VALUE</a></h3>-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td style="width: 220px; text-align: center;">-->
+<!--                <img th:src="${order.getImagePath()}" alt="Фото телефону" style="max-width: 260px;">-->
+<!--            </td>-->
+<!--            <td style="padding-left: 20px;">-->
+<!--                Виробник: <a th:text="${order.getBrand()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Модель: <a th:text="${order.getModel()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Вбудована пам'ять: <a th:text="${order.getMemorySize()}">VALUE</a> ГБ-->
+<!--                <br><br>-->
+<!--                Кількість: <a th:text="${order.getQuantity()}">VALUE</a> шт.-->
+<!--                <br>-->
+<!--                Загальна сума: <a th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴-->
+<!--                <br><br>-->
+<!--                <hr>-->
+<!--                Ім'я покупця: <b><a th:text="${order.getPersonName()}">VALUE</a></b>-->
+<!--                <br>-->
+<!--                Телефон покупця: <b><a th:text="${order.getPersonPhone()}">VALUE</a></b>-->
+<!--                <br><br>-->
+<!--                Точка видачі: <a th:text="${order.getPoint()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Дата замовлення: <span th:text="${#dates.format(order.getDate(), 'dd.MM.yyyy HH:mm')}"></span>-->
 
-            </td>
-        </tr>
-    </table>
-    <table>
-        <tbody>
-        <tr>
-            <td style="width: auto">
-                <div th:align="left" th:each="orders : ${order}">
-                    <br><br>
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--    <table>-->
+<!--        <tbody>-->
+<!--        <tr>-->
+<!--            <td style="width: auto">-->
+<!--                <div th:align="left" th:each="orders : ${order}">-->
+<!--                    <br><br>-->
 
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</nav>
-<hr>
-<br>
-<p>
-    <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>
-</p>
-</body>
-</html>
+<!--                </div>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</nav>-->
+<!--<hr>-->
+<!--<br>-->
+<!--<p>-->
+<!--    <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>-->
+<!--</p>-->
+<!--</body>-->
+<!--</html>-->

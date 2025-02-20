@@ -1,49 +1,129 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Телефон</title>-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav>-->
+<!--    <h3>За кодом <a th:text="${order.getId()}">VALUE</a> Знайдено замовлення:</h3>-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td style="width: 220px; text-align: center;">-->
+<!--                <img th:src="${order.getImagePath()}" alt="Фото телефону" style="max-width: 205px;">-->
+<!--            </td>-->
+<!--            <td style="padding-left: 20px;">-->
+<!--                Виробник: <a th:text="${order.getBrand()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Модель: <a th:text="${order.getModel()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Вбудована пам'ять: <a th:text="${order.getMemorySize()}">VALUE</a> ГБ-->
+<!--                <br>-->
+<!--                Ціна: <a th:text="${order.getPrice()}">VALUE</a> грн.-->
+<!--                <br><br>-->
+<!--                <hr>-->
+<!--                Ім'я покупця: <b><a th:text="${order.getPersonName()}">VALUE</a></b>-->
+<!--                <br>-->
+<!--                Телефон покупця: <b><a th:text="${order.getPersonPhone()}">VALUE</a></b>-->
+<!--                <br><br>-->
+<!--                Точка видачі: <a th:text="${order.getPoint()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Дата замовлення: <a th:text="${order.getDate()}">VALUE</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</nav>-->
+<!--<hr>-->
+<!--<br><br>-->
+<!--<div th:align="center">-->
+<!--    <form th:method="DELETE" th:action="@{/mobileshop/delete/order/{id}(id=${order.getId()})}">-->
+<!--        <input style="color: red" type="submit" value="Видалити заказ">-->
+<!--    </form>-->
+<!--</div>-->
+<!--<br><br>-->
+<!--<p>-->
+<!--    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>-->
+<!--</p>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Телефон</title>
+    <title>Замовлення</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <style>
+        body {
+            background-color: #E7D48D;
+        }
+    </style>
 </head>
 <body>
-<nav>
-    <h3>За кодом <a th:text="${order.getId()}">VALUE</a> Знайдено замовлення:</h3>
-    <table>
-        <tr>
-            <td style="width: 220px; text-align: center;">
-                <img th:src="${order.getImagePath()}" alt="Фото телефону" style="max-width: 205px;">
-            </td>
-            <td style="padding-left: 20px;">
-                Виробник: <a th:text="${order.getBrand()}">VALUE</a>
-                <br>
-                Модель: <a th:text="${order.getModel()}">VALUE</a>
-                <br>
-                Вбудована пам'ять: <a th:text="${order.getMemorySize()}">VALUE</a> ГБ
-                <br>
-                Ціна: <a th:text="${order.getPrice()}">VALUE</a> грн.
-                <br><br>
-                <hr>
-                Ім'я покупця: <b><a th:text="${order.getPersonName()}">VALUE</a></b>
-                <br>
-                Телефон покупця: <b><a th:text="${order.getPersonPhone()}">VALUE</a></b>
-                <br><br>
-                Точка видачі: <a th:text="${order.getPoint()}">VALUE</a>
-                <br>
-                Дата замовлення: <a th:text="${order.getDate()}">VALUE</a>
-            </td>
-        </tr>
-    </table>
-</nav>
-<hr>
-<br><br>
-<div th:align="center">
-    <form th:method="DELETE" th:action="@{/mobileshop/delete/order/{id}(id=${order.getId()})}">
-        <input style="color: red" type="submit" value="Видалити заказ">
-    </form>
+
+<div class="order-container"
+     style="max-width: 600px; margin: 30px auto; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); background-color: beige;">
+    <!-- Заголовок -->
+    <h3 style="text-align: center; margin-bottom: 20px;">Замовлення № <span th:text="${order.getId()}"></span></h3>
+
+    <!-- Інформація про замовлення -->
+    <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+        <img th:src="${order.getImagePath()}" alt="Фото телефону" style="max-height: 260px; border-radius: 5px;">
+        <div style="flex: 1;">
+            <strong>Виробник: </strong><span th:text="${order.getBrand()}"></span>
+            <br>
+            <strong>Модель:</strong> <span th:text="${order.getModel()}"></span>
+            <br>
+            <strong>Вбудована пам'ять: </strong> <span th:text="${order.getMemorySize()}"></span> GB
+            <br><br>
+            <strong>Кількість:</strong> <span th:text="${order.getQuantity()}"></span> шт.
+            <br>
+            <strong>Загальна сума:</strong> <span th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}"></span> ₴
+            <br><br><hr>
+            <strong>Ім'я покупця:</strong> <span th:text="${order.getPersonName()}"></span>
+            <br>
+            <strong>Телефон покупця:</strong> <span th:text="${order.getPersonPhone()}"></span>
+            <br><br>
+            <strong>Точка видачі:</strong> <span th:text="${order.getPoint()}"></span>
+            <br>
+            <strong>Дата замовлення:</strong> <span th:text="${#dates.format(order.getDate(), 'dd.MM.yyyy - HH:mm')}"></span></p>
+        </div>
+    </div>
+
+    <!-- Кнопки дій -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
+        <!-- Кнопка видалення з підтвердженням -->
+        <form th:method="DELETE" th:action="@{/mobileshop/delete/order/{id}(id=${order.getId()})}"
+              style="flex: 1; display: flex; flex-direction: column-reverse; align-items: center;">
+            <label for="confirmDelete" style="margin-top: 10px;">
+                <input type="checkbox" id="confirmDelete" onchange="toggleDeleteButton()"> Підтверджую видалення
+            </label>
+            <input id="deleteButton" type="submit" value="Видалити замовлення" disabled
+                   style="padding: 10px 20px; background-color: #d3d3d3; border: none; border-radius: 5px; color: #fff; cursor: not-allowed; font-size: 15px;">
+        </form>
+    </div>
 </div>
-<br><br>
+<br>
 <p>
-    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>
+    <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>
 </p>
+
+<script>
+    function toggleDeleteButton() {
+        const deleteButton = document.getElementById('deleteButton');
+        const confirmDelete = document.getElementById('confirmDelete');
+
+        if (confirmDelete.checked) {
+            deleteButton.disabled = false;
+            deleteButton.style.backgroundColor = 'red';
+            deleteButton.style.cursor = 'pointer';
+        } else {
+            deleteButton.disabled = true;
+            deleteButton.style.backgroundColor = '#d3d3d3';
+            deleteButton.style.cursor = 'not-allowed';
+        }
+    }
+</script>
+
 </body>
 </html>

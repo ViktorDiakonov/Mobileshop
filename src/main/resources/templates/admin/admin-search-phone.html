@@ -77,23 +77,27 @@
     <meta charset="UTF-8">
     <title>Телефон</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <style>
+        body {
+            background-color: #E7D48D;
+        }
+    </style>
 </head>
 <body>
 
 <div class="phone-container"
-     style="max-width: 600px; margin: 30px auto; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+     style="max-width: 600px; margin: 30px auto; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); background-color: beige;">
     <!-- Заголовок -->
     <h3 style="text-align: center; margin-bottom: 20px;">Телефон за кодом: <span th:text="${phone.getId()}"></span></h3>
 
     <!-- Информация о телефоне -->
     <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
-        <img th:src="${phone.imagePath}" alt="Фото телефону" style="max-width: 180px; border-radius: 5px;">
+        <img th:src="${phone.imagePath}" alt="Фото телефону" style="max-height: 200px; border-radius: 5px;">
         <div style="flex: 1;">
-            <p style="text-align: left"><strong>Код товару:</strong> <span th:text="${phone.getId()}"></span></p>
             <p style="text-align: left"><strong>Виробник:</strong> <span th:text="${phone.getBrand()}"></span></p>
             <p style="text-align: left"><strong>Модель:</strong> <span th:text="${phone.getModel()}"></span></p>
-            <p style="text-align: left"><strong>Пам'ять:</strong> <span th:text="${phone.getMemorySize()}"></span> GB
-            </p>
+            <p style="text-align: left"><strong>Вбудована пам'ять:</strong> <span
+                    th:text="${phone.getMemorySize()}"></span> GB</p>
             <p style="text-align: left"><strong>Ціна:</strong> <span
                     th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}"></span> ₴</p>
         </div>
@@ -115,13 +119,11 @@
                    style="padding: 10px 20px; background-color: #d3d3d3; border: none; border-radius: 5px; color: #fff; cursor: not-allowed; font-family: Arial, sans-serif; font-size: 15px;">
         </form>
     </div>
-
+<br>
     <!-- Возврат на страницу администратора -->
-    <div style="text-align: center; margin-top: 30px;">
-        <a class="btn btn-success" href="/mobileshop/admin_page"
-           style="padding: 10px 20px; background-color: green; color: #fff; text-decoration: none; border-radius: 5px;">
-            Сторінка адміністратора</a>
-    </div>
+    <p>
+        <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>
+    </p>
 </div>
 
 <script>

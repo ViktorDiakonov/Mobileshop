@@ -1,47 +1,83 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Створено новий телефон</title>-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav>-->
+<!--    <h3>Було створено новий телефон:</h3>-->
+<!--    <table>-->
+<!--        <tbody>-->
+<!--        <tr>-->
+<!--            <td style="width: auto">-->
+<!--                Код товара: <a th:text="${phone.getId()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Виробник: <a th:text="${phone.getBrand()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Модель: <a th:text="${phone.getModel()}">VALUE</a>-->
+<!--                <br>-->
+<!--                Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> Гб-->
+<!--                <br>-->
+<!--                Ціна: <a th:text="${phone.getPrice()}">VALUE</a> грн.-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</nav>-->
+<!--<hr>-->
+<!--<br>-->
+<!--<p>-->
+<!--    <button>-->
+<!--        <a style="color: blue" th:href="@{/mobileshop/{id}/edit_phone(id=${phone.getId()})}">Корегувати</a>-->
+<!--    </button>-->
+<!--</p>-->
+<!--<br><br>-->
+<!--<div th:align="center">-->
+<!--    <form th:method="DELETE" th:action="@{/mobileshop/delete_phone/{id}(id=${phone.getId()})}">-->
+<!--        <input style="color: red" type="submit" value="Видалити телефон">-->
+<!--    </form>-->
+<!--</div>-->
+<!--<br><br>-->
+<!--<p>-->
+<!--    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>-->
+<!--</p>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Створено новий телефон</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <style>
+        body {
+            background-color: #E7D48D;
+        }
+    </style>
 </head>
 <body>
-<nav>
-    <h3>Було створено новий телефон:</h3>
-    <table>
-        <tbody>
-        <tr>
-            <td style="width: auto">
-                Код товара: <a th:text="${phone.getId()}">VALUE</a>
-                <br>
-                Виробник: <a th:text="${phone.getBrand()}">VALUE</a>
-                <br>
-                Модель: <a th:text="${phone.getModel()}">VALUE</a>
-                <br>
-                Вбудована пам'ять: <a th:text="${phone.getMemorySize()}">VALUE</a> Гб
-                <br>
-                Ціна: <a th:text="${phone.getPrice()}">VALUE</a> грн.
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</nav>
-<hr>
-<br>
-<p>
-    <button>
-        <a style="color: blue" th:href="@{/mobileshop/{id}/edit_phone(id=${phone.getId()})}">Корегувати</a>
-    </button>
-</p>
-<br><br>
-<div th:align="center">
-    <form th:method="DELETE" th:action="@{/mobileshop/delete_phone/{id}(id=${phone.getId()})}">
-        <input style="color: red" type="submit" value="Видалити телефон">
-    </form>
+
+<div class="phone-container"
+     style="max-width: 600px; margin: 30px auto; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); background-color: beige;">
+    <h3 style="text-align: center; margin-bottom: 20px;">Було створено новий телефон:</h3>
+
+    <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+        <img th:src="${phone.imagePath}" alt="Фото телефону" style="max-height: 200px; border-radius: 5px;">
+        <div style="flex: 1;">
+            <p style="text-align: left"><strong>Код товара:</strong> <span th:text="${phone.getId()}"></span></p>
+            <p style="text-align: left"><strong>Виробник:</strong> <span th:text="${phone.getBrand()}"></span></p>
+            <p style="text-align: left"><strong>Модель:</strong> <span th:text="${phone.getModel()}"></span></p>
+            <p style="text-align: left"><strong>Вбудована пам'ять:</strong> <span th:text="${phone.getMemorySize()}"></span> Гб</p>
+            <p style="text-align: left"><strong>Ціна:</strong> <span th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}"></span> грн.</p>
+        </div>
+    </div>
+
+    <p>
+        <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>
+    </p>
 </div>
-<br><br>
-<p>
-    <button><a style="color: forestgreen" href="/mobileshop/admin_page">Сторінка адміністратора</a></button>
-</p>
+
 </body>
 </html>

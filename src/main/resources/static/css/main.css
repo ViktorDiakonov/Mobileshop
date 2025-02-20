@@ -403,6 +403,7 @@ input:valid + span::before {
 /*страница заказа*/
 .order-container {
     display: flex;
+    font-family: "Grava Display", serif;
     flex-direction: column;
     align-items: center;
     text-align: left;
@@ -463,6 +464,101 @@ input:valid + span::before {
 }
 /*заказ подтвержден конец*/
 
+/*главная админ страница*/
+
+/*.admin-container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    max-width: 900px;*/
+/*    margin: auto;*/
+/*    padding: 20px;*/
+/*}*/
+
+/*.admin-panel {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: space-between;*/
+/*    width: 100%;*/
+/*    gap: 20px;*/
+/*}*/
+
+/*.admin-section {*/
+/*    flex: 1;*/
+/*    background-color: beige;*/
+/*    border: 2px solid green;*/
+/*    padding: 20px;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*button, input[type="submit"] {*/
+/*    background-color: #4CAF50;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    padding: 10px 15px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 5px;*/
+/*    font-size: 14px;*/
+/*}*/
+
+/*button a {*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*}*/
+
+/*button:hover, input[type="submit"]:hover {*/
+/*    background-color: #45a049;*/
+/*}*/
+
+/*.admin-button {*/
+/*    display: inline-block;*/
+/*    background-color: green;*/
+/*    color: white;*/
+/*    padding: 10px 20px;*/
+/*    text-decoration: none;*/
+/*    border-radius: 5px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.admin-button:hover {*/
+/*    background-color: darkgreen;*/
+/*}*/
+
+/*input[type="text"] {*/
+/*    padding: 8px;*/
+/*    margin-top: 5px;*/
+/*    border: 1px solid gray;*/
+/*    border-radius: 5px;*/
+/*    width: 90%;*/
+/*}*/
+
+/*.admin-section-title {*/
+/*    text-align: center;*/
+/*    font-size: 18px;*/
+/*    font-weight: bold;*/
+/*    padding: 10px;*/
+/*    background-color: #ffffcc;*/
+/*    border: 2px solid green;*/
+/*    border-radius: 10px;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*.btn-success {*/
+/*    display: inline-block;*/
+/*    margin-top: 20px;*/
+/*    text-decoration: none;*/
+/*    background-color: #008CBA;*/
+/*    color: white;*/
+/*    padding: 10px 20px;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.btn-success:hover {*/
+/*    background-color: #0073a6;*/
+/*}*/
+/*главная админ страница*/
+/*-----------------------------------------------*/
 /*Таблица заказов администратора*/
 .order-table {
     width: 70%;

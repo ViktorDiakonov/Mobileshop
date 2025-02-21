@@ -13,7 +13,6 @@ import ua.viktor.myspringbootapp.services.PhoneService;
 
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import ua.viktor.myspringbootapp.services.PhoneServiceBean;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +34,6 @@ public class AdminController {
 
     private final PhoneService phoneService;
     private final AdminService adminService;
-    private final PhoneServiceBean phoneServiceBean;
     private final PhoneRepository phoneRepository;
 
     // admin page
@@ -151,35 +149,25 @@ public class AdminController {
     public String createNewPhone(@ModelAttribute("phone") @Valid Phone phone,
                                  BindingResult bindingResult,
                                  @RequestParam(value = "image", required = false) MultipartFile file) {
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             log.warn("Ошибка валидации при создании телефона");
             return "admin/new-phone";
         }
 
-        if (file != null && !file.isEmpty()) {
-            try {
-                String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-                Path uploadPath = Paths.get("src/main/resources/static/uploads");
-
-                if (!Files.exists(uploadPath)) {
-                    Files.createDirectories(uploadPath);
-                }
-
-                Path filePath = uploadPath.resolve(filename);
-                Files.write(filePath, file.getBytes());
-
-                // Сохраняем путь к изображению в БД
-                phone.setImagePath("/uploads/" + filename);
-                log.info("Файл загружен: {}", filePath.toAbsolutePath());
-            } catch (IOException e) {
-                log.error("Ошибка загрузки файла", e);
+        try {
+            String imagePath = adminService.saveFile(file);
+            if (imagePath != null) {
+                phone.setImagePath(imagePath);
             }
+        } catch (IOException e) {
+            log.error("Ошибка загрузки файла", e);
         }
 
-        adminService.create(phone); // Сохраняем телефон в БД
+        adminService.create(phone);
         log.info("Телефон успешно создан: {} {}", phone.getBrand(), phone.getModel());
         return "admin/view-created-phone";
     }
+
 
 
     //---------------------------------------------------------------
@@ -193,12 +181,25 @@ public class AdminController {
     }
 
     // save edit phone
+//    @PatchMapping("/{id}")
+//    public String updatePhone(@ModelAttribute("phone") @Valid Phone phone, BindingResult bindingResult,
+//                              @PathVariable("id") int id) {
+//        if (bindingResult.hasErrors()) return "admin/edit";
+//        adminService.updateById(id, phone);
+//        return "redirect:/mobileshop/admin_page";
+//    }
+
     @PatchMapping("/{id}")
-    public String updatePhone(@ModelAttribute("phone") @Valid Phone phone, BindingResult bindingResult,
-                              @PathVariable("id") int id) {
-        if (bindingResult.hasErrors()) return "admin/edit";
-        adminService.updateById(id, phone);
+    public String updatePhone(@ModelAttribute("phone") @Valid Phone phone,
+                              BindingResult bindingResult,
+                              @PathVariable("id") int id,
+                              @RequestParam(value = "file", required = false) MultipartFile file) {
+        if (bindingResult.hasErrors()) {
+            return "admin/edit";
+        }
+        adminService.updateById(id, phone, file);
         return "redirect:/mobileshop/admin_page";
     }
+
     //--------------------------------------------------------------------
 }

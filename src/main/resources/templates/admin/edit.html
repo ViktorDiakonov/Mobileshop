@@ -11,34 +11,60 @@
     <table>
         <tr>
             <td style="width: auto">
-                <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}" th:object="${phone}">
+<!--                <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}" th:object="${phone}">-->
+<!--                    <label for="brand">Введіть бренд</label>-->
+<!--                    <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>-->
+<!--                    <span></span>-->
+<!--                    <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>-->
+<!--                    <br><br>-->
+<!--                    <label for="model">Введіть модель телефону</label>-->
+<!--                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="20" required>-->
+<!--                    <span></span>-->
+<!--                    <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>-->
+<!--                    <br><br>-->
+<!--                    <label for="memorySize">Введіть обсяг пам'яті</label>-->
+<!--                    <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb-->
+<!--                    <span></span>-->
+<!--                    <div style="color: red" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">-->
+<!--                        MemorySize Error</div>-->
+<!--                    <br><br>-->
+<!--                    <label for="price">Введіть ціну</label>-->
+<!--                    <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> грн-->
+<!--                    <span></span>-->
+<!--                    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>-->
+<!--                    <br><br>-->
+<!--                    &lt;!&ndash; Загрузка нового файла &ndash;&gt;-->
+<!--                    <label for="file">Оновити фото:</label>-->
+<!--                    <input type="file" id="file" name="file">-->
+<!--                    <br><br>-->
+<!--                    <input type="submit" value="Зберегти">-->
+<!--                </form>-->
+                <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}"
+                      th:object="${phone}" enctype="multipart/form-data">
+
                     <label for="brand">Введіть бренд</label>
                     <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>
-                    <span></span>
-                    <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>
                     <br><br>
+
                     <label for="model">Введіть модель телефону</label>
                     <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="20" required>
-                    <span></span>
-                    <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>
                     <br><br>
+
                     <label for="memorySize">Введіть обсяг пам'яті</label>
                     <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb
-                    <span></span>
-                    <div style="color: red" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">
-                        MemorySize Error</div>
                     <br><br>
+
                     <label for="price">Введіть ціну</label>
                     <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> грн
-                    <span></span>
-                    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>
                     <br><br>
-                    <!-- Загрузка нового файла -->
+
                     <label for="file">Оновити фото:</label>
                     <input type="file" id="file" name="file">
                     <br><br>
+
                     <input type="submit" value="Зберегти">
                 </form>
+
             </td>
         </tr>
     </table>

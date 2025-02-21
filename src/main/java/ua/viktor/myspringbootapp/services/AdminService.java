@@ -1,8 +1,10 @@
 package ua.viktor.myspringbootapp.services;
 
+import org.springframework.web.multipart.MultipartFile;
 import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
 
+import java.io.IOException;
 import java.util.List;
 /**
  * @author Diakonov Viktor
@@ -22,7 +24,7 @@ public interface AdminService {
     Phone create(Phone phone);
 
     // сохранение обновленного телефона
-    void updateById(Integer id, Phone phone);
+    void updateById(Integer id, Phone phone, MultipartFile file);
 
     // страница создания заказа
     Phone readById(Integer id);
@@ -32,4 +34,6 @@ public interface AdminService {
 
     // показать админу все заказы с пагинацией
     List<Order> findWithPagination(int page, int size);
+
+    String saveFile(MultipartFile file) throws IOException;
 }

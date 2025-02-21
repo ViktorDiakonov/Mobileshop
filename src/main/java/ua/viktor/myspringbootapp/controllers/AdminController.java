@@ -7,16 +7,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ua.viktor.myspringbootapp.models.Phone;
+import ua.viktor.myspringbootapp.repositories.PhoneRepository;
 import ua.viktor.myspringbootapp.services.AdminService;
 import ua.viktor.myspringbootapp.services.PhoneService;
 
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import ua.viktor.myspringbootapp.services.PhoneServiceBean;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -31,18 +35,58 @@ public class AdminController {
 
     private final PhoneService phoneService;
     private final AdminService adminService;
+    private final PhoneServiceBean phoneServiceBean;
+    private final PhoneRepository phoneRepository;
 
     // admin page
     @GetMapping("/admin_page")
     public String adminPage() {
+        log.info("Открытие страницы администратора");
         return "admin/admin-page";
     }
+
+//    // delete phone by id
+//    @DeleteMapping("/delete_phone/{id}")
+//    public String deletePhone(@PathVariable("id") int id) {
+//        log.info("Удаление телефона с id={}", id);
+//        adminService.deletePhoneById(id);
+//        return "redirect:/mobileshop/admin_page";
+//    }
 
     // delete phone by id
     @DeleteMapping("/delete_phone/{id}")
     public String deletePhone(@PathVariable("id") int id) {
         log.info("Удаление телефона с id={}", id);
+
+        // Получаем телефон по id
+        Optional<Phone> phone = phoneRepository.findById(id);
+        String imagePath = phone.get().getImagePath(); // Например: "/uploads/image.jpg"
+        log.info("Полученный путь к изображению: {}", imagePath);
+// Убираем начальный слеш, если он есть
+        if (imagePath.startsWith("/")) {
+            imagePath = imagePath.substring(1);
+        }
+
+// Формируем абсолютный путь к файлу
+        String filePath = System.getProperty("user.dir") + "/src/main/resources/static/" + imagePath;
+        File imageFile = new File(filePath);
+        log.info("Полный путь к файлу: {}", imageFile.getAbsolutePath());
+
+// Проверяем существование и удаляем файл
+        if (imageFile.exists()) {
+            boolean deleted = imageFile.delete();
+            if (deleted) {
+                log.info("Изображение телефона с id={} успешно удалено", id);
+            } else {
+                log.error("Ошибка удаления изображения телефона с id={}", id);
+            }
+        } else {
+            log.error("Файл не найден: {}", imageFile.getAbsolutePath());
+        }
+
+        // Удаляем телефон из базы данных
         adminService.deletePhoneById(id);
+        log.info("Телефон с id={} удален из базы данных", id);
         return "redirect:/mobileshop/admin_page";
     }
 
@@ -107,7 +151,10 @@ public class AdminController {
     public String createNewPhone(@ModelAttribute("phone") @Valid Phone phone,
                                  BindingResult bindingResult,
                                  @RequestParam(value = "image", required = false) MultipartFile file) {
-        if (bindingResult.hasErrors()) return "admin/new-phone";
+        if (bindingResult.hasErrors()){
+            log.warn("Ошибка валидации при создании телефона");
+            return "admin/new-phone";
+        }
 
         if (file != null && !file.isEmpty()) {
             try {
@@ -123,13 +170,14 @@ public class AdminController {
 
                 // Сохраняем путь к изображению в БД
                 phone.setImagePath("/uploads/" + filename);
+                log.info("Файл загружен: {}", filePath.toAbsolutePath());
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("Ошибка загрузки файла", e);
             }
         }
 
         adminService.create(phone); // Сохраняем телефон в БД
-
+        log.info("Телефон успешно создан: {} {}", phone.getBrand(), phone.getModel());
         return "admin/view-created-phone";
     }
 

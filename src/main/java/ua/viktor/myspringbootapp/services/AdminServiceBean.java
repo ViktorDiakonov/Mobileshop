@@ -27,56 +27,64 @@ public class AdminServiceBean implements AdminService{
 
     @Override
     public void deletePhoneById(Integer id) {
-        log.info("Удален телефон с id = {}", id);
+        log.info("Попытка удаления телефона с id = {}", id);
         Phone phone = phoneRepository.findById(id).orElseThrow(PhoneNotFoundException::new);
         phoneRepository.delete(phone);
+        log.info("Телефон с id = {} успешно удален", id);
     }
 
     @Override
     public void deleteOrderById(Integer id) {
-        log.info("Удален Заказ с id = {}", id);
+        log.info("Попытка удаления заказа с id = {}", id);
         orderRepository.deleteById(id);
+        log.info("Заказ с id = {} успешно удален", id);
     }
 
     @Override
     public Order findOrder(int id) {
-        log.info("Выведен заказ с id = {}", id);
+        log.info("Поиск заказа с id = {}", id);
         Optional<Order> foundOrder = orderRepository.findById(id);
         return foundOrder.orElseThrow(OrderNotFoundException::new);
     }
 
     @Override
     public Phone create(Phone phone) {
-        log.info("Создан новый телефон = {}", phone);
+        log.info("Попытка создания нового телефона: {}", phone);
         return phoneRepository.save(phone);
     }
 
     @Override
     public void updateById(Integer id, Phone updatedPhone) {
-        log.info("Обновлен телефон с Id = {}", id);
+        log.info("Попытка обновления телефона с id = {}", id);
         Phone phoneToBeUpdated = readById(id);
         phoneToBeUpdated.setBrand(updatedPhone.getBrand());
         phoneToBeUpdated.setModel(updatedPhone.getModel());
         phoneToBeUpdated.setMemorySize(updatedPhone.getMemorySize());
         phoneToBeUpdated.setPrice(updatedPhone.getPrice());
         phoneRepository.save(phoneToBeUpdated);
+        log.info("Телефон с id = {} успешно обновлен", id);
     }
 
     @Override
     public Phone readById(Integer id) {
-        log.info("Получен телефон с id = {}", id);
+        log.info("Попытка получения телефона с id = {}", id);
         return phoneRepository.findById(id).orElseThrow(PhoneNotFoundException::new);
     }
 
     @Override
     public List<Order> findAllOrders() {
         log.info("Просмотр всех заказов");
-        return orderRepository.findByOrderByDateDesc();
+        List<Order> orders = orderRepository.findByOrderByDateDesc();
+        log.info("Найдено {} заказов", orders.size());
+        return orders;
     }
 
     @Override
     public List<Order> findWithPagination(int page, int size) {
-            return orderRepository.findAll(PageRequest.of(page, size, Sort.by("date").descending())).getContent();
+        log.info("Просмотр заказов с пагинацией: страница = {}, размер = {}", page, size);
+        List<Order> orders = orderRepository.findAll(PageRequest.of(page, size, Sort.by("date").descending())).getContent();
+        log.info("Найдено {} заказов на странице {}", orders.size(), page);
+        return orders;
     }
 
 }

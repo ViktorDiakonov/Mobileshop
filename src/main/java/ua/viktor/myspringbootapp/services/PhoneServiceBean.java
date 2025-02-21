@@ -42,32 +42,38 @@ public class PhoneServiceBean implements PhoneService {
 //    }
 
     public Phone findPhone(int id) {
-        log.info("Запрос - найти телефон с id = {} начало", id);
+        log.info("Запрос на поиск телефона с id = {}", id);
         Optional<Phone> foundPhone = phoneRepository.findById(id);
-        log.info("Запрос - найти телефон с id = {} конец", id);
+        if (foundPhone.isPresent()) {
+            log.info("Телефон с id = {} найден", id);
+        } else {
+            log.warn("Телефон с id = {} не найден", id);
+        }
         return foundPhone.orElseThrow(PhoneNotFoundException::new);
     }
 
     @Override
     public void createOrder(Order order) {
-        log.info("Создан новый заказ: order = {}", order);
+        log.info("Создан новый заказ: {}", order);
         orderRepository.save(order);
     }
 
     // тест
     @Override
     public List<Order> readAllOrdersByPersonPhone(String phone) {
+        log.info("Запрос на просмотр всех заказов по телефону: {}", phone);
         return orderRepository.findOrdersByPersonPhone(phone);
     }
 
     @Override
     public List<Phone> findAllPhones() {
-        log.info("Просмотр всех телефонов");
+        log.info("Запрос на просмотр всех телефонов");
         return phoneRepository.findAll();
     }
 
     @Override
     public List<Phone> readPhonesByBrandSorted(String brand, String sort) {
+        log.info("Запрос телефонов по бренду: {}, сортировка: {}", brand, sort);
         String formattedBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1).toLowerCase();
         if ("asc".equalsIgnoreCase(sort)) {
             return phoneRepository.findByBrandOrderByPriceDesc(formattedBrand);

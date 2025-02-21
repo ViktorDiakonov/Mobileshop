@@ -30,9 +30,10 @@ public class AuthServiceBean implements AuthService {
     // регистрирует нового пользователя и присваивает ему роль USER
     @Transactional
     public void register(Person person) {
+        log.info("Регистрация нового пользователя: {}", person);
         person.setPassword(passwordEncoder.encode(person.getPassword()));
-        log.info("Для валидации - роль (ROLE_USER) получил пользователь = {}", person);
         person.setRole("ROLE_USER");
         peopleRepository.save(person);
+        log.info("Пользователь {} успешно зарегистрирован", person.getUserName());
     }
 }

@@ -20,7 +20,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * @author Diakonov Viktor
@@ -57,9 +56,9 @@ public class AdminServiceBean implements AdminService{
     }
 
     @Override
-    public Phone create(Phone phone) {
+    public void create(Phone phone) {
         log.info("Попытка создания нового телефона: {}", phone);
-        return phoneRepository.save(phone);
+        phoneRepository.save(phone);
     }
 
 //    @Override
@@ -117,7 +116,6 @@ public class AdminServiceBean implements AdminService{
         }
     }
 
-
     @Override
     public Phone readById(Integer id) {
         log.info("Попытка получения телефона с id = {}", id);
@@ -166,6 +164,4 @@ public class AdminServiceBean implements AdminService{
         log.info("Файл загружен: {}", filePath.toAbsolutePath());
         return "/uploads/" + filename;
     }
-
-
 }

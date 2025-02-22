@@ -4,124 +4,233 @@
 <!--    <meta charset="UTF-8">-->
 <!--    <title>Сторінка додавання нового телефону</title>-->
 <!--    <link rel="stylesheet" type="text/css" href="/css/main.css">-->
+<!--    <style>-->
+<!--        body {-->
+<!--            background-color: #E7D48D;-->
+<!--        }-->
+
+<!--        .form-container {-->
+<!--            padding: 50px; /* Регулируй значение */-->
+<!--            display: flex;-->
+<!--            font-family: "Grava Display", serif;-->
+<!--            flex-direction: column;-->
+<!--            align-items: center;-->
+<!--            text-align: left;-->
+<!--            max-width: 420px;-->
+<!--            margin: 30px auto;-->
+<!--        }-->
+
+<!--        .section-title {-->
+<!--            text-align: center;-->
+<!--            font-size: 18px;-->
+<!--            font-weight: bold;-->
+<!--            padding: 10px;-->
+<!--            background-color: #ffffcc;-->
+<!--            border: 2px solid green;-->
+<!--            border-radius: 10px;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+<!--        .form-group {-->
+<!--            display: flex; /* Размещает label и input в один ряд */-->
+<!--            margin-bottom: 15px; /* Отступ между строками */-->
+<!--            align-items: center; /* Выравнивание по вертикали, чтобы надписи и поля были на одной линии */-->
+<!--        }-->
+
+<!--        .form-group label {-->
+<!--            flex: 1; /* Лейбл займет 1 часть доступного пространства */-->
+<!--            text-align: right; /* Текст метки выровнен вправо */-->
+<!--            margin-right: 15px; /* Отступ между меткой и полем ввода */-->
+<!--        }-->
+
+<!--        /*Стили для полей ввода:*/-->
+<!--        .form-group input[type="text"],-->
+<!--        .form-group input[type="file"] {-->
+<!--            flex: 2; /* Поле ввода займет 2 части доступного пространства */-->
+<!--            padding: 8px; /* Внутренний отступ */-->
+<!--            border: 1px solid #ccc; /* Граница поля */-->
+<!--            border-radius: 5px; /* Закругленные углы */-->
+<!--        }-->
+<!--    </style>-->
 <!--</head>-->
 <!--<body>-->
-<!--<nav>-->
-<!--    <h3>Форма додавання нового телефону</h3>-->
-<!--    <table>-->
-<!--        <tr>-->
-<!--            <td style="width: auto">-->
-<!--                <form novalidate th:method="POST" th:action="@{/mobileshop}" th:object="${phone}"-->
-<!--                      enctype="multipart/form-data">-->
-<!--                    <label for="brand">Введіть бренд</label>-->
-<!--                    <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>-->
-<!--                    <span></span>-->
-<!--                    <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>-->
-<!--                    <br><br>-->
 
-<!--                    <label for="model">Введіть модель телефону</label>-->
-<!--                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="20" required>-->
-<!--                    <span></span>-->
-<!--                    <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>-->
-<!--                    <br><br>-->
+<!--<div class="form-container" style="border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); background-color: beige;">-->
+<!--    <form novalidate th:method="POST" th:action="@{/mobileshop}" th:object="${phone}" enctype="multipart/form-data">-->
+<!--        <div class="section-title">Форма додавання нового телефону</div>-->
+<!--        <br><br>-->
+<!--        <div class="form-group">-->
+<!--            <label for="brand" style="min-width: 150px;">Виробник:</label>-->
+<!--            <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>-->
+<!--        </div>-->
+<!--        <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>-->
 
-<!--                    <label for="memorySize">Введіть обсяг пам'яті</label>-->
-<!--                    <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb-->
-<!--                    <span></span>-->
-<!--                    <div style="color: red" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">-->
-<!--                        MemorySize Error-->
-<!--                    </div>-->
-<!--                    <br><br>-->
+<!--        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">-->
+<!--            <label for="model" style="min-width: 150px;">Модель:</label>-->
+<!--            <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="25" required>-->
+<!--        </div>-->
+<!--        <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>-->
 
-<!--                    <label for="price">Введіть ціну</label>-->
-<!--                    <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> .грн-->
-<!--                    <span></span>-->
-<!--                    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>-->
-<!--                    <br><br>-->
+<!--        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">-->
+<!--            <label for="memorySize" style="min-width: 150px;">Вбудована пам'ять:</label>-->
+<!--            <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required>&nbsp;Gb-->
+<!--        </div>-->
+<!--        <div style="color: red" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">MemorySize Error</div>-->
 
-<!--                    <label for="image">Завантажте фото</label>-->
-<!--                    <input type="file" id="image" name="image" accept="image/*">-->
-<!--                    <br><br>-->
+<!--        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">-->
+<!--            <label for="price" style="min-width: 150px;">Ціна:</label>-->
+<!--            <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required>&nbsp;₴-->
+<!--        </div>-->
+<!--        <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>-->
 
-<!--                    <input type="submit" value="Відправити">-->
-<!--                </form>-->
-<!--            </td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</nav>-->
-<!--<hr>-->
+<!--        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">-->
+<!--            <label for="image" style="min-width: 150px;">Завантажте фото:</label>-->
+<!--            <input type="file" id="image" name="image" accept="image/*" style="display: none;">-->
+<!--            <button type="button" onclick="document.getElementById('image').click()">Виберіть файл</button>-->
+<!--            <span id="file-name">Файл не обрано</span>-->
+<!--        </div>-->
+
+<!--        <script>-->
+<!--            document.getElementById('image').addEventListener('change', function() {-->
+<!--                let fileName = this.files.length > 0 ? this.files[0].name : "Файл не обрано";-->
+<!--                document.getElementById('file-name').textContent = fileName;-->
+<!--            });-->
+<!--        </script>-->
+<!--        <br>-->
+<!--        <div>-->
+<!--            <input type="submit" value="Відправити">-->
+
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
 <!--<br>-->
 <!--<p>-->
 <!--    <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>-->
 <!--</p>-->
+
 <!--</body>-->
 <!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Сторінка додавання нового телефону</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" >
     <style>
-        body {
-            background-color: #E7D48D;
-        }
 
-        .form-container {
-            padding: 50px; /* Регулируй значение */
-            display: flex;
-            font-family: "Grava Display", serif;
-            flex-direction: column;
-            align-items: center;
-            text-align: left;
-            max-width: 420px;
-            margin: 30px auto;
-        }
+    body {
+    background-color: #E7D48D;
+    }
 
-        .section-title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            padding: 10px;
-            background-color: #ffffcc;
-            border: 2px solid green;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-    </style>
+    .form-container {
+    padding: 50px;
+    display: flex;
+    font-family: "Grava Display", serif;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    max-width: 420px;
+    margin: 30px auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    background-color: beige;
+    }
+
+    .section-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #ffffcc;
+    border: 2px solid green;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    }
+
+    .form-group {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    }
+
+    .form-group label {
+    flex: 1;
+    text-align: right;
+    margin-right: 15px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="file"] {
+    flex: 2;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    }
+
+    button[type="button"] {
+    background-color: #f0f0f0;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    }
+
+    #file-name {
+    margin-left: 10px;
+    }
+
+    input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+    background-color: #45a049;
+    }
+
+    label {
+        min-width: 150px; /* Минимальная ширина для надписей */
+    }
+</style>
 </head>
 <body>
 
-<div class="form-container" style="border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); background-color: beige;">
+<div class="form-container">
+    <h3 style="text-align: center; font-family: Arial, sans-serif; margin-bottom: 20px;">Форма додавання нового телефону</h3>
     <form novalidate th:method="POST" th:action="@{/mobileshop}" th:object="${phone}" enctype="multipart/form-data">
-        <div class="section-title">Форма додавання нового телефону</div>
         <br><br>
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <label for="brand" style="min-width: 150px;">Бренд:</label>
+        <div class="form-group">
+            <label for="brand">Виробник:</label>
             <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>
         </div>
         <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>
 
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <label for="model" style="min-width: 150px;">Модель:</label>
-            <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="20" required>
+        <div class="form-group">
+            <label for="model">Модель:</label>
+            <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="25" required>
         </div>
         <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>
 
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <label for="memorySize" style="min-width: 150px;">Вбудована пам'ять:</label>
-            <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb
+        <div class="form-group">
+            <label for="memorySize">Вбудована пам'ять:</label>
+            <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required>&nbsp;Gb
         </div>
         <div style="color: red" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">MemorySize Error</div>
 
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <label for="price" style="min-width: 150px;">Ціна:</label>
-            <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> ₴
+        <div class="form-group">
+            <label for="price">Ціна:</label>
+            <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required>&nbsp;₴
         </div>
         <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>
 
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <label for="image" style="min-width: 150px;">Завантажте фото:</label>
+        <div class="form-group">
+            <label for="image">Фото:</label>
             <input type="file" id="image" name="image" accept="image/*" style="display: none;">
             <button type="button" onclick="document.getElementById('image').click()">Виберіть файл</button>
             <span id="file-name">Файл не обрано</span>
@@ -134,9 +243,8 @@
             });
         </script>
         <br>
-        <div style="text-align: center; margin-top: 20px;">
-            <input type="submit" value="Відправити" style="padding: 10px 20px; background-color: royalblue; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 18px;">
-
+        <div>
+            <input type="submit" value="Відправити">
         </div>
     </form>
 </div>

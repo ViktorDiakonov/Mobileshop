@@ -21,7 +21,7 @@ public interface AdminService {
     Order findOrder(int id);
 
     // посылает параметры телефона из web формы и сохраняет его в БД
-    Phone create(Phone phone);
+    void create(Phone phone);
 
     // сохранение обновленного телефона
     void updateById(Integer id, Phone phone, MultipartFile file);

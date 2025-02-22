@@ -1,75 +1,180 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Update Phone</title>-->
+<!--    <link rel="stylesheet" type="text/css" href="/css/main.css">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav>-->
+<!--    <h3>Форма оновлення телефону за кодом: <a th:text="${phone.getId()}">VALUE</a></h3>-->
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td style="width: auto">-->
+<!--                <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}"-->
+<!--                      th:object="${phone}" enctype="multipart/form-data">-->
+
+<!--                    <label for="brand">Введіть бренд</label>-->
+<!--                    <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>-->
+<!--                    <br><br>-->
+
+<!--                    <label for="model">Введіть модель телефону</label>-->
+<!--                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="20" required>-->
+<!--                    <br><br>-->
+
+<!--                    <label for="memorySize">Введіть обсяг пам'яті</label>-->
+<!--                    <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb-->
+<!--                    <br><br>-->
+
+<!--                    <label for="price">Введіть ціну</label>-->
+<!--                    <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> грн-->
+<!--                    <br><br>-->
+
+<!--                    <label for="file">Оновити фото:</label>-->
+<!--                    <input type="file" id="file" name="file">-->
+<!--                    <br><br>-->
+
+<!--                    <input type="submit" value="Зберегти">-->
+<!--                </form>-->
+
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</nav>-->
+<!--<hr>-->
+<!--<br>-->
+<!--<p>-->
+<!--    <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>-->
+<!--</p>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update Phone</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <title>Оновлення телефону</title>
+    <link rel="stylesheet" type="text/css">
+    <style>
+        body {
+            background-color: #E7D48D;
+            font-family: "Grava Display", sans-serif;
+        }
+
+        /* Контейнеры и основная структура:*/
+        .container {
+            max-width: 700px; /* Максимальная ширина контейнера */
+            margin: 30px auto; /* Центрирование по горизонтали с отступом сверху и снизу */
+            border: 1px solid #ccc; /* Граница контейнера серого цвета */
+            border-radius: 10px; /* Закругленные углы */
+            padding: 20px; /* Внутренний отступ */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* Тень вокруг контейнера */
+            background-color: beige; /* Фон */
+        }
+        .form-container {
+            display: flex; /* Горизонтальное расположение элементов */
+            gap: 30px; /* Расстояние между элементами */
+            align-items: flex-start; /* Выравнивание элементов по верхнему краю */
+        }
+
+
+        /*Группировка и выравнивание полей:*/
+        .form-group {
+            display: flex; /* Горизонтальное выравнивание */
+            align-items: center; /* Центрирование по вертикали */
+            margin-bottom: 15px; /* Отступ между группами полей */
+        }
+
+        .form-group label {
+            flex: 1; /* Лейбл займет 1 часть доступного пространства */
+            text-align: right; /* Текст метки выровнен вправо */
+            margin-right: 15px; /* Отступ между меткой и полем ввода */
+        }
+
+        /*Стили для полей ввода:*/
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            flex: 2; /* Поле ввода займет 2 части доступного пространства */
+            padding: 8px; /* Внутренний отступ */
+            border: 1px solid #ccc; /* Граница поля */
+            border-radius: 5px; /* Закругленные углы */
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 150px; /* Фиксированная ширина полей ввода */
+            padding: 8px; /* Внутренний отступ */
+            border: 1px solid #ccc; /* Граница */
+            border-radius: 5px; /* Закругленные углы */
+            font-size: 14px; /* Размер шрифта */
+        }
+
+        /*Кнопка отправки:*/
+        .submit-button {
+            display: flex; /* Выравнивание кнопки */
+            justify-content: center; /* Кнопка прижата к правому краю */
+        }
+
+        .submit-button input[type="submit"] {
+            padding: 10px 20px; /* Внутренний отступ */
+            background-color: #4CAF50; /* Цвет фона кнопки */
+            color: white; /* Цвет текста */
+            border: none; /* Без границы */
+            border-radius: 5px; /* Закругленные углы */
+            cursor: pointer; /* Изменение курсора при наведении */
+        }
+
+        .submit-button input[type="submit"]:hover {
+            background-color: #45a049; /* Изменение цвета кнопки при наведении */
+        }
+
+        /*Фиксированная ширина лейблов:*/
+        label {
+            min-width: 150px; /* Минимальная ширина для надписей */
+        }
+
+    </style>
 </head>
 <body>
-<nav>
-    <h3>Форма оновлення телефону за кодом: <a th:text="${phone.getId()}">VALUE</a></h3>
-    <table>
-        <tr>
-            <td style="width: auto">
-<!--                <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}" th:object="${phone}">-->
-<!--                    <label for="brand">Введіть бренд</label>-->
-<!--                    <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>-->
-<!--                    <span></span>-->
-<!--                    <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>-->
-<!--                    <br><br>-->
-<!--                    <label for="model">Введіть модель телефону</label>-->
-<!--                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="20" required>-->
-<!--                    <span></span>-->
-<!--                    <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>-->
-<!--                    <br><br>-->
-<!--                    <label for="memorySize">Введіть обсяг пам'яті</label>-->
-<!--                    <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb-->
-<!--                    <span></span>-->
-<!--                    <div style="color: red" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">-->
-<!--                        MemorySize Error</div>-->
-<!--                    <br><br>-->
-<!--                    <label for="price">Введіть ціну</label>-->
-<!--                    <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> грн-->
-<!--                    <span></span>-->
-<!--                    <div style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>-->
-<!--                    <br><br>-->
-<!--                    &lt;!&ndash; Загрузка нового файла &ndash;&gt;-->
-<!--                    <label for="file">Оновити фото:</label>-->
-<!--                    <input type="file" id="file" name="file">-->
-<!--                    <br><br>-->
-<!--                    <input type="submit" value="Зберегти">-->
-<!--                </form>-->
-                <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}"
-                      th:object="${phone}" enctype="multipart/form-data">
+<div class="container">
+    <h3 style="text-align: center; font-family: Arial, sans-serif; margin-bottom: 20px;">Оновлення телефону за кодом: <span th:text="${phone.getId()}"></span></h3>
+<br>
+    <div class="form-container">
+        <!-- Фото телефону -->
+        <img th:src="${phone.imagePath}" alt="Фото телефону" style="max-height: 250px; border-radius: 5px;">
 
-                    <label for="brand">Введіть бренд</label>
-                    <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>
-                    <br><br>
+        <!-- Форма оновлення -->
+        <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}" th:object="${phone}" enctype="multipart/form-data" class="form-fields">
+            <div class="form-group">
+                <label for="brand">Виробник:</label>
+                <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>
+            </div>
 
-                    <label for="model">Введіть модель телефону</label>
-                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="20" required>
-                    <br><br>
+            <div class="form-group">
+                <label for="model">Модель:</label>
+                <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="25" required>
+            </div>
 
-                    <label for="memorySize">Введіть обсяг пам'яті</label>
-                    <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required> Gb
-                    <br><br>
+            <div class="form-group">
+                <label for="memorySize">Вбудована пам'ять:</label>
+                <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required>&nbsp;GB
+            </div>
 
-                    <label for="price">Введіть ціну</label>
-                    <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required> грн
-                    <br><br>
+            <div class="form-group">
+                <label for="price">Ціна:</label>
+                <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required>&nbsp;₴
+            </div>
 
-                    <label for="file">Оновити фото:</label>
-                    <input type="file" id="file" name="file">
-                    <br><br>
-
-                    <input type="submit" value="Зберегти">
-                </form>
-
-            </td>
-        </tr>
-    </table>
-</nav>
-<hr>
+            <div class="form-group">
+                <label for="file">Фото:</label>
+                <input type="file" id="file" name="file">
+            </div>
+            <br><br>
+            <div class="submit-button">
+                <input type="submit" value="Зберегти">
+            </div>
+        </form>
+    </div>
+</div>
 <br>
 <p>
     <a class="btn btn-success" href="/mobileshop/admin_page">Сторінка адміністратора</a>

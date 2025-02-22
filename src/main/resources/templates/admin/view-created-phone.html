@@ -66,12 +66,12 @@
     <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
         <img th:src="${phone.imagePath}" alt="Фото телефону" style="max-height: 200px; border-radius: 5px;">
         <div style="flex: 1;">
-            <p style="text-align: left"><strong>Код товара:</strong><span th:text="${phone.getId()}"></span></p>
-            <p style="text-align: left"><strong>Виробник:</strong><span th:text="${phone.getBrand()}"></span></p>
-            <p style="text-align: left"><strong>Модель:</strong><span th:text="${phone.getModel()}"></span></p>
-            <p style="text-align: left"><strong>Вбудована пам'ять:</strong> <span
+            <p style="text-align: left"><strong>Код товара: </strong><span th:text="${phone.getId()}"></span></p>
+            <p style="text-align: left"><strong>Виробник: </strong><span th:text="${phone.getBrand()}"></span></p>
+            <p style="text-align: left"><strong>Модель: </strong><span th:text="${phone.getModel()}"></span></p>
+            <p style="text-align: left"><strong>Вбудована пам'ять: </strong> <span
                     th:text="${phone.getMemorySize()}"></span> Гб</p>
-            <p style="text-align: left"><strong>Ціна:</strong><span
+            <p style="text-align: left"><strong>Ціна: </strong><span
                     th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}"></span> грн.</p>
         </div>
     </div>

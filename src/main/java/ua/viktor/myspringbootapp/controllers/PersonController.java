@@ -15,6 +15,7 @@ import ua.viktor.myspringbootapp.services.PhoneServiceBean;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Diakonov Viktor
@@ -31,10 +32,9 @@ public class PersonController {
 
     @GetMapping("/")
     public String mainPage(Model model) {
-        List<Phone> phones = phoneService.findAllPhones();
-        Collections.shuffle(phones); // Перемешиваем список в случайном порядке
+        List<Phone> phones = phoneService.findLast16Phones();
         model.addAttribute("phone", phones);
-        log.info("Пользователь перешел на главную страницу магазина, отображаем телефоны");
+        log.info("Пользователь перешел на главную страницу магазина, отображаем 16 последних телефонов");
         return "person/main-page";
     }
 

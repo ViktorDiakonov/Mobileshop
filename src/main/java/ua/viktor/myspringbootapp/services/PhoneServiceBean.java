@@ -72,6 +72,13 @@ public class PhoneServiceBean implements PhoneService {
     }
 
     @Override
+    public List<Phone> findLast16Phones() {
+        log.info("Запрос на просмотр 16 последних телефонов через SQL LIMIT");
+        return phoneRepository.findTop16ByOrderByIdDesc();
+    }
+
+
+    @Override
     public List<Phone> readPhonesByBrandSorted(String brand, String sort) {
         log.info("Запрос телефонов по бренду: {}, сортировка: {}", brand, sort);
         String formattedBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1).toLowerCase();

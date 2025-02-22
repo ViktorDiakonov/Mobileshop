@@ -59,12 +59,13 @@
         <img id="phoneImage-show-phone" th:src="${phone.imagePath}" alt="Фото телефону">
     </div>
     <div class="phone-details-show-phone">
-        <p><strong>Код товару:</strong> <a th:text="${phone.getId()}">VALUE</a></p>
+        <p><strong>Код товару: </strong> <a th:text="${phone.getId()}">VALUE</a></p>
         <br>
-        <p><strong>Виробник:</strong> <a th:text="${phone.getBrand()}">VALUE</a></p>
-        <p><strong>Модель:</strong> <a th:text="${phone.getModel()}">VALUE</a></p>
-        <p><strong>Вбудована пам'ять:</strong> <a th:text="${phone.getMemorySize()}">VALUE</a> Gb</p>
-        <p><strong>Ціна:</strong> <b><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a></b> ₴</p>
+        <p><strong>Виробник: </strong> <a th:text="${phone.getBrand()}">VALUE</a></p>
+        <p><strong>Модель: </strong> <a th:text="${phone.getModel()}">VALUE</a></p>
+        <p><strong>Вбудована пам'ять: </strong> <a th:text="${phone.getMemorySize()}">VALUE</a> Gb</p>
+        <br>
+        <p><strong>Ціна: </strong><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴</p>
     </div>
 </div>
 <br>

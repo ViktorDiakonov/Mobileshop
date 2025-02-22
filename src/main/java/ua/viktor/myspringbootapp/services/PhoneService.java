@@ -28,6 +28,8 @@ public interface PhoneService {
 
     List<Phone> findAllPhones();
 
+    List<Phone> findLast16Phones() ;
+
     List<Phone> readPhonesByBrandSorted(String brand, String sort);
 
 }

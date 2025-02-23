@@ -13,9 +13,7 @@ import ua.viktor.myspringbootapp.services.PhoneService;
 import ua.viktor.myspringbootapp.services.PhoneServiceBean;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Diakonov Viktor

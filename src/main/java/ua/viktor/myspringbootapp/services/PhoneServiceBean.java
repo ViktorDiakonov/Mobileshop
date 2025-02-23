@@ -23,24 +23,6 @@ public class PhoneServiceBean implements PhoneService {
     private final PhoneRepository phoneRepository;
     private final OrderRepository orderRepository;
 
-//    @Override
-//    public List<Phone> readAllPhonesByBrandApple(String phone) {
-//        log.info("Просмотр телефонов бренда = {}", phone);
-//        return phoneRepository.findByBrandOrderByModelAsc("Apple");
-//    }
-//
-//    @Override
-//    public List<Phone> readAllPhonesByBrandXiaomi(String phone) {
-//        log.info("Просмотр телефонов бренда = {}", phone);
-//        return phoneRepository.findByBrandOrderByModelAsc("Xiaomi");
-//    }
-//
-//    @Override
-//    public List<Phone> readAllPhonesByBrandSamsung(String phone) {
-//        log.info("Просмотр телефонов бренда = {}", phone);
-//        return phoneRepository.findByBrandOrderByModelAsc("Samsung");
-//    }
-
     public Phone findPhone(int id) {
         log.info("Запрос на поиск телефона с id = {}", id);
         Optional<Phone> foundPhone = phoneRepository.findById(id);
@@ -66,12 +48,6 @@ public class PhoneServiceBean implements PhoneService {
     }
 
     @Override
-    public List<Phone> findAllPhones() {
-        log.info("Запрос на просмотр всех телефонов");
-        return phoneRepository.findAll();
-    }
-
-    @Override
     public List<Phone> findLast16Phones() {
         log.info("Запрос на просмотр 16 последних телефонов через SQL LIMIT");
         return phoneRepository.findTop16ByOrderByIdDesc();
@@ -88,4 +64,3 @@ public class PhoneServiceBean implements PhoneService {
         return phoneRepository.findByBrandOrderByPriceAsc(formattedBrand);
     }
 }
-

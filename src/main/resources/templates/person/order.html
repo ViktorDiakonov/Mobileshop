@@ -32,23 +32,21 @@
     <span style="color: gray;"> &gt; </span>
     <span th:text="${phone.getModel()}" style="font-weight: bold; color: black;"></span>
 </nav>
-<div class="order-container"
-     style="max-width: 600px; margin: 30px auto; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+<div class="order-container">
     <h2>Оформлення замовлення</h2>
 
     <form method="POST" th:action="@{/mobileshop/{id}/order(id=${phone.getId()})}" th:object="${phone}">
-        <!-- Блок с информацией о телефоне -->
         <div class="phone-details">
             <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону">
             <div class="phone-info">
                 <p><strong>Виробник:</strong> <span th:text="${phone.brand}"></span></p>
                 <p><strong>Модель:</strong> <span th:text="${phone.model}"></span></p>
                 <p><strong>Вбудована пам'ять:</strong> <span th:text="${phone.memorySize}"></span> ГБ</p>
+                <br>
                 <p><strong>Ціна:</strong> <span id="priceDisplay"
                                                 th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴
                     <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required>
                     <label for="quantity">шт.</label>
-
                 </p>
                 <p><strong>Сума до сплати:</strong> <span id="totalPrice">0</span> ₴</p>
             </div>
@@ -57,7 +55,6 @@
             <label for="personName">Ім'я покупця:</label>
             <input type="text" id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"
                    maxlength="20">
-
         </p>
         <p>
             <label for="personPhone">Номер телефону:</label>

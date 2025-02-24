@@ -22,12 +22,12 @@
         </ul>
     </div>
 </div>
-<div id="leftSidebar" style="border: skyblue 2mm solid">
-    <p><b>Новинка iPhone 14 !</b></p>
+<div id="leftSidebar" style="border: limegreen 1mm solid">
+    <p><b>Новинка iPhone 16 !</b></p>
     <a href="/mobileshop/phone/38"><img src="/img/site/iphone-14-pro-max-2.gif" alt="banner" width="200"
                                         height="220"></a>
 </div>
-<div id="rightSidebar" style="border: skyblue 2mm solid">
+<div id="rightSidebar" style="border: limegreen 1mm solid">
     <p>Отримуй інформацію
         <br>про:<br></p>
     <p><b>Акції</b></p>
@@ -35,7 +35,7 @@
     <p><b>Новинки</b></p>
     <p>пройди просту реєстрацію</p>
     <p>
-        <button><a href="/mobileshop/auth/registration">Зареєструватись</a></button>
+        <button button type="submit" class="btn-submit"><a href="/mobileshop/auth/registration">Зареєструватись</a></button>
     </p>
 </div>
 <nav class="brand-nav">
@@ -59,7 +59,7 @@
     </div>
 </nav>
 <hr>
-<h3>Останні надходження</h3>
+<h2 style="color: limegreen; font-family: 'Grava Display', serif;">Останні надходження</h2>
 <div id="phones-container" class="grid-view">
     <div th:each="phones : ${phone}" class="phone-item">
         <a th:href="@{/mobileshop/phone/{id}(id=${phones.id})}">

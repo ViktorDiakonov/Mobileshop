@@ -8,35 +8,44 @@
 <body>
 <div class="container">
     <h3>Оновлення телефону за кодом: <span th:text="${phone.getId()}"></span></h3>
-<br>
+    <br>
     <div class="form-container">
         <div class="form-content">
             <div class="phone-image">
                 <img th:src="${phone.imagePath}" alt="Фото телефону">
             </div>
-            <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}" th:object="${phone}" enctype="multipart/form-data" class="form-fields">
+            <form th:method="PATCH" th:action="@{/mobileshop/{id}(id=${phone.getId()})}" th:object="${phone}"
+                  enctype="multipart/form-data" class="form-fields">
                 <div class="form-group">
                     <label for="brand">Виробник:</label>
                     <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>&nbsp;
-                    <div style="color: red; display: inline;" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">Brand Error</div>
+                    <div style="color: red; display: inline;" th:if="${#fields.hasErrors('brand')}"
+                         th:errors="*{brand}">Brand Error
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="model">Модель:</label>
                     <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="25" required>&nbsp;
-                    <div style="color: red; display: inline;" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</div>
+                    <div style="color: red; display: inline;" th:if="${#fields.hasErrors('model')}"
+                         th:errors="*{model}">Model Error
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="memorySize">Вбудована пам'ять:</label>
                     <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required>&nbsp;Gb&nbsp;
-                    <div style="color: red; display: inline;" th:if="${#fields.hasErrors('memorySize')}" th:errors="*{memorySize}">MemorySize Error</div>
+                    <div style="color: red; display: inline;" th:if="${#fields.hasErrors('memorySize')}"
+                         th:errors="*{memorySize}">MemorySize Error
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="price">Ціна:</label>
                     <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required>&nbsp;₴&nbsp;
-                    <div style="color: red; display: inline;" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</div>
+                    <div style="color: red; display: inline;" th:if="${#fields.hasErrors('price')}"
+                         th:errors="*{price}">Price Error
+                    </div>
                 </div>
 
                 <div class="form-group">

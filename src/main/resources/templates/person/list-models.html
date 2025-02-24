@@ -44,10 +44,12 @@
 </nav>
 <hr>
 <nav>
-    <a href="/mobileshop/" style="color: black">Головна</a> >
+    <a href="/mobileshop/" style="color: black; text-decoration: none;">Головна</a>
+    <span style="color: gray;"> &gt; </span>
+    <span th:text="${selectedBrand}" style="font-weight: bold; color: black;"></span>
 </nav>
 <div style="text-align: center; margin-bottom: 10px;">
-    <button onclick="toggleSort()">Сортувати за ціною</button>
+    <button type="submit" class="btn-submit" onclick="toggleSort()">Сортувати за ціною</button>
 </div>
 
 <div id="phones-container" class="grid-view">

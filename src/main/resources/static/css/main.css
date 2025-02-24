@@ -127,7 +127,8 @@ a {
 aside {
     float: right; /* Размещаем панель справа */
     width: 200px; /* Фиксируем ширину боковой панели */
-    background-color: skyblue; /* Устанавливаем цвет фона */
+    /*background-color: skyblue; !* Устанавливаем цвет фона *!*/
+    background-color: limegreen;
 }
 
 /* Навигация с брендами */
@@ -168,7 +169,7 @@ aside {
 
 /* Стили для подписей к брендам */
 .brand-item p {
-    margin: 3px 0; /* Отступы сверху и снизу */
+    margin: 0 0; /* Отступы сверху и снизу */
     font-size: 15px; /* Размер шрифта */
 }
 
@@ -271,7 +272,8 @@ h1, h2, h3, h4 {
 
 /*заголовок начало*/
 #header {
-    background-color: skyblue;
+    /*background-color: skyblue;*/
+    background-color: limegreen;
     height: 150px;
     padding: 5px;
     display: flex;
@@ -397,7 +399,7 @@ li {
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 p {
@@ -528,7 +530,8 @@ p {
 }
 
 .sidebar {
-    background-color: skyblue;
+    /*background-color: skyblue;*/
+    background-color: limegreen;
     flex: 1;
     padding: 1px;
     box-sizing: border-box;

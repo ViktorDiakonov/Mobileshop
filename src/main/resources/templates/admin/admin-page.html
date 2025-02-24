@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Admin page</title>
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
-    </head>
+</head>
 <body>
 
 <div class="container">
@@ -16,13 +16,17 @@
             <hr>
             <br><br>
             <a href="/mobileshop/orders" class="button">Дивитись всі замовлення</a>
-            <br><br><hr><br>
+            <br><br><br>
+            <hr>
+            <br>
             <label>Останні замовлення</label><br>
             <form method="get" action="/mobileshop/orders/p" style="display: flex; align-items: center; gap: 10px;">
                 <input type="text" name="size" placeholder="Введіть кількість 1-15" pattern="([1-9]|1[0-5])" required>
                 <input type="submit" value="Показати">
             </form>
-            <br><br><hr><br>
+            <br><br>
+            <hr>
+            <br>
             <label>Знайти / Видалити</label><br>
             <form method="get" action="/mobileshop/admin_page/search_order"
                   style="display: flex; align-items: center; gap: 10px;">
@@ -37,7 +41,9 @@
             <hr>
             <br><br>
             <a href="/mobileshop/new_phone" class="button">Додавання нового телефону</a>
-            <br><br><hr><br>
+            <br><br><br>
+            <hr>
+            <br>
             <label>Оновити / Видалити</label><br>
             <form method="get" action="/mobileshop/admin_page/search_phone"
                   style="display: flex; align-items: center; gap: 10px;">

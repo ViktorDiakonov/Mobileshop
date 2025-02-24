@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .formLogin().loginPage("/mobileshop/auth/login") // моя форма регистрации
                 .loginProcessingUrl("/process_login") // адрес, где обрабатываются данные с формы
-                .defaultSuccessUrl("/mobileshop/admin_page", true) // страница куда перенаправляет потом
+                .defaultSuccessUrl("/mobileshop/", true) // страница куда перенаправляет потом
                 .failureUrl("/mobileshop/auth/login?error") //адрес, куда перенаправит, если не верный логин или пароль
                 .and()
                 .logout()

@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Замовлення</title>
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
-   </head>
+</head>
 <body>
 <div class="order-container-admin">
     <h3 style="text-align: center; margin-bottom: 20px;">Замовлення № <span th:text="${order.getId()}"></span></h3>
-    <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
-        <img th:src="${order.getImagePath()}" alt="Фото телефону" style="max-height: 260px; border-radius: 5px;">
+    <div style="display: flex; gap: 20px; align-items: center; font-size: 18px; margin-bottom: 20px;">
+        <img th:src="${order.getImagePath()}" alt="Фото телефону" style="max-height: 270px; border-radius: 5px;">
         <div style="flex: 1;">
             <strong>Виробник: </strong><span th:text="${order.getBrand()}"></span>
             <br>
@@ -19,21 +19,21 @@
             <br><br>
             <strong>Кількість:</strong> <span th:text="${order.getQuantity()}"></span> шт.
             <br>
-            <strong>Загальна сума:</strong> <span th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}"></span> ₴
-            <br><br><hr>
+            <strong>Загальна сума:</strong> <span
+                th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}"></span> ₴
+            <br><br>
+            <hr>
             <strong>Ім'я покупця:</strong> <span th:text="${order.getPersonName()}"></span>
             <br>
             <strong>Телефон покупця:</strong> <span th:text="${order.getPersonPhone()}"></span>
             <br><br>
             <strong>Точка видачі:</strong> <span th:text="${order.getPoint()}"></span>
             <br>
-            <strong>Дата замовлення:</strong> <span th:text="${#dates.format(order.getDate(), 'dd.MM.yyyy - HH:mm')}"></span></p>
+            <strong>Дата замовлення:</strong> <span
+                th:text="${#dates.format(order.getDate(), 'dd.MM.yyyy - HH:mm')}"></span>
         </div>
     </div>
-
-    <!-- Кнопки дій -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px;">
-        <!-- Кнопка видалення з підтвердженням -->
         <form th:method="DELETE" th:action="@{/mobileshop/delete/order/{id}(id=${order.getId()})}"
               style="flex: 1; display: flex; flex-direction: column-reverse; align-items: center;">
             <label for="confirmDelete" style="margin-top: 10px;">

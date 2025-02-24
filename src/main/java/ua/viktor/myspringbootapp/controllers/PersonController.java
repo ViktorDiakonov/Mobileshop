@@ -42,6 +42,10 @@ public class PersonController {
                                    Model model) {
         log.info("Пользователь выбрал бренд: {}, сортировка по цене: {}", brand, sort);
         model.addAttribute("phone", phoneServiceBean.readPhonesByBrandSorted(brand, sort));
+        // Преобразование бренда: первая буква заглавная, остальные — как есть
+        String formattedBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1).toLowerCase();
+        model.addAttribute("selectedBrand", formattedBrand);
+        model.addAttribute("brands", phoneServiceBean.getAllBrands());
         return "person/list-models";
     }
 

@@ -11,6 +11,7 @@ import ua.viktor.myspringbootapp.util.exeption.PhoneNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Diakonov Viktor
@@ -63,4 +64,15 @@ public class PhoneServiceBean implements PhoneService {
         }
         return phoneRepository.findByBrandOrderByPriceAsc(formattedBrand);
     }
+
+    @Override
+    public List<String> getAllBrands() {
+        return phoneRepository.findAll()
+                .stream()
+                .map(Phone::getBrand)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
 }

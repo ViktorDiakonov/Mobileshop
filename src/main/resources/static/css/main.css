@@ -121,6 +121,7 @@
 a {
     text-decoration: none; /* Убираем подчеркивание текста ссылки */
     color: black; /* Устанавливаем черный цвет текста */
+    font-family: "Grava Display", serif;
 }
 
 /* Боковая панель */
@@ -183,6 +184,7 @@ aside {
     background-color: forestgreen; /* Цвет фона кнопки */
     color: white; /* Цвет текста кнопки */
     border: none; /* Убираем границу */
+    display: inline-block; /* Для захвата всех отступов вокруг текста */
     padding: 12px 20px; /* Внутренние отступы */
     border-radius: 10px; /* Скругление углов */
     cursor: pointer; /* Изменяем курсор при наведении */

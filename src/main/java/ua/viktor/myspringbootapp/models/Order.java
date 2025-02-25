@@ -39,6 +39,10 @@ public class Order {
     @Column(name = "price")
     private int price;
 
+    @Size(max = 150, message = "Максимальна довжина повідомлення 150 символів")
+    @Column(name = "person_comment")
+    private String personComment;
+
     @Size(min = 2, max = 20, message = "Ім'я має бути від 2 до 20 букв")
     @Column(name = "person_name")
     public String personName;

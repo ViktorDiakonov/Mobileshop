@@ -21,11 +21,13 @@
             <br>
             <strong>Загальна сума:</strong> <span
                 th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}"></span> ₴
-            <br><br>
+            <br>
             <hr>
             <strong>Ім'я покупця:</strong> <span th:text="${order.getPersonName()}"></span>
             <br>
             <strong>Телефон покупця:</strong> <span th:text="${order.getPersonPhone()}"></span>
+            <br><br>
+            <strong>Коментар до замовлення:</strong> <span th:text="${order.getPersonComment()}"></span>
             <br><br>
             <strong>Точка видачі:</strong> <span th:text="${order.getPoint()}"></span>
             <br>

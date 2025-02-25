@@ -1,3 +1,8 @@
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
 .admin-panel {
     display: flex; /* Горизонтальное расположение блоков */
     flex-direction: row; /* Элементы располагаются в ряд */

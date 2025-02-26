@@ -66,14 +66,31 @@
             </p>
         </div>
 
-        <p>
-            <label for="personComment">Коментар до замовлення:</label><br>
-            <textarea id="personComment" name="personComment" placeholder="до 150 символів" required minlength="0"
-                      maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"
-                      style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px;font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
-        <div id="charCount" style="text-align: center; font-size: 14px; color: #777;" >0/150</div> <!-- Это будет отображать количество символов -->
-        </p>
+<!--        <p>-->
+<!--            <label for="personComment">Коментар до замовлення:</label><br>-->
+<!--            <textarea id="personComment" name="personComment" placeholder="до 150 символів" required minlength="0"-->
+<!--                      maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"-->
+<!--                      style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px;font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>-->
+<!--        <div id="charCount" style="text-align: center; font-size: 14px; color: #777;" >0/150</div> &lt;!&ndash; Это будет отображать количество символов &ndash;&gt;-->
+<!--        </p>-->
 
+<!--        <script>-->
+<!--            function updateCharacterCount() {-->
+<!--                var textArea = document.getElementById('personComment');-->
+<!--                var charCount = textArea.value.length;-->
+<!--                var maxLength = textArea.getAttribute('maxlength');-->
+<!--                document.getElementById('charCount').textContent = charCount + '/' + maxLength;-->
+<!--            }-->
+<!--        </script>-->
+        <div style="display: flex; margin-top: 7px; justify-content: flex-end;">
+                <label for="personComment"></label><br>
+            <div style="display: flex; align-items: flex-end; gap: 18px;">
+                <div id="charCount" style="font-size: 14px; color: #777; white-space: nowrap;">0/150</div>
+                <textarea id="personComment" name="personComment" placeholder="Додати коментар:" required minlength="0"
+                          maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"
+                          style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+            </div>
+        </div>
         <script>
             function updateCharacterCount() {
                 var textArea = document.getElementById('personComment');

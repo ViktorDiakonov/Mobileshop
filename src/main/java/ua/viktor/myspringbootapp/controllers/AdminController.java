@@ -39,14 +39,6 @@ public class AdminController {
         return "admin/admin-page";
     }
 
-//    // delete phone by id
-//    @DeleteMapping("/delete_phone/{id}")
-//    public String deletePhone(@PathVariable("id") int id) {
-//        log.info("Удаление телефона с id={}", id);
-//        adminService.deletePhoneById(id);
-//        return "redirect:/mobileshop/admin_page";
-//    }
-
     // delete phone by id
     @DeleteMapping("/delete_phone/{id}")
     public String deletePhone(@PathVariable("id") int id) {
@@ -194,6 +186,5 @@ public class AdminController {
         adminService.updateById(id, phone, file);
         return "redirect:/mobileshop/admin_page";
     }
-
     //--------------------------------------------------------------------
 }

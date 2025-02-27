@@ -10,7 +10,6 @@ import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.services.AdminService;
 import ua.viktor.myspringbootapp.services.PhoneService;
-import ua.viktor.myspringbootapp.services.PhoneServiceBean;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
 /**
  * @author Diakonov Viktor
  */
-@Slf4j  // Добавляем аннотацию для логирования
+@Slf4j
 @Controller
 @AllArgsConstructor
 @RequestMapping("/mobileshop")
@@ -26,7 +25,6 @@ public class PersonController {
 
     private final PhoneService phoneService;
     private final AdminService adminService;
-    private final PhoneServiceBean phoneServiceBean;
 
     @GetMapping("/")
     public String mainPage(Model model) {
@@ -41,11 +39,11 @@ public class PersonController {
                                    @RequestParam(value = "sort", required = false, defaultValue = "desc") String sort,
                                    Model model) {
         log.info("Пользователь выбрал бренд: {}, сортировка по цене: {}", brand, sort);
-        model.addAttribute("phone", phoneServiceBean.readPhonesByBrandSorted(brand, sort));
+        model.addAttribute("phone", phoneService.readPhonesByBrandSorted(brand, sort));
         // Преобразование бренда: первая буква заглавная, остальные — как есть
         String formattedBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1).toLowerCase();
         model.addAttribute("selectedBrand", formattedBrand);
-        model.addAttribute("brands", phoneServiceBean.getAllBrands());
+        model.addAttribute("brands", phoneService.getAllBrands());
         return "person/list-models";
     }
 
@@ -115,22 +113,6 @@ public class PersonController {
         log.info("Пользователь перешел на страницу 'Условия доставки'");
         return "person/delivery";
     }
-
-    // todo тест для личного кабинета
-    @GetMapping("/my_orders2")
-    public String myOrders2(Model model) {
-        log.info("Пользователь запрашивает свои заказы для телефона 38090000000");
-        model.addAttribute("order", phoneService.readAllOrdersByPersonPhone("38090000000"));
-        return "person/list-orders";
-    }
-
-    @GetMapping("/my_orders")
-    public String viewAllOrders(Model model) {
-        log.info("Пользователь просматривает все свои заказы");
-        model.addAttribute("order", adminService.findAllOrders());
-        return "person/list-orders";
-    }
-
 }
 
 

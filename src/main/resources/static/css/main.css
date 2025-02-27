@@ -1,121 +1,3 @@
-/*a {*/
-/*    text-decoration: none;*/
-/*    color: black;*/
-/*}*/
-
-/*aside {*/
-/*    float: right;*/
-/*    width: 200px;*/
-/*    background-color: skyblue;*/
-/*}*/
-
-/*.brand-nav {*/
-/*    display: flex; !* Используем flex для горизонтального расположения элементов *!*/
-/*    justify-content: center; !* Центрируем элементы по горизонтали *!*/
-/*    gap: 20px; !* Промежуток между элементами *!*/
-/*    height: 60px; !* Фиксированная высота блока *!*/
-/*    align-items: center; !* Выравнивание по вертикали *!*/
-/*    margin: 12px 0; !* Отступ сверху и снизу *!*/
-/*}*/
-
-/*!* Элемент бренда *!*/
-/*.brand-item {*/
-/*    text-align: center; !* Центрируем содержимое *!*/
-/*    padding: 5px 10px; !* Внутренние отступы *!*/
-/*    border-right: 1px solid black; !* Разделительная линия между элементами *!*/
-/*    flex: 1 1 200px; !* Гибкая ширина с минимальным размером 200px *!*/
-/*}*/
-
-/*!* Стили для ссылок *!*/
-/*.brand-item a {*/
-/*    text-decoration: none; !* Убираем подчеркивание *!*/
-/*    color: inherit; !* Наследуем цвет текста *!*/
-/*    transition: color 0.3s ease; !* Плавное изменение цвета при наведении *!*/
-/*}*/
-
-/*!* Эффект наведения *!*/
-/*.brand-item a:hover {*/
-/*    color: #007BFF; !* Меняем цвет текста при наведении *!*/
-/*}*/
-
-/*!* Стили для изображений *!*/
-/*.brand-item img {*/
-/*    height: 30px; !* Задаем высоту изображения *!*/
-/*    object-fit: contain; !* Гарантируем корректное отображение логотипа *!*/
-/*}*/
-
-/*!* Стили для подписей *!*/
-/*.brand-item p {*/
-/*    margin: 3px 0; !* Небольшие отступы сверху и снизу *!*/
-/*    font-size: 15px; !* Размер текста *!*/
-/*}*/
-
-/*!* Убираем границу у последнего элемента *!*/
-/*.brand-item:last-child {*/
-/*    border-right: none; !* Удаляем правую границу у последнего элемента *!*/
-/*}*/
-
-/*.btn-submit {*/
-/*    background-color: forestgreen;*/
-/*    color: white;*/
-/*    border: none;*/
-/*    padding: 12px 20px;*/
-/*    border-radius: 10px;*/
-/*    cursor: pointer;*/
-/*    font-size: 16px;*/
-/*    transition: background-color 0.3s;*/
-/*}*/
-
-/*.btn-submit:hover {*/
-/*    background-color: #388e3c;*/
-/*}*/
-
-
-/*.btn { !*дизайн большой кнопки*!*/
-/*    padding: 10px 15px;*/
-/*    text-decoration: none;*/
-/*    color: #fff;*/
-/*    border-radius: 5px;*/
-/*}*/
-
-/*button {*/
-/*    font-family: "Arial", serif;*/
-/*}*/
-
-/*button a {*/
-/*    color: white;*/
-/*    text-decoration: none;*/
-/*}*/
-
-/*.button:hover {*/
-/*    background-color: darkgreen;*/
-/*}*/
-
-/*.close {*/
-/*    position: absolute;*/
-/*    top: 5px;*/
-/*    right: 10px;*/
-/*    font-size: 24px;*/
-/*    font-weight: bold;*/
-/*    cursor: pointer;*/
-/*    color: red;*/
-/*}*/
-
-/*.flex-container {*/
-/*    display: flex;*/
-/*    align-items: stretch;*/
-/*    height: 185px; !* Можно задать любую высоту *!*/
-/*}*/
-
-/*.form-group {*/
-/*    margin: 15px 0;*/
-/*    text-align: center;*/
-/*    flex-direction: column;*/
-/*}*/
-
-/*.form-group label {*/
-/*    margin-bottom: 2px;*/
-/*}*/
 
 /* Стили для ссылок */
 a {
@@ -125,12 +7,12 @@ a {
 }
 
 /* Боковая панель */
-aside {
-    float: right; /* Размещаем панель справа */
-    width: 200px; /* Фиксируем ширину боковой панели */
-    /*background-color: skyblue; !* Устанавливаем цвет фона *!*/
-    background-color: limegreen;
-}
+/*aside {*/
+/*    float: right; !* Размещаем панель справа *!*/
+/*    width: 200px; !* Фиксируем ширину боковой панели *!*/
+/*    !*background-color: skyblue; !* Устанавливаем цвет фона *!*!*/
+/*    background-color: limegreen;*/
+/*}*/
 
 /* Навигация с брендами */
 .brand-nav {
@@ -340,19 +222,19 @@ li {
     font-family: "Grava Display", serif;
 }
 
-.list-view {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Центрирует все элементы */
-}
+/*.list-view {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center; !* Центрирует все элементы *!*/
+/*}*/
 
-.list-view .phone-item {
-    display: flex;
-    flex-direction: column; /* Чтобы текст шел под картинкой */
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
+/*.list-view .phone-item {*/
+/*    display: flex;*/
+/*    flex-direction: column; !* Чтобы текст шел под картинкой *!*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    width: 100%;*/
+/*}*/
 
 .logo {
     flex: 2;
@@ -482,9 +364,9 @@ p {
     max-height: 180px;
 }
 
-.pickup-options div {
-    margin: 10px 0;
-}
+/*.pickup-options div {*/
+/*    margin: 10px 0;*/
+/*}*/
 
 #quantity {
     width: 60px;
@@ -539,10 +421,10 @@ p {
     box-sizing: border-box;
 }
 
-.submit-button {
-    display: block;
-    margin: 20px auto;
-}
+/*.submit-button {*/
+/*    display: block;*/
+/*    margin: 20px auto;*/
+/*}*/
 
 table {
     margin: auto;

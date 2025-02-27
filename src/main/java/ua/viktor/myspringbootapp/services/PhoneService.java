@@ -14,9 +14,6 @@ public interface PhoneService {
     // посылает параметры заказа из web формы и сохраняет его в БД
     void createOrder(Order order);
 
-    // todo тест для личного кабинета пользователя
-    List<Order> readAllOrdersByPersonPhone(String phone);
-
     List<Phone> findLast16Phones() ;
 
     List<Phone> readPhonesByBrandSorted(String brand, String sort);

@@ -41,19 +41,11 @@ public class PhoneServiceBean implements PhoneService {
         orderRepository.save(order);
     }
 
-    // тест
-    @Override
-    public List<Order> readAllOrdersByPersonPhone(String phone) {
-        log.info("Запрос на просмотр всех заказов по телефону: {}", phone);
-        return orderRepository.findOrdersByPersonPhone(phone);
-    }
-
     @Override
     public List<Phone> findLast16Phones() {
         log.info("Запрос на просмотр 16 последних телефонов через SQL LIMIT");
         return phoneRepository.findTop16ByOrderByIdDesc();
     }
-
 
     @Override
     public List<Phone> readPhonesByBrandSorted(String brand, String sort) {
@@ -74,5 +66,4 @@ public class PhoneServiceBean implements PhoneService {
                 .sorted()
                 .collect(Collectors.toList());
     }
-
 }

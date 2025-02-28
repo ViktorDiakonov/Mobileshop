@@ -104,7 +104,7 @@ public class AdminServiceBean implements AdminService{
         log.info("Телефон с id = {} успешно обновлен", id);
     }
 
-    private void deleteOldFile(String imagePath) {
+    public void deleteOldFile(String imagePath) {
         if (imagePath != null && !imagePath.isEmpty()) {
             String oldFilePath = System.getProperty("user.dir") + "/src/main/resources/static" + imagePath;
             File oldFile = new File(oldFilePath);

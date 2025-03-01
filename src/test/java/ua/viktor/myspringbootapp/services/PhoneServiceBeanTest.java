@@ -9,7 +9,7 @@ import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.repositories.OrderRepository;
 import ua.viktor.myspringbootapp.repositories.PhoneRepository;
-import ua.viktor.myspringbootapp.util.exeption.PhoneNotFoundException;
+import ua.viktor.myspringbootapp.util.exception.PhoneNotFoundException;
 
 import java.util.*;
 

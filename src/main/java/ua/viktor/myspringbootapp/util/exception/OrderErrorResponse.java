@@ -1,4 +1,4 @@
-//package ua.viktor.myspringbootapp.util.exeption;
+//package ua.viktor.myspringbootapp.util.exception;
 //
 //import lombok.AllArgsConstructor;
 //import lombok.Getter;
@@ -9,9 +9,7 @@
 // */
 //@AllArgsConstructor
 //@Getter
-//public class PhoneErrorResponse {
-//
+//public class OrderErrorResponse {
 //    private String message;
 //    private Date timestamp;
-////    private String details;
 //}

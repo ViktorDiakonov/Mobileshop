@@ -9,18 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.multipart.MultipartFile;
 import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.repositories.OrderRepository;
 import ua.viktor.myspringbootapp.repositories.PhoneRepository;
-import ua.viktor.myspringbootapp.util.exeption.OrderNotFoundException;
-import ua.viktor.myspringbootapp.util.exeption.PhoneNotFoundException;
+import ua.viktor.myspringbootapp.util.exception.OrderNotFoundException;
+import ua.viktor.myspringbootapp.util.exception.PhoneNotFoundException;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 

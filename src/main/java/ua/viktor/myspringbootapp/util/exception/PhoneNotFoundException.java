@@ -1,4 +1,4 @@
-package ua.viktor.myspringbootapp.util.exeption;
+package ua.viktor.myspringbootapp.util.exception;
 /**
  * @author Diakonov Viktor
  */

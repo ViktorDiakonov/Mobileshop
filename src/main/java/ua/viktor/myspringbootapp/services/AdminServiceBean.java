@@ -10,8 +10,8 @@ import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.repositories.OrderRepository;
 import ua.viktor.myspringbootapp.repositories.PhoneRepository;
-import ua.viktor.myspringbootapp.util.exeption.OrderNotFoundException;
-import ua.viktor.myspringbootapp.util.exeption.PhoneNotFoundException;
+import ua.viktor.myspringbootapp.util.exception.OrderNotFoundException;
+import ua.viktor.myspringbootapp.util.exception.PhoneNotFoundException;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +52,7 @@ public class AdminServiceBean implements AdminService{
     public Order findOrder(int id) {
         log.info("Поиск заказа с id = {}", id);
         Optional<Order> foundOrder = orderRepository.findById(id);
-        return foundOrder.orElseThrow(PhoneNotFoundException::new);
+        return foundOrder.orElseThrow(OrderNotFoundException::new);
     }
 
     @Override

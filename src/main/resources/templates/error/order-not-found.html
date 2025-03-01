@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Заказ не найдено</title>
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 70px;
+    }
+    h1 {
+      font-size: 70px;
+      color: #ff6347;
+    }
+    p {
+      font-size: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+<h1>Помилка!</h1>
+<p th:text="${errorMessage}"></p>
+<p><button type="submit" class="btn-submit" onclick="history.back()">Повернутись назад</button></p>
+</body>
+</html>

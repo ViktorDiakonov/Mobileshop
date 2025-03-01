@@ -52,7 +52,7 @@ public class AdminServiceBean implements AdminService{
     public Order findOrder(int id) {
         log.info("Поиск заказа с id = {}", id);
         Optional<Order> foundOrder = orderRepository.findById(id);
-        return foundOrder.orElseThrow(OrderNotFoundException::new);
+        return foundOrder.orElseThrow(PhoneNotFoundException::new);
     }
 
     @Override

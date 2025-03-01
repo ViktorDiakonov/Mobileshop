@@ -134,8 +134,7 @@ public class AdminController {
 //        return "admin/view-created-phone";
 //    }
     @PostMapping()
-    public String createNewPhone(@ModelAttribute("phone") @Valid Phone phone,
-                                 BindingResult bindingResult,
+    public String createNewPhone(@ModelAttribute("phone") @Valid Phone phone, BindingResult bindingResult,
                                  @RequestParam(value = "image", required = false) MultipartFile file) {
         if (bindingResult.hasErrors()) {
             log.warn("Ошибка валидации при создании телефона");

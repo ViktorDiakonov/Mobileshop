@@ -68,12 +68,19 @@
 </div>
 
 <script>
+    // function toggleSort() {
+    //     window.location.href = window.location.href.includes('sort=desc')
+    //         ? window.location.href.replace('sort=desc', 'sort=asc')
+    //         : window.location.href.includes('sort=asc')
+    //             ? window.location.href.replace('sort=asc', 'sort=desc')
+    //             : window.location.href + '?sort=asc';
+    // }
     function toggleSort() {
-        window.location.href = window.location.href.includes('sort=desc')
-            ? window.location.href.replace('sort=desc', 'sort=asc')
-            : window.location.href.includes('sort=asc')
-                ? window.location.href.replace('sort=asc', 'sort=desc')
-                : window.location.href + '?sort=asc';
+        window.location.href = window.location.href.includes('sort=asc')
+            ? window.location.href.replace('sort=asc', 'sort=desc')
+            : window.location.href.includes('sort=desc')
+                ? window.location.href.replace('sort=desc', 'sort=asc')
+                : window.location.href + '?sort=desc';
     }
 </script>
 </body>

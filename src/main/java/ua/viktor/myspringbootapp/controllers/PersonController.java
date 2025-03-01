@@ -36,11 +36,10 @@ public class PersonController {
 
     @GetMapping("/phones/{brand}")
     public String getPhonesByBrand(@PathVariable String brand,
-                                   @RequestParam(value = "sort", required = false, defaultValue = "desc") String sort,
+                                   @RequestParam(value = "sort", required = false, defaultValue = "asc") String sort,
                                    Model model) {
         log.info("Пользователь выбрал бренд: {}, сортировка по цене: {}", brand, sort);
         model.addAttribute("phone", phoneService.readPhonesByBrandSorted(brand, sort));
-        // Преобразование бренда: первая буква заглавная, остальные — как есть
         String formattedBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1).toLowerCase();
         model.addAttribute("selectedBrand", formattedBrand);
         model.addAttribute("brands", phoneService.getAllBrands());
@@ -70,7 +69,8 @@ public class PersonController {
                               @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             log.warn("Ошибка при создании заказа для телефона с id = {}", id);
-            return "redirect:/mobileshop/" + id + "/new_order";
+            return "redirect:/mobileshop/" + id;
+//            return "redirect:/mobileshop/" + id + "/new_order";
         }
 
         Phone phone = phoneService.findPhone(id);

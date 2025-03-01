@@ -51,7 +51,7 @@ public class PhoneServiceBean implements PhoneService {
     public List<Phone> readPhonesByBrandSorted(String brand, String sort) {
         log.info("Запрос телефонов по бренду: {}, сортировка: {}", brand, sort);
         String formattedBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1).toLowerCase();
-        if ("asc".equalsIgnoreCase(sort)) {
+        if ("desc".equalsIgnoreCase(sort)) {
             return phoneRepository.findByBrandOrderByPriceDesc(formattedBrand);
         }
         return phoneRepository.findByBrandOrderByPriceAsc(formattedBrand);

@@ -6,14 +6,6 @@ a {
     font-family: "Grava Display", serif;
 }
 
-/* Боковая панель */
-/*aside {*/
-/*    float: right; !* Размещаем панель справа *!*/
-/*    width: 200px; !* Фиксируем ширину боковой панели *!*/
-/*    !*background-color: skyblue; !* Устанавливаем цвет фона *!*!*/
-/*    background-color: limegreen;*/
-/*}*/
-
 /* Навигация с брендами */
 .brand-nav {
     display: flex; /* Используем flexbox для расположения элементов */
@@ -133,7 +125,6 @@ button a {
     margin-bottom: 2px; /* Отступ между подписью и полем */
 }
 
-
 /* Сетка с центровкой */
 .grid-view {
     display: grid;
@@ -221,20 +212,6 @@ input:valid + span::before {
 li {
     font-family: "Grava Display", serif;
 }
-
-/*.list-view {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    align-items: center; !* Центрирует все элементы *!*/
-/*}*/
-
-/*.list-view .phone-item {*/
-/*    display: flex;*/
-/*    flex-direction: column; !* Чтобы текст шел под картинкой *!*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    width: 100%;*/
-/*}*/
 
 .logo {
     flex: 2;
@@ -364,10 +341,6 @@ p {
     max-height: 180px;
 }
 
-/*.pickup-options div {*/
-/*    margin: 10px 0;*/
-/*}*/
-
 #quantity {
     width: 60px;
     text-align: center;
@@ -420,11 +393,6 @@ p {
     padding: 1px;
     box-sizing: border-box;
 }
-
-/*.submit-button {*/
-/*    display: block;*/
-/*    margin: 20px auto;*/
-/*}*/
 
 table {
     margin: auto;

@@ -1,6 +1,7 @@
 package ua.viktor.myspringbootapp.util.config.security;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,9 +11,11 @@ import java.util.Collections;
 /**
  * @author Diakonov Viktor
  */
+@Getter
 @AllArgsConstructor
 public class PersonDetails implements UserDetails {
 
+    // нужно, чтобы получать данные аутентифицированного пользователя
     private final Person person;
 
     // метод для авторизации пользователя
@@ -51,8 +54,4 @@ public class PersonDetails implements UserDetails {
         return true;
     }
 
-    // todo нужно, чтобы получать данные аутентифицированного пользователя
-    public Person getPerson(){
-        return this.person;
-    }
 }

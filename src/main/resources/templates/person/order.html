@@ -22,6 +22,7 @@
         </ul>
     </div>
 </div>
+<br>
 <nav>
     <a href="/mobileshop/" style="color: black; text-decoration: none;">Головна</a>
     <span style="color: gray;"> &gt; </span>
@@ -30,11 +31,11 @@
         <span th:text="${phone.getBrand()}"></span>
     </a>
     <span style="color: gray;"> &gt; </span>
-    <span th:text="${phone.getModel()}" style="font-weight: bold; color: black;"></span>
+    <span th:text="${phone.getModel()}"
+          style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
 </nav>
 <div class="order-container">
     <h2>Оформлення замовлення</h2>
-
     <form method="POST" th:action="@{/mobileshop/{id}/order(id=${phone.getId()})}" th:object="${phone}">
         <div class="phone-details">
             <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону">
@@ -51,39 +52,24 @@
                 <p><strong>Сума до сплати:</strong> <span id="totalPrice">0</span> ₴</p>
             </div>
         </div>
-        <hr style="width: 80%; margin: 0 auto; border: 1px solid grey;" />
+        <hr style="width: 80%; margin: 0 auto; border: 1px solid grey;"/>
         <br>
         <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">
             <p style="margin: 5px;">
                 <label for="personName">Ім'я покупця:</label>
-                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="text" id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"
+                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="text"
+                       id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"
                        maxlength="20">
             </p>
             <p style="margin: 5px;">
                 <label for="personPhone">Номер телефону:</label>
-                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="tel" id="personPhone" name="personPhone" pattern="\+\d{12}" placeholder="+380XXXXXXXXX"
+                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="tel"
+                       id="personPhone" name="personPhone" pattern="\+\d{12}" placeholder="+380XXXXXXXXX"
                        required value="+380">
             </p>
         </div>
-
-<!--        <p>-->
-<!--            <label for="personComment">Коментар до замовлення:</label><br>-->
-<!--            <textarea id="personComment" name="personComment" placeholder="до 150 символів" required minlength="0"-->
-<!--                      maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"-->
-<!--                      style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px;font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>-->
-<!--        <div id="charCount" style="text-align: center; font-size: 14px; color: #777;" >0/150</div> &lt;!&ndash; Это будет отображать количество символов &ndash;&gt;-->
-<!--        </p>-->
-
-<!--        <script>-->
-<!--            function updateCharacterCount() {-->
-<!--                var textArea = document.getElementById('personComment');-->
-<!--                var charCount = textArea.value.length;-->
-<!--                var maxLength = textArea.getAttribute('maxlength');-->
-<!--                document.getElementById('charCount').textContent = charCount + '/' + maxLength;-->
-<!--            }-->
-<!--        </script>-->
         <div style="display: flex; margin-top: 7px; justify-content: flex-end;">
-                <label for="personComment"></label><br>
+            <label for="personComment"></label><br>
             <div style="display: flex; align-items: flex-end; gap: 18px;">
                 <div id="charCount" style="font-size: 14px; color: #777; white-space: nowrap;">0/150</div>
                 <textarea id="personComment" name="personComment" placeholder="Додати коментар:" required minlength="0"
@@ -93,9 +79,9 @@
         </div>
         <script>
             function updateCharacterCount() {
-                var textArea = document.getElementById('personComment');
-                var charCount = textArea.value.length;
-                var maxLength = textArea.getAttribute('maxlength');
+                let textArea = document.getElementById('personComment');
+                let charCount = textArea.value.length;
+                let maxLength = textArea.getAttribute('maxlength');
                 document.getElementById('charCount').textContent = charCount + '/' + maxLength;
             }
         </script>

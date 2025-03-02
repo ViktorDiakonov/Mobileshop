@@ -46,7 +46,7 @@
 <nav>
     <a href="/mobileshop/" style="color: black; text-decoration: none;">Головна</a>
     <span style="color: gray;"> &gt; </span>
-    <span th:text="${selectedBrand}" style="font-weight: bold; color: black;"></span>
+    <span th:text="${selectedBrand}" style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
 </nav>
 <div style="text-align: center; margin-bottom: 10px;">
     <button type="submit" class="btn-submit" onclick="toggleSort()">Сортувати за ціною</button>
@@ -68,13 +68,6 @@
 </div>
 
 <script>
-    // function toggleSort() {
-    //     window.location.href = window.location.href.includes('sort=desc')
-    //         ? window.location.href.replace('sort=desc', 'sort=asc')
-    //         : window.location.href.includes('sort=asc')
-    //             ? window.location.href.replace('sort=asc', 'sort=desc')
-    //             : window.location.href + '?sort=asc';
-    // }
     function toggleSort() {
         window.location.href = window.location.href.includes('sort=asc')
             ? window.location.href.replace('sort=asc', 'sort=desc')

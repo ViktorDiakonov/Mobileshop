@@ -1,10 +1,10 @@
 package ua.viktor.myspringbootapp.models;
 
 import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
+
 /**
  * @author Diakonov Viktor
  */
@@ -25,7 +25,6 @@ public class Person {
     @Column(name = "name")
     private String userName;
 
-    // не нужно при шифровании @Size(min = 4, max = 10, message = "Пароль має бути від 4 до 10 символів")
     @Column(name = "password")
     private String password;
 

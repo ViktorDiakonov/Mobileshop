@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.Date;
+
 /**
  * @author Diakonov Viktor
  */
@@ -54,7 +55,7 @@ public class Order {
     @Column(name = "point")
     private String point;
 
-    private String imagePath; // Новый параметр для фото
+    private String imagePath;
 
     @Column(name = "quantity")
     private Integer quantity;

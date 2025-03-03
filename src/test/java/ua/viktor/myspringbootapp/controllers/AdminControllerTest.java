@@ -63,7 +63,7 @@ class AdminControllerTest {
 
     @Test
     void searchPhone_ShouldReturnSearchPhoneView() throws Exception {
-        when(phoneService.findPhone(anyInt())).thenReturn(new Phone());
+        when(phoneService.findPhoneById(anyInt())).thenReturn(new Phone());
 
         mockMvc.perform(get("/mobileshop/admin_page/search_phone").param("id", "1"))
                 .andExpect(status().isOk())

@@ -24,7 +24,7 @@ public class PhoneServiceBean implements PhoneService {
     private final PhoneRepository phoneRepository;
     private final OrderRepository orderRepository;
 
-    public Phone findPhone(int id) {
+    public Phone findPhoneById(int id) {
         log.info("Запрос на поиск телефона с id = {}", id);
         Optional<Phone> foundPhone = phoneRepository.findById(id);
         if (foundPhone.isPresent()) {

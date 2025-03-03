@@ -33,12 +33,12 @@ public class PhoneServiceBeanTest {
     }
 
     @Test
-    public void testFindPhoneThrowsException() {
+    public void testFindPhoneByIdThrowsException() {
         // Настройка поведения мока
         when(phoneRepository.findById(1)).thenReturn(Optional.empty());
 
         // Проверка, что метод выбрасывает исключение
-        assertThrows(PhoneNotFoundException.class, () -> phoneService.findPhone(1));
+        assertThrows(PhoneNotFoundException.class, () -> phoneService.findPhoneById(1));
 
         // Убеждаемся, что репозиторий был вызван
         verify(phoneRepository).findById(1);

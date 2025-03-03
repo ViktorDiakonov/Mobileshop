@@ -17,6 +17,4 @@ public interface PhoneRepository extends JpaRepository<Phone, Integer> {
     List<Phone> findByBrandOrderByPriceDesc(String brand);
 
     List<Phone> findTop16ByOrderByIdDesc();
-
-
 }

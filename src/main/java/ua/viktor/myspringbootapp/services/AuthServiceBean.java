@@ -9,6 +9,7 @@ import ua.viktor.myspringbootapp.repositories.PeopleRepository;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
+
 /**
  * @author Diakonov Viktor
  */
@@ -20,14 +21,12 @@ public class AuthServiceBean implements AuthService {
     private final PeopleRepository peopleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    // для валидации
     @Override
     public Optional<Person> show(String userName) {
         log.info("Для валидации - получен Person с именем = {}", userName);
         return peopleRepository.findByUserName(userName);
     }
 
-    // регистрирует нового пользователя и присваивает ему роль USER
     @Transactional
     public void register(Person person) {
         log.info("Регистрация нового пользователя: {}", person);

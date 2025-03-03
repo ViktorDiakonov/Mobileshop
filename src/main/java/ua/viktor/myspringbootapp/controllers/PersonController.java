@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
-import ua.viktor.myspringbootapp.services.AdminService;
 import ua.viktor.myspringbootapp.services.PhoneService;
 
 import javax.validation.Valid;
@@ -24,7 +23,6 @@ import java.util.List;
 public class PersonController {
 
     private final PhoneService phoneService;
-    private final AdminService adminService;
 
     @GetMapping("/")
     public String mainPage(Model model) {
@@ -50,7 +48,7 @@ public class PersonController {
     @GetMapping("/phone/{id}")
     public String viewPhoneById(@PathVariable("id") int id, Model model) {
         log.info("Запрос на просмотр телефона с id = {}", id);
-        model.addAttribute("phone", phoneService.findPhone(id));
+        model.addAttribute("phone", phoneService.findPhoneById(id));
         return "person/show-phone";
     }
 
@@ -59,7 +57,7 @@ public class PersonController {
     @GetMapping("/{id}/new_order")
     public String createNewOrder(@PathVariable("id") int id, Model model) {
         log.info("Пользователь перешел на страницу создания заказа для телефона с id = {}", id);
-        model.addAttribute("phone", adminService.readById(id));
+        model.addAttribute("phone", phoneService.findPhoneById(id));
         return "person/order";
     }
 
@@ -70,10 +68,9 @@ public class PersonController {
         if (bindingResult.hasErrors()) {
             log.warn("Ошибка при создании заказа для телефона с id = {}", id);
             return "redirect:/mobileshop/" + id;
-//            return "redirect:/mobileshop/" + id + "/new_order";
         }
 
-        Phone phone = phoneService.findPhone(id);
+        Phone phone = phoneService.findPhoneById(id);
         if (phone == null) {
             log.error("Телефон с id = {} не найден, перенаправляем на главную страницу", id);
             return "redirect:/mobileshop";
@@ -82,7 +79,7 @@ public class PersonController {
         order.setBrand(phone.getBrand());
         order.setModel(phone.getModel());
         order.setMemorySize(phone.getMemorySize());
-        order.setPrice(phone.getPrice() * quantity); // Общая стоимость
+        order.setPrice(phone.getPrice() * quantity);
         order.setImagePath(phone.getImagePath());
         order.setQuantity(quantity);
 
@@ -114,7 +111,3 @@ public class PersonController {
         return "person/delivery";
     }
 }
-
-
-
-

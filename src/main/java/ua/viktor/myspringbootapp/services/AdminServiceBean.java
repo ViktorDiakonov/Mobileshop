@@ -27,7 +27,7 @@ import java.util.Optional;
 @Slf4j
 @AllArgsConstructor
 @Service
-public class AdminServiceBean implements AdminService{
+public class AdminServiceBean implements AdminService {
 
     private final OrderRepository orderRepository;
     private final PhoneRepository phoneRepository;
@@ -61,19 +61,7 @@ public class AdminServiceBean implements AdminService{
         phoneRepository.save(phone);
     }
 
-//    @Override
-//    public void updateById(Integer id, Phone updatedPhone) {
-//        log.info("Попытка обновления телефона с id = {}", id);
-//        Phone phoneToBeUpdated = readById(id);
-//        phoneToBeUpdated.setBrand(updatedPhone.getBrand());
-//        phoneToBeUpdated.setModel(updatedPhone.getModel());
-//        phoneToBeUpdated.setMemorySize(updatedPhone.getMemorySize());
-//        phoneToBeUpdated.setPrice(updatedPhone.getPrice());
-//        phoneToBeUpdated.setImagePath(updatedPhone.getImagePath());
-//        phoneRepository.save(phoneToBeUpdated);
-//        log.info("Телефон с id = {} успешно обновлен", id);
-//    }
-
+    //Update File + delete old image-------------------------------------------
     @Override
     public void updateById(Integer id, Phone updatedPhone, MultipartFile file) {
         log.info("Попытка обновления телефона с id = {}", id);
@@ -115,6 +103,7 @@ public class AdminServiceBean implements AdminService{
             }
         }
     }
+    //-------------------------------------------------------------------
 
     @Override
     public Phone readById(Integer id) {

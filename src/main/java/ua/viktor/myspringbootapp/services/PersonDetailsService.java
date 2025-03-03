@@ -10,6 +10,7 @@ import ua.viktor.myspringbootapp.repositories.PeopleRepository;
 import ua.viktor.myspringbootapp.util.config.security.PersonDetails;
 
 import java.util.Optional;
+
 /**
  * @author Diakonov Viktor
  */

@@ -1,8 +1,10 @@
 package ua.viktor.myspringbootapp.models;
 
 import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 /**
  * @author Diakonov Viktor
  */
@@ -14,7 +16,7 @@ import javax.validation.constraints.*;
 @Setter
 public class Phone {
 
-    private String imagePath; // Путь к файлу изображения
+    private String imagePath;
 
     @Id
     @Column(name = "id")
@@ -33,17 +35,8 @@ public class Phone {
     @Column(name = "memory_size")
     private String memorySize;
 
-    @Positive(message = "ціна має бути більшою за нуль")
-    @NotNull(message = "ціна не може бути порожньою")
+    @Positive(message = "Ціна має бути більшою за нуль")
+    @NotNull(message = "Ціна не може бути порожньою")
     @Column(name = "price")
     private Integer price;
-
-    // todo ------------------костыль, возможно нужно переделать--------------------------
-    @Size(min = 2, max = 20, message = "Ім'я має бути від 2 до 20 букв")
-    @Column(name = "person_name")
-    private String personName;
-
-    @Size(min = 12, max = 12, message = "Номер телефону має бути довжиною 12 цифр і починатися з 380")
-    @Column(name = "person_phone")
-    private String personPhone;
 }

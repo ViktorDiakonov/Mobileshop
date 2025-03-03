@@ -21,14 +21,15 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min = 2, max = 20, message = "Iм'я має бути від 2 до 15 літер")
+    @Size(min = 2, max = 20, message = "Не менше двох букв")
     @Column(name = "name")
     private String userName;
 
+    @Size(min = 4, message = "Довжина від 4 до 10 символів")
     @Column(name = "password")
     private String password;
 
-    @Size(min = 12, max = 12, message = "Номер телефону має бути довжиною 12 цифр і починатися з 380")
+    @Size(min = 12, max = 12, message = "Має бути 12 цифр")
     @Column(name = "phone_number")
     private String phoneNumber;
 

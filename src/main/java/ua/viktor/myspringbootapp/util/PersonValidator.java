@@ -30,6 +30,7 @@ public class PersonValidator implements Validator {
 
         authService.show(person.getUserName()).ifPresent(existingPerson ->
                 errors.rejectValue("userName", "", "Це ім'я вже зайнято")
+
         );
     }
 }

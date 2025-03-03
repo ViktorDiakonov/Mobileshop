@@ -25,37 +25,41 @@
 <h3>Заповніть форму реєстрації</h3>
 <div style="font-family: 'Grava Display', serif; max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
     <form th:method="POST" th:action="@{/mobileshop/auth/registration}" th:object="${person}"
-          style="display: flex; flex-direction: column; align-items: flex-end;">
+          style="display: flex; flex-direction: column; align-items: flex-end;" novalidate>
 
         <div>
+            <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"
+                 style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
+                Username Error
+            </div>
             <label for="userName">Введіть ім'я користувача</label>
             <input type="text" th:field="*{userName}" id="userName" placeholder="цифри, літери, символи"
                    minlength="2" maxlength="20" required style="margin-bottom: 10px; padding: 5px;
                    border: 2px solid #ccc; border-radius: 5px;">
-            <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">
-                Username Error
-            </div>
         </div>
 
         <div>
+            <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"
+                 style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
+                Помилка номеру телефону
+            </div>
             <label for="phoneNumber">Введіть номер телефону</label>
             <input type="tel" th:field="*{phoneNumber}" id="phoneNumber" name="phoneNumber"
                    pattern="380\d{9}" placeholder="380XXXXXXXXX" required value="380"
                    style="margin-bottom: 10px; padding: 5px; border: 2px solid #ccc; border-radius: 5px;">
-            <div th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">
-                Phone number Error
-            </div>
         </div>
 
         <div>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                 style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
+                Password Error
+            </div>
             <label for="password">Придумайте пароль</label>
             <input type="password" th:field="*{password}" id="password" placeholder="4-10 символів"
                    minlength="4" maxlength="10" required style="margin-bottom: 10px; padding: 5px;
                    border: 2px solid #ccc; border-radius: 5px;">
-            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
-                Password Error
-            </div>
         </div>
+
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const phoneInput = document.getElementById('phoneNumber');
@@ -69,13 +73,6 @@
                     if (!phoneInput.value.startsWith('380')) {
                         phoneInput.value = '380';
                     }
-                });
-
-                // Помещаем курсор в конец строки
-                phoneInput.addEventListener('focus', function () {
-                    setTimeout(() => {
-                        phoneInput.selectionStart = phoneInput.selectionEnd = phoneInput.value.length;
-                    }, 0);
                 });
             });
         </script>

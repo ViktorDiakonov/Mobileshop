@@ -64,8 +64,8 @@
             <p style="margin: 5px;">
                 <label for="personPhone">Номер телефону:</label>
                 <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="tel"
-                       id="personPhone" name="personPhone" pattern="\+\d{12}" placeholder="+380XXXXXXXXX"
-                       required value="+380">
+                       id="personPhone" name="personPhone" pattern="380\d{9}" placeholder="380XXXXXXXXX"
+                       required value="380">
             </p>
         </div>
         <div style="display: flex; margin-top: 7px; justify-content: flex-end;">
@@ -90,8 +90,8 @@
             const phoneInput = document.getElementById('personPhone');
 
             phoneInput.addEventListener('input', function () {
-                if (!phoneInput.value.startsWith('+380')) {
-                    phoneInput.value = '+380';
+                if (!phoneInput.value.startsWith('380')) {
+                    phoneInput.value = '380';
                 }
             });
         </script>

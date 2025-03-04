@@ -18,7 +18,7 @@
                   enctype="multipart/form-data" class="form-fields">
                 <div class="form-group">
                     <label for="brand">Виробник:</label>
-                    <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>&nbsp;
+                    <input type="text" th:field="*{brand}" id="brand" pattern="[a-z,A-Z]{2,15}" required>
                     <div style="color: red; display: inline;" th:if="${#fields.hasErrors('brand')}"
                          th:errors="*{brand}">Brand Error
                     </div>
@@ -26,23 +26,23 @@
 
                 <div class="form-group">
                     <label for="model">Модель:</label>
-                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="25" required>&nbsp;
+                    <input type="text" th:field="*{model}" id="model" minlength="2" maxlength="25" required>
                     <div style="color: red; display: inline;" th:if="${#fields.hasErrors('model')}"
                          th:errors="*{model}">Model Error
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="memorySize">Вбудована пам'ять:</label>
-                    <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required>&nbsp;Gb&nbsp;
+                    <label for="memorySize">Вбудована пам'ять (Gb):</label>
+                    <input type="text" th:field="*{memorySize}" id="memorySize" pattern="\d{1,4}" required>
                     <div style="color: red; display: inline;" th:if="${#fields.hasErrors('memorySize')}"
                          th:errors="*{memorySize}">MemorySize Error
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="price">Ціна:</label>
-                    <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required>&nbsp;₴&nbsp;
+                    <label for="price">Ціна (₴):</label>
+                    <input type="text" th:field="*{price}" id="price" pattern="\d{1,6}" required>
                     <div style="color: red; display: inline;" th:if="${#fields.hasErrors('price')}"
                          th:errors="*{price}">Price Error
                     </div>

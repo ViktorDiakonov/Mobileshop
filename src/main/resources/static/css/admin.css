@@ -115,7 +115,7 @@ input[type="text"] {
 }
 
 label {
-    min-width: 150px; /* Минимальная ширина для надписей */
+    min-width: 180px; /* Минимальная ширина для надписей */
 }
 
 .order-container {

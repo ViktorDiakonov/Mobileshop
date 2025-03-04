@@ -44,11 +44,11 @@ public class Order {
     @Column(name = "person_comment")
     private String personComment;
 
-    @Size(min = 2, max = 20, message = "Ім'я має бути від 2 до 20 букв")
+    @Size(min = 2, max = 20, message = "Не менше двох букв")
     @Column(name = "person_name")
-    public String personName;
+    private String personName;
 
-    @Size(min = 9, max = 14, message = "Номер телефону має бути довжиною вiд 9 до 14 цифр")
+    @Size(min = 12, max = 12, message = "Має бути 12 цифр")
     @Column(name = "person_phone")
     private String personPhone;
 

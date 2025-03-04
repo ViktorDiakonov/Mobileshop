@@ -26,21 +26,12 @@ General information:
 - Framework: Spring Boot (Thymeleaf, Security, PostgreSQL, Lombok, Test, Validation)
 - Backend: Java
 - Frontend: HTML, CSS, JavaScript
-- 
+
 ## Usage
 To run the project:
 
 1. Build and run application in your IDE.
 2. Open http://localhost:8080/mobileshop/ in your browser to view the application.
-
-## Contributing
-Contributions to the Life Flow Simulation project are welcome. Please follow these steps to contribute:
-
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature-branch).
-3. Make changes and commit (git commit -am 'Add some feature').
-4. Push to the branch (git push origin feature-branch).
-5. Create a new Pull Request.
 
 ## License
 [Specify the license or if it's open source, you can include a standard license like MIT.]
@@ -48,4 +39,4 @@ Contributions to the Life Flow Simulation project are welcome. Please follow the
 ## Contact
 - Developer: Viktor Diakonov
 - Email: diakonov.viktor.ua@gmail.com
-- LinkedIn: 
+- LinkedIn: https://www.linkedin.com/in/viktordiakonov/

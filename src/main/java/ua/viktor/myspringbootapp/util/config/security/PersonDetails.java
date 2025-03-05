@@ -15,7 +15,6 @@ import java.util.Collections;
 @AllArgsConstructor
 public class PersonDetails implements UserDetails {
 
-    // нужно, чтобы получать данные аутентифицированного пользователя
     private final Person person;
 
     // метод для авторизации пользователя

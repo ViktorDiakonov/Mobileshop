@@ -18,6 +18,6 @@ public interface PhoneService {
 
     List<Phone> readPhonesByBrandSorted(String brand, String sort);
 
-    List<String> getAllBrands();
+//    List<String> getAllBrands();
 
 }

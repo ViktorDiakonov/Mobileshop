@@ -94,17 +94,17 @@ public class PhoneServiceBeanTest {
         verify(phoneRepository).findByBrandOrderByPriceDesc("Samsung");
     }
 
-    @Test
-    public void testGetAllBrands() {
-        Phone phone1 = new Phone();
-        phone1.setBrand("Samsung");
-        Phone phone2 = new Phone();
-        phone2.setBrand("Apple");
-        when(phoneRepository.findAll()).thenReturn(Arrays.asList(phone1, phone2));
-        List<String> brands = phoneService.getAllBrands();
-        assertEquals(2, brands.size());
-        assertTrue(brands.contains("Samsung"));
-        assertTrue(brands.contains("Apple"));
-        verify(phoneRepository).findAll();
-    }
+//    @Test
+//    public void testGetAllBrands() {
+//        Phone phone1 = new Phone();
+//        phone1.setBrand("Samsung");
+//        Phone phone2 = new Phone();
+//        phone2.setBrand("Apple");
+//        when(phoneRepository.findAll()).thenReturn(Arrays.asList(phone1, phone2));
+//        List<String> brands = phoneService.getAllBrands();
+//        assertEquals(2, brands.size());
+//        assertTrue(brands.contains("Samsung"));
+//        assertTrue(brands.contains("Apple"));
+//        verify(phoneRepository).findAll();
+//    }
 }

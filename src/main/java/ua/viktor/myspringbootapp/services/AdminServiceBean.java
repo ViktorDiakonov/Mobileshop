@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
@@ -33,6 +34,7 @@ public class AdminServiceBean implements AdminService {
     private final PhoneRepository phoneRepository;
     private static final String UPLOAD_DIR = "src/main/resources/static/uploads";
 
+    @Transactional
     @Override
     public void deletePhoneById(Integer id) {
         log.info("Попытка удаления телефона с id = {}", id);
@@ -41,6 +43,7 @@ public class AdminServiceBean implements AdminService {
         log.info("Телефон с id = {} успешно удален", id);
     }
 
+    @Transactional
     @Override
     public void deleteOrderById(Integer id) {
         log.info("Попытка удаления заказа с id = {}", id);
@@ -55,13 +58,16 @@ public class AdminServiceBean implements AdminService {
         return foundOrder.orElseThrow(OrderNotFoundException::new);
     }
 
+    @Transactional
     @Override
     public void create(Phone phone) {
         log.info("Попытка создания нового телефона: {}", phone);
         phoneRepository.save(phone);
     }
 
+
     //Update File + delete old image-------------------------------------------
+    @Transactional
     @Override
     public void updateById(Integer id, Phone updatedPhone, MultipartFile file) {
         log.info("Попытка обновления телефона с id = {}", id);

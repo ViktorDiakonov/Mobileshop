@@ -40,7 +40,7 @@ public class PersonController {
         model.addAttribute("phone", phoneService.readPhonesByBrandSorted(brand, sort));
         String formattedBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1).toLowerCase();
         model.addAttribute("selectedBrand", formattedBrand);
-        model.addAttribute("brands", phoneService.getAllBrands());
+//        model.addAttribute("brands", phoneService.getAllBrands());
         return "person/list-models";
     }
 

@@ -46,12 +46,12 @@ public class PersonControllerTest {
     @Test
     public void testGetPhonesByBrand() {
         when(phoneService.readPhonesByBrandSorted("Samsung", "desc")).thenReturn(List.of(new Phone()));
-        when(phoneService.getAllBrands()).thenReturn(List.of("Samsung", "Apple"));
+//        when(phoneService.getAllBrands()).thenReturn(List.of("Samsung", "Apple"));
 
         String viewName = personController.getPhonesByBrand("Samsung", "desc", model);
 
         verify(phoneService).readPhonesByBrandSorted("Samsung", "desc");
-        verify(phoneService).getAllBrands();
+//        verify(phoneService).getAllBrands();
         verify(model).addAttribute(eq("phone"), any());
         verify(model).addAttribute(eq("selectedBrand"), any());
         verify(model).addAttribute(eq("brands"), any());

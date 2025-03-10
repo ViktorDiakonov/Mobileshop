@@ -3,6 +3,7 @@ package ua.viktor.myspringbootapp.services;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.repositories.OrderRepository;
@@ -11,7 +12,6 @@ import ua.viktor.myspringbootapp.util.exception.PhoneNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @author Diakonov Viktor
@@ -35,6 +35,7 @@ public class PhoneServiceBean implements PhoneService {
         return foundPhone.orElseThrow(PhoneNotFoundException::new);
     }
 
+    @Transactional
     @Override
     public void createOrder(Order order) {
         log.info("Создан новый заказ: {}", order);
@@ -57,13 +58,13 @@ public class PhoneServiceBean implements PhoneService {
         return phoneRepository.findByBrandOrderByPriceAsc(formattedBrand);
     }
 
-    @Override
-    public List<String> getAllBrands() {
-        return phoneRepository.findAll()
-                .stream()
-                .map(Phone::getBrand)
-                .distinct()
-                .sorted()
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<String> getAllBrands() {
+//        return phoneRepository.findAll()
+//                .stream()
+//                .map(Phone::getBrand)
+//                .distinct()
+//                .sorted()
+//                .collect(Collectors.toList());
+//    }
 }

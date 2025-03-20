@@ -4,35 +4,36 @@
     <title>Мои заказы</title>
 </head>
 <body>
-<h1>Мои заказы</h1>
+<h1>Особистий кабінет</h1>
 
 <div sec:authorize="isAuthenticated()">
-    <p>Вы вошли как: <span sec:authentication="name"></span></p>
+    <p>Вітаю: <span th:each="order : ${orders}" th:text="${order.getPersonName()}"></span>!</p>
 </div>
-
 <table border="1">
     <thead>
     <tr>
-        <th>№ заказа</th>
-        <th>Бренд</th>
+        <th>№ заказу</th>
+        <th>Виробник</th>
         <th>Модель</th>
-        <th>Объем памяти</th>
-        <th>Цена</th>
-        <th>Дата</th>
+        <th>Вбудована пам'ять</th>
+        <th>Кількість</th>
+        <th>Ціна</th>
+        <th>Дата замовлення</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="order : ${orders}">
-        <td th:text="${order.id}"></td>
-        <td th:text="${order.brand}"></td>
-        <td th:text="${order.model}"></td>
-        <td th:text="${order.memorySize}"></td>
-        <td th:text="${order.price}"></td>
-        <td th:text="${order.date}"></td>
+        <td th:text="${order.getId()}"></td>
+        <td th:text="${order.getBrand()}"></td>
+        <td th:text="${order.getModel()}"></td>
+        <td th:text="${order.getMemorySize()}"></td>
+        <td th:text="${order.getQuantity()}"></td>
+        <td th:text="${order.getPrice()}"></td>
+        <td th:text="${order.getDate()}"></td>
     </tr>
     </tbody>
 </table>
 
-<p><a href="/mobileshop/">На главную</a></p>
+<p><a href="/mobileshop/">На головну</a></p>
 </body>
 </html>

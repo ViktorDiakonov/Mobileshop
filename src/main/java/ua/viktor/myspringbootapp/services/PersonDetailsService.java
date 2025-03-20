@@ -20,11 +20,22 @@ public class PersonDetailsService implements UserDetailsService {
 
     private final PeopleRepository peopleRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Optional<Person> person = peopleRepository.findByUserName(userName);
+//    @Override
+//    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+//        Optional<Person> person = peopleRepository.findByUserName(userName);
+//
+//        if (person.isEmpty()) throw new UsernameNotFoundException("User not found!");
+//        return new PersonDetails(person.get());
+//    }
 
-        if (person.isEmpty()) throw new UsernameNotFoundException("User not found!");
-        return new PersonDetails(person.get());
+    @Override
+    public UserDetails loadUserByUsername(String phoneNumber) throws UsernameNotFoundException {
+        Optional<Person> person = peopleRepository.findByPhoneNumber(phoneNumber);
+
+        if (person.isEmpty()) {
+            throw new UsernameNotFoundException("Пользователь с номером " + phoneNumber + " не найден");
+        }
+
+        return new PersonDetails(person.get()); // Используем PersonDetails
     }
 }

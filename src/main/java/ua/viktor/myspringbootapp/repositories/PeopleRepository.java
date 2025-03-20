@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface PeopleRepository extends JpaRepository<Person, Integer> {
 
     Optional<Person> findByUserName(String name);
+
+    Optional<Person> findByPhoneNumber(String phoneNumber); // Теперь поиск по телефону
 }

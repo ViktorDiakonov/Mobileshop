@@ -28,6 +28,7 @@ public class AuthServiceBean implements AuthService {
     }
 
     @Transactional
+    @Override
     public void register(Person person) {
         log.info("Регистрация нового пользователя: {}", person);
         person.setPassword(passwordEncoder.encode(person.getPassword()));

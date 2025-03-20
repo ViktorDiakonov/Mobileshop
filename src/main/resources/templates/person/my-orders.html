@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Мои заказы</title>
+</head>
+<body>
+<h1>Мои заказы</h1>
+
+<div sec:authorize="isAuthenticated()">
+    <p>Вы вошли как: <span sec:authentication="name"></span></p>
+</div>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>№ заказа</th>
+        <th>Бренд</th>
+        <th>Модель</th>
+        <th>Объем памяти</th>
+        <th>Цена</th>
+        <th>Дата</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.brand}"></td>
+        <td th:text="${order.model}"></td>
+        <td th:text="${order.memorySize}"></td>
+        <td th:text="${order.price}"></td>
+        <td th:text="${order.date}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p><a href="/mobileshop/">На главную</a></p>
+</body>
+</html>

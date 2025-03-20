@@ -19,8 +19,15 @@
             <li><a href="/mobileshop/aboutus">Про нас</a></li>
             <li><a href="/mobileshop/contacts">Контакти</a></li>
             <li><a href="/mobileshop/delivery">Умови доставки</a></li>
+            <li><a href="/mobileshop/auth/login">Увійти</a></li>
         </ul>
     </div>
+    <div sec:authorize="isAuthenticated()">
+        <p th:if="${username != null}">Вітаємо - <span th:text="${username}"></span>!</p>
+        <br>
+        <a href="/mobileshop/my-orders">Кабінет</a>
+    </div>
+
 </div>
 <div id="leftSidebar" style="border: limegreen 1mm solid">
     <p><b>Новинка iPhone 16 !</b></p>

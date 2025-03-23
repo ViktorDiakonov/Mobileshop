@@ -1,6 +1,7 @@
 package ua.viktor.myspringbootapp.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
+
 
 /**
  * @author Diakonov Viktor
@@ -26,6 +27,7 @@ import java.util.Optional;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/mobileshop")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController {
 
     private final PhoneService phoneService;
@@ -43,8 +45,9 @@ public class AdminController {
         log.info("Удаление телефона с id={}", id);
 
 // Получаем телефон по id
-        Optional<Phone> phone = phoneRepository.findById(id);
-        String imagePath = phone.get().getImagePath(); // Например: "/uploads/image.jpg"
+        Phone phone = phoneRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Телефон не найден"));
+        String imagePath = phone.getImagePath();
         log.info("Полученный путь к изображению: {}", imagePath);
 // Убираем начальный слеш, если он есть
         if (imagePath.startsWith("/")) {

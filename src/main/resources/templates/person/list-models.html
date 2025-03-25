@@ -6,22 +6,23 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
-<div id="header" class="flex-container">
-    <div id="leftHeader" class="sidebar">
-        <h1>Mobile Shop</h1>
-        <p>Ваш магазин смартфонів</p>
-    </div>
-    <div class="logo">
-        <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
-    </div>
-    <div id="rightHeader" class="sidebar">
-        <ul>
-            <li><a href="/mobileshop/aboutus">Про нас</a></li>
-            <li><a href="/mobileshop/contacts">Контакти</a></li>
-            <li><a href="/mobileshop/delivery">Умови доставки</a></li>
-        </ul>
-    </div>
-</div>
+<!--<div id="header" class="flex-container">-->
+<!--    <div id="leftHeader" class="sidebar">-->
+<!--        <h1>Mobile Shop</h1>-->
+<!--        <p>Ваш магазин смартфонів</p>-->
+<!--    </div>-->
+<!--    <div class="logo">-->
+<!--        <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>-->
+<!--    </div>-->
+<!--    <div id="rightHeader" class="sidebar">-->
+<!--        <ul>-->
+<!--            <li><a href="/mobileshop/aboutus">Про нас</a></li>-->
+<!--            <li><a href="/mobileshop/contacts">Контакти</a></li>-->
+<!--            <li><a href="/mobileshop/delivery">Умови доставки</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</div>-->
+<div th:replace="~{fragments/header :: header}"></div>
 <nav class="brand-nav">
     <div class="brand-item">
         <a href="/mobileshop/phones/apple">

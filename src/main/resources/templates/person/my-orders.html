@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <title>Мои заказы</title>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}"></div>
 <h1>Особистий кабінет</h1>
 
 <div sec:authorize="isAuthenticated()">

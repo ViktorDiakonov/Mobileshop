@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    .item-container {
+        display: flex;
+        align-items: center; /* Выравнивает элементы по центру */
+        gap: 15px; /* Расстояние между элементами */
+        margin: 20px;
+    }
+</style>
+<body>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<div th:replace="~{fragments/header :: header}"></div>
+<h1>Корзина</h1>
+<div th:if="${items.isEmpty()}">Корзина порожня!</div>
+<div th:each="item : ${items}" class="item-container">
+    <img th:src="${item.imagePath}" alt="Фото телефону" style="height: 100px;">
+    <p th:text="${item.brand}"></p>
+    <p th:text="${item.model}"></p>
+    <p th:text="${item.memorySize} + ' Gb -'"></p>
+    <p th:text="${item.price} + ' ₴'"></p>
+</div>
+<hr>
+<p>Загальна сума: <span th:text="${total} + ' ₴'"></span></p>
+<p><button onclick="window.history.back()">Повернутись назад</button></p>
+</body>
+</html>

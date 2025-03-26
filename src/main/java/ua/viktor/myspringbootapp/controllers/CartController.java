@@ -42,6 +42,23 @@ public class CartController {
     public String viewCart(@ModelAttribute("cart") Cart cart, Model model) {
         model.addAttribute("items", cart.getItems());
         model.addAttribute("total", cart.getTotal());
-        return "person/cart"; // Шаблон cart.html
+        return "person/cart";
+    }
+
+    @PostMapping("/cart/remove/{id}")
+    public String removeFromCart(
+            @PathVariable int id,
+            @ModelAttribute("cart") Cart cart,
+            RedirectAttributes redirectAttributes
+    ) {
+        cart.removeItem(id);
+        redirectAttributes.addFlashAttribute("message", "Товар видалено з корзини");
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/cart/total")
+    @ResponseBody
+    public String getCartTotal(@ModelAttribute("cart") Cart cart) {
+        return String.valueOf(cart.getTotal());
     }
 }

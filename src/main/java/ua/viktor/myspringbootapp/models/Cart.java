@@ -20,4 +20,8 @@ public class Cart {
     public double getTotal() {
         return items.stream().mapToDouble(Phone::getPrice).sum();
     }
+
+    public void removeItem(int phoneId) {
+        items.removeIf(phone -> phone.getId() == phoneId);
+    }
 }

@@ -1,27 +1,89 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<style>
-    .item-container {
-        display: flex;
-        align-items: center; /* Выравнивает элементы по центру */
-        gap: 15px; /* Расстояние между элементами */
-        margin: 20px;
-    }
-</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <style>
+        .item-container {
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px auto;
+            padding: 10px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .item-container:hover {
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .item-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+            flex-grow: 1;
+        }
+
+        .phone-image {
+            height: 100px;
+            object-fit: contain;
+        }
+
+        .phone-info {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
 <body>
-<link rel="stylesheet" type="text/css" href="/css/main.css">
 <div th:replace="~{fragments/header :: header}"></div>
 <h1>Корзина</h1>
-<div th:if="${items.isEmpty()}">Корзина порожня!</div>
+<div th:if="${items.isEmpty()}" style="text-align: center">Корзина порожня!</div>
+
+<!-- Список товаров -->
 <div th:each="item : ${items}" class="item-container">
-    <img th:src="${item.imagePath}" alt="Фото телефону" style="height: 100px;">
-    <p th:text="${item.brand}"></p>
-    <p th:text="${item.model}"></p>
-    <p th:text="${item.memorySize} + ' Gb -'"></p>
-    <p th:text="${item.price} + ' ₴'"></p>
+    <a th:href="@{/mobileshop/phone/{id}(id=${item.id})}" class="item-link">
+        <img th:src="${item.imagePath}" alt="Фото телефону" class="phone-image">
+        <div class="phone-info">
+            <p>
+                <span th:text="${item.brand} + ' ' + ${item.model} + ' ' + ${item.memorySize} + ' Gb -'"></span>
+                <strong th:text="${#numbers.formatInteger(item.price, 0, 'DEFAULT')} + ' ₴'"></strong>
+            </p>
+        </div>
+    </a>
+
+    <!-- Кнопка удаления (если нужно) -->
+    <form th:action="@{/cart/remove/{id}(id=${item.id})}" method="post">
+        <button type="submit" style="background: none; border: none; cursor: pointer;">
+            <i class="fas fa-trash-alt" style="color: #ff4444;"></i>
+        </button>
+    </form>
 </div>
+
 <hr>
-<p>Загальна сума: <span th:text="${total} + ' ₴'"></span></p>
-<p><button onclick="window.history.back()">Повернутись назад</button></p>
+<h3>Загальна сума: <strong th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong></h3>
+<p><button class="btn-submit" onclick="window.history.back()">Повернутись назад</button></p>
+
+<!-- Подключаем Font Awesome для иконки корзины -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!-- Скрипт для AJAX-удаления -->
+<script>
+    document.querySelectorAll('.remove-item').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Видалити товар з корзини?')) {
+                fetch(this.form.action, { method: 'POST' })
+                    .then(() => window.location.reload());
+            }
+        });
+    });
+</script>
 </body>
 </html>

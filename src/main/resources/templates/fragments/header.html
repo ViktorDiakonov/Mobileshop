@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>Mobile shop</title>
@@ -20,11 +20,45 @@
                 <li><a href="/mobileshop/aboutus">Про нас</a></li>
                 <li><a href="/mobileshop/contacts">Контакти</a></li>
                 <li><a href="/mobileshop/my-orders">Кабінет</a></li>
-                <li><a href="/cart">Корзина</a></li>
+                <li>
+                    <a href="/cart" class="cart-link">
+                        Кошик <i class="fas fa-shopping-cart"></i>
+                        <span th:if="${#ctx.containsVariable('cart') and cart.items.size() > 0}"
+                              th:text="${cart.items.size()}"
+                              class="cart-badge"></span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
 </div>
+<script>
+    // Универсальная функция для обновления бейджа
+    function updateCartBadge(count) {
+        const badge = document.querySelector('.cart-badge');
+        if (!badge) {
+            // Создаем бейдж если его нет
+            const cartLink = document.querySelector('.cart-link');
+            if (cartLink) {
+                const newBadge = document.createElement('span');
+                newBadge.className = 'cart-badge';
+                newBadge.textContent = count;
+                cartLink.appendChild(newBadge);
+            }
+            return;
+        }
+
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+
+    // Инициализация при загрузке
+    document.addEventListener('DOMContentLoaded', function () {
+        // Можно добавить запрос к API для получения текущего количества
+        fetch('/cart/count')
+            .then(response => response.text())
+            .then(count => updateCartBadge(parseInt(count)));
+    });
+</script>
 </body>
 </html>
-

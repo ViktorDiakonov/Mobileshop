@@ -1,27 +1,69 @@
 package ua.viktor.myspringbootapp.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Diakonov Viktor
  */
 @Getter
+@AllArgsConstructor
+@Setter
 public class Cart {
-    // Геттеры
-    private final List<Phone> items = new ArrayList<>();
+    public static class CartItem {
+        private final Phone phone;
+        private int quantity;
 
-    public void addItem(Phone phone) {
-        items.add(phone);
+        public CartItem(Phone phone, int quantity) {
+            this.phone = phone;
+            this.quantity = quantity;
+        }
+
+        // Геттеры
+        public Phone getPhone() { return phone; }
+        public int getQuantity() { return quantity; }
+        public void setQuantity(int quantity) { this.quantity = quantity; }
     }
 
-    public double getTotal() {
-        return items.stream().mapToDouble(Phone::getPrice).sum();
+    private final Map<Integer, CartItem> items = new HashMap<>();
+
+    public void addItem(Phone phone) {
+        items.compute(phone.getId(), (id, existingItem) ->
+                existingItem == null
+                        ? new CartItem(phone, 1)
+                        : new CartItem(phone, existingItem.getQuantity() + 1)
+        );
     }
 
     public void removeItem(int phoneId) {
-        items.removeIf(phone -> phone.getId() == phoneId);
+        items.remove(phoneId);
+    }
+
+    public void updateQuantity(int phoneId, int quantity) {
+        if (quantity <= 0) {
+            removeItem(phoneId);
+        } else {
+            CartItem item = items.get(phoneId);
+            if (item != null) {
+                item.setQuantity(quantity);
+            }
+        }
+    }
+
+    public double getTotal() {
+        return items.values().stream()
+                .mapToDouble(item -> item.getPhone().getPrice() * item.getQuantity())
+                .sum();
+    }
+
+    public Collection<CartItem> getItems() {
+        return items.values();
+    }
+
+    public boolean containsItem(int phoneId) {
+        return items.containsKey(phoneId);
     }
 }

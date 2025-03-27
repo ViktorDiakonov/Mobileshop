@@ -4,33 +4,9 @@
     <meta charset="utf-8">
     <title>Mobile shop</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<!--<div id="header" class="flex-container">-->
-<!--    <div id="leftHeader" class="sidebar">-->
-<!--        <h1>Mobile Shop</h1>-->
-<!--        <p>Ваш магазин смартфонів</p>-->
-<!--    </div>-->
-<!--    <div class="logo">-->
-<!--        <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>-->
-<!--    </div>-->
-<!--    <div id="rightHeader" class="sidebar">-->
-<!--        <ul>-->
-<!--            <li><a href="/mobileshop/aboutus">Про нас</a></li>-->
-<!--            <li><a href="/mobileshop/contacts">Контакти</a></li>-->
-<!--            <li><a href="/mobileshop/delivery">Умови доставки</a></li>-->
-<!--            <li><a href="/mobileshop/auth/login">Увійти</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--    <div sec:authorize="isAuthenticated()">-->
-<!--        <p th:if="${username != null}">Вітаємо - <span th:text="${username}"></span>!</p>-->
-<!--        <a href="/mobileshop/my-orders">Кабінет</a>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <a href="/cart">Корзина</a>-->
-<!--    </div>-->
-
-<!--</div>-->
 <div th:replace="~{fragments/header :: header}"></div>
 <div id="leftSidebar" style="border: limegreen 1mm solid">
     <p><b>Новинка iPhone 16 !</b></p>

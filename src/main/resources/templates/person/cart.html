@@ -19,7 +19,7 @@
 
         .item-container:hover {
             background-color: #f9f9f9;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .item-link {
@@ -49,41 +49,105 @@
 
 <!-- Список товаров -->
 <div th:each="item : ${items}" class="item-container">
-    <a th:href="@{/mobileshop/phone/{id}(id=${item.id})}" class="item-link">
-        <img th:src="${item.imagePath}" alt="Фото телефону" class="phone-image">
+    <a th:href="@{/mobileshop/phone/{id}(id=${item.phone.id})}" class="item-link">
+        <img th:src="${item.phone.imagePath}" alt="Фото телефону" class="phone-image">
         <div class="phone-info">
             <p>
-                <span th:text="${item.brand} + ' ' + ${item.model} + ' ' + ${item.memorySize} + ' Gb -'"></span>
-                <strong th:text="${#numbers.formatInteger(item.price, 0, 'DEFAULT')} + ' ₴'"></strong>
+                <span th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' + ${item.phone.memorySize} + ' Gb -'"></span>
+                <strong th:text="${#numbers.formatInteger(item.phone.price, 0, 'DEFAULT')} + ' ₴'"></strong>
             </p>
         </div>
     </a>
 
-    <!-- Кнопка удаления (если нужно) -->
-    <form th:action="@{/cart/remove/{id}(id=${item.id})}" method="post">
-        <button type="submit" style="background: none; border: none; cursor: pointer;">
-            <i class="fas fa-trash-alt" style="color: #ff4444;"></i>
+    <div class="quantity-controls">
+        <button class="quantity-btn minus" th:data-id="${item.phone.id}">-</button>
+        <span class="quantity" th:text="${item.quantity}"></span>
+        <button class="quantity-btn plus" th:data-id="${item.phone.id}">+</button>
+    </div>
+
+    <!-- Кнопка удаления -->
+    <form th:action="@{/cart/remove/{id}(id=${item.phone.id})}" method="post">
+        <button type="button" class="remove-item" style="color: red">
+            <i class="fas fa-trash-alt"></i>
         </button>
     </form>
 </div>
 
 <hr>
-<h3>Загальна сума: <strong th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong></h3>
-<p><button class="btn-submit" onclick="window.history.back()">Повернутись назад</button></p>
+<h3>Загальна сума: <strong id="total-price" th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong>
+</h3>
+<p>
+    <button class="btn-submit" onclick="window.history.back()">Повернутись назад</button>
+</p>
 
-<!-- Подключаем Font Awesome для иконки корзины -->
+<!-- Подключаем Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<!-- Скрипт для AJAX-удаления -->
+
 <script>
-    document.querySelectorAll('.remove-item').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (confirm('Видалити товар з корзини?')) {
-                fetch(this.form.action, { method: 'POST' })
-                    .then(() => window.location.reload());
-            }
+    document.addEventListener('DOMContentLoaded', function () {
+        // Обработка изменения количества
+        document.querySelectorAll('.quantity-btn').forEach(btn => {
+            btn.addEventListener('click', async function () {
+                const phoneId = parseInt(this.dataset.id);
+                const isPlus = this.classList.contains('plus');
+                const quantityElement = this.parentElement.querySelector('.quantity');
+                let quantity = parseInt(quantityElement.textContent);
+
+                quantity = isPlus ? quantity + 1 : Math.max(1, quantity - 1);
+
+                try {
+                    const response = await fetch('/cart/update', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `phoneId=${phoneId}&quantity=${quantity}`
+                    });
+
+                    if (!response.ok) throw new Error('Ошибка сервера');
+
+                    const data = await response.json();
+
+                    // Обновляем интерфейс
+                    quantityElement.textContent = data.items.find(i => i.phone.id === phoneId).quantity;
+                    document.getElementById('total-price').textContent =
+                        data.total.toLocaleString('uk-UA') + ' ₴';
+
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    alert('Не вдалося оновити кількість');
+                }
+            });
+        });
+
+        // Обработка удаления
+        document.querySelectorAll('.remove-item').forEach(btn => {
+            btn.addEventListener('click', async function (e) {
+                if (confirm('Видалити товар з корзини?')) {
+                    try {
+                        const form = this.closest('form');
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            }
+                        });
+
+                        if (response.ok) {
+                            form.closest('.item-container').remove();
+                            const totalResponse = await fetch('/cart/total');
+                            const total = await totalResponse.text();
+                            document.getElementById('total-price').textContent =
+                                parseInt(total).toLocaleString('uk-UA') + ' ₴';
+                        }
+                    } catch (error) {
+                        console.error('Ошибка удаления:', error);
+                    }
+                }
+            });
         });
     });
 </script>
+
 </body>
 </html>

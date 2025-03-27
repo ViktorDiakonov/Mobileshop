@@ -7,22 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<!--<div id="header" class="flex-container">-->
-<!--    <div id="leftHeader" class="sidebar">-->
-<!--        <h1>Mobile Shop</h1>-->
-<!--        <p>Ваш магазин смартфонів</p>-->
-<!--    </div>-->
-<!--    <div class="logo">-->
-<!--        <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>-->
-<!--    </div>-->
-<!--    <div id="rightHeader" class="sidebar">-->
-<!--        <ul>-->
-<!--            <li><a href="/mobileshop/aboutus">Про нас</a></li>-->
-<!--            <li><a href="/mobileshop/contacts">Контакти</a></li>-->
-<!--            <li><a href="/mobileshop/delivery">Умови доставки</a></li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
 <div th:replace="~{fragments/header :: header}"></div>
 <nav class="brand-nav">
     <div class="brand-item">
@@ -69,9 +53,11 @@
         <p><strong>Вбудована пам'ять: </strong><a th:text="${phone.getMemorySize()}">VALUE</a> Gb</p>
         <br>
         <p><strong>Ціна: </strong><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴</p>
+
         <form th:action="@{/cart/add/{id}(id=${phone.id})}" method="post">
-            <button type="submit" title="Додати до кошика" style="all: unset; cursor: pointer;">
-                <img src="/img/site/photo-cart.png" alt="Добавить в корзину" width="25">
+            <button type="submit" class="btn-submit"
+                    th:disabled="${cart != null && cart.containsItem(phone.id)}"
+                    th:text="${cart != null && cart.containsItem(phone.id) ? 'У кошику' : 'Додати в кошик'}">
             </button>
         </form>
 
@@ -79,7 +65,7 @@
 </div>
 <br>
 <div class="form-group">
-    <a th:href="@{/mobileshop/{id}/new_order(id=${phone.getId()})}" class="btn-submit">Придбати</a>
+    <a th:href="@{/mobileshop/{id}/new_order(id=${phone.getId()})}" class="btn-submit">Швидке замовлення</a>
 </div>
 
 <div id="imageModal" class="modal">
@@ -110,6 +96,37 @@
         }
     });
 </script>
+<script>
+    document.querySelectorAll('.add-to-cart-form').forEach(form => {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            fetch(this.action, {method: 'POST'})
+                .then(response => {
+                    if (response.ok) {
+                        // Получаем текущее значение
+                        const badge = document.getElementById('cartBadge');
+                        const currentCount = parseInt(badge?.textContent || 0);
+
+                        // Обновляем бейдж (+1)
+                        updateCartBadge(currentCount + 1);
+
+                        // Можно добавить анимацию
+                        badge?.classList.add('badge-pop');
+                        setTimeout(() => badge?.classList.remove('badge-pop'), 300);
+                    }
+                });
+        });
+    });
+</script>
+<script>
+    document.querySelectorAll(".btn-submit").forEach(button => {
+        button.addEventListener("click", function () {
+            this.classList.add("btn-pressed");
+        });
+    });
+</script>
+
 </body>
 </html>
 

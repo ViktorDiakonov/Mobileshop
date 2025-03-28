@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
  */
 @Controller
 @SessionAttributes("cart") // Корзина хранится в сессии
+@RequestMapping("/mobileshop")
 public class CartController {
 
     @ModelAttribute("cart") // Инициализация корзины
@@ -31,6 +32,12 @@ public class CartController {
     @Autowired
     public CartController(PhoneService phoneService) {
         this.phoneService = phoneService;
+    }
+
+    @GetMapping("/cart/count")
+    @ResponseBody
+    public String getCartCount(@ModelAttribute("cart") Cart cart) {
+        return String.valueOf(cart.getItems().size());
     }
 
     @PostMapping("/cart/add/{phoneId}")
@@ -59,14 +66,17 @@ public class CartController {
     }
 
     @PostMapping("/cart/remove/{id}")
-    public String removeFromCart(
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> removeFromCart(
             @PathVariable int id,
-            @ModelAttribute("cart") Cart cart,
-            RedirectAttributes redirectAttributes
+            @ModelAttribute("cart") Cart cart
     ) {
         cart.removeItem(id);
-        redirectAttributes.addFlashAttribute("message", "Товар видалено з корзини");
-        return "redirect:/cart";
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("total", cart.getTotal());
+        response.put("count", cart.getItems().size());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/cart/total")

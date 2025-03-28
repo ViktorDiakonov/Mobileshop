@@ -54,7 +54,7 @@
         <br>
         <p><strong>Ціна: </strong><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴</p>
 
-        <form th:action="@{/cart/add/{id}(id=${phone.id})}" method="post">
+        <form th:action="@{/mobileshop/cart/add/{id}(id=${phone.id})}" method="post">
             <button type="submit" class="btn-submit"
                     th:disabled="${cart != null && cart.containsItem(phone.id)}"
                     th:text="${cart != null && cart.containsItem(phone.id) ? 'У кошику' : 'Додати в кошик'}">
@@ -94,29 +94,6 @@
         if (event.target === modal) {
             modal.style.display = "none";
         }
-    });
-</script>
-<script>
-    document.querySelectorAll('.add-to-cart-form').forEach(form => {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            fetch(this.action, {method: 'POST'})
-                .then(response => {
-                    if (response.ok) {
-                        // Получаем текущее значение
-                        const badge = document.getElementById('cartBadge');
-                        const currentCount = parseInt(badge?.textContent || 0);
-
-                        // Обновляем бейдж (+1)
-                        updateCartBadge(currentCount + 1);
-
-                        // Можно добавить анимацию
-                        badge?.classList.add('badge-pop');
-                        setTimeout(() => badge?.classList.remove('badge-pop'), 300);
-                    }
-                });
-        });
     });
 </script>
 <script>

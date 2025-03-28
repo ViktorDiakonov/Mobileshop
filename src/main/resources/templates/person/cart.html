@@ -2,8 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Корзина</title>
+    <title>Кошик</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .item-container {
             max-width: 800px;
@@ -44,8 +45,8 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<h1>Корзина</h1>
-<div th:if="${items.isEmpty()}" style="text-align: center">Корзина порожня!</div>
+<h1>Кошик</h1>
+<div th:if="${items.isEmpty()}" style="text-align: center">Кошик порожній!</div>
 
 <!-- Список товаров -->
 <div th:each="item : ${items}" class="item-container">
@@ -66,7 +67,7 @@
     </div>
 
     <!-- Кнопка удаления -->
-    <form th:action="@{/cart/remove/{id}(id=${item.phone.id})}" method="post">
+    <form th:action="@{/mobileshop/cart/remove/{id}(id=${item.phone.id})}" method="post">
         <button type="button" class="remove-item" style="color: red">
             <i class="fas fa-trash-alt"></i>
         </button>
@@ -79,9 +80,6 @@
 <p>
     <button class="btn-submit" onclick="window.history.back()">Повернутись назад</button>
 </p>
-
-<!-- Подключаем Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -96,7 +94,7 @@
                 quantity = isPlus ? quantity + 1 : Math.max(1, quantity - 1);
 
                 try {
-                    const response = await fetch('/cart/update', {
+                    const response = await fetch('/mobileshop/cart/update', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
@@ -123,31 +121,49 @@
         // Обработка удаления
         document.querySelectorAll('.remove-item').forEach(btn => {
             btn.addEventListener('click', async function (e) {
-                if (confirm('Видалити товар з корзини?')) {
+                if (confirm('Видалити товар з кошика?')) {
                     try {
                         const form = this.closest('form');
                         const response = await fetch(form.action, {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
+                                'Content-Type': 'application/json',
                             }
                         });
 
                         if (response.ok) {
+                            const data = await response.json();
                             form.closest('.item-container').remove();
-                            const totalResponse = await fetch('/cart/total');
-                            const total = await totalResponse.text();
                             document.getElementById('total-price').textContent =
-                                parseInt(total).toLocaleString('uk-UA') + ' ₴';
+                                data.total.toLocaleString('uk-UA') + ' ₴';
+                            updateCartBadge(data.count);
                         }
                     } catch (error) {
-                        console.error('Ошибка удаления:', error);
+                        console.error('Помилка видалення:', error);
                     }
                 }
             });
         });
     });
-</script>
 
+    // Универсальная функция для обновления бейджа
+    function updateCartBadge(count) {
+        const badge = document.querySelector('.cart-badge');
+        if (!badge) {
+            // Создаем бейдж если его нет
+            const cartLink = document.querySelector('.cart-link');
+            if (cartLink) {
+                const newBadge = document.createElement('span');
+                newBadge.className = 'cart-badge';
+                newBadge.textContent = count;
+                cartLink.appendChild(newBadge);
+            }
+            return;
+        }
+
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+</script>
 </body>
 </html>

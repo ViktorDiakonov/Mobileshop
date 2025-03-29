@@ -19,10 +19,14 @@
             <ul>
                 <li><a href="/mobileshop/aboutus">Про нас</a></li>
                 <li><a href="/mobileshop/contacts">Контакти</a></li>
-                <li><a href="/mobileshop/my-orders">Кабінет</a></li>
+                <li>
+                    <a href="/mobileshop/my-orders" title="Особистий кабінет">
+                        <i class="fa-solid fa-user-large"></i>
+                    </a>
+                </li>
                 <li>
                     <a href="/mobileshop/cart" class="cart-link">
-                        Кошик <i class="fas fa-shopping-cart"></i>
+                        <i class="fas fa-shopping-cart"></i>
                         <span th:if="${#ctx.containsVariable('cart') and cart.items.size() > 0}"
                               th:text="${cart.items.size()}"
                               class="cart-badge"></span>

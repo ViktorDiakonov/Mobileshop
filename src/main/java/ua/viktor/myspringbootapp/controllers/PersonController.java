@@ -20,6 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Controller
+@SessionAttributes("cart") // Добавляем аннотацию
 @AllArgsConstructor
 @RequestMapping("/mobileshop")
 public class PersonController {

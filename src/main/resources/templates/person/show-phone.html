@@ -5,6 +5,18 @@
     <title>Телефон</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .cart-icon {
+            width: 30px; /* или нужный вам размер */
+            height: 30px;
+        }
+
+        .icon-text-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px; /* Расстояние между текстом и иконкой */
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
@@ -56,11 +68,15 @@
 
         <form th:action="@{/mobileshop/cart/add/{id}(id=${phone.id})}" method="post">
             <button type="submit" class="btn-submit"
-                    th:disabled="${cart != null && cart.containsItem(phone.id)}"
-                    th:text="${cart != null && cart.containsItem(phone.id) ? 'У кошику' : 'Додати в кошик'}">
+                    th:disabled="${cart != null && cart.containsItem(phone.id)}">
+                <span th:if="${cart != null && cart.containsItem(phone.id)}">
+                    У кошику <i class="fas fa-shopping-cart"></i>
+                </span>
+                <span th:unless="${cart != null && cart.containsItem(phone.id)}" class="icon-text-container">Додати в кошик
+                    <img th:src="@{/img/site/photo-cart2.png}" alt="Додати в кошик" class="cart-icon">
+                </span>
             </button>
         </form>
-
     </div>
 </div>
 <br>

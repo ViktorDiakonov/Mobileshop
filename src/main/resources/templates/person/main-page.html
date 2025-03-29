@@ -5,6 +5,32 @@
     <title>Mobile shop</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Добавьте эти стили для кнопки корзины в списке */
+        .add-to-cart-btn {
+            padding: 7px 7px; /* Внутренние отступы */
+            outline: none; /* Убирает контур */
+            border: none; /* Если нужно убрать границу */
+            background-color: transparent; /* Прозрачный фон */
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #D3FDD6; /* Полупрозрачный фон при наведении */
+        }
+
+        .cart-icon {
+            width: 30px; /* или нужный вам размер */
+            height: 30px;
+        }
+
+        .btn-submit .cart-icon {
+            transition: transform 0.2s;
+        }
+
+        .btn-submit:hover .cart-icon {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
@@ -61,7 +87,71 @@
                 </p>
             </div>
         </a>
+        <!-- Кнопка добавления в корзину -->
+        <button class="btn-submit add-to-cart-btn"
+                th:data-id="${phones.id}"
+                th:disabled="${cart != null && cart.containsItem(phones.id)}">
+            <span th:if="${cart != null && cart.containsItem(phones.id)}">
+                <img th:src="@{/img/site/add-cart.svg}" alt="У кошику" class="cart-icon">
+            </span>
+            <span th:unless="${cart != null && cart.containsItem(phones.id)}">
+                <img th:src="@{/img/site/photo-cart.png}" alt="Додати в кошик" class="cart-icon">
+            </span>
+        </button>
     </div>
 </div>
+<script>
+    // Обработка добавления в корзину
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', async function () {
+            if (this.disabled) return;
+
+            const phoneId = this.dataset.id;
+
+            try {
+                const response = await fetch(`/mobileshop/cart/add/${phoneId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                });
+
+                if (response.ok) {
+                    // Обновляем состояние кнопки
+                    this.innerHTML = '<img src="/img/site/add-cart.svg" alt="В корзине" class="cart-icon">';
+                    this.disabled = true;
+
+                    // Обновляем бейдж корзины
+                    updateCartBadge(await getCartCount());
+                }
+            } catch (error) {
+                console.error('Помилка додавання:', error);
+            }
+        });
+    });
+
+    // Функция для получения текущего количества товаров в корзине
+    async function getCartCount() {
+        const response = await fetch('/mobileshop/cart/count');
+        return await response.text();
+    }
+
+    // Функция обновления бейджа
+    function updateCartBadge(count) {
+        const badge = document.querySelector('.cart-badge');
+        if (!badge) {
+            const cartLink = document.querySelector('.cart-link');
+            if (cartLink) {
+                const newBadge = document.createElement('span');
+                newBadge.className = 'cart-badge';
+                newBadge.textContent = count;
+                cartLink.appendChild(newBadge);
+            }
+            return;
+        }
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+</script>
 </body>
 </html>

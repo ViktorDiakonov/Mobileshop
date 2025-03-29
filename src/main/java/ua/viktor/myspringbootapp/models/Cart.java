@@ -14,7 +14,9 @@ import java.util.*;
 @Setter
 public class Cart {
     public static class CartItem {
+
         private final Phone phone;
+        @Setter
         private int quantity;
 
         public CartItem(Phone phone, int quantity) {
@@ -25,7 +27,6 @@ public class Cart {
         // Геттеры
         public Phone getPhone() { return phone; }
         public int getQuantity() { return quantity; }
-        public void setQuantity(int quantity) { this.quantity = quantity; }
     }
 
     private final Map<Integer, CartItem> items = new HashMap<>();

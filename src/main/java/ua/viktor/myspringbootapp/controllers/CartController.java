@@ -1,6 +1,9 @@
 package ua.viktor.myspringbootapp.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,20 +21,16 @@ import java.util.stream.Collectors;
  * @author Diakonov Viktor
  */
 @Controller
-@SessionAttributes("cart") // Корзина хранится в сессии
+@AllArgsConstructor
+@SessionAttributes("cart") // Только эта аннотация
 @RequestMapping("/mobileshop")
 public class CartController {
 
-    @ModelAttribute("cart") // Инициализация корзины
-    public Cart cart() {
-        return new Cart();
-    }
-
     private final PhoneService phoneService;
 
-    @Autowired
-    public CartController(PhoneService phoneService) {
-        this.phoneService = phoneService;
+    @ModelAttribute("cart")
+    public Cart cart() {
+        return new Cart(); // Создаст корзину при первом обращении
     }
 
     @GetMapping("/cart/count")

@@ -41,12 +41,23 @@
             display: flex;
             flex-direction: column;
         }
+
+        #total-block {
+            transition: all 0.3s ease;
+        }
+
+        #total-block.hidden {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<h1>Кошик</h1>
-<div th:if="${items.isEmpty()}" style="text-align: center">Кошик порожній!</div>
+<h1>Ваш кошик<span th:if="${items.isEmpty()}" style="text-align: center"> порожній.</span></h1>
 
 <!-- Список товаров -->
 <div th:each="item : ${items}" class="item-container">
@@ -74,9 +85,14 @@
     </form>
 </div>
 
-<hr>
-<h3>Загальна сума: <strong id="total-price" th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong>
-</h3>
+<!-- Блок общей суммы -->
+<div id="total-block" th:classappend="${total <= 0} ? 'hidden' : ''">
+    <hr>
+    <h3>Загальна сума:
+        <strong id="total-price" th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong>
+    </h3>
+</div>
+
 <p>
     <button class="btn-submit" onclick="window.history.back()">Повернутись назад</button>
 </p>
@@ -108,8 +124,7 @@
 
                     // Обновляем интерфейс
                     quantityElement.textContent = data.items.find(i => i.phone.id === phoneId).quantity;
-                    document.getElementById('total-price').textContent =
-                        data.total.toLocaleString('uk-UA') + ' ₴';
+                    updateTotalDisplay(data.total);
 
                 } catch (error) {
                     console.error('Ошибка:', error);
@@ -134,9 +149,16 @@
                         if (response.ok) {
                             const data = await response.json();
                             form.closest('.item-container').remove();
-                            document.getElementById('total-price').textContent =
-                                data.total.toLocaleString('uk-UA') + ' ₴';
+
+                            // Обновляем отображение
+                            updateTotalDisplay(data.total);
                             updateCartBadge(data.count);
+
+                            // // Если товаров нет, показываем сообщение
+                            // if (data.count === 0) {
+                            //     document.querySelector('h1').insertAdjacentHTML('afterend',
+                            //         '<div style="text-align: center">Кошик порожній!</div>');
+                            // }
                         }
                     } catch (error) {
                         console.error('Помилка видалення:', error);
@@ -145,6 +167,17 @@
             });
         });
     });
+
+    // Функция обновления отображения суммы
+    function updateTotalDisplay(total) {
+        const totalBlock = document.getElementById('total-block');
+        const totalPrice = document.getElementById('total-price');
+
+        if (totalBlock && totalPrice) {
+            totalPrice.textContent = total.toLocaleString('uk-UA') + ' ₴';
+            totalBlock.classList.toggle('hidden', total <= 0);
+        }
+    }
 
     // Универсальная функция для обновления бейджа
     function updateCartBadge(count) {

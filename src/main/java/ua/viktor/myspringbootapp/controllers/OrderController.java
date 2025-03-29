@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.services.OrderService;
 
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @Controller
+@SessionAttributes("cart") // Добавляем аннотацию
 @AllArgsConstructor
 @RequestMapping("/mobileshop")
 public class OrderController {

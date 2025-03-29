@@ -77,6 +77,7 @@ import javax.validation.Valid;
  */
 @Slf4j
 @Controller
+@SessionAttributes("cart") // Добавляем аннотацию
 @AllArgsConstructor
 @RequestMapping("/mobileshop/auth")
 public class AuthController {

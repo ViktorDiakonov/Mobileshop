@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Оформлення замовлення</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="order-container">
+    <h2>Оформлення замовлення</h2>
+    <div th:each="item : ${cartItems}" class="cart-item">
+        <img th:src="@{${item.phone.imagePath}}" height="100">
+        <div>
+            <p th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' + ${item.phone.getMemorySize()} + ' Gb (' + ${item.quantity} + ' шт.) - ' + ${#numbers.formatInteger(item.phone.price * item.quantity, 0, 'DEFAULT')} + ' ₴'"></p>
+
+        </div>
+    </div>
+
+    <h3>Загальна сума: <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span> ₴</h3>
+    <form th:action="@{/mobileshop/place-order}" method="post" th:object="${order}">
+        <div class="form-group">
+            <label>Ім'я:</label>
+            <input type="text" th:field="*{personName}" required>
+        </div>
+        <div class="form-group">
+            <label>Телефон:</label>
+            <input type="tel" th:field="*{personPhone}" required>
+        </div>
+        <div style="display: flex; margin-top: 7px; justify-content: flex-end;">
+            <label for="personComment"></label><br>
+            <div style="display: flex; align-items: flex-end; gap: 18px;">
+                <div id="charCount" style="font-size: 14px; color: #777; white-space: nowrap;">0/150</div>
+                <textarea id="personComment" th:field="*{personComment}" placeholder="Додати коментар:"
+                          minlength="0" maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"
+                          style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+            </div>
+        </div>
+        <p>
+            <label for="pickupPoint">Виберіть точку видачі:</label>
+            <select id="pickupPoint" th:field="*{point}" required>
+                <option value="Київ, вул. Антоновича, 50">Київ, вул. Антоновича, 50 (10:00-21:00)</option>
+                <option value="Дніпро, вул. Магнітогорська, 1А">Дніпро, вул. Магнітогорська, 1А (10:00-21:00)</option>
+                <option value="Одеса, вул. Дерибасівська 3Д">Одеса, вул. Дерибасівська 3Д (09:00-22:00)</option>
+            </select>
+        </p>
+        <button type="submit" class="btn-submit">Підтвердити замовлення</button>
+    </form>
+</div>
+</body>
+</html>

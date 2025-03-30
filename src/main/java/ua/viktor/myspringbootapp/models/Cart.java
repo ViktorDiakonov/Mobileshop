@@ -13,6 +13,7 @@ import java.util.*;
 @AllArgsConstructor
 @Setter
 public class Cart {
+
     public static class CartItem {
 
         private final Phone phone;
@@ -66,5 +67,9 @@ public class Cart {
 
     public boolean containsItem(int phoneId) {
         return items.containsKey(phoneId);
+    }
+
+    public void clear() {
+        items.clear(); // Очищаем карту items
     }
 }

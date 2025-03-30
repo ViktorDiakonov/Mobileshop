@@ -85,14 +85,20 @@
     </form>
 </div>
 
-<!-- Блок общей суммы -->
 <div id="total-block" th:classappend="${total <= 0} ? 'hidden' : ''">
     <hr>
     <h3>Загальна сума:
         <strong id="total-price" th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong>
     </h3>
 </div>
-
+<!-- Кнопка оформления заказа -->
+<div th:unless="${items.isEmpty()}" class="checkout-section">
+    <form th:action="@{/mobileshop/checkout}" method="get">
+        <button type="submit" class="btn-submit">
+            Оформити замовлення
+        </button>
+    </form>
+</div>
 <p>
     <button class="btn-submit" onclick="window.history.back()">Повернутись назад</button>
 </p>

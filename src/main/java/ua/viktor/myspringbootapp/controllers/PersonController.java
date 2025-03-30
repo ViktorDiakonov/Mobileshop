@@ -8,11 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ua.viktor.myspringbootapp.models.Cart;
 import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.services.PhoneService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -118,4 +120,77 @@ public class PersonController {
         log.info("Пользователь перешел на страницу 'Условия доставки'");
         return "person/delivery";
     }
+
+    @GetMapping("/checkout")
+    public String checkout(@ModelAttribute("cart") Cart cart, Model model) {
+        if (cart.getItems().isEmpty()) {
+            return "redirect:/mobileshop/cart";
+        }
+
+        model.addAttribute("order", new Order());
+        model.addAttribute("cartItems", cart.getItems());
+        model.addAttribute("total", cart.getTotal());
+        return "person/cart-order";
+    }
+
+    @PostMapping("/place-order")
+    public String placeOrder(@ModelAttribute("cart") Cart cart,
+                             @ModelAttribute("order") @Valid Order order,
+                             BindingResult bindingResult,
+                             Model model) {
+
+        if (bindingResult.hasErrors() || cart.getItems().isEmpty()) {
+            model.addAttribute("cartItems", cart.getItems());
+            model.addAttribute("total", cart.getTotal());
+            return "person/cart-order";
+        }
+
+        // Создаем заказ для каждого товара
+        List<Order> createdOrders = new ArrayList<>();
+        for (Cart.CartItem item : cart.getItems()) {
+            Order newOrder = getOrder(order, item);
+
+            phoneService.createOrder(newOrder);
+            createdOrders.add(newOrder);
+        }
+
+        // Очищаем корзину
+        cart.clear();
+
+        model.addAttribute("orders", createdOrders);
+        return "person/cart-order-success";
+    }
+
+//    private static Order getOrder(Order order, Cart.CartItem item) {
+//        Order newOrder = new Order();
+//        // Заполняем данные как в вашем существующем методе
+//        newOrder.setPersonName(order.getPersonName());
+//        newOrder.setPersonPhone(order.getPersonPhone());
+//        newOrder.setPoint(order.getPoint());
+//        newOrder.setBrand(item.getPhone().getBrand());
+//        newOrder.setModel(item.getPhone().getModel());
+//        newOrder.setMemorySize(item.getPhone().getMemorySize());
+//        newOrder.setPrice(item.getPhone().getPrice() * item.getQuantity());
+//        newOrder.setQuantity(item.getQuantity());
+//        newOrder.setImagePath(item.getPhone().getImagePath());
+//        return newOrder;
+//    }
+private static Order getOrder(Order order, Cart.CartItem item) {
+    Order newOrder = new Order();
+    // Копируем все поля из формы
+    newOrder.setPersonName(order.getPersonName());
+    newOrder.setPersonPhone(order.getPersonPhone());
+    newOrder.setPersonComment(order.getPersonComment()); // Добавлено
+    newOrder.setPoint(order.getPoint()); // Теперь должно работать
+
+    // Устанавливаем данные о товаре
+    newOrder.setBrand(item.getPhone().getBrand());
+    newOrder.setModel(item.getPhone().getModel());
+    newOrder.setMemorySize(item.getPhone().getMemorySize());
+    newOrder.setPrice(item.getPhone().getPrice() * item.getQuantity());
+    newOrder.setQuantity(item.getQuantity());
+    newOrder.setImagePath(item.getPhone().getImagePath());
+
+    return newOrder;
+}
 }

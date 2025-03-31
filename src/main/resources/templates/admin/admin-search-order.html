@@ -19,16 +19,14 @@
             <br><br>
             <strong>Кількість:</strong> <span th:text="${order.getQuantity()}"></span> шт.
             <br>
-            <strong>Загальна сума:</strong> <span
-                th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}"></span> ₴
-            <br>
-            <hr>
+            <strong>Загальна сума:</strong> <span th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}"></span> ₴
+            <br><br>
             <strong>Ім'я покупця:</strong> <span th:text="${order.getPersonName()}"></span>
             <br>
             <strong>Телефон покупця:</strong> <span th:text="${order.getPersonPhone()}"></span>
-            <br><br>
-            <strong>Коментар до замовлення:</strong> <span th:text="${order.getPersonComment()}"></span>
-            <br><br>
+            <br>
+            <p style="max-width: 350px"><strong>Коментар до замовлення:</strong> <span th:text="${order.getPersonComment()}"></span></p>
+            <br>
             <strong>Точка видачі:</strong> <span th:text="${order.getPoint()}"></span>
             <br>
             <strong>Дата замовлення:</strong> <span

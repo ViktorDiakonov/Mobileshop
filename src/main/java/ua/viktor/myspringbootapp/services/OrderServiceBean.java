@@ -21,4 +21,9 @@ public class OrderServiceBean implements OrderService {
     public List<Order> getOrdersByPersonName(String personName) {
         return orderRepository.findByPersonName(personName);
     }
+
+    @Override
+    public List<Order> getOrdersByPersonPhoneNumber(String phoneNumber) {
+        return orderRepository.findByPersonPhone(phoneNumber);
+    }
 }

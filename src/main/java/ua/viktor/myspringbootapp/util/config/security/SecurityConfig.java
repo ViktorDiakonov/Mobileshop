@@ -90,7 +90,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 new AntPathRequestMatcher("/mobileshop/admin_page/**"),
                                 new AntPathRequestMatcher("/mobileshop/orders"),
-                                new AntPathRequestMatcher("/mobileshop/{orderId}/order"),
+//                                new AntPathRequestMatcher("/mobileshop/{orderId}/order"),
                                 new AntPathRequestMatcher("/mobileshop/orders/p"),
                                 new AntPathRequestMatcher("/mobileshop/new_phone"),
                                 new AntPathRequestMatcher("/mobileshop/{phoneId}/edit_phone")

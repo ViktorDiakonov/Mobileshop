@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Оформлення замовлення</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
@@ -13,21 +14,42 @@
     <div th:each="item : ${cartItems}" class="cart-item">
         <img th:src="@{${item.phone.imagePath}}" height="100">
         <div>
-            <p th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' + ${item.phone.getMemorySize()} + ' Gb (' + ${item.quantity} + ' шт.) - ' + ${#numbers.formatInteger(item.phone.price * item.quantity, 0, 'DEFAULT')} + ' ₴'"></p>
-
+            <p th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' + ${item.phone.getMemorySize()} +
+            ' Gb (' + ${item.quantity} + ' шт.) - ' + ${#numbers.formatInteger(item.phone.price * item.quantity, 0, 'DEFAULT')} + ' ₴'"></p>
         </div>
     </div>
 
-    <h3>Загальна сума: <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span> ₴</h3>
+    <h3>Сума до сплати: <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span> ₴</h3>
     <form th:action="@{/mobileshop/place-order}" method="post" th:object="${order}">
-        <div class="form-group">
-            <label>Ім'я:</label>
-            <input type="text" th:field="*{personName}" required>
+
+<!--        <div class="form-group">-->
+<!--            <label>Ім'я покупця:</label>-->
+<!--            <input type="text" th:field="*{personName}" required>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Номер телефону:</label>-->
+<!--            <input type="tel" th:field="*{personPhone}" required>-->
+<!--        </div>-->
+
+        <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">
+            <p style="margin: 5px;">
+                <label for="personName">Ім'я покупця:</label>
+                <input type="text" th:field="*{personName}" style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;"
+                       id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"
+                       maxlength="20">
+            </p>
+            <p style="margin: 5px;">
+                <label for="personPhone">Номер телефону:</label>
+                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;"
+                       type="tel" id="personPhone" name="personPhone"
+                       pattern="380\d{9}" placeholder="380XXXXXXXXX"
+                       maxlength="12" required value="380"
+                       oninput="if (!this.value.startsWith('380')) this.value = '380';">
+            </p>
         </div>
-        <div class="form-group">
-            <label>Телефон:</label>
-            <input type="tel" th:field="*{personPhone}" required>
-        </div>
+
+
         <div style="display: flex; margin-top: 7px; justify-content: flex-end;">
             <label for="personComment"></label><br>
             <div style="display: flex; align-items: flex-end; gap: 18px;">
@@ -37,6 +59,23 @@
                           style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
             </div>
         </div>
+        <script>
+            function updateCharacterCount() {
+                let textArea = document.getElementById('personComment');
+                let charCount = textArea.value.length;
+                let maxLength = textArea.getAttribute('maxlength');
+                document.getElementById('charCount').textContent = charCount + '/' + maxLength;
+            }
+        </script>
+        <script>
+            const phoneInput = document.getElementById('personPhone');
+
+            phoneInput.addEventListener('input', function () {
+                if (!phoneInput.value.startsWith('380')) {
+                    phoneInput.value = '380';
+                }
+            });
+        </script>
         <p>
             <label for="pickupPoint">Виберіть точку видачі:</label>
             <select id="pickupPoint" th:field="*{point}" required>
@@ -45,8 +84,28 @@
                 <option value="Одеса, вул. Дерибасівська 3Д">Одеса, вул. Дерибасівська 3Д (09:00-22:00)</option>
             </select>
         </p>
-        <button type="submit" class="btn-submit">Підтвердити замовлення</button>
+        <div class="form-group">
+            <button type="submit" class="btn-submit">Підтвердити замовлення</button>
+        </div>
     </form>
 </div>
+<script>
+    // Автоматический расчет общей стоимости
+    const priceElement = document.getElementById('priceDisplay');
+    const quantityInput = document.getElementById('quantity');
+    const totalPriceElement = document.getElementById('totalPrice');
+
+    const unitPrice = parseFloat(priceElement.innerText.replace(/\s/g, ''));
+
+    function updateTotalPrice() {
+        const quantity = parseInt(quantityInput.value) || 1;
+        const total = unitPrice * quantity;
+        totalPriceElement.innerText = total.toLocaleString('uk-UA');
+        setTimeout(() => totalPriceElement.style.color = '#2e7d32', 500);
+    }
+
+    quantityInput.addEventListener('input', updateTotalPrice);
+    window.addEventListener('DOMContentLoaded', updateTotalPrice);
+</script>
 </body>
 </html>

@@ -9,9 +9,9 @@
 <div th:replace="~{fragments/header :: header}"></div>
 <h1>Особистий кабінет</h1>
 
-<div sec:authorize="isAuthenticated()">
-    <p>Вітаю: <span th:each="order : ${orders}" th:text="${order.getPersonName()}"></span>!</p>
-</div>
+<!--<div sec:authorize="isAuthenticated()">-->
+<!--    <p>Вітаю: <span th:each="order : ${orders}" th:text="${order.getPersonPhone()}"></span>!</p>-->
+<!--</div>-->
 <table border="1">
     <thead>
     <tr>
@@ -32,11 +32,12 @@
         <td th:text="${order.getMemorySize()}"></td>
         <td th:text="${order.getQuantity()}"></td>
         <td th:text="${order.getPrice()}"></td>
-        <td th:text="${order.getDate()}"></td>
+        <td th:text="${#dates.format(order.getDate(), 'dd.MM.yyyy - HH:mm')}"></td>
     </tr>
     </tbody>
 </table>
 
 <p><a href="/mobileshop/">На головну</a></p>
+<p><a href="/mobileshop/logout">Вийти з облікового запису</a></p>
 </body>
 </html>

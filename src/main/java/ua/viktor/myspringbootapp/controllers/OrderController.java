@@ -32,9 +32,10 @@ public class OrderController {
         if (authentication != null && authentication.isAuthenticated()
                 && !"anonymousUser".equals(authentication.getName())) {
 
-            String username = authentication.getName();
+            String personPhone = authentication.getName();
 
-            List<Order> orders = orderService.getOrdersByPersonName(username);
+//            List<Order> orders = orderService.getOrdersByPersonName(username);
+            List<Order> orders = orderService.getOrdersByPersonPhoneNumber(personPhone);
             model.addAttribute("orders", orders);
         }
 

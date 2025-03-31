@@ -87,7 +87,7 @@
 
 <div id="total-block" th:classappend="${total <= 0} ? 'hidden' : ''">
     <hr>
-    <h3>Загальна сума:
+    <h3>Сума до сплати:
         <strong id="total-price" th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong>
     </h3>
 </div>

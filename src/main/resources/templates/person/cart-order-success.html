@@ -4,37 +4,26 @@
     <meta charset="UTF-8">
     <title>Замовлення оформлено</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 
 <div class="order-container">
     <h2 style="color: green">Ваше замовлення прийнято!</h2>
-
-<!--    <div th:each="order : ${orders}" class="order-item">-->
-<!--        <img th:src="@{${order.imagePath}}" width="120">-->
-<!--        <div class="order-info">-->
-<!--            <p><strong>Виробник:</strong> <span th:text="${order.brand}"></span></p>-->
-<!--            <p><strong>Модель:</strong> <span th:text="${order.model}"></span></p>-->
-<!--            <p><strong>Кількість:</strong> <span th:text="${order.quantity}"></span> шт.</p>-->
-<!--            <p><strong>Сума:</strong> <span th:text="${#numbers.formatInteger(order.price, 0, 'DEFAULT')}"></span> ₴</p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <p class="buy-info">Замовлення отримувати за адресою: <a th:text="${order.getPoint()}">VALUE</a></p>-->
     <div th:each="order : ${orders}" class="order-item">
-        <img th:src="@{${order.imagePath}}" width="120">
-        <div class="order-info">
-            <p><strong>Виробник:</strong> <span th:text="${order.brand}"></span></p>
-            <p><strong>Модель:</strong> <span th:text="${order.model}"></span></p>
-            <p><strong>Кількість:</strong> <span th:text="${order.quantity}"></span> шт.</p>
-            <p><strong>Сума:</strong> <span th:text="${#numbers.formatInteger(order.price, 0, 'DEFAULT')}"></span> ₴</p>
-            <p th:if="${order.personComment != null && !order.personComment.isEmpty()}">
-                <strong>Коментар:</strong> <span th:text="${order.personComment}"></span>
-            </p>
+        <img th:src="@{${order.imagePath}}" height="100" alt="Зображення товару">
+        <div class="order-info" style="align-content: flex-start">
+            <p th:text="${order.brand} + ' ' + ${order.model} + ' ' + ${order.getMemorySize()} +
+            ' Gb (' + ${order.quantity} + ' шт.) - ' + ${#numbers.formatInteger(order.price * order.quantity, 0, 'DEFAULT')} + ' ₴'"></p>
+            <p><strong>Сума до сплати: </strong><span th:text="${#numbers.formatInteger(order.price, 0, 'DEFAULT')}"></span> ₴</p>
         </div>
     </div>
+    <p th:if="${order.personComment != null && !order.personComment.isEmpty()}">
+        <strong>Коментар до замовлення:</strong> <span th:text="${order.personComment}" style="max-width: 200px"></span>
+    </p>
+
     <p class="buy-info">Замовлення отримувати за адресою: <span th:text="${orders[0].point}">VALUE</span></p>
-    <p class="buy-info"><b style="color: green">Чекайте на дзвінок оператора на вказаний Вами номер</b></p>
 
     <p class="buy-info"><b style="color: green">Чекайте на дзвінок оператора</b></p>
 </div>

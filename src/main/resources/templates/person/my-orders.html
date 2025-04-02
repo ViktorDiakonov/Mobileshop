@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -9,35 +9,31 @@
 <div th:replace="~{fragments/header :: header}"></div>
 <h1>Особистий кабінет</h1>
 
-<!--<div sec:authorize="isAuthenticated()">-->
-<!--    <p>Вітаю: <span th:each="order : ${orders}" th:text="${order.getPersonPhone()}"></span>!</p>-->
-<!--</div>-->
-<table border="1">
-    <thead>
-    <tr>
-        <th>№ заказу</th>
-        <th>Виробник</th>
-        <th>Модель</th>
-        <th>Вбудована пам'ять</th>
-        <th>Кількість</th>
-        <th>Ціна</th>
-        <th>Дата замовлення</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="order : ${orders}">
-        <td th:text="${order.getId()}"></td>
-        <td th:text="${order.getBrand()}"></td>
-        <td th:text="${order.getModel()}"></td>
-        <td th:text="${order.getMemorySize()}"></td>
-        <td th:text="${order.getQuantity()}"></td>
-        <td th:text="${order.getPrice()}"></td>
-        <td th:text="${#dates.format(order.getDate(), 'dd.MM.yyyy - HH:mm')}"></td>
-    </tr>
-    </tbody>
-</table>
+<div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+    <a href="/mobileshop/" style="margin-right: 180px;" class="btn-submit">На головну</a>
+    <a href="/mobileshop/logout" style="margin-left: 180px;" class="btn-submit">Вийти з облікового запису</a>
+</div>
 
-<p><a href="/mobileshop/">На головну</a></p>
-<p><a href="/mobileshop/logout">Вийти з облікового запису</a></p>
+<div class="order-container" style="max-width: 700px">
+    <h3>Історія замовлень:</h3>
+    <div th:each="order : ${orders}" class="cart-item">
+        <div>
+            <p>
+                <strong th:text="'№ ' + ${order.getId()}"></strong>
+                <span th:text="' від ' + ${#dates.format(order.getDate(), 'dd.MM.yyyy')} + ' '"></span>
+                <img th:src="@{${order.getImagePath()}}" height="50" style="vertical-align: middle;" alt="Фото товару">
+                <span th:text="'  ' + ${order.getBrand()} + ' ' + ${order.getModel()} + ' ' + ${order.getMemorySize()}
+                + ' Gb (' + ${order.getQuantity} + ' шт.) - '"></span>
+                <strong th:text="${#numbers.formatInteger(order.getPrice * order.getQuantity, 0, 'DEFAULT')} + ' ₴'"></strong>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+    <a href="/mobileshop/" style="margin-right: 180px;" class="btn-submit">На головну</a>
+    <a href="/mobileshop/logout" style="margin-left: 180px;" class="btn-submit">Вийти з облікового запису</a>
+</div>
+
 </body>
 </html>

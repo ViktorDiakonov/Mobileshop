@@ -4,44 +4,40 @@
     <meta charset="UTF-8">
     <title>Замовлення оформлено</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<div id="header" class="flex-container">
-    <div id="leftHeader" class="sidebar">
-        <h1>Mobile Shop</h1>
-        <p>Ваш магазин смартфонів</p>
-    </div>
-    <div class="logo">
-        <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>
-    </div>
-    <div id="rightHeader" class="sidebar">
-        <ul>
-            <li><a href="/mobileshop/aboutus">Про нас</a></li>
-            <li><a href="/mobileshop/contacts">Контакти</a></li>
-            <li><a href="/mobileshop/delivery">Умови доставки</a></li>
-        </ul>
-    </div>
-</div>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
 <div class="order-container">
     <h2 style="color: green">Ваше замовлення прийнято!</h2>
 
-           <div class="phone-details">
-            <img id="phoneImage" th:src="${order.getImagePath()}" alt="Фото телефону">
-            <div class="phone-info">
-                <p><strong>Виробник:</strong> <a th:text="${order.getBrand()}">VALUE</a></p>
-                <p><strong>Модель:</strong> <a th:text="${order.getModel()}">VALUE</a></p>
-                <p><strong>Вбудована пам'ять:</strong> <a th:text="${order.getMemorySize()}">VALUE</a> ГБ</p>
-                <p><strong>Кількість:</strong> <a th:text="${order.getQuantity()}">VALUE</a> шт.</p>
-                <br>
-                <p><strong>Сума до сплати:</strong> <a th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴</p>
-            </div>
+    <div class="phone-details">
+        <img id="phoneImage" th:src="${order.getImagePath()}" alt="Фото телефону">
+        <div class="phone-info">
+            <p><strong>Виробник:</strong> <a th:text="${order.getBrand()}">VALUE</a></p>
+            <p><strong>Модель:</strong> <a th:text="${order.getModel()}">VALUE</a></p>
+            <p><strong>Вбудована пам'ять:</strong> <a th:text="${order.getMemorySize()}">VALUE</a> ГБ</p>
+            <p><strong>Кількість:</strong> <a th:text="${order.getQuantity()}">VALUE</a> шт.</p>
+            <br>
+            <p><strong>Сума до сплати:</strong> <a th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}">VALUE</a>
+                ₴</p>
         </div>
+    </div>
+
+    <p th:if="${order.personComment != null && !order.personComment.isEmpty()}">
+        <strong>Коментар до замовлення:</strong> <span th:text="${order.personComment}" style="max-width: 200px"></span>
+    </p>
+
     <p class="buy-info">Замовлення отримувати за адресою: <a th:text="${order.getPoint()}">VALUE</a></p>
     <p class="buy-info"><b style="color: green">Чекайте на дзвінок оператора на вказаний Вами номер</b></p>
 </div>
 <br>
+
 <p>
     <button type="submit" class="btn-submit"><a href="/mobileshop/">Повернутись на головну сторінку</a></button>
 </p>
+
 </body>
 </html>

@@ -72,34 +72,38 @@
 </nav>
 <hr>
 <h2 style="color: limegreen; font-family: 'Grava Display', serif;">Останні надходження</h2>
+
 <div id="phones-container" class="grid-view">
     <div th:each="phones : ${phone}" class="phone-item">
-        <a th:href="@{/mobileshop/phone/{id}(id=${phones.id})}">
-            <img th:src="@{${phones.imagePath}}" alt="Фото телефону" style="max-height: 100px;">
+        <a th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}">
+            <img th:src="@{${phones.imagePath}}" alt="Фото телефону" style="max-height: 100px;" title="Перейти на товар">
             <div>
-                <p>
-                    <span th:text="${phones.getBrand()}">text</span>
-                    <br>
-                    <span th:text="${phones.getModel()}">text</span>
-                    <br>
-                    <td th:text="${phones.memorySize}"></td>&nbsp;Gb
-                    <br><b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')}">text</span></b> ₴
+                <p title="Перейти на товар">
+                    <span th:text="${phones.getBrand()}"></span>
+                    <span th:text="${phones.getModel()}"></span>
+                    <span th:text="${phones.getMemorySize()}"></span> Gb
                 </p>
             </div>
         </a>
-        <!-- Кнопка добавления в корзину -->
-        <button class="btn-submit add-to-cart-btn"
-                th:data-id="${phones.id}"
-                th:disabled="${cart != null && cart.containsItem(phones.id)}">
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 50px;" >
+            <!--            <b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')}"></span></b> ₴-->
+            <b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')} + ' ₴'"
+                     style="font-family: 'Grava Display', serif; font-size: 20px;"></span></b>
+            <button class="btn-submit add-to-cart-btn"
+                    th:data-id="${phones.id}"
+                    th:disabled="${cart != null && cart.containsItem(phones.id)}">
             <span th:if="${cart != null && cart.containsItem(phones.id)}">
                 <img th:src="@{/img/site/add-cart.svg}" alt="У кошику" class="cart-icon">
             </span>
-            <span th:unless="${cart != null && cart.containsItem(phones.id)}">
-                <img th:src="@{/img/site/photo-cart.png}" alt="Додати в кошик" class="cart-icon">
+                <span th:unless="${cart != null && cart.containsItem(phones.id)}">
+                <img th:src="@{/img/site/photo-cart.png}" alt="Додати в кошик" class="cart-icon" title="До кошику">
             </span>
-        </button>
+            </button>
+        </div>
     </div>
 </div>
+
 <script>
     // Обработка добавления в корзину
     document.querySelectorAll('.add-to-cart-btn').forEach(btn => {

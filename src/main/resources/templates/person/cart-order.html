@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="En">
 <head>
     <meta charset="UTF-8">
     <title>Оформлення замовлення</title>
@@ -11,31 +11,26 @@
 
 <div class="order-container">
     <h2>Оформлення замовлення</h2>
-    <div th:each="item : ${cartItems}" class="cart-item">
-        <img th:src="@{${item.phone.imagePath}}" height="100">
+    <div th:each="item : ${cartItems}" class="cart-item"
+         style="display: flex; align-items: center; gap: 15px;">
+
+        <img th:src="@{${item.phone.imagePath}}" height="100" alt="Фото товару">
+
         <div>
-            <p th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' + ${item.phone.getMemorySize()} +
-            ' Gb (' + ${item.quantity} + ' шт.) - ' + ${#numbers.formatInteger(item.phone.price * item.quantity, 0, 'DEFAULT')} + ' ₴'"></p>
+            <p th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' +
+        ${item.phone.getMemorySize()} + ' Gb (' + ${item.quantity} + ' шт.) - ' +
+        ${#numbers.formatInteger(item.phone.price * item.quantity, 0, 'DEFAULT')} + ' ₴'"></p>
         </div>
     </div>
 
-    <h3>Сума до сплати: <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span> ₴</h3>
+    <h3>Сума до сплати: <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span>₴</h3>
     <form th:action="@{/mobileshop/place-order}" method="post" th:object="${order}">
-
-<!--        <div class="form-group">-->
-<!--            <label>Ім'я покупця:</label>-->
-<!--            <input type="text" th:field="*{personName}" required>-->
-<!--        </div>-->
-
-<!--        <div class="form-group">-->
-<!--            <label>Номер телефону:</label>-->
-<!--            <input type="tel" th:field="*{personPhone}" required>-->
-<!--        </div>-->
 
         <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">
             <p style="margin: 5px;">
                 <label for="personName">Ім'я покупця:</label>
-                <input type="text" th:field="*{personName}" style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;"
+                <input type="text" th:field="*{personName}"
+                       style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;"
                        id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"
                        maxlength="20">
             </p>

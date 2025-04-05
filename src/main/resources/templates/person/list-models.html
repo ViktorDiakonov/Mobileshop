@@ -34,32 +34,16 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<nav class="brand-nav">
-    <div class="brand-item">
-        <a href="/mobileshop/phones/apple">
-            <img src="/img/site/iphone.png" alt="Apple">
-            <p>Apple</p>
-        </a>
-    </div>
-    <div class="brand-item">
-        <a href="/mobileshop/phones/xiaomi">
-            <img src="/img/site/mi.png" alt="Xiaomi">
-            <p>Xiaomi</p>
-        </a>
-    </div>
-    <div class="brand-item">
-        <a href="/mobileshop/phones/samsung">
-            <img src="/img/site/samsung.png" alt="Samsung">
-            <p>Samsung</p>
-        </a>
-    </div>
-</nav>
-<hr>
+<div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
+<br>
+
 <nav>
     <a href="/mobileshop/" style="color: black; text-decoration: none;">Головна</a>
     <span style="color: gray;"> &gt; </span>
+    <span style="color: black; text-decoration: none; font-family: Grava Display, serif"> Смартфони </span>
     <span th:text="${selectedBrand}" style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
 </nav>
+
 <div style="text-align: center; margin-bottom: 10px;">
     <button type="submit" class="btn-submit" onclick="toggleSort()">Сортувати за ціною</button>
 </div>

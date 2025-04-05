@@ -34,11 +34,8 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<div id="leftSidebar" style="border: limegreen 1mm solid">
-    <p><b>Новинка iPhone 16 !</b></p>
-    <a href="/mobileshop/phone/38"><img src="/img/site/iphone-14-pro-max-2.gif" alt="banner" width="200"
-                                        height="220"></a>
-</div>
+<div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
+
 <div id="rightSidebar" style="border: limegreen 1mm solid">
     <p>Отримуй інформацію
         <br>про:<br></p>
@@ -47,36 +44,18 @@
     <p><b>Новинки</b></p>
     <p>пройди просту реєстрацію</p>
     <p>
-        <button button type="submit" class="btn-submit"><a href="/mobileshop/auth/registration">Зареєструватись</a></button>
+        <button button type="submit" class="btn-submit"><a href="/mobileshop/auth/registration">Зареєструватись</a>
+        </button>
     </p>
 </div>
-<nav class="brand-nav">
-    <div class="brand-item">
-        <a href="/mobileshop/phones/apple">
-            <img src="/img/site/iphone.png" alt="Apple">
-            <p>Apple</p>
-        </a>
-    </div>
-    <div class="brand-item">
-        <a href="/mobileshop/phones/xiaomi">
-            <img src="/img/site/mi.png" alt="Xiaomi">
-            <p>Xiaomi</p>
-        </a>
-    </div>
-    <div class="brand-item">
-        <a href="/mobileshop/phones/samsung">
-            <img src="/img/site/samsung.png" alt="Samsung">
-            <p>Samsung</p>
-        </a>
-    </div>
-</nav>
-<hr>
+<br>
 <h2 style="color: limegreen; font-family: 'Grava Display', serif;">Останні надходження</h2>
-
+<br>
 <div id="phones-container" class="grid-view">
     <div th:each="phones : ${phone}" class="phone-item">
         <a th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}">
-            <img th:src="@{${phones.imagePath}}" alt="Фото телефону" style="max-height: 100px;" title="Перейти на товар">
+            <img th:src="@{${phones.imagePath}}" alt="Фото телефону" style="max-height: 100px;"
+                 title="Перейти на товар">
             <div>
                 <p title="Перейти на товар">
                     <span th:text="${phones.getBrand()}"></span>
@@ -86,7 +65,7 @@
             </div>
         </a>
 
-        <div style="display: flex; justify-content: center; align-items: center; gap: 50px;" >
+        <div style="display: flex; justify-content: center; align-items: center; gap: 50px;">
             <!--            <b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')}"></span></b> ₴-->
             <b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')} + ' ₴'"
                      style="font-family: 'Grava Display', serif; font-size: 20px;"></span></b>

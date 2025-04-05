@@ -11,6 +11,7 @@
 
 <div class="order-container">
     <h2>Оформлення замовлення</h2>
+    <br>
     <div th:each="item : ${cartItems}" class="cart-item"
          style="display: flex; align-items: center; gap: 15px;">
 
@@ -25,6 +26,7 @@
 
     <h3>Сума до сплати: <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span>₴</h3>
     <form th:action="@{/mobileshop/place-order}" method="post" th:object="${order}">
+        <br>
 
         <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">
             <p style="margin: 5px;">
@@ -71,6 +73,7 @@
                 }
             });
         </script>
+        <br>
         <p>
             <label for="pickupPoint">Виберіть точку видачі:</label>
             <select id="pickupPoint" th:field="*{point}" required>

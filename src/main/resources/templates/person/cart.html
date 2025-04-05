@@ -57,6 +57,7 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
+<br>
 <h1>Ваш кошик<span th:if="${items.isEmpty()}" style="text-align: center"> порожній.</span></h1>
 
 <!-- Список товаров -->
@@ -87,6 +88,7 @@
 
 <div id="total-block" th:classappend="${total <= 0} ? 'hidden' : ''">
     <hr>
+    <br>
     <h3>Сума до сплати:
         <strong id="total-price" th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong>
     </h3>
@@ -99,6 +101,7 @@
         </button>
     </form>
 </div>
+<br>
 <p>
     <button class="btn-submit" onclick="window.history.back()">Повернутись назад</button>
 </p>

@@ -11,10 +11,28 @@
             height: 30px;
         }
 
-        .icon-text-container {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px; /* Расстояние между текстом и иконкой */
+        .add-to-cart-btn {
+            padding: 7px 7px; /* Внутренние отступы */
+            outline: none; /* Убирает контур */
+            border: none; /* Если нужно убрать границу */
+            background-color: transparent; /* Прозрачный фон */
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #D3FDD6; /* Полупрозрачный фон при наведении */
+        }
+
+        .cart-icon {
+            width: 30px; /* или нужный вам размер */
+            height: 30px;
+        }
+
+        .btn-submit .cart-icon {
+            transition: transform 0.2s;
+        }
+
+        .btn-submit:hover .cart-icon {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -38,34 +56,38 @@
 <div class="order-container">
     <h2>Смартфон:</h2>
     <br>
-<div class="phone-container-show-phone">
-    <div class="phone-image-show-phone">
-        <img id="phoneImage-show-phone" th:src="${phone.imagePath}" alt="Фото телефону" title="Збільшити">
-    </div>
-    <div class="phone-details-show-phone">
-        <p><strong>Код товару: </strong><a th:text="${phone.getId()}">VALUE</a></p>
-        <br>
-        <p><strong>Виробник: </strong><a th:text="${phone.getBrand()}">VALUE</a></p>
-        <p><strong>Модель: </strong><a th:text="${phone.getModel()}">VALUE</a></p>
-        <p><strong>Вбудована пам'ять: </strong><a th:text="${phone.getMemorySize()}">VALUE</a> Gb</p>
-        <br>
-        <p><strong>Ціна: </strong><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴</p>
 
-        <form th:action="@{/mobileshop/cart/add/{id}(id=${phone.id})}" method="post">
-            <button type="submit" class="btn-submit"
-                    th:disabled="${cart != null && cart.containsItem(phone.id)}">
-                <span th:if="${cart != null && cart.containsItem(phone.id)}">
-                    У кошику <i class="fas fa-shopping-cart"></i>
-                </span>
-                <span th:unless="${cart != null && cart.containsItem(phone.id)}" class="icon-text-container">Додати в кошик
-                    <img th:src="@{/img/site/photo-cart2.png}" alt="Додати в кошик" class="cart-icon">
-                </span>
-            </button>
-        </form>
+    <div class="phone-container-show-phone">
+        <div class="phone-image-show-phone">
+            <img id="phoneImage-show-phone" th:src="${phone.imagePath}" alt="Фото телефону" title="Збільшити">
+        </div>
+        <div class="phone-details-show-phone">
+            <p><strong>Код товару: </strong><a th:text="${phone.getId()}">VALUE</a></p>
+            <br>
+            <p><strong>Виробник: </strong><a th:text="${phone.getBrand()}">VALUE</a></p>
+            <p><strong>Модель: </strong><a th:text="${phone.getModel()}">VALUE</a></p>
+            <p><strong>Вбудована пам'ять: </strong><a th:text="${phone.getMemorySize()}">VALUE</a> Gb</p>
+            <br>
+
+            <div class="price-and-cart-container" style="display: flex; align-items: center; gap: 10px;">
+                <p style="margin: 0;"><strong>Ціна: </strong><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴</p>
+
+                <form th:action="@{/mobileshop/cart/add/{id}(id=${phone.id})}" method="post" style="margin: 0;">
+                    <button class="btn-submit add-to-cart-btn"
+                            th:disabled="${cart != null && cart.containsItem(phone.id)}">
+                    <span th:if="${cart != null && cart.containsItem(phone.id)}">
+                        <img th:src="@{/img/site/add-cart.svg}" alt="У кошику" class="cart-icon">
+                    </span>
+                        <span th:unless="${cart != null && cart.containsItem(phone.id)}">
+                        <img th:src="@{/img/site/photo-cart.png}" alt="Додати в кошик" class="cart-icon" title="У кошик">
+                    </span>
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
-</div>
-<br>
+
 <div class="form-group">
     <a th:href="@{/mobileshop/{id}/new_order(id=${phone.getId()})}" class="btn-submit">Швидке замовлення</a>
 </div>

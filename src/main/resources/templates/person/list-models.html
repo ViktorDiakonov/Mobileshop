@@ -30,22 +30,70 @@
         .btn-submit:hover .cart-icon {
             transform: scale(1.1);
         }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border: 1px solid green;
+            border-radius: 10px;
+        }
+
+        .dropdown-content {
+            color: #333;
+            position: absolute;
+            background-color: white;
+            min-width: 220px;
+            z-index: 1;
+            border-radius: 10px;
+            right: 0;
+            border: 1px solid green;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: white;
+        }
     </style>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
 <br>
 
-<nav>
+<nav style="margin-left: 50px;">
     <a href="/mobileshop/" style="color: black; text-decoration: none;">Головна</a>
     <span style="color: gray;"> &gt; </span>
     <span style="color: black; text-decoration: none; font-family: Grava Display, serif"> Смартфони </span>
     <span th:text="${selectedBrand}" style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
 </nav>
 
-<div style="text-align: center; margin-bottom: 10px;">
-    <button type="submit" class="btn-submit" onclick="toggleSort()">Сортувати за ціною</button>
+<div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
+
+<div style="text-align: center; margin-bottom: 10px">
+    <div class="dropdown" style="display: inline-block; margin-left: 658px;">
+        <button class="btn-submit dropdown-toggle" onclick="toggleDropdown()">
+            <i class="fa-solid fa-sort"></i>&nbsp;&nbsp;
+            <span id="currentSortOption">Від дешевих до дорогих</span>
+        </button>
+        <div id="sortDropdown" class="dropdown-content" style="display: none;">
+            <a href="#" onclick="applySort()" id="alternativeSortOption">Від дорогих до дешевих</a>
+        </div>
+    </div>
 </div>
 
 <div id="phones-container" class="grid-view">
@@ -57,13 +105,11 @@
                     <span th:text="${phones.getBrand()}"></span>
                     <span th:text="${phones.getModel()}"></span>
                     <span th:text="${phones.getMemorySize()}"></span> Gb
-<!--                    <br><b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')}"></span></b> ₴-->
                 </p>
             </div>
         </a>
 
         <div style="display: flex; justify-content: center; align-items: center; gap: 50px;" >
-<!--            <b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')}"></span></b> ₴-->
             <b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')} + ' ₴'"
                      style="font-family: 'Grava Display', serif; font-size: 20px;"></span></b>
             <button class="btn-submit add-to-cart-btn"
@@ -77,20 +123,52 @@
             </span>
             </button>
         </div>
-
-        <!-- Кнопка добавления в корзину -->
-<!--        <button class="btn-submit add-to-cart-btn"-->
-<!--                th:data-id="${phones.id}"-->
-<!--                th:disabled="${cart != null && cart.containsItem(phones.id)}">-->
-<!--            <span th:if="${cart != null && cart.containsItem(phones.id)}">-->
-<!--                <img th:src="@{/img/site/add-cart.svg}" alt="У кошику" class="cart-icon">-->
-<!--            </span>-->
-<!--            <span th:unless="${cart != null && cart.containsItem(phones.id)}">-->
-<!--                <img th:src="@{/img/site/photo-cart.png}" alt="Додати в кошик" class="cart-icon">-->
-<!--            </span>-->
-<!--        </button>-->
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        updateSortDisplay();
+    });
+
+    function toggleDropdown() {
+        const dropdown = document.getElementById("sortDropdown");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    function applySort() {
+        const url = new URL(window.location.href);
+        const currentSort = url.searchParams.get('sort');
+
+        if (currentSort === 'desc') {
+            url.searchParams.set('sort', 'asc');
+        } else {
+            url.searchParams.set('sort', 'desc');
+        }
+
+        window.location.href = url.toString();
+    }
+
+    function updateSortDisplay() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentSort = urlParams.get('sort');
+        const currentOption = document.getElementById('currentSortOption');
+        const alternativeOption = document.getElementById('alternativeSortOption');
+
+        if (currentSort === 'desc') {
+            currentOption.textContent = 'Від дорогих до дешевих';
+            alternativeOption.textContent = 'Від дешевих до дорогих';
+        } else {
+            currentOption.textContent = 'Від дешевих до дорогих';
+            alternativeOption.textContent = 'Від дорогих до дешевих';
+        }
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.closest('.dropdown')) {
+            document.getElementById("sortDropdown").style.display = "none";
+        }
+    }
+</script>
 
 <script>
     // Обработка добавления в корзину

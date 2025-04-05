@@ -473,7 +473,7 @@ td {
 }
 
 .widget {
-    margin-top: 70px;
+    margin-top: 50px;
     min-height: 330px; /* Минимальная высота, но может расти */
     height: auto; /* Растягивается под контент */
     margin-left: 50px;

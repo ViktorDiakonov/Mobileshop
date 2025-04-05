@@ -8,22 +8,22 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
 <br>
 
 <nav>
-    <a href="/mobileshop/" style="color: black; text-decoration: none;">Головна</a>
+    <a href="/mobileshop/" style="color: black; text-decoration: none; margin-left: 50px">Головна</a>
     <span style="color: gray;"> &gt; </span>
     <a th:href="@{/mobileshop/phones/{id}(id=${phone.getBrand().toLowerCase()})}"
        style="color: black; text-decoration: none; font-family: Grava Display, serif">
         Смартфони <span th:text="${phone.getBrand()}"></span>
     </a>
     <span style="color: gray;"> &gt; </span>
-    <span th:text="${phone.getModel()}"
-          style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
+    <span th:text="${phone.getModel()}" style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
 </nav>
 
-<div class="order-container">
+<div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
+
+<div class="order-container" style="margin-top: 50px">
     <h2>Оформлення замовлення</h2>
     <br>
     <form method="POST" th:action="@{/mobileshop/{id}/order(id=${phone.getId()})}" th:object="${phone}">

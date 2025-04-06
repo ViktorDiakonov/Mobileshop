@@ -6,11 +6,26 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
 </head>
 <body>
+
 <div th:fragment="header">
     <div id="header" class="flex-container">
         <div id="leftHeader" class="sidebar">
             <h1>Mobile Shop</h1>
             <p>Ваш магазин смартфонів</p>
+        </div>
+        <div class="search-container" style="margin-left: 20px; display: flex;">
+            <form th:action="@{/mobileshop/search}" method="get" class="search-form" style="display: flex;">
+                <label>
+                    <input type="text"
+                           name="q"
+                           placeholder="Пошук за моделлю..."
+                           style="padding: 8px; border: 1px solid #ccc; border-radius: 4px 0 0 4px;">
+                </label>
+                <button type="submit"
+                        style="padding: 8px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 0 4px 4px 0; cursor: pointer;">
+                    <i class="fa fa-search"></i>
+                </button>
+            </form>
         </div>
         <div class="logo">
             <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo"></a>

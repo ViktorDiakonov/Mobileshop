@@ -34,21 +34,14 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
+<br>
+
+<nav style="margin-left: 50px;">
+    <span style="font-family: Grava Display, serif">Головна</span>
+</nav>
+
 <div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
 
-<div id="rightSidebar" style="border: limegreen 1mm solid">
-    <p>Отримуй інформацію
-        <br>про:<br></p>
-    <p><b>Акції</b></p>
-    <p><b>Знижки</b></p>
-    <p><b>Новинки</b></p>
-    <p>пройди просту реєстрацію</p>
-    <p>
-        <button button type="submit" class="btn-submit"><a href="/mobileshop/auth/registration">Зареєструватись</a>
-        </button>
-    </p>
-</div>
-<br>
 <h2 style="color: limegreen; font-family: 'Grava Display', serif;">Останні надходження</h2>
 <br>
 <div id="phones-container" class="grid-view">

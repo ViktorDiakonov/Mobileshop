@@ -54,7 +54,7 @@ class PhoneRepositoryTest {
 
     @Test
     void findTop16ByOrderByIdDesc_ShouldReturnPhones() {
-        List<Phone> phones = phoneRepository.findTop16ByOrderByIdDesc();
+        List<Phone> phones = phoneRepository.findTop20ByOrderByIdDesc();
 
         assertThat(phones).hasSize(4); // в setUp 4 телефона
         assertThat(phones.get(0).getModel()).isEqualTo("iPhone 13");

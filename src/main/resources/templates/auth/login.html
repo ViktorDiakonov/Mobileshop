@@ -13,25 +13,6 @@
 <br>
 <div style="font-family: 'Grava Display', serif; max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc;
  border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-<!--    <form novalidate name="f" method="post" action="/process_login" style="display: flex; flex-direction: column;">-->
-<!--&lt;!&ndash;        <label for="username">Введіть ім'я користувача:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;        <input type="text" name="username" id="username" minlength="2" maxlength="20" required&ndash;&gt;-->
-<!--&lt;!&ndash;               style="margin-bottom: 10px; padding: 5px;">&ndash;&gt;-->
-<!--        <label for="phoneNumber">Введіть ім'я користувача:</label>-->
-<!--        <input type="text" name="phoneNumber" id="phoneNumber" minlength="2" maxlength="20" required-->
-<!--               style="margin-bottom: 10px; padding: 5px;">-->
-
-<!--        <label for="password">Введіть пароль:</label>-->
-<!--        <input type="password" name="password" id="password" minlength="4" maxlength="10" required-->
-<!--               style="margin-bottom: 10px; padding: 5px;">-->
-
-<!--        <input type="submit" value="Вхід"-->
-<!--               style="background-color: green; color: white; padding: 8px; border: none; cursor: pointer; border-radius: 5px;">-->
-
-<!--        <div th:if="${param.error}" style="color: red; margin-top: 10px;">-->
-<!--            Неправильне ім'я або пароль-->
-<!--        </div>-->
-<!--    </form>-->
     <form novalidate name="f" method="post" action="/process_login" style="display: flex; flex-direction: column;">
         <label for="phoneNumber">Введіть номер телефону:</label>
         <input type="text" name="username" id="phoneNumber" minlength="12" maxlength="12" required
@@ -42,12 +23,21 @@
                style="margin-bottom: 10px; padding: 5px;">
 
         <input type="submit" value="Вхід"
-               style="background-color: green; color: white; padding: 8px; border: none; cursor: pointer; border-radius: 5px;">
+               style="background-color: green; color: white; padding: 8px; border: none; cursor: pointer; border-radius: 5px; font-size: 16px; font-family: Grava Display, serif">
 
         <div th:if="${param.error}" style="color: red; margin-top: 10px;">
             Невірний номер телефону або пароль
         </div>
     </form>
+</div>
+<br><br>
+
+<div style="font-family: 'Grava Display', serif; max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc;
+ border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center;">
+    <h3>Або</h3>
+    <br>
+    <button type="submit" style="background-color: green; width: 100%; color: white; padding: 8px; border: none; cursor: pointer;
+    border-radius: 5px"><a href="/mobileshop/auth/registration" style="color: white; font-size: 16px; text-decoration: none;">Зареєструйтесь</a></button>
 </div>
 
 <br><br>

@@ -128,13 +128,14 @@ button a {
 /* Сетка с центровкой */
 .grid-view {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 3 в ряд */
+    grid-template-columns: repeat(5, 1fr); /* 3 в ряд */
     gap: 20px;
     justify-content: center; /* Центрируем */
 }
 
 /* Карточки телефонов */
 .grid-view .phone-item {
+    min-width: 200px; /* Минимальная ширина карточки */
     text-align: center;
     border: 1px solid #ddd;
     padding: 10px;
@@ -521,4 +522,38 @@ td {
     vertical-align: bottom;
     color: #dd3333;
     margin-right: 14px;
+}
+
+/* Стили для поисковой формы */
+.search-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.search-form input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+
+.search-form button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #45a049;
+}
+
+/* Для мобильной версии */
+@media (max-width: 768px) {
+    .search-form input[type="text"] {
+        width: 200px;
+    }
 }

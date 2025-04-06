@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ua.viktor.myspringbootapp.models.Cart;
 import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
+import ua.viktor.myspringbootapp.repositories.PhoneRepository;
 import ua.viktor.myspringbootapp.services.PhoneService;
 
 import javax.validation.Valid;
@@ -28,6 +29,7 @@ import java.util.List;
 public class PersonController {
 
     private final PhoneService phoneService;
+    private final PhoneRepository phoneRepository;
 
     @GetMapping("/")
     public String mainPage(Model model) {
@@ -36,7 +38,7 @@ public class PersonController {
                 && !"anonymousUser".equals(authentication.getName())) {
             model.addAttribute("username", authentication.getName());
         }
-        List<Phone> phones = phoneService.findLast16Phones();
+        List<Phone> phones = phoneService.findLast20Phones();
         model.addAttribute("phone", phones);
         log.info("Пользователь перешел на главную страницу магазина, отображаем 16 последних телефонов");
         return "person/main-page";
@@ -161,20 +163,6 @@ public class PersonController {
         return "person/cart-order-success";
     }
 
-//    private static Order getOrder(Order order, Cart.CartItem item) {
-//        Order newOrder = new Order();
-//        // Заполняем данные как в вашем существующем методе
-//        newOrder.setPersonName(order.getPersonName());
-//        newOrder.setPersonPhone(order.getPersonPhone());
-//        newOrder.setPoint(order.getPoint());
-//        newOrder.setBrand(item.getPhone().getBrand());
-//        newOrder.setModel(item.getPhone().getModel());
-//        newOrder.setMemorySize(item.getPhone().getMemorySize());
-//        newOrder.setPrice(item.getPhone().getPrice() * item.getQuantity());
-//        newOrder.setQuantity(item.getQuantity());
-//        newOrder.setImagePath(item.getPhone().getImagePath());
-//        return newOrder;
-//    }
 private static Order getOrder(Order order, Cart.CartItem item) {
     Order newOrder = new Order();
     // Копируем все поля из формы
@@ -193,4 +181,12 @@ private static Order getOrder(Order order, Cart.CartItem item) {
 
     return newOrder;
 }
+
+    @GetMapping("/search")
+    public String searchPhones(@RequestParam String q, Model model) {
+        List<Phone> phones = phoneRepository.findByModelContainingIgnoreCase(q);
+        model.addAttribute("phones", phones);
+        model.addAttribute("query", q);
+        return "person/search-results"; // имя вашего Thymeleaf шаблона
+    }
 }

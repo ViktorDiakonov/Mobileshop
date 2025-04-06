@@ -43,9 +43,9 @@ public class PhoneServiceBean implements PhoneService {
     }
 
     @Override
-    public List<Phone> findLast16Phones() {
+    public List<Phone> findLast20Phones() {
         log.info("Запрос на просмотр 16 последних телефонов через SQL LIMIT");
-        return phoneRepository.findTop16ByOrderByIdDesc();
+        return phoneRepository.findTop20ByOrderByIdDesc();
     }
 
     @Override

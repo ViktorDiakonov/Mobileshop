@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Результати пошуку</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .search-header {
+            margin-left: 50px;
+            margin-bottom: 20px;
+        }
+
+        .search-query {
+            font-weight: bold;
+            color: #2a5885;
+        }
+
+        .results-count {
+            color: #666;
+            font-size: 17px;
+            margin-top: 20px;
+        }
+
+        /* Стили из оригинала */
+        .add-to-cart-btn {
+            padding: 7px 7px;
+            outline: none;
+            border: none;
+            background-color: transparent;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #D3FDD6;
+        }
+
+        .cart-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .btn-submit .cart-icon {
+            transition: transform 0.2s;
+        }
+
+        .btn-submit:hover .cart-icon {
+            transform: scale(1.1);
+        }
+
+        /*.dropdown {*/
+        /*    position: relative;*/
+        /*    display: inline-block;*/
+        /*}*/
+
+        /*.dropdown-toggle {*/
+        /*    color: #333;*/
+        /*    cursor: pointer;*/
+        /*    display: flex;*/
+        /*    align-items: center;*/
+        /*    background-color: white;*/
+        /*    border: 1px solid green;*/
+        /*    border-radius: 10px;*/
+        /*}*/
+
+        /*.dropdown-content {*/
+        /*    color: #333;*/
+        /*    position: absolute;*/
+        /*    background-color: white;*/
+        /*    min-width: 220px;*/
+        /*    z-index: 1;*/
+        /*    border-radius: 10px;*/
+        /*    right: 0;*/
+        /*    border: 1px solid green;*/
+        /*}*/
+
+        .dropdown-content a {
+            color: #333;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: white;
+        }
+
+        .no-results {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.2em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<br>
+
+<nav style="margin-left: 50px;">
+    <a href="/mobileshop/" style="color: black; text-decoration: none;">Головна</a>
+    <span style="color: gray;"> &gt; </span>
+    <span style="color: black; text-decoration: none; font-family: Grava Display, serif"> Пошук </span>
+</nav>
+
+<div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
+
+<div class="search-header">
+    <h2>Результати пошуку «<span class="search-query" th:text="${query}"></span>»</h2>
+    <div class="results-count" style="text-align: center" th:text="'Знайдено ' + ${phones.size()} + ' товарів'"></div>
+</div>
+
+<div th:if="${phones.isEmpty()}">
+    <div class="no-results">
+        <p>За запитом "<span class="search-query" th:text="${query}"></span>" нічого не знайдено :(</p>
+        <p>Спробуйте змінити критерії пошуку.</p>
+    </div>
+</div>
+
+<div th:unless="${phones.isEmpty()}">
+    <div id="phones-container" class="grid-view">
+        <div th:each="phone : ${phones}" class="phone-item">
+            <a th:href="@{/mobileshop/phone/{id}(id=${phone.getId()})}">
+                <img th:src="@{${phone.imagePath}}" alt="Фото телефону" style="max-height: 100px;" title="Перейти на товар">
+                <div>
+                    <p title="Перейти на товар">
+                        <span th:text="${phone.getBrand()}"></span>
+                        <span th:text="${phone.getModel()}"></span>
+                        <span th:text="${phone.getMemorySize()}"></span> Gb
+                    </p>
+                </div>
+            </a>
+
+            <div style="display: flex; justify-content: center; align-items: center; gap: 50px;" >
+                <b><span th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')} + ' ₴'"
+                         style="font-family: 'Grava Display', serif; font-size: 20px;"></span></b>
+                <button class="btn-submit add-to-cart-btn"
+                        th:data-id="${phone.id}"
+                        th:disabled="${cart != null && cart.containsItem(phone.id)}">
+                <span th:if="${cart != null && cart.containsItem(phone.id)}">
+                    <img th:src="@{/img/site/add-cart.svg}" alt="У кошику" class="cart-icon">
+                </span>
+                    <span th:unless="${cart != null && cart.containsItem(phone.id)}">
+                    <img th:src="@{/img/site/photo-cart.png}" alt="Додати в кошик" class="cart-icon" title="До кошику">
+                </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Обработка добавления в корзину
+    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', async function () {
+            if (this.disabled) return;
+
+            const phoneId = this.dataset.id;
+
+            try {
+                const response = await fetch(`/mobileshop/cart/add/${phoneId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                });
+
+                if (response.ok) {
+                    // Обновляем состояние кнопки
+                    this.innerHTML = '<img src="/img/site/add-cart.svg" alt="В корзине" class="cart-icon">';
+                    this.disabled = true;
+
+                    // Обновляем бейдж корзины
+                    updateCartBadge(await getCartCount());
+                }
+            } catch (error) {
+                console.error('Помилка додавання:', error);
+            }
+        });
+    });
+
+    // Функция для получения текущего количества товаров в корзине
+    async function getCartCount() {
+        const response = await fetch('/mobileshop/cart/count');
+        return await response.text();
+    }
+
+    // Функция обновления бейджа
+    function updateCartBadge(count) {
+        const badge = document.querySelector('.cart-badge');
+        if (!badge) {
+            const cartLink = document.querySelector('.cart-link');
+            if (cartLink) {
+                const newBadge = document.createElement('span');
+                newBadge.className = 'cart-badge';
+                newBadge.textContent = count;
+                cartLink.appendChild(newBadge);
+            }
+            return;
+        }
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+</script>
+</body>
+</html>

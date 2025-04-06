@@ -34,11 +34,11 @@ public class PersonControllerTest {
 
     @Test
     public void testMainPage() {
-        when(phoneService.findLast16Phones()).thenReturn(List.of(new Phone(), new Phone()));
+        when(phoneService.findLast20Phones()).thenReturn(List.of(new Phone(), new Phone()));
 
         String viewName = personController.mainPage(model);
 
-        verify(phoneService).findLast16Phones();
+        verify(phoneService).findLast20Phones();
         verify(model).addAttribute(eq("phone"), any());
         assertEquals("person/main-page", viewName);
     }

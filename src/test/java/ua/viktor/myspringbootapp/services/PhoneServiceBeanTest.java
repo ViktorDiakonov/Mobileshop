@@ -55,11 +55,11 @@ public class PhoneServiceBeanTest {
 
     @Test
     public void testFindLast16Phones() {
-        when(phoneRepository.findTop16ByOrderByIdDesc()).thenReturn(Collections.emptyList());
-        List<Phone> phones = phoneService.findLast16Phones();
+        when(phoneRepository.findTop20ByOrderByIdDesc()).thenReturn(Collections.emptyList());
+        List<Phone> phones = phoneService.findLast20Phones();
         assertNotNull(phones);
         assertEquals(0, phones.size());
-        verify(phoneRepository).findTop16ByOrderByIdDesc();
+        verify(phoneRepository).findTop20ByOrderByIdDesc();
     }
 
     @Test

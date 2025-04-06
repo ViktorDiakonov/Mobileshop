@@ -14,7 +14,7 @@ public interface PhoneService {
 
     void createOrder(Order order);
 
-    List<Phone> findLast16Phones();
+    List<Phone> findLast20Phones();
 
     List<Phone> readPhonesByBrandSorted(String brand, String sort);
 

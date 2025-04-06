@@ -58,6 +58,11 @@
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 <br>
+
+<nav style="margin-left: 50px;">
+    <a href="/mobileshop/" style="color: black; text-decoration: none;">На головну</a>
+</nav>
+
 <h1>Ваш кошик<span th:if="${items.isEmpty()}" style="text-align: center"> порожній.</span></h1>
 
 <!-- Список товаров -->

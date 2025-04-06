@@ -15,15 +15,18 @@
         <img th:src="@{${order.imagePath}}" height="100" alt="Зображення товару">
         <div class="order-info" style="align-content: flex-start">
             <p th:text="${order.brand} + ' ' + ${order.model} + ' ' + ${order.getMemorySize()} +
-            ' Gb (' + ${order.quantity} + ' шт.) - ' + ${#numbers.formatInteger(order.price * order.quantity, 0, 'DEFAULT')} + ' ₴'"></p>
-            <p><strong>Сума до сплати: </strong><span th:text="${#numbers.formatInteger(order.price, 0, 'DEFAULT')}"></span> ₴</p>
+            ' Gb (' + ${order.quantity} + ' шт.) - ' + ${#numbers.formatInteger(order.price, 0, 'DEFAULT')} + ' ₴'"></p>
         </div>
     </div>
+    <p><strong>Сума до сплати: </strong><span th:text="${#numbers.formatInteger(order.price, 0, 'DEFAULT')}"></span> ₴</p>
+
     <p th:if="${order.personComment != null && !order.personComment.isEmpty()}">
         <strong>Коментар до замовлення:</strong> <span th:text="${order.personComment}" style="max-width: 200px"></span>
     </p>
+    <br>
 
     <p class="buy-info">Замовлення отримувати за адресою: <span th:text="${orders[0].point}">VALUE</span></p>
+    <br>
 
     <p class="buy-info"><b style="color: green">Чекайте на дзвінок оператора</b></p>
 </div>

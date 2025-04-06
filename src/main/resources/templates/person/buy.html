@@ -13,6 +13,7 @@
 
 <div class="order-container">
     <h2 style="color: green">Ваше замовлення прийнято!</h2>
+    <br>
 
     <div class="phone-details">
         <img id="phoneImage" th:src="${order.getImagePath()}" alt="Фото телефону">
@@ -26,12 +27,16 @@
                 ₴</p>
         </div>
     </div>
+    <br>
 
     <p th:if="${order.personComment != null && !order.personComment.isEmpty()}">
         <strong>Коментар до замовлення:</strong> <span th:text="${order.personComment}" style="max-width: 200px"></span>
     </p>
+    <br>
 
     <p class="buy-info">Замовлення отримувати за адресою: <a th:text="${order.getPoint()}">VALUE</a></p>
+    <br>
+
     <p class="buy-info"><b style="color: green">Чекайте на дзвінок оператора на вказаний Вами номер</b></p>
 </div>
 <br>

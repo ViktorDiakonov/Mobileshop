@@ -52,7 +52,6 @@ public class PersonController {
         model.addAttribute("phone", phoneService.readPhonesByBrandSorted(brand, sort));
         String formattedBrand = brand.substring(0, 1).toUpperCase() + brand.substring(1).toLowerCase();
         model.addAttribute("selectedBrand", formattedBrand);
-//        model.addAttribute("brands", phoneService.getAllBrands());
         return "person/list-models";
     }
 
@@ -135,58 +134,91 @@ public class PersonController {
         return "person/cart-order";
     }
 
-    @PostMapping("/place-order")
-    public String placeOrder(@ModelAttribute("cart") Cart cart,
-                             @ModelAttribute("order") @Valid Order order,
-                             BindingResult bindingResult,
-                             Model model) {
+//    @PostMapping("/place-order")
+//    public String placeOrder(@ModelAttribute("cart") Cart cart,
+//                             @ModelAttribute("order") @Valid Order order,
+//                             BindingResult bindingResult,
+//                             Model model) {
+//
+//        if (bindingResult.hasErrors() || cart.getItems().isEmpty()) {
+//            model.addAttribute("cartItems", cart.getItems());
+//            model.addAttribute("total", cart.getTotal());
+//            return "person/cart-order";
+//        }
+//
+//        // Создаем заказ для каждого товара
+//        List<Order> createdOrders = new ArrayList<>();
+//        for (Cart.CartItem item : cart.getItems()) {
+//            Order newOrder = getOrder(order, item);
+//
+//            phoneService.createOrder(newOrder);
+//            createdOrders.add(newOrder);
+//        }
+//
+//        // Очищаем корзину
+//        cart.clear();
+//
+//        model.addAttribute("orders", createdOrders);
+//        return "person/cart-order-success";
+//    }
+@PostMapping("/place-order")
+public String placeOrder(@ModelAttribute("cart") Cart cart,
+                         @ModelAttribute("order") @Valid Order order,
+                         BindingResult bindingResult,
+                         Model model) {
 
-        if (bindingResult.hasErrors() || cart.getItems().isEmpty()) {
-            model.addAttribute("cartItems", cart.getItems());
-            model.addAttribute("total", cart.getTotal());
-            return "person/cart-order";
-        }
-
-        // Создаем заказ для каждого товара
-        List<Order> createdOrders = new ArrayList<>();
-        for (Cart.CartItem item : cart.getItems()) {
-            Order newOrder = getOrder(order, item);
-
-            phoneService.createOrder(newOrder);
-            createdOrders.add(newOrder);
-        }
-
-        // Очищаем корзину
-        cart.clear();
-
-        model.addAttribute("orders", createdOrders);
-        return "person/cart-order-success";
+    if (bindingResult.hasErrors() || cart.getItems().isEmpty()) {
+        model.addAttribute("cartItems", cart.getItems());
+        model.addAttribute("total", cart.getTotal());
+        return "person/cart-order";
     }
 
-private static Order getOrder(Order order, Cart.CartItem item) {
-    Order newOrder = new Order();
-    // Копируем все поля из формы
-    newOrder.setPersonName(order.getPersonName());
-    newOrder.setPersonPhone(order.getPersonPhone());
-    newOrder.setPersonComment(order.getPersonComment()); // Добавлено
-    newOrder.setPoint(order.getPoint()); // Теперь должно работать
+    List<Order> createdOrders = new ArrayList<>();
+    for (Cart.CartItem item : cart.getItems()) {
+        Order newOrder = getOrder(order, item); // здесь ты мапишь item в заказ
+        phoneService.createOrder(newOrder);
+        createdOrders.add(newOrder);
+    }
 
-    // Устанавливаем данные о товаре
-    newOrder.setBrand(item.getPhone().getBrand());
-    newOrder.setModel(item.getPhone().getModel());
-    newOrder.setMemorySize(item.getPhone().getMemorySize());
-    newOrder.setPrice(item.getPhone().getPrice() * item.getQuantity());
-    newOrder.setQuantity(item.getQuantity());
-    newOrder.setImagePath(item.getPhone().getImagePath());
+    // Вот эта строка вычисляет общую сумму
+    int total = createdOrders.stream()
+            .mapToInt(o -> o.getPrice() * o.getQuantity())
+            .sum();
 
-    return newOrder;
+    cart.clear();
+
+    model.addAttribute("orders", createdOrders);
+    model.addAttribute("total", total);
+
+    return "person/cart-order-success";
 }
+
+
+    private static Order getOrder(Order order, Cart.CartItem item) {
+        Order newOrder = new Order();
+        // Копируем все поля из формы
+        newOrder.setPersonName(order.getPersonName());
+        newOrder.setPersonPhone(order.getPersonPhone());
+        newOrder.setPersonComment(order.getPersonComment()); // Добавлено
+        newOrder.setPoint(order.getPoint()); // Теперь должно работать
+
+        // Устанавливаем данные о товаре
+        newOrder.setBrand(item.getPhone().getBrand());
+        newOrder.setModel(item.getPhone().getModel());
+        newOrder.setMemorySize(item.getPhone().getMemorySize());
+//        newOrder.setPrice(item.getPhone().getPrice() * item.getQuantity());
+        newOrder.setPrice(item.getPhone().getPrice());
+        newOrder.setQuantity(item.getQuantity());
+        newOrder.setImagePath(item.getPhone().getImagePath());
+
+        return newOrder;
+    }
 
     @GetMapping("/search")
     public String searchPhones(@RequestParam String q, Model model) {
         List<Phone> phones = phoneRepository.findByModelContainingIgnoreCase(q);
         model.addAttribute("phones", phones);
         model.addAttribute("query", q);
-        return "person/search-results"; // имя вашего Thymeleaf шаблона
+        return "person/search-results";
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Замовлення оформлено</title>
@@ -18,7 +18,11 @@
             ' Gb (' + ${order.quantity} + ' шт.) - ' + ${#numbers.formatInteger(order.price, 0, 'DEFAULT')} + ' ₴'"></p>
         </div>
     </div>
-    <p><strong>Сума до сплати: </strong><span th:text="${#numbers.formatInteger(order.price, 0, 'DEFAULT')}"></span> ₴</p>
+
+    <h2>Сума до сплати:
+        <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span>₴
+    </h2>
+    <br>
 
     <p th:if="${order.personComment != null && !order.personComment.isEmpty()}">
         <strong>Коментар до замовлення:</strong> <span th:text="${order.personComment}" style="max-width: 200px"></span>

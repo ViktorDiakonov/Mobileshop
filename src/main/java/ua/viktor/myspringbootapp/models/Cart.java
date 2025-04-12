@@ -14,8 +14,10 @@ import java.util.*;
 @Setter
 public class Cart {
 
+    @Getter
     public static class CartItem {
 
+        // Геттеры
         private final Phone phone;
         @Setter
         private int quantity;
@@ -24,10 +26,6 @@ public class Cart {
             this.phone = phone;
             this.quantity = quantity;
         }
-
-        // Геттеры
-        public Phone getPhone() { return phone; }
-        public int getQuantity() { return quantity; }
     }
 
     private final Map<Integer, CartItem> items = new HashMap<>();
@@ -55,11 +53,16 @@ public class Cart {
         }
     }
 
-    public double getTotal() {
-        return items.values().stream()
-                .mapToDouble(item -> item.getPhone().getPrice() * item.getQuantity())
-                .sum();
-    }
+//    public double getTotal() {
+//        return items.values().stream()
+//                .mapToDouble(item -> item.getPhone().getPrice() * item.getQuantity())
+//                .sum();
+//    }
+public int getTotal() {
+    return items.values().stream()
+            .mapToInt(item -> item.getPhone().getPrice() * item.getQuantity())
+            .sum();
+}
 
     public Collection<CartItem> getItems() {
         return items.values();

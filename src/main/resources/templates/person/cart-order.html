@@ -25,6 +25,7 @@
     </div>
 
     <h3>Сума до сплати: <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span>₴</h3>
+
     <form th:action="@{/mobileshop/place-order}" method="post" th:object="${order}">
         <br>
 

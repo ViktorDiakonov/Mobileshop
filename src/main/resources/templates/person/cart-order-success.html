@@ -11,9 +11,9 @@
 
 <div class="order-container">
     <h2 style="color: green">Ваше замовлення прийнято!</h2>
-    <div th:each="order : ${orders}" class="order-item">
+    <div th:each="order : ${orders}" class="order-item" style="display: flex; align-items: center; gap: 15px;">
         <img th:src="@{${order.imagePath}}" height="100" alt="Зображення товару">
-        <div class="order-info" style="align-content: flex-start">
+        <div>
             <p th:text="${order.brand} + ' ' + ${order.model} + ' ' + ${order.getMemorySize()} +
             ' Gb (' + ${order.quantity} + ' шт.) - ' + ${#numbers.formatInteger(order.price, 0, 'DEFAULT')} + ' ₴'"></p>
         </div>

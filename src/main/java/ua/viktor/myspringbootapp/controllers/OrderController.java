@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.viktor.myspringbootapp.models.Order;
+import ua.viktor.myspringbootapp.models.Person;
 import ua.viktor.myspringbootapp.services.OrderService;
+import ua.viktor.myspringbootapp.services.PhoneService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Diakonov Viktor
@@ -25,18 +28,42 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+    private final PhoneService phoneService;
 
+//    @GetMapping("/my-orders")
+//    public String getUserOrders(Model model) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication != null && authentication.isAuthenticated()
+//                && !"anonymousUser".equals(authentication.getName())) {
+//
+//            String personPhone = authentication.getName();
+//            String personPhoneNumber = authentication.getPrincipal().toString();
+//
+
+    /// /            List<Order> orders = orderService.getOrdersByPersonName(username);
+//            List<Order> orders = orderService.getOrdersByPersonPhoneNumber(personPhone);
+//            String number = String.valueOf(phoneService.personPhoneNumber(personPhoneNumber));
+//            model.addAttribute("orders", orders);
+//            model.addAttribute("number", number);
+//        }
+//
+//        return "person/my-orders";
+//    }
     @GetMapping("/my-orders")
     public String getUserOrders(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()
                 && !"anonymousUser".equals(authentication.getName())) {
 
-            String personPhone = authentication.getName();
+            String phoneNumber = authentication.getName();
+            List<Order> orders = orderService.getOrdersByPersonPhoneNumber(phoneNumber);
+            Optional<Person> personOptional = phoneService.personPhoneNumber(phoneNumber);
 
-//            List<Order> orders = orderService.getOrdersByPersonName(username);
-            List<Order> orders = orderService.getOrdersByPersonPhoneNumber(personPhone);
             model.addAttribute("orders", orders);
+
+            if (personOptional.isPresent()) {
+                model.addAttribute("person", personOptional.get());
+            }
         }
 
         return "person/my-orders";

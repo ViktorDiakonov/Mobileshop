@@ -5,8 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.viktor.myspringbootapp.models.Order;
+import ua.viktor.myspringbootapp.models.Person;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.repositories.OrderRepository;
+import ua.viktor.myspringbootapp.repositories.PeopleRepository;
 import ua.viktor.myspringbootapp.repositories.PhoneRepository;
 import ua.viktor.myspringbootapp.util.exception.PhoneNotFoundException;
 
@@ -23,6 +25,7 @@ public class PhoneServiceBean implements PhoneService {
 
     private final PhoneRepository phoneRepository;
     private final OrderRepository orderRepository;
+    private final PeopleRepository peopleRepository;
 
     public Phone findPhoneById(int id) {
         log.info("Запрос на поиск телефона с id = {}", id);
@@ -56,6 +59,11 @@ public class PhoneServiceBean implements PhoneService {
             return phoneRepository.findByBrandOrderByPriceDesc(formattedBrand);
         }
         return phoneRepository.findByBrandOrderByPriceAsc(formattedBrand);
+    }
+
+    @Override
+    public Optional<Person> personPhoneNumber(String phoneNumber) {
+        return peopleRepository.findByPhoneNumber(phoneNumber);
     }
 
 //    @Override

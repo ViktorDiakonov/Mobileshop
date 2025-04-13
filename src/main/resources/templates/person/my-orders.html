@@ -7,15 +7,27 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<h1>Особистий кабінет</h1>
+<br>
+
+<nav style="margin-left: 50px;">
+    <a href="/mobileshop/" style="color: black; text-decoration: none;">На головну</a>
+</nav>
+
+<div th:if="${person != null}">
+    <h2>Вітаємо в особистому кабінеті <span th:text="${person.getUserName()}"></span>!</h2>
+    <br>
+    <p><strong>Ваш телефон:</strong> <span th:text="${person.phoneNumber}"></span> (логін)</p>
+</div>
+<br>
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-    <a href="/mobileshop/" style="margin-right: 180px;" class="btn-submit">На головну</a>
-    <a href="/mobileshop/logout" style="margin-left: 180px;" class="btn-submit">Вийти з облікового запису</a>
+<!--    <a href="/mobileshop/" style="margin-right: 180px;" class="btn-submit">На головну</a>-->
+    <a href="/mobileshop/logout" class="btn-submit">Вийти з облікового запису</a>
 </div>
 
 <div class="order-container" style="max-width: 700px">
     <h3>Історія замовлень:</h3>
+
     <div th:each="order : ${orders}" class="cart-item">
         <div>
             <p>
@@ -32,8 +44,10 @@
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
     <a href="/mobileshop/" style="margin-right: 180px;" class="btn-submit">На головну</a>
-    <a href="/mobileshop/logout" style="margin-left: 180px;" class="btn-submit">Вийти з облікового запису</a>
+    <a href="/mobileshop/logout" style="margin-left: 130px;" class="btn-submit">Вийти з облікового запису</a>
 </div>
+<br>
+<br>
 
 </body>
 </html>

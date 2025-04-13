@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <title>Сторінка замовлень</title>
     <link rel="stylesheet" type="text/css" href="/css/admin.css">
+    <style>
+        /* Стили для строк с чередующимися цветами */
+        .highlight-row-red {
+            background-color: #EBF2AC !important; /* Светло-красный */
+            transition: background-color 0.3s ease;
+        }
+
+        /* Дополнительные стили для текста в выделенных строках */
+        .highlight-row-red td,
+        .highlight-row-yellow td {
+            color: #333 !important;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
 <nav>
@@ -12,7 +26,7 @@
         <a class="button" href="/mobileshop/admin_page">Сторінка адміністратора</a>
     </p>
     <p>Виберіть замовлення за номером</p>
-    <table class="order-table">
+    <table class="order-table" id="orderTable">
         <thead>
         <tr>
             <th class="header-text">Номер замовлення</th>
@@ -44,7 +58,7 @@
                 <span th:text="${#numbers.formatInteger(orders.getPrice(), 0, 'DEFAULT')}"></span>
             </td>
             <td>
-                <span th:text="${#dates.format(orders.getDate(), 'dd.MM.yyyy - HH:mm')}"></span>
+                <span th:text="${#dates.format(orders.getDate(), 'dd.MM.yyyy - HH:mm:ss')}"></span>
             </td>
         </tr>
         </tbody>
@@ -55,4 +69,64 @@
     <a class="button" href="/mobileshop/admin_page">Сторінка адміністратора</a>
 </p>
 </body>
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const timeSpans = document.querySelectorAll('#orderTable tbody tr td:nth-child(6) span');
+    //     let colorIndex = 0;
+    //     const colors = ['#ff5252', '#ffc107']; // Ярко-красный и желтый
+    //     let prevTime = '';
+    //
+    //     timeSpans.forEach(span => {
+    //         const currentTime = span.textContent.trim();
+    //
+    //         if (currentTime !== prevTime) {
+    //             colorIndex = (colorIndex + 1) % colors.length;
+    //             prevTime = currentTime;
+    //         } else {
+    //             span.style.color = colors[colorIndex];
+    //             span.style.fontWeight = 'bold';
+    //         }
+    //     });
+    // });
+    document.addEventListener('DOMContentLoaded', function() {
+        const rows = document.querySelectorAll('#orderTable tbody tr');
+        const colorClasses = ['highlight-row-red', 'highlight-row-yellow']; // Классы для строк
+        let currentColorIndex = 0;
+        let prevTime = null;
+        let currentGroup = [];
+
+        // Функция для применения стилей ко всей строке
+        function applyColorToGroup(group, colorClass) {
+            group.forEach(row => {
+                row.classList.add(colorClass); // Добавляем класс ко всей строке
+            });
+        }
+
+        // Проходим по всем строкам
+        rows.forEach(row => {
+            const timeCell = row.cells[5]; // 6-й столбец с датой (индекс 5)
+            const timeSpan = timeCell.querySelector('span');
+            const currentTime = timeSpan.textContent.trim();
+
+            if (currentTime !== prevTime) {
+                // Если группа не пуста - применяем цвет
+                if (currentGroup.length > 0) {
+                    applyColorToGroup(currentGroup, colorClasses[currentColorIndex]);
+                    currentColorIndex = (currentColorIndex + 1) % colorClasses.length;
+                }
+                // Начинаем новую группу
+                currentGroup = [row];
+                prevTime = currentTime;
+            } else {
+                // Добавляем в текущую группу
+                currentGroup.push(row);
+            }
+        });
+
+        // Обрабатываем последнюю группу
+        if (currentGroup.length > 0) {
+            applyColorToGroup(currentGroup, colorClasses[currentColorIndex]);
+        }
+    });
+</script>
 </html>

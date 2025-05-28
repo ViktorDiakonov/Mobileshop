@@ -1,8 +1,12 @@
-# Используем официальный Java образ
+# Используем официальный Java 17 JDK образ
 FROM eclipse-temurin:17-jdk
 
-# Копируем .jar в контейнер
-COPY MySpringBootApp-0.0.1-SNAPSHOT.jar app.jar
+# Копируем JAR-файл в контейнер
+COPY Mobileshop-0.0.1-SNAPSHOT.jar app.jar
 
-# Указываем команду запуска
+# Указываем порт, если Render его подаёт через переменную
+ENV PORT=8080
+EXPOSE ${PORT}
+
+# Запускаем приложение
 CMD ["java", "-jar", "app.jar"]

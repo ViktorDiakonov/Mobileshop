@@ -2,7 +2,7 @@
 FROM eclipse-temurin:17-jdk
 
 # Копируем JAR-файл в контейнер
-COPY Mobileshop-0.0.1-SNAPSHOT.jar app.jar
+COPY target/Mobileshop-0.0.1-SNAPSHOT.jar app.jar
 
 # Указываем порт, если Render его подаёт через переменную
 ENV PORT=8080

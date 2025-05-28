@@ -1,12 +1,10 @@
-# Используем официальный Java 17 JDK образ
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:17-jdk as builder
+WORKDIR /app
+COPY . .
+RUN ./mvnw clean package
 
-# Копируем JAR-файл в контейнер
-COPY target/Mobileshop-0.0.1-SNAPSHOT.jar app.jar
-
-# Указываем порт, если Render его подаёт через переменную
-ENV PORT=8080
-EXPOSE ${PORT}
-
-# Запускаем приложение
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=builder /app/target/Mobileshop-*.jar app.jar
+EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]

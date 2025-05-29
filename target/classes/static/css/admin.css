@@ -1,0 +1,180 @@
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.admin-panel {
+    display: flex; /* Горизонтальное расположение блоков */
+    flex-direction: row; /* Элементы располагаются в ряд */
+    justify-content: space-between; /* Равномерное распределение по ширине */
+    width: 100%; /* На всю ширину */
+    gap: 20px; /* Расстояние между элементами */
+}
+
+.admin-section {
+    flex: 1; /* Занимает все доступное пространство */
+    background-color: beige; /* Фон панели */
+    border: 2px solid green; /* Зеленая граница */
+    padding: 20px; /* Внутренний отступ */
+    border-radius: 10px; /* Скругление углов */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Тень вокруг панели */
+}
+
+body {
+    text-align: center; /* Центрирование текста */
+    font-family: "Grava Display", serif; /* Шрифт страницы */
+    background-color: #E7D48D; /* Цвет фона страницы */
+}
+
+.button {
+    display: inline-block; /* Кнопка остается в потоке */
+    background-color: green; /* Фон */
+    color: white; /* Текст */
+    padding: 10px 20px; /* Внутренний отступ */
+    text-decoration: none; /* Убираем подчеркивание */
+    border-radius: 5px; /* Скругление углов */
+    text-align: center; /* Текст по центру */
+}
+
+button, input[type="submit"] {
+    background-color: #4CAF50; /* Зеленый фон кнопок */
+    color: white; /* Белый текст */
+    border: none; /* Без границ */
+    padding: 10px 15px; /* Отступы внутри кнопок */
+    cursor: pointer; /* Курсор в виде руки */
+    border-radius: 5px; /* Скругленные углы */
+    font-size: 14px; /* Размер текста */
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #45a049; /* Темно-зеленый при наведении */
+}
+
+.container {
+    background-color: beige; /* Фон контейнера */
+    display: flex; /* Гибкое размещение */
+    flex-direction: column; /* В столбик */
+    border: 1px solid #ccc; /* Граница серого цвета */
+    border-radius: 10px; /* Скругление углов */
+    align-items: center; /* Центрирование содержимого */
+    max-width: 900px; /* Максимальная ширина */
+    margin: 30px auto; /* Центрирование по горизонтали */
+    padding: 20px; /* Внутренний отступ */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Тень вокруг контейнера */
+}
+
+.form-container {
+    display: flex; /* Гибкое размещение */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    padding: 20px; /* Внутренний отступ */
+    font-size: 18px;
+}
+
+.form-content {
+    display: flex; /* Горизонтальное размещение фото и формы */
+    gap: 30px; /* Расстояние между ними */
+    align-items: flex-start; /* Выравнивание по верхнему краю */
+}
+
+.form-fields {
+    display: flex; /* Гибкое размещение */
+    flex-direction: column; /* В столбик */
+    gap: 5px; /* Отступы между полями */
+}
+
+.form-group {
+    display: flex; /* Горизонтальное выравнивание */
+    align-items: center; /* Выравнивание по центру */
+    margin-bottom: 15px; /* Отступ между группами полей */
+    font-size: 18px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"] {
+    flex: 1; /* Поля ввода займут больше места */
+    padding: 8px; /* Внутренний отступ */
+    border: 1px solid #ccc; /* Граница серого цвета */
+    border-radius: 5px; /* Скругление углов */
+}
+
+.form-group label {
+    flex: 1; /* Лейбл займет 1 часть */
+    text-align: right; /* Выравнивание текста вправо */
+    margin-right: 15px; /* Отступ между лейблом и полем ввода */
+}
+
+input[type="file"],
+input[type="text"] {
+    margin-top: 5px; /* Отступ сверху */
+    width: 90%; /* Ширина полей ввода */
+    padding: 8px; /* Внутренний отступ */
+    border: 1px solid gray; /* Граница */
+    border-radius: 5px; /* Скругление углов */
+    font-size: 14px; /* Размер шрифта */
+}
+
+label {
+    min-width: 180px; /* Минимальная ширина для надписей */
+}
+
+.order-container {
+    display: flex; /* Вертикальное размещение */
+    flex-direction: column; /* В столбик */
+    align-items: center; /* Центрирование */
+    text-align: left; /* Текст слева */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.order-container-admin {
+    text-align: left; /* Текст выровнен по левому краю */
+    max-width: 700px; /* Максимальная ширина */
+    width: auto; /* Автоматическая ширина */
+    margin: 30px auto; /* Центрирование */
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 10px; /* Скругление углов */
+    padding: 20px; /* Внутренний отступ */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Тень вокруг блока */
+    background-color: beige; /* Фон */
+}
+form-content
+.order-link {
+    color: blue; /* Синий текст ссылок */
+    text-decoration: none; /* Убрать подчеркивание */
+}
+
+.order-table {
+    width: 70%; /* Ширина таблицы */
+    margin: 0 auto; /* Центрирование */
+    border-collapse: collapse; /* Объединение границ */
+    background-color: beige; /* Фон таблицы */
+    text-align: center; /* Центрирование текста */
+}
+
+.order-table th, .order-table td {
+    padding: 10px; /* Отступы внутри ячеек */
+    border: 1px solid #ccc; /* Граница ячеек */
+}
+
+.phone-image img {
+    max-height: 250px; /* Максимальная высота изображения */
+    border-radius: 5px; /* Скругление углов */
+}
+
+.submit-button {
+    display: flex; /* Выравнивание кнопки */
+    justify-content: center; /* Кнопка прижата к правому краю */
+}
+
+.submit-button input[type="submit"] {
+    padding: 10px 20px; /* Внутренний отступ */
+    background-color: #4CAF50; /* Цвет фона кнопки */
+    color: white; /* Цвет текста */
+    border: none; /* Без границы */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Изменение курсора при наведении */
+}
+
+.submit-button input[type="submit"]:hover {
+    background-color: #45a049; /* Изменение цвета кнопки при наведении */
+}

@@ -86,20 +86,20 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
 
                 // 2. Настраиваем авторизацию
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers(
-//                                new AntPathRequestMatcher("/mobileshop/admin_page/**"),
-//                                new AntPathRequestMatcher("/mobileshop/orders"),
-////                                new AntPathRequestMatcher("/mobileshop/{orderId}/order"),
-//                                new AntPathRequestMatcher("/mobileshop/orders/p"),
-//                                new AntPathRequestMatcher("/mobileshop/new_phone"),
-//                                new AntPathRequestMatcher("/mobileshop/{phoneId}/edit_phone")
-//                        ).hasRole("ADMIN") // Доступ только для ADMIN
-//
-//                        .requestMatchers(new AntPathRequestMatcher("/mobileshop/my-orders")).authenticated() // Доступ только после аутентификации
-//
-//                        .anyRequest().permitAll() // Все остальные страницы доступны всем
-//                )
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/mobileshop/admin_page/**"),
+                                new AntPathRequestMatcher("/mobileshop/orders"),
+//                                new AntPathRequestMatcher("/mobileshop/{orderId}/order"),
+                                new AntPathRequestMatcher("/mobileshop/orders/p"),
+                                new AntPathRequestMatcher("/mobileshop/new_phone"),
+                                new AntPathRequestMatcher("/mobileshop/{phoneId}/edit_phone")
+                        ).hasRole("ADMIN") // Доступ только для ADMIN
+
+                        .requestMatchers(new AntPathRequestMatcher("/mobileshop/my-orders")).authenticated() // Доступ только после аутентификации
+
+                        .anyRequest().permitAll() // Все остальные страницы доступны всем
+                )
 
                 // 3. Настраиваем форму входа
                 .formLogin(form -> form

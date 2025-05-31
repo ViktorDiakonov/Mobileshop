@@ -110,8 +110,8 @@ button a {
 .flex-container {
     display: flex; /* Включаем flexbox */
     align-items: stretch; /* Растягиваем элементы по высоте */
-    /*height: 185px; !* Фиксированная высота *!*/
     height: 100px; /* Фиксированная высота */
+    min-width: 1000px;
 }
 
 /* Форма с группами полей */
@@ -156,6 +156,8 @@ h1, h2, h3, h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box; /* Важно! */
 }
 
 .header-text {
@@ -164,17 +166,17 @@ h1, h2, h3, h4 {
     text-transform: uppercase; /* если хотите заглавные буквы */
 }
 
-header.logo {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+/*header.logo {*/
+/*    flex: 2;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
 
-header.logo img {
-    height: 150px;
-    margin-top: 25px;
-}
+/*header.logo img {*/
+/*    height: 150px;*/
+/*    margin-top: 25px;*/
+/*}*/
 
 input {
     text-decoration: none;

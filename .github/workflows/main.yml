@@ -1,0 +1,13 @@
+name: Wake Up My Site
+
+on:
+  schedule:
+    # Запускаем каждые 5 минут (синтаксис cron)
+    - cron: '*/5 * * * *'
+
+jobs:
+  wake-up:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the site
+        run: curl -s "https://mobileshop-z7mn.onrender.com/mobileshop/" > /dev/null

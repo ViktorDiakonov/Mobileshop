@@ -112,6 +112,11 @@ button a {
     align-items: stretch; /* Растягиваем элементы по высоте */
     height: 100px; /* Фиксированная высота */
     min-width: 1000px;
+
+    background-color: limegreen; /* Цвет полосы */
+    width: 100%;               /* На всю ширину экрана */
+    top: 0;                   /* Прижимаем к верху */
+    left: 0;                  /* Выравнивание по левому краю */
 }
 
 /* Форма с группами полей */
@@ -150,7 +155,7 @@ h1, h2, h3, h4 {
 /*заголовок начало*/
 #header {
     /*background-color: skyblue;*/
-    background-color: limegreen;
+    /*background-color: limegreen;*/
     height: 120px;
     padding: 5px;
     display: flex;
@@ -393,7 +398,7 @@ p {
 
 .sidebar {
     /*background-color: skyblue;*/
-    background-color: limegreen;
+    /*background-color: limegreen;*/
     flex: 1;
     padding: 1px;
     box-sizing: border-box;
@@ -535,7 +540,7 @@ td {
 }
 
 .search-form input[type="text"] {
-    width: 300px;
+    width: 200px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px 0 0 4px;

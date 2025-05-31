@@ -44,6 +44,10 @@
 
 <h2 style="color: limegreen; font-family: 'Grava Display', serif;">Останні надходження</h2>
 <br>
+
+<!--костыль - для изменения размера страницы-->
+<div style="display: inline-block; margin-left: 1000px;"></div>
+
 <div id="phones-container" class="grid-view">
     <div th:each="phones : ${phone}" class="phone-item">
         <a th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}">

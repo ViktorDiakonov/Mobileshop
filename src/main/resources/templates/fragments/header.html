@@ -7,53 +7,84 @@
 </head>
 <body>
 
+<!--<div th:fragment="header">-->
+<!--    <div id="header" class="flex-container" style="gap: 50px;">-->
+<!--        <div id="leftHeader" class="sidebar">-->
+<!--            <a href="/mobileshop/" title="На головну">-->
+<!--                <h1>Mobile Shop</h1>-->
+<!--                <p>Ваш магазин смартфонів</p>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div class="search-container">-->
+<!--            <form th:action="@{/mobileshop/search}" method="get" class="search-form">-->
+<!--                <label>-->
+<!--                    <input type="text"-->
+<!--                           name="q"-->
+<!--                           placeholder="Пошук за моделлю..."-->
+<!--                           style="padding: 8px; border: 1px solid #ccc; border-radius: 4px 0 0 4px;">-->
+<!--                </label>-->
+<!--                <button type="submit"-->
+<!--                        style="padding: 8px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 0 4px 4px 0; cursor: pointer;">-->
+<!--                    <i class="fa fa-search"></i>-->
+<!--                </button>-->
+<!--            </form>-->
+<!--        </div>-->
+
+<!--        <div id="rightHeader" class="right-header">-->
+<!--            <a href="/mobileshop/my-orders" title="Замовлення">-->
+<!--                <i class="fa-solid fa-user-large"></i> Кабінет-->
+<!--            </a>-->
+
+<!--            <a href="/mobileshop/cart" class="cart-link">-->
+<!--                <i class="fas fa-shopping-cart"></i>-->
+<!--                <span th:if="${#ctx.containsVariable('cart') and cart.items.size() > 0}"-->
+<!--                      th:text="${cart.items.size()}"-->
+<!--                      class="cart-badge"></span>-->
+<!--                <span>Кошик</span>-->
+<!--            </a>-->
+
+<!--            <a href="https://github.com/ViktorDiakonov">GitHub</a>-->
+<!--            <a href="/mobileshop/contacts">Контакти</a>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--</div>-->
 <div th:fragment="header">
-    <div id="header" class="flex-container" style="gap: 50px;">
-        <div id="leftHeader" class="sidebar" style="min-width: 200px">
+    <div id="header" class="flex-container">
+        <div id="leftHeader" class="sidebar">
             <a href="/mobileshop/" title="На головну">
                 <h1>Mobile Shop</h1>
                 <p>Ваш магазин смартфонів</p>
             </a>
-
         </div>
-        <div class="search-container" style="margin-left: 20px; display: flex;">
-            <form th:action="@{/mobileshop/search}" method="get" class="search-form" style="display: flex;">
-                <label>
-                    <input type="text"
-                           name="q"
-                           placeholder="Пошук за моделлю..."
-                           style="padding: 8px; border: 1px solid #ccc; border-radius: 4px 0 0 4px;">
-                </label>
-                <button type="submit"
-                        style="padding: 8px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 0 4px 4px 0; cursor: pointer;">
+
+        <div class="search-container">
+            <form th:action="@{/mobileshop/search}" method="get" class="search-form">
+                <input type="text" name="q" placeholder="Пошук за моделлю...">
+                <button type="submit">
                     <i class="fa fa-search"></i>
                 </button>
             </form>
         </div>
-<!--        <div class="logo">-->
-<!--            <a href="/mobileshop/"><img src="/img/site/logoheader.png" alt="logo" title="На головну"></a>-->
-<!--        </div>-->
-        <div id="rightHeader" class="sidebar" style="display: flex; align-items: center; gap: 10px; margin-right: 50px">
-            <a href="/mobileshop/my-orders" title="Замовлення"
-               style="display: flex; align-items: center; gap: 5px;">
-                <i class="fa-solid fa-user-large"></i> Замовлення
+
+        <div id="rightHeader" class="right-header">
+            <a href="/mobileshop/my-orders" title="Замовлення">
+                <i class="fa-solid fa-user-large"></i> Кабінет
             </a>
-            <span style="color: gray;">&nbsp;&nbsp;&nbsp;</span>
-            <a href="/mobileshop/cart" class="cart-link" style="display: flex; align-items: center; gap: 5px;">
+
+            <a href="/mobileshop/cart" class="cart-link">
                 <i class="fas fa-shopping-cart"></i>
                 <span th:if="${#ctx.containsVariable('cart') and cart.items.size() > 0}"
                       th:text="${cart.items.size()}"
-                      class="cart-badge"
-                      style="background: #dc3545; color: white; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-left: 5px;"></span>
+                      class="cart-badge"></span>
                 <span>Кошик</span>
             </a>
 
-            <span style="color: gray;">&nbsp;&nbsp;&nbsp;</span>
             <a href="https://github.com/ViktorDiakonov">GitHub</a>
-            <span style="color: gray;">&nbsp;&nbsp;&nbsp;</span>
             <a href="/mobileshop/contacts">Контакти</a>
         </div>
     </div>
 </div>
+
 </body>
 </html>

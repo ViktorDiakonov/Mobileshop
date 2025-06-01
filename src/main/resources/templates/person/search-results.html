@@ -96,15 +96,14 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<br>
+
+<div th:replace="~{fragments/BrandSidebar :: leftSidebar}"></div>
 
 <nav style="margin-left: 50px;">
     <a href="/mobileshop/" style="color: black; text-decoration: none;">Головна</a>
     <span style="color: gray;"> &gt; </span>
     <span style="color: black; text-decoration: none; font-family: Grava Display, serif"> Пошук </span>
 </nav>
-
-<div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
 
 <div class="search-header">
     <h2>Результати пошуку «<span class="search-query" th:text="${query}"></span>»</h2>

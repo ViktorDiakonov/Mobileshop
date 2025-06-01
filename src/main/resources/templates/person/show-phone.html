@@ -38,7 +38,8 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<br>
+
+<div th:replace="~{fragments/BrandSidebar :: leftSidebar}"></div>
 
 <nav>
     <a href="/mobileshop/" style="color: black; text-decoration: none; margin-left: 50px">Головна</a>
@@ -50,8 +51,6 @@
     <span style="color: gray;"> &gt; </span>
     <span th:text="${phone.getModel()}" style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
 </nav>
-
-<div th:replace="~{fragments/leftSidebar :: leftSidebar}"></div>
 
 <div class="order-container" style="margin-top: 50px">
     <h2>Смартфон:</h2>

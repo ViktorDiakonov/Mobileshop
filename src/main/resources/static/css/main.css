@@ -134,14 +134,15 @@ button a {
 /* Сетка с центровкой */
 .grid-view {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 3 в ряд */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    justify-content: center; /* Центрируем */
+    max-width: 1100px; /* 5 * 200px + 4 * 20px = 1080px */
+    margin: 0 auto;
 }
 
 /* Карточки телефонов */
-.grid-view .phone-item {
-    min-width: 200px; /* Минимальная ширина карточки */
+.phone-item {
+    width: 100%;
     text-align: center;
     border: 1px solid #ddd;
     padding: 10px;
@@ -284,7 +285,7 @@ p {
 }
 
 #phones-container {
-    max-width: 900px; /* Или другое значение в зависимости от дизайна */
+    max-width: 90%; /* Или другое значение в зависимости от дизайна */
     margin: 0 auto;
 }
 

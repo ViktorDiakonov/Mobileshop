@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile shop</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -44,9 +44,6 @@
 <h2 style="color: limegreen; font-family: 'Grava Display', serif;">Останні надходження</h2>
 <br>
 
-<!--костыль - для изменения размера страницы-->
-<div style="display: inline-block; margin-left: 1000px;"></div>
-
 <div id="phones-container" class="grid-view">
     <div th:each="phones : ${phone}" class="phone-item">
         <a th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}">
@@ -61,8 +58,7 @@
             </div>
         </a>
 
-        <div style="display: flex; justify-content: center; align-items: center; gap: 50px;">
-            <!--            <b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')}"></span></b> ₴-->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px">
             <b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')} + ' ₴'"
                      style="font-family: 'Grava Display', serif; font-size: 20px;"></span></b>
             <button class="btn-submit add-to-cart-btn"

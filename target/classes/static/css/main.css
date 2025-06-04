@@ -110,8 +110,11 @@ button a {
 .flex-container {
     display: flex; /* Включаем flexbox */
     align-items: stretch; /* Растягиваем элементы по высоте */
-    /*height: 185px; !* Фиксированная высота *!*/
     height: 100px; /* Фиксированная высота */
+    background-color: limegreen; /* Цвет полосы */
+    width: 100%;               /* На всю ширину экрана */
+    top: 0;                   /* Прижимаем к верху */
+    left: 0;                  /* Выравнивание по левому краю */
 }
 
 /* Форма с группами полей */
@@ -129,14 +132,15 @@ button a {
 /* Сетка с центровкой */
 .grid-view {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 3 в ряд */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    justify-content: center; /* Центрируем */
+    max-width: 90%; /* 5 * 200px + 4 * 20px = 1080px */
+    margin: 0 auto;
 }
 
 /* Карточки телефонов */
-.grid-view .phone-item {
-    min-width: 200px; /* Минимальная ширина карточки */
+.phone-item {
+    width: 100%;
     text-align: center;
     border: 1px solid #ddd;
     padding: 10px;
@@ -149,31 +153,21 @@ h1, h2, h3, h4 {
 
 /*заголовок начало*/
 #header {
-    /*background-color: skyblue;*/
-    background-color: limegreen;
     height: 120px;
     padding: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box; /* Важно! */
+    flex-wrap: wrap; /* Чтобы всё переносилось на маленьких экранах */
+    gap: 20px;
 }
 
 .header-text {
     font-size: 16px; /* или другой размер по вашему желанию */
     font-family: "Arial", serif;
     text-transform: uppercase; /* если хотите заглавные буквы */
-}
-
-header.logo {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-header.logo img {
-    height: 150px;
-    margin-top: 25px;
 }
 
 input {
@@ -204,12 +198,12 @@ input:valid + span::before {
     color: green;
 }
 
-#leftSidebar {
-    background-color: white;
-    float: left;
-    width: 200px;
-    height: 271px;
-}
+/*#leftSidebar {*/
+/*    background-color: white;*/
+/*    float: left;*/
+/*    width: 200px;*/
+/*    height: 271px;*/
+/*}*/
 
 li {
     font-family: "Grava Display", serif;
@@ -277,7 +271,7 @@ p {
 }
 
 #phones-container {
-    max-width: 900px; /* Или другое значение в зависимости от дизайна */
+    max-width: 90%; /* Или другое значение в зависимости от дизайна */
     margin: 0 auto;
 }
 
@@ -382,7 +376,21 @@ p {
 #rightSidebar {
     background-color: white;
     float: right;
-    width: 200px;
+    width: 100%;
+}
+
+.right-header {
+    padding: 1px;
+    box-sizing: border-box;
+
+
+    display: flex;
+    flex-wrap: wrap; /* позволяет сжиматься и переноситься */
+    gap: 30px; /* расстояние между элементами */
+    align-items: center;
+    flex: 1; /* гибкий блок */
+    width: 100%
+    /*min-width: 200px;*/
 }
 
 #rightHeader li {
@@ -391,10 +399,11 @@ p {
 
 .sidebar {
     /*background-color: skyblue;*/
-    background-color: limegreen;
+    /*background-color: limegreen;*/
     flex: 1;
     padding: 1px;
     box-sizing: border-box;
+    width: 100%;
 }
 
 table {
@@ -475,69 +484,30 @@ td {
     margin: 0;
 }
 
-.widget {
-    margin-top: 50px;
-    min-height: 330px; /* Минимальная высота, но может расти */
-    height: auto; /* Растягивается под контент */
-    margin-left: 50px;
-    padding: 40px;
-    border: 5px solid #f1f1f1;
-    background: #fff;
-    border-radius: 5px;
-}
-
-.widget a:hover {
-    color: #2ecc71; /* или любой другой зеленый цвет */
-    /* Можно добавить плавный переход */
-    transition: color 0.3s ease;
-}
-
-.widget ul {
+.search-container {
+    flex: 1; /* Позволяет занять свободное пространство */
     display: flex;
-    flex-direction: column; /* Главная ось теперь вертикальна */
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    width: auto;
-}
-
-.widget li {
-    border-bottom: 1px solid #eaeaea;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-}
-
-.widget li:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.widget a {
-    text-decoration: none;
-    color: #616a6b;
-    display: inline-block;
-}
-
-.widget li:before {
-    font-size: 40px;
-    vertical-align: bottom;
-    color: #dd3333;
-    margin-right: 14px;
+    justify-content: center; /* По центру */
 }
 
 /* Стили для поисковой формы */
 .search-form {
-    max-width: 400px;
+    width: 100%;
     margin: 0 auto;
+    flex: 1; /* Позволяет растягиваться */
+    display: flex; /* Для выравнивания кнопки */
+    /*max-width: 500px; !* Ограничиваем, если нужно *!*/
 }
 
 .search-form input[type="text"] {
-    width: 300px;
+    width: 100%;
+    max-width: 400px; /* Увеличено с 200px до 400px */
+    min-width: 150px; /* Не сжимается слишком сильно */
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px 0 0 4px;
     outline: none;
+    box-sizing: border-box;
 }
 
 .search-form button {
@@ -556,6 +526,6 @@ td {
 /* Для мобильной версии */
 @media (max-width: 768px) {
     .search-form input[type="text"] {
-        width: 200px;
+        width: 100%;
     }
 }

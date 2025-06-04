@@ -2,6 +2,7 @@ package ua.viktor.myspringbootapp.controllers;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import ua.viktor.myspringbootapp.models.Cart;
 import ua.viktor.myspringbootapp.models.Order;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.repositories.PhoneRepository;
+import ua.viktor.myspringbootapp.services.EmailService;
 import ua.viktor.myspringbootapp.services.PhoneService;
 
 import javax.validation.Valid;
@@ -30,6 +32,8 @@ public class PersonController {
 
     private final PhoneService phoneService;
     private final PhoneRepository phoneRepository;
+    private final EmailService emailService;
+
 
     @GetMapping("/")
     public String mainPage(Model model) {
@@ -96,6 +100,19 @@ public class PersonController {
 
         phoneService.createOrder(order);
         log.info("Создан новый заказ: {}", order);
+
+        // Отправка письма
+        String subject = "Нове замовлення #" + order.getId();
+        String body =
+                "Нове замовлення від " + order.getPersonName() + "\n" +
+                        "Телефон: " + order.getBrand() + "\n" +
+                        "Модель: " + order.getModel() + "\n" +
+                        "Памʼять: " + order.getMemorySize() + "\n" +
+                        "Кількість: " + order.getQuantity() + "\n" +
+                        "Ціна: " + order.getPrice() + " UAH";
+
+        emailService.sendOrderNotification("vip3352@gmail.com", subject, body);
+
         model.addAttribute("order", order);
         return "person/buy";
     }

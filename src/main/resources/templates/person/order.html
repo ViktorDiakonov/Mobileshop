@@ -11,8 +11,8 @@
 
 <div th:replace="~{fragments/brandSidebar :: leftSidebar}"></div>
 
-<nav>
-    <a href="/mobileshop/" style="color: black; text-decoration: none; margin-left: 50px">Головна</a>
+<nav style="margin-left: 50px;">
+    <a href="/mobileshop/" style="color: black; text-decoration: none;">  <span><i class="fas fa-home home-icon"></i> Головна</span></a>
     <span style="color: gray;"> &gt; </span>
     <a th:href="@{/mobileshop/phones/{id}(id=${phone.getBrand().toLowerCase()})}"
        style="color: black; text-decoration: none; font-family: Grava Display, serif">

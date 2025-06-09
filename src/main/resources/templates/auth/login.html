@@ -5,13 +5,20 @@
     <title>Login page</title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        nav {
+            margin-left: 50px;
+            font-family: "Grava Display", serif;
+        }
+
+    </style>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 <br>
 
-<nav style="margin-left: 50px;">
-    <a href="/mobileshop/" style="color: black; text-decoration: none;">На головну</a>
+<nav>
+    <a href="/mobileshop/" style="color: black; text-decoration: none;"><span><i class="fas fa-home home-icon"></i> Головна</span></a>
 </nav>
 
 <h3>Увійдіть в свій обліковий запис</h3>

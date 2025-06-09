@@ -30,6 +30,12 @@
         .btn-submit:hover .cart-icon {
             transform: scale(1.1);
         }
+
+        nav {
+             margin-left: 50px;
+             font-family: "Grava Display", serif;
+         }
+
     </style>
 </head>
 <body>
@@ -37,8 +43,8 @@
 
 <div th:replace="~{fragments/brandSidebar :: leftSidebar}"></div>
 
-<nav style="margin-left: 50px;">
-    <span style="font-family: Grava Display, serif">Головна</span>
+<nav>
+    <span><i class="fas fa-home home-icon"></i> Головна</span>
 </nav>
 
 <h2 style="color: limegreen; font-family: 'Grava Display', serif;">Останні надходження</h2>

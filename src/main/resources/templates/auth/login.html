@@ -45,5 +45,22 @@
     border-radius: 5px"><a href="/mobileshop/auth/registration" style="color: white; font-size: 16px; text-decoration: none;">Зареєструйтесь</a></button>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const phoneInput = document.getElementById('phoneNumber');
+
+        // Устанавливаем префикс 380 при загрузке страницы, если поле пустое
+        if (!phoneInput.value || !phoneInput.value.startsWith('380')) {
+            phoneInput.value = '380';
+        }
+
+        phoneInput.addEventListener('input', function () {
+            if (!phoneInput.value.startsWith('380')) {
+                phoneInput.value = '380';
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

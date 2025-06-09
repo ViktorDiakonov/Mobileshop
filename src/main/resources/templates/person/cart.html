@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Кошик</title>
@@ -43,15 +43,12 @@
         }
 
         #total-block {
-            transition: all 0.3s ease;
-        }
-
-        #total-block.hidden {
             opacity: 0;
             height: 0;
             overflow: hidden;
             margin: 0;
             padding: 0;
+            transition: all 0.3s ease;
         }
     </style>
 </head>
@@ -107,9 +104,9 @@
     </form>
 </div>
 <br>
-<p>
-    <button class="btn-submit" onclick="window.history.back()">Повернутись назад</button>
-</p>
+<!--<p>-->
+<!--    <button class="btn-submit" onclick="window.history.back()">Повернутись назад</button>-->
+<!--</p>-->
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -21,6 +21,7 @@ public class AuthServiceBean implements AuthService {
     private final PeopleRepository peopleRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // для валидеции по имени - уже не использую
     @Override
     public Optional<Person> show(String userName) {
         log.info("Для валидации - получен Person с именем = {}", userName);
@@ -36,4 +37,11 @@ public class AuthServiceBean implements AuthService {
         peopleRepository.save(person);
         log.info("Пользователь {} успешно зарегистрирован", person.getUserName());
     }
+
+    @Override
+    public Optional<Person> findByPhoneNumber(String phoneNumber) {
+        log.info("Для валидации - получен Person с телефоном = {}", phoneNumber);
+        return peopleRepository.findByPhoneNumber(phoneNumber);
+    }
+
 }

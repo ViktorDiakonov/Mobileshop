@@ -9,9 +9,12 @@ import java.util.Optional;
  */
 public interface AuthService {
 
-    // для валидации
+    // для валидации по имени
     Optional<Person> show(String userName);
 
     // регистрирует нового пользователя и присваивает ему роль USER
     void register(Person person);
+
+    Optional<Person> findByPhoneNumber(String phoneNumber);
+
 }

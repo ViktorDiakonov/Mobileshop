@@ -39,7 +39,7 @@
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 
-<div th:replace="~{fragments/brandSidebar :: leftSidebar}"></div>
+<div th:replace="~{fragments/brand-sidebar :: brand-sidebar}"></div>
 
 <nav style="margin-left: 50px;">
     <a href="/mobileshop/" style="color: black; text-decoration: none;">  <span><i class="fas fa-home home-icon"></i> Головна</span></a>
@@ -88,7 +88,7 @@
 </div>
 
 <div class="form-group">
-    <a th:href="@{/mobileshop/{id}/new_order(id=${phone.getId()})}" class="btn-submit">Швидке замовлення</a>
+    <a th:href="@{/mobileshop/{id}/quick-order(id=${phone.getId()})}" class="btn-submit">Швидке замовлення</a>
 </div>
 
 <div id="imageModal" class="modal">

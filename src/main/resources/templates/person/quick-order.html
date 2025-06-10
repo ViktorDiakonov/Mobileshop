@@ -9,7 +9,7 @@
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 
-<div th:replace="~{fragments/brandSidebar :: leftSidebar}"></div>
+<div th:replace="~{fragments/brand-sidebar :: brand-sidebar}"></div>
 
 <nav style="margin-left: 50px;">
     <a href="/mobileshop/" style="color: black; text-decoration: none;">  <span><i class="fas fa-home home-icon"></i> Головна</span></a>
@@ -25,7 +25,7 @@
 <div class="order-container" style="margin-top: 50px">
     <h2>Оформлення замовлення</h2>
     <br>
-    <form method="POST" th:action="@{/mobileshop/{id}/order(id=${phone.getId()})}" th:object="${phone}">
+    <form method="POST" th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.getId()})}" th:object="${phone}">
         <div class="phone-details">
             <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону">
             <div class="phone-info">

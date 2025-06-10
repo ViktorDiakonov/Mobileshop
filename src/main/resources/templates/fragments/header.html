@@ -18,7 +18,9 @@
 
         <div class="search-container">
             <form th:action="@{/mobileshop/search}" method="get" class="search-form">
-                <input type="text" name="q" placeholder="Пошук за моделлю...">
+                <label>
+                    <input type="text" name="q" placeholder="Пошук за моделлю...">
+                </label>
                 <button type="submit">
                     <i class="fa fa-search"></i>
                 </button>
@@ -30,9 +32,16 @@
                 <i class="fa-solid fa-user-large"></i> Кабінет
             </a>
 
+<!--            <a href="/mobileshop/cart" class="cart-link">-->
+<!--                <i class="fas fa-shopping-cart"></i>-->
+<!--                <span th:if="${#ctx.containsVariable('cart') and cart.items.size() > 0}"-->
+<!--                      th:text="${cart.items.size()}"-->
+<!--                      class="cart-badge"></span>-->
+<!--                <span>Кошик</span>-->
+<!--            </a>-->
             <a href="/mobileshop/cart" class="cart-link">
                 <i class="fas fa-shopping-cart"></i>
-                <span th:if="${#ctx.containsVariable('cart') and cart.items.size() > 0}"
+                <span th:if="${cart?.items != null and not cart.items.isEmpty()}"
                       th:text="${cart.items.size()}"
                       class="cart-badge"></span>
                 <span>Кошик</span>

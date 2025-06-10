@@ -65,14 +65,14 @@ public class PersonController {
 
     //----------------------------------------------------------------------
     // order creation page
-    @GetMapping("/{id}/new_order")
+    @GetMapping("/{id}/quick-order")
     public String createNewOrder(@PathVariable("id") int id, Model model) {
         log.info("Пользователь перешел на страницу создания заказа для телефона с id = {}", id);
         model.addAttribute("phone", phoneService.findPhoneById(id));
-        return "person/order";
+        return "person/quick-order";
     }
 
-    @PostMapping("/{id}/order")
+    @PostMapping("/{id}/quick-order-confirmation")
     public String createOrder(@PathVariable int id,
                               @RequestParam("quantity") int quantity,
                               @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
@@ -97,16 +97,9 @@ public class PersonController {
         phoneService.createOrder(order);
         log.info("Создан новый заказ: {}", order);
         model.addAttribute("order", order);
-        return "person/buy";
+        return "person/quick-order-confirmation";
     }
 //---------------------------------------------------------------------
-
-    // returns the page "About us"
-    @GetMapping("/aboutus")
-    public String aboutUs() {
-        log.info("Пользователь перешел на страницу 'О нас'");
-        return "person/aboutus";
-    }
 
     // returns the page "Contacts"
     @GetMapping("/contacts")
@@ -115,15 +108,8 @@ public class PersonController {
         return "person/contacts";
     }
 
-    // returns the page "Conditions of delivery"
-    @GetMapping("/delivery")
-    public String delivery() {
-        log.info("Пользователь перешел на страницу 'Условия доставки'");
-        return "person/delivery";
-    }
-
-    @GetMapping("/checkout")
-    public String checkout(@ModelAttribute("cart") Cart cart, Model model) {
+    @GetMapping("/cart-order")
+    public String cartOrder(@ModelAttribute("cart") Cart cart, Model model) {
         if (cart.getItems().isEmpty()) {
             return "redirect:/mobileshop/cart";
         }
@@ -134,64 +120,37 @@ public class PersonController {
         return "person/cart-order";
     }
 
-//    @PostMapping("/place-order")
-//    public String placeOrder(@ModelAttribute("cart") Cart cart,
-//                             @ModelAttribute("order") @Valid Order order,
-//                             BindingResult bindingResult,
-//                             Model model) {
-//
-//        if (bindingResult.hasErrors() || cart.getItems().isEmpty()) {
-//            model.addAttribute("cartItems", cart.getItems());
-//            model.addAttribute("total", cart.getTotal());
-//            return "person/cart-order";
-//        }
-//
-//        // Создаем заказ для каждого товара
-//        List<Order> createdOrders = new ArrayList<>();
-//        for (Cart.CartItem item : cart.getItems()) {
-//            Order newOrder = getOrder(order, item);
-//
-//            phoneService.createOrder(newOrder);
-//            createdOrders.add(newOrder);
-//        }
-//
-//        // Очищаем корзину
-//        cart.clear();
-//
-//        model.addAttribute("orders", createdOrders);
-//        return "person/cart-order-success";
-//    }
-@PostMapping("/place-order")
-public String placeOrder(@ModelAttribute("cart") Cart cart,
-                         @ModelAttribute("order") @Valid Order order,
-                         BindingResult bindingResult,
-                         Model model) {
+    @PostMapping("/cart-order-confirmation")
+    public String placeOrder(@ModelAttribute("cart") Cart cart,
+                             @ModelAttribute("order") @Valid Order order,
+                             BindingResult bindingResult,
+                             Model model) {
 
-    if (bindingResult.hasErrors() || cart.getItems().isEmpty()) {
-        model.addAttribute("cartItems", cart.getItems());
-        model.addAttribute("total", cart.getTotal());
-        return "person/cart-order";
+        if (bindingResult.hasErrors() || cart.getItems().isEmpty()) {
+            model.addAttribute("cartItems", cart.getItems());
+            model.addAttribute("total", cart.getTotal());
+            return "person/cart-order";
+        }
+
+        List<Order> createdOrders = new ArrayList<>();
+        for (Cart.CartItem item : cart.getItems()) {
+            Order newOrder = getOrder(order, item); // здесь ты мапишь item в заказ
+            phoneService.createOrder(newOrder);
+            createdOrders.add(newOrder);
+        }
+
+        // Вот эта строка вычисляет общую сумму
+        int total = createdOrders.stream()
+                .mapToInt(o -> o.getPrice() * o.getQuantity())
+                .sum();
+
+        cart.clear();
+
+        model.addAttribute("orders", createdOrders);
+        model.addAttribute("total", total);
+
+        return "person/cart-order-confirmation";
     }
-
-    List<Order> createdOrders = new ArrayList<>();
-    for (Cart.CartItem item : cart.getItems()) {
-        Order newOrder = getOrder(order, item); // здесь ты мапишь item в заказ
-        phoneService.createOrder(newOrder);
-        createdOrders.add(newOrder);
-    }
-
-    // Вот эта строка вычисляет общую сумму
-    int total = createdOrders.stream()
-            .mapToInt(o -> o.getPrice() * o.getQuantity())
-            .sum();
-
-    cart.clear();
-
-    model.addAttribute("orders", createdOrders);
-    model.addAttribute("total", total);
-
-    return "person/cart-order-success";
-}
 
 
     private static Order getOrder(Order order, Cart.CartItem item) {

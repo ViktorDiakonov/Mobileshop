@@ -97,7 +97,7 @@
 </div>
 <!-- Кнопка оформления заказа -->
 <div th:unless="${items.isEmpty()}" class="checkout-section">
-    <form th:action="@{/mobileshop/checkout}" method="get">
+    <form th:action="@{/mobileshop/cart-order}" method="get">
         <button type="submit" class="btn-submit">
             Оформити замовлення
         </button>

@@ -12,20 +12,96 @@
 <div th:replace="~{fragments/brand-sidebar :: brand-sidebar}"></div>
 
 <nav style="margin-left: 50px;">
-    <a href="/mobileshop/" style="color: black; text-decoration: none;">  <span><i class="fas fa-home home-icon"></i> Головна</span></a>
+    <a href="/mobileshop/" style="color: black; text-decoration: none;"> <span><i class="fas fa-home home-icon"></i> Головна</span></a>
     <span style="color: gray;"> &gt; </span>
     <a th:href="@{/mobileshop/phones/{id}(id=${phone.getBrand().toLowerCase()})}"
        style="color: black; text-decoration: none; font-family: Grava Display, serif">
         Смартфони <span th:text="${phone.getBrand()}"></span>
     </a>
     <span style="color: gray;"> &gt; </span>
-    <span th:text="${phone.getModel()}" style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
+    <span th:text="${phone.getModel()}"
+          style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
 </nav>
 
 <div class="order-container" style="margin-top: 50px">
     <h2>Оформлення замовлення</h2>
     <br>
-    <form method="POST" th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.getId()})}" th:object="${phone}">
+    <!--    <form method="POST" th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.getId()})}" th:object="${phone}">-->
+    <!--    <form th:object="${order}" method="POST"-->
+    <!--          th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.id})}">-->
+    <!--        <div class="phone-details">-->
+    <!--            <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону">-->
+    <!--            <div class="phone-info">-->
+    <!--                <p><strong>Виробник:</strong> <span th:text="${phone.brand}"></span></p>-->
+    <!--                <p><strong>Модель:</strong> <span th:text="${phone.model}"></span></p>-->
+    <!--                <p><strong>Вбудована пам'ять:</strong> <span th:text="${phone.memorySize}"></span> ГБ</p>-->
+    <!--                <br>-->
+    <!--                <p><strong>Ціна:</strong> <span id="priceDisplay"-->
+    <!--                                                th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴-->
+    <!--                    <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required>-->
+    <!--                    <label for="quantity">шт.</label>-->
+    <!--                </p>-->
+    <!--                <p><strong>Сума до сплати:</strong> <span id="totalPrice">0</span> ₴</p>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <hr style="width: 80%; margin: 0 auto; border: 1px solid grey;"/>-->
+    <!--        <br>-->
+    <!--        <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">-->
+    <!--            <p style="margin: 5px;">-->
+    <!--                <label for="personName">Ім'я покупця:</label>-->
+    <!--                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="text"-->
+    <!--                       id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"-->
+    <!--                       maxlength="20">-->
+    <!--            </p>-->
+    <!--            <p style="margin: 5px;">-->
+    <!--                <label for="personPhone">Номер телефону:</label>-->
+    <!--                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="tel"-->
+    <!--                       id="personPhone" name="personPhone" pattern="380\d{9}" placeholder="380XXXXXXXXX"-->
+    <!--                       required value="380">-->
+    <!--            </p>-->
+    <!--        </div>-->
+    <!--        <div style="display: flex; margin-top: 7px; justify-content: flex-end;">-->
+    <!--            <label for="personComment"></label><br>-->
+    <!--            <div style="display: flex; align-items: flex-end; gap: 18px;">-->
+    <!--                <div id="charCount" style="font-size: 14px; color: #777; white-space: nowrap;">0/150</div>-->
+    <!--                <textarea id="personComment" name="personComment" placeholder="Додати коментар:" minlength="0"-->
+    <!--                          maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"-->
+    <!--                          style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <script>-->
+    <!--            function updateCharacterCount() {-->
+    <!--                let textArea = document.getElementById('personComment');-->
+    <!--                let charCount = textArea.value.length;-->
+    <!--                let maxLength = textArea.getAttribute('maxlength');-->
+    <!--                document.getElementById('charCount').textContent = charCount + '/' + maxLength;-->
+    <!--            }-->
+    <!--        </script>-->
+
+    <!--        <script>-->
+    <!--            const phoneInput = document.getElementById('personPhone');-->
+
+    <!--            phoneInput.addEventListener('input', function () {-->
+    <!--                if (!phoneInput.value.startsWith('380')) {-->
+    <!--                    phoneInput.value = '380';-->
+    <!--                }-->
+    <!--            });-->
+    <!--        </script>-->
+    <!--        <br>-->
+    <!--        <p>-->
+    <!--            <label for="pickupPoint">Виберіть точку видачі:</label>-->
+    <!--            <select id="pickupPoint" name="point" required>-->
+    <!--                <option value="Київ, вул. Антоновича, 50">Київ, вул. Антоновича, 50 (10:00-21:00)</option>-->
+    <!--                <option value="Дніпро, вул. Магнітогорська, 1А">Дніпро, вул. Магнітогорська, 1А (10:00-21:00)</option>-->
+    <!--                <option value="Одеса, вул. Дерибасівська 3Д">Одеса, вул. Дерибасівська 3Д (09:00-22:00)</option>-->
+    <!--            </select>-->
+    <!--        </p>-->
+    <!--        <div class="form-group">-->
+    <!--            <button type="submit" class="btn-submit">Підтвердити замовлення</button>-->
+    <!--        </div>-->
+    <!--    </form>-->
+    <form method="POST" th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.id})}"
+          th:object="${order}" novalidate>
         <div class="phone-details">
             <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону">
             <div class="phone-info">
@@ -33,9 +109,9 @@
                 <p><strong>Модель:</strong> <span th:text="${phone.model}"></span></p>
                 <p><strong>Вбудована пам'ять:</strong> <span th:text="${phone.memorySize}"></span> ГБ</p>
                 <br>
-                <p><strong>Ціна:</strong> <span id="priceDisplay"
-                                                th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴
-                    <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required>
+                <p><strong>Ціна:</strong>
+                    <span id="priceDisplay" th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴
+                    <input type="number" name="quantity" id="quantity" min="1" max="100" value="1" required>
                     <label for="quantity">шт.</label>
                 </p>
                 <p><strong>Сума до сплати:</strong> <span id="totalPrice">0</span> ₴</p>
@@ -43,29 +119,43 @@
         </div>
         <hr style="width: 80%; margin: 0 auto; border: 1px solid grey;"/>
         <br>
+
         <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">
-            <p style="margin: 5px;">
+            <!-- Поле имени с валидацией -->
+            <div>
+                <div th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}"
+                     style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
+                    Помилка імені
+                </div>
                 <label for="personName">Ім'я покупця:</label>
-                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="text"
-                       id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"
-                       maxlength="20">
-            </p>
-            <p style="margin: 5px;">
+                <input style="border: 2px solid limegreen; border-radius: 5px; margin-bottom: 10px; padding: 5px;"
+                       type="text"
+                       th:field="*{personName}" id="personName" placeholder="вiд 2 до 20 літер" required>
+            </div>
+            <!-- Поле телефона с валидацией -->
+            <div>
+                <div th:if="${#fields.hasErrors('personPhone')}" th:errors="*{personPhone}"
+                     style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
+                    Помилка номеру телефону
+                </div>
                 <label for="personPhone">Номер телефону:</label>
                 <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="tel"
-                       id="personPhone" name="personPhone" pattern="380\d{9}" placeholder="380XXXXXXXXX"
-                       required value="380">
-            </p>
+                       th:field="*{personPhone}" id="personPhone" placeholder="380XXXXXXXXX" required>
+            </div>
         </div>
+
+        <!-- Поле комментария -->
         <div style="display: flex; margin-top: 7px; justify-content: flex-end;">
             <label for="personComment"></label><br>
             <div style="display: flex; align-items: flex-end; gap: 18px;">
                 <div id="charCount" style="font-size: 14px; color: #777; white-space: nowrap;">0/150</div>
-                <textarea id="personComment" name="personComment" placeholder="Додати коментар:" minlength="0"
+                <textarea id="personComment" th:field="*{personComment}" placeholder="Додати коментар:"
                           maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"
-                          style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+                          style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px;
+                      font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
             </div>
         </div>
+
         <script>
             function updateCharacterCount() {
                 let textArea = document.getElementById('personComment');
@@ -77,22 +167,32 @@
 
         <script>
             const phoneInput = document.getElementById('personPhone');
+            // Инициализация значения поля телефона
+            if (!phoneInput.value) {
+                phoneInput.value = '380';
+            }
 
             phoneInput.addEventListener('input', function () {
                 if (!phoneInput.value.startsWith('380')) {
                     phoneInput.value = '380';
                 }
+                // Ограничение длины до 12 символов (380 + 9 цифр)
+                if (phoneInput.value.length > 12) {
+                    phoneInput.value = phoneInput.value.substring(0, 12);
+                }
             });
         </script>
+
         <br>
         <p>
             <label for="pickupPoint">Виберіть точку видачі:</label>
-            <select id="pickupPoint" name="point" required>
+            <select id="pickupPoint" th:field="*{point}" required>
                 <option value="Київ, вул. Антоновича, 50">Київ, вул. Антоновича, 50 (10:00-21:00)</option>
                 <option value="Дніпро, вул. Магнітогорська, 1А">Дніпро, вул. Магнітогорська, 1А (10:00-21:00)</option>
                 <option value="Одеса, вул. Дерибасівська 3Д">Одеса, вул. Дерибасівська 3Д (09:00-22:00)</option>
             </select>
         </p>
+
         <div class="form-group">
             <button type="submit" class="btn-submit">Підтвердити замовлення</button>
         </div>

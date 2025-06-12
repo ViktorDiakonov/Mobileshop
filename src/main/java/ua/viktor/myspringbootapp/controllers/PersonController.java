@@ -65,40 +65,40 @@ public class PersonController {
 
     //----------------------------------------------------------------------
     // order creation page
-    @GetMapping("/{id}/quick-order")
-    public String createNewOrder(@PathVariable("id") int id, Model model) {
-        log.info("Пользователь перешел на страницу создания заказа для телефона с id = {}", id);
-        model.addAttribute("phone", phoneService.findPhoneById(id));
-        return "person/quick-order";
-    }
-
-    @PostMapping("/{id}/quick-order-confirmation")
-    public String createOrder(@PathVariable int id,
-                              @RequestParam("quantity") int quantity,
-                              @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            log.warn("Ошибка при создании заказа для телефона с id = {}", id);
-            return "redirect:/mobileshop/" + id;
-        }
-
-        Phone phone = phoneService.findPhoneById(id);
-        if (phone == null) {
-            log.error("Телефон с id = {} не найден, перенаправляем на главную страницу", id);
-            return "redirect:/mobileshop";
-        }
-
-        order.setBrand(phone.getBrand());
-        order.setModel(phone.getModel());
-        order.setMemorySize(phone.getMemorySize());
-        order.setPrice(phone.getPrice() * quantity);
-        order.setImagePath(phone.getImagePath());
-        order.setQuantity(quantity);
-
-        phoneService.createOrder(order);
-        log.info("Создан новый заказ: {}", order);
-        model.addAttribute("order", order);
-        return "person/quick-order-confirmation";
-    }
+//    @GetMapping("/{id}/quick-order")
+//    public String createNewOrder(@PathVariable("id") int id, Model model) {
+//        log.info("Пользователь перешел на страницу создания заказа для телефона с id = {}", id);
+//        model.addAttribute("phone", phoneService.findPhoneById(id));
+//        return "person/quick-order";
+//    }
+//
+//    @PostMapping("/{id}/quick-order-confirmation")
+//    public String createOrder(@PathVariable int id,
+//                              @RequestParam("quantity") int quantity,
+//                              @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            log.warn("Ошибка при создании заказа для телефона с id = {}", id);
+//            return "redirect:/mobileshop/" + id;
+//        }
+//
+//        Phone phone = phoneService.findPhoneById(id);
+//        if (phone == null) {
+//            log.error("Телефон с id = {} не найден, перенаправляем на главную страницу", id);
+//            return "redirect:/mobileshop";
+//        }
+//
+//        order.setBrand(phone.getBrand());
+//        order.setModel(phone.getModel());
+//        order.setMemorySize(phone.getMemorySize());
+//        order.setPrice(phone.getPrice() * quantity);
+//        order.setImagePath(phone.getImagePath());
+//        order.setQuantity(quantity);
+//
+//        phoneService.createOrder(order);
+//        log.info("Создан новый заказ: {}", order);
+//        model.addAttribute("order", order);
+//        return "person/quick-order-confirmation";
+//    }
 //---------------------------------------------------------------------
 
     // returns the page "Contacts"

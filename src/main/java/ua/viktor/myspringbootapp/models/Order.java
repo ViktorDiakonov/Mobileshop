@@ -48,7 +48,7 @@ public class Order {
     @Column(name = "person_name")
     private String personName;
 
-    @Size(min = 12, max = 12, message = "Має бути 12 цифр")
+    @Size(min = 12, max = 12, message = "Загалом 12 цифр")
     @Column(name = "person_phone")
     private String personPhone;
 

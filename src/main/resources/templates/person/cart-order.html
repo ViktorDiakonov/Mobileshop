@@ -26,25 +26,31 @@
 
     <h3>Сума до сплати: <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span>₴</h3>
 
-    <form th:action="@{/mobileshop/cart-order-confirmation}" method="post" th:object="${order}">
+    <form th:action="@{/mobileshop/cart-order-confirmation}" method="post" th:object="${order}" novalidate>
         <br>
 
         <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">
-            <p style="margin: 5px;">
+            <!-- Поле имени с валидацией -->
+            <div>
+                <div th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}"
+                     style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
+                    Помилка імені
+                </div>
                 <label for="personName">Ім'я покупця:</label>
-                <input type="text" th:field="*{personName}"
-                       style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;"
-                       id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"
-                       maxlength="20">
-            </p>
-            <p style="margin: 5px;">
+                <input style="border: 2px solid limegreen; border-radius: 5px; margin-bottom: 10px; padding: 5px;"
+                       type="text"
+                       th:field="*{personName}" id="personName" placeholder="вiд 2 до 20 літер" required>
+            </div>
+            <!-- Поле телефона с валидацией -->
+            <div>
+                <div th:if="${#fields.hasErrors('personPhone')}" th:errors="*{personPhone}"
+                     style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
+                    Помилка номеру телефону
+                </div>
                 <label for="personPhone">Номер телефону:</label>
-                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;"
-                       type="tel" id="personPhone" name="personPhone"
-                       pattern="380\d{9}" placeholder="380XXXXXXXXX"
-                       maxlength="12" required value="380"
-                       oninput="if (!this.value.startsWith('380')) this.value = '380';">
-            </p>
+                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="tel"
+                       th:field="*{personPhone}" id="personPhone" placeholder="380XXXXXXXXX" required>
+            </div>
         </div>
 
 

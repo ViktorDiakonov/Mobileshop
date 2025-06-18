@@ -111,8 +111,31 @@
                 <br>
                 <p><strong>Ціна:</strong>
                     <span id="priceDisplay" th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴
-                    <input type="number" name="quantity" id="quantity" min="1" max="100" value="1" required>
-                    <label for="quantity">шт.</label>
+<!--                    <input type="number" name="quantity" th:value="${order.quantity != null ? order.quantity : 1}"-->
+<!--                           id="quantity" min="1" max="100" value="1" required>-->
+<!--                    <input type="number"-->
+<!--                           name="quantity"-->
+<!--                           th:value="${order.quantity != null ? order.quantity : 1}"-->
+<!--                           id="quantity"-->
+<!--                           min="1"-->
+<!--                           max="100"-->
+<!--                           step="1"-->
+<!--                           required-->
+<!--                           onkeydown="return false;"> &lt;!&ndash; 🔒 запрещает ввод с клавиатуры &ndash;&gt;-->
+<!--                    <label for="quantity">шт.</label>-->
+<!--                <div style="display: flex; align-items: center; gap: 10px;">-->
+<!--                    <button type="button" onclick="changeQuantity(-1)">−</button>-->
+<!--                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" readonly>-->
+<!--                    <button type="button" onclick="changeQuantity(1)">+</button>-->
+<!--                </div>-->
+
+                <div class="quantity-control">
+                    <button type="button" class="btn-qty" onclick="decreaseQty()">−</button>
+                    <input type="number" id="quantity" name="quantity"
+                           min="1" max="100" value="1" required />
+                    <button type="button" class="btn-qty" onclick="increaseQty()">+</button>
+                </div>
+
                 </p>
                 <p><strong>Сума до сплати:</strong> <span id="totalPrice">0</span> ₴</p>
             </div>
@@ -127,7 +150,7 @@
                      style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
                     Помилка імені
                 </div>
-                <label for="personName">Ім'я покупця:</label>
+                <label for="personName" style="font-family: 'Grava Display', serif;">Ім'я покупця:</label>
                 <input style="border: 2px solid limegreen; border-radius: 5px; margin-bottom: 10px; padding: 5px;"
                        type="text"
                        th:field="*{personName}" id="personName" placeholder="вiд 2 до 20 літер" required>
@@ -138,7 +161,7 @@
                      style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
                     Помилка номеру телефону
                 </div>
-                <label for="personPhone">Номер телефону:</label>
+                <label for="personPhone" style="font-family: 'Grava Display', serif;">Номер телефону:</label>
                 <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="tel"
                        th:field="*{personPhone}" id="personPhone" placeholder="380XXXXXXXXX" required>
             </div>
@@ -182,6 +205,22 @@
                 }
             });
         </script>
+
+        <script>
+            function increaseQty() {
+                const input = document.getElementById('quantity');
+                let current = parseInt(input.value) || 1;
+                if (current < parseInt(input.max)) input.value = current + 1;
+            }
+
+            function decreaseQty() {
+                const input = document.getElementById('quantity');
+                let current = parseInt(input.value) || 1;
+                if (current > parseInt(input.min)) input.value = current - 1;
+            }
+        </script>
+
+
 
         <br>
         <p>

@@ -1,9 +1,6 @@
 package ua.viktor.myspringbootapp.controllers;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,24 +18,35 @@ import java.util.stream.Collectors;
  * @author Diakonov Viktor
  */
 @Controller
-@AllArgsConstructor
 @SessionAttributes("cart") // Только эта аннотация
+@AllArgsConstructor
 @RequestMapping("/mobileshop")
 public class CartController {
 
     private final PhoneService phoneService;
 
+    // Инициализация корзины при первом обращении
     @ModelAttribute("cart")
     public Cart cart() {
         return new Cart(); // Создаст корзину при первом обращении
     }
 
+    // Страница корзины
+    @GetMapping("/cart")
+    public String viewCart(@ModelAttribute("cart") Cart cart, Model model) {
+        model.addAttribute("items", cart.getItems());
+        model.addAttribute("total", cart.getTotal());
+        return "person/cart";
+    }
+
+    // Количество товаров в корзине
     @GetMapping("/cart/count")
     @ResponseBody
     public String getCartCount(@ModelAttribute("cart") Cart cart) {
         return String.valueOf(cart.getItems().size());
     }
 
+    // Добавить товар в корзину
     @PostMapping("/cart/add/{phoneId}")
     public String addToCart(
             @PathVariable int phoneId,
@@ -57,13 +65,7 @@ public class CartController {
         return "redirect:/mobileshop/phone/" + phoneId;
     }
 
-    @GetMapping("/cart")
-    public String viewCart(@ModelAttribute("cart") Cart cart, Model model) {
-        model.addAttribute("items", cart.getItems());
-        model.addAttribute("total", cart.getTotal());
-        return "person/cart";
-    }
-
+    // Удалить товар из корзины
     @PostMapping("/cart/remove/{id}")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> removeFromCart(
@@ -78,12 +80,14 @@ public class CartController {
         return ResponseEntity.ok(response);
     }
 
+    // Общая стоимость корзины
     @GetMapping("/cart/total")
     @ResponseBody
     public String getCartTotal(@ModelAttribute("cart") Cart cart) {
         return String.valueOf(cart.getTotal());
     }
 
+    // Обновить количество товара
     @PostMapping("/cart/update")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> updateQuantity(

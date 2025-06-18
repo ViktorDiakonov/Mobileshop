@@ -65,14 +65,4 @@ public class PhoneServiceBean implements PhoneService {
     public Optional<Person> personPhoneNumber(String phoneNumber) {
         return peopleRepository.findByPhoneNumber(phoneNumber);
     }
-
-//    @Override
-//    public List<String> getAllBrands() {
-//        return phoneRepository.findAll()
-//                .stream()
-//                .map(Phone::getBrand)
-//                .distinct()
-//                .sorted()
-//                .collect(Collectors.toList());
-//    }
 }

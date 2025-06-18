@@ -21,7 +21,4 @@ public interface PhoneService {
     List<Phone> readPhonesByBrandSorted(String brand, String sort);
 
     Optional<Person> personPhoneNumber(String phoneNumber);
-
-//    List<String> getAllBrands();
-
 }

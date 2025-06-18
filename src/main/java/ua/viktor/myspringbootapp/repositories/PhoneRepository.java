@@ -23,17 +23,17 @@ public interface PhoneRepository extends JpaRepository<Phone, Integer> {
 
     List<Phone> findTop20ByOrderByIdDesc();
 
-    // Поиск по точному совпадению модели (регистрозависимый)
-    List<Phone> findByModel(String model);
+//    // Поиск по точному совпадению модели (регистрозависимый)
+//    List<Phone> findByModel(String model);
 
     // Поиск по частичному совпадению модели (без учета регистра)
     List<Phone> findByModelContainingIgnoreCase(String modelPart);
 
     // Альтернативный вариант с аннотацией @Query
-    @Query("SELECT p FROM Phone p WHERE LOWER(p.model) LIKE LOWER(CONCAT('%', :query, '%'))")
-    List<Phone> searchByModel(@Param("query") String query);
-
-    Page<Phone> findByModelContainingIgnoreCase(String modelPart, Pageable pageable);
-
-    List<Phone> findByModelContainingIgnoreCase(String modelPart, Sort sort);
+//    @Query("SELECT p FROM Phone p WHERE LOWER(p.model) LIKE LOWER(CONCAT('%', :query, '%'))")
+//    List<Phone> searchByModel(@Param("query") String query);
+//
+//    Page<Phone> findByModelContainingIgnoreCase(String modelPart, Pageable pageable);
+//
+//    List<Phone> findByModelContainingIgnoreCase(String modelPart, Sort sort);
 }

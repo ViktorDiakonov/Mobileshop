@@ -11,7 +11,7 @@
 //
 //import javax.validation.Valid;
 //
-///**
+/// **
 // * @author Diakonov Viktor
 // */
 //@Slf4j
@@ -86,7 +86,8 @@ public class AuthController {
     private final PersonValidator personValidator;
     private final AuthenticationManager authenticationManager;
 
-    // Регистрация нового пользователя ------------------------------------
+    // ========== REGISTRATION PAGE ==========
+
     @GetMapping("/registration")
     public String registrationPage(@ModelAttribute("person") Person person) {
         log.info("Пользователь перешел на страницу регистрации");
@@ -94,7 +95,8 @@ public class AuthController {
     }
 
     @PostMapping("/registration")
-    public String performRegistrationPage(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+    public String performRegistrationPage(@ModelAttribute("person")
+                                          @Valid Person person, BindingResult bindingResult) {
         log.info("Пользователь пытается зарегистрироваться с данными: {}", person);
         personValidator.validate(person, bindingResult);
 
@@ -108,18 +110,18 @@ public class AuthController {
 
         return "redirect:/mobileshop/auth/login";
     }
-    //-----------------------------------------------------------------------
 
-    // Страница входа пользователя
+    // ========== AUTHORIZATION PAGE ==========
+
     @GetMapping("/login")
     public String loginPage() {
         log.info("Пользователь перешел на страницу входа");
         return "auth/login";
     }
 
-    // Обработчик входа по номеру телефона
     @PostMapping("/process_login")
-    public String processLogin(@RequestParam String phoneNumber, @RequestParam String password) {
+    public String processLogin(@RequestParam String phoneNumber,
+                               @RequestParam String password) {
         log.info("Пользователь с номером {} пытается войти", phoneNumber);
 
         Authentication authentication = authenticationManager.authenticate(

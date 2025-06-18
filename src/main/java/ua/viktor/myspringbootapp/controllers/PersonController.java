@@ -10,24 +10,28 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.viktor.myspringbootapp.models.Cart;
 import ua.viktor.myspringbootapp.models.Order;
+import ua.viktor.myspringbootapp.models.Person;
 import ua.viktor.myspringbootapp.models.Phone;
 import ua.viktor.myspringbootapp.repositories.PhoneRepository;
+import ua.viktor.myspringbootapp.services.OrderService;
 import ua.viktor.myspringbootapp.services.PhoneService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Diakonov Viktor
  */
 @Slf4j
 @Controller
-@SessionAttributes("cart") // Добавляем аннотацию
+@SessionAttributes("cart")
 @AllArgsConstructor
 @RequestMapping("/mobileshop")
 public class PersonController {
 
+    private final OrderService orderService;
     private final PhoneService phoneService;
     private final PhoneRepository phoneRepository;
 
@@ -55,7 +59,6 @@ public class PersonController {
         return "person/list-models";
     }
 
-    // show specific phone
     @GetMapping("/phone/{id}")
     public String viewPhoneById(@PathVariable("id") int id, Model model) {
         log.info("Запрос на просмотр телефона с id = {}", id);
@@ -63,45 +66,23 @@ public class PersonController {
         return "person/show-phone";
     }
 
-    //----------------------------------------------------------------------
-    // order creation page
-//    @GetMapping("/{id}/quick-order")
-//    public String createNewOrder(@PathVariable("id") int id, Model model) {
-//        log.info("Пользователь перешел на страницу создания заказа для телефона с id = {}", id);
-//        model.addAttribute("phone", phoneService.findPhoneById(id));
-//        return "person/quick-order";
-//    }
-//
-//    @PostMapping("/{id}/quick-order-confirmation")
-//    public String createOrder(@PathVariable int id,
-//                              @RequestParam("quantity") int quantity,
-//                              @ModelAttribute("order") @Valid Order order, BindingResult bindingResult, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            log.warn("Ошибка при создании заказа для телефона с id = {}", id);
-//            return "redirect:/mobileshop/" + id;
-//        }
-//
-//        Phone phone = phoneService.findPhoneById(id);
-//        if (phone == null) {
-//            log.error("Телефон с id = {} не найден, перенаправляем на главную страницу", id);
-//            return "redirect:/mobileshop";
-//        }
-//
-//        order.setBrand(phone.getBrand());
-//        order.setModel(phone.getModel());
-//        order.setMemorySize(phone.getMemorySize());
-//        order.setPrice(phone.getPrice() * quantity);
-//        order.setImagePath(phone.getImagePath());
-//        order.setQuantity(quantity);
-//
-//        phoneService.createOrder(order);
-//        log.info("Создан новый заказ: {}", order);
-//        model.addAttribute("order", order);
-//        return "person/quick-order-confirmation";
-//    }
-//---------------------------------------------------------------------
+    @GetMapping("/my-orders")
+    public String getUserOrders(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()
+                && !"anonymousUser".equals(authentication.getName())) {
 
-    // returns the page "Contacts"
+            String phoneNumber = authentication.getName();
+            List<Order> orders = orderService.getOrdersByPersonPhoneNumber(phoneNumber);
+            Optional<Person> personOptional = phoneService.personPhoneNumber(phoneNumber);
+
+            model.addAttribute("orders", orders);
+
+            personOptional.ifPresent(person -> model.addAttribute("person", person));
+        }
+        return "person/my-orders";
+    }
+
     @GetMapping("/contacts")
     public String contacts() {
         log.info("Пользователь перешел на страницу 'Контакты'");
@@ -127,6 +108,7 @@ public class PersonController {
                              Model model) {
 
         if (bindingResult.hasErrors() || cart.getItems().isEmpty()) {
+            log.error("Cart order validation errors: {}", bindingResult.getAllErrors());
             model.addAttribute("cartItems", cart.getItems());
             model.addAttribute("total", cart.getTotal());
             return "person/cart-order";
@@ -136,10 +118,11 @@ public class PersonController {
         for (Cart.CartItem item : cart.getItems()) {
             Order newOrder = getOrder(order, item); // здесь ты мапишь item в заказ
             phoneService.createOrder(newOrder);
+            log.info("Создан новый заказ из корзины: {}", order);
             createdOrders.add(newOrder);
         }
 
-        // Вот эта строка вычисляет общую сумму
+        // вычисляем общую сумму
         int total = createdOrders.stream()
                 .mapToInt(o -> o.getPrice() * o.getQuantity())
                 .sum();
@@ -159,13 +142,12 @@ public class PersonController {
         newOrder.setPersonName(order.getPersonName());
         newOrder.setPersonPhone(order.getPersonPhone());
         newOrder.setPersonComment(order.getPersonComment()); // Добавлено
-        newOrder.setPoint(order.getPoint()); // Теперь должно работать
+        newOrder.setPoint(order.getPoint());
 
         // Устанавливаем данные о товаре
         newOrder.setBrand(item.getPhone().getBrand());
         newOrder.setModel(item.getPhone().getModel());
         newOrder.setMemorySize(item.getPhone().getMemorySize());
-//        newOrder.setPrice(item.getPhone().getPrice() * item.getQuantity());
         newOrder.setPrice(item.getPhone().getPrice());
         newOrder.setQuantity(item.getQuantity());
         newOrder.setImagePath(item.getPhone().getImagePath());

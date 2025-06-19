@@ -25,8 +25,8 @@ public class OrderValidator implements Validator {
 //        }
 
         // Проверка количества товара
-        if (order.getQuantity() == null || order.getQuantity() <= 0) {
-            errors.rejectValue("quantity", "invalid.quantity", "Кількість має бути більше 0");
-        }
+//        if (order.getQuantity() == null || order.getQuantity() <= 0) {
+//            errors.rejectValue("quantity", "invalid.quantity", "Кількість має бути більше 0");
+//        }
     }
 }

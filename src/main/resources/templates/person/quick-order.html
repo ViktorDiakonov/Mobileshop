@@ -26,80 +26,7 @@
 <div class="order-container" style="margin-top: 50px">
     <h2>Оформлення замовлення</h2>
     <br>
-    <!--    <form method="POST" th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.getId()})}" th:object="${phone}">-->
-    <!--    <form th:object="${order}" method="POST"-->
-    <!--          th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.id})}">-->
-    <!--        <div class="phone-details">-->
-    <!--            <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону">-->
-    <!--            <div class="phone-info">-->
-    <!--                <p><strong>Виробник:</strong> <span th:text="${phone.brand}"></span></p>-->
-    <!--                <p><strong>Модель:</strong> <span th:text="${phone.model}"></span></p>-->
-    <!--                <p><strong>Вбудована пам'ять:</strong> <span th:text="${phone.memorySize}"></span> ГБ</p>-->
-    <!--                <br>-->
-    <!--                <p><strong>Ціна:</strong> <span id="priceDisplay"-->
-    <!--                                                th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴-->
-    <!--                    <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required>-->
-    <!--                    <label for="quantity">шт.</label>-->
-    <!--                </p>-->
-    <!--                <p><strong>Сума до сплати:</strong> <span id="totalPrice">0</span> ₴</p>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <hr style="width: 80%; margin: 0 auto; border: 1px solid grey;"/>-->
-    <!--        <br>-->
-    <!--        <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">-->
-    <!--            <p style="margin: 5px;">-->
-    <!--                <label for="personName">Ім'я покупця:</label>-->
-    <!--                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="text"-->
-    <!--                       id="personName" name="personName" placeholder="вiд 2 до 20 літер" required minlength="2"-->
-    <!--                       maxlength="20">-->
-    <!--            </p>-->
-    <!--            <p style="margin: 5px;">-->
-    <!--                <label for="personPhone">Номер телефону:</label>-->
-    <!--                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="tel"-->
-    <!--                       id="personPhone" name="personPhone" pattern="380\d{9}" placeholder="380XXXXXXXXX"-->
-    <!--                       required value="380">-->
-    <!--            </p>-->
-    <!--        </div>-->
-    <!--        <div style="display: flex; margin-top: 7px; justify-content: flex-end;">-->
-    <!--            <label for="personComment"></label><br>-->
-    <!--            <div style="display: flex; align-items: flex-end; gap: 18px;">-->
-    <!--                <div id="charCount" style="font-size: 14px; color: #777; white-space: nowrap;">0/150</div>-->
-    <!--                <textarea id="personComment" name="personComment" placeholder="Додати коментар:" minlength="0"-->
-    <!--                          maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"-->
-    <!--                          style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <script>-->
-    <!--            function updateCharacterCount() {-->
-    <!--                let textArea = document.getElementById('personComment');-->
-    <!--                let charCount = textArea.value.length;-->
-    <!--                let maxLength = textArea.getAttribute('maxlength');-->
-    <!--                document.getElementById('charCount').textContent = charCount + '/' + maxLength;-->
-    <!--            }-->
-    <!--        </script>-->
 
-    <!--        <script>-->
-    <!--            const phoneInput = document.getElementById('personPhone');-->
-
-    <!--            phoneInput.addEventListener('input', function () {-->
-    <!--                if (!phoneInput.value.startsWith('380')) {-->
-    <!--                    phoneInput.value = '380';-->
-    <!--                }-->
-    <!--            });-->
-    <!--        </script>-->
-    <!--        <br>-->
-    <!--        <p>-->
-    <!--            <label for="pickupPoint">Виберіть точку видачі:</label>-->
-    <!--            <select id="pickupPoint" name="point" required>-->
-    <!--                <option value="Київ, вул. Антоновича, 50">Київ, вул. Антоновича, 50 (10:00-21:00)</option>-->
-    <!--                <option value="Дніпро, вул. Магнітогорська, 1А">Дніпро, вул. Магнітогорська, 1А (10:00-21:00)</option>-->
-    <!--                <option value="Одеса, вул. Дерибасівська 3Д">Одеса, вул. Дерибасівська 3Д (09:00-22:00)</option>-->
-    <!--            </select>-->
-    <!--        </p>-->
-    <!--        <div class="form-group">-->
-    <!--            <button type="submit" class="btn-submit">Підтвердити замовлення</button>-->
-    <!--        </div>-->
-    <!--    </form>-->
     <form method="POST" th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.id})}"
           th:object="${order}" novalidate>
         <div class="phone-details">
@@ -111,32 +38,15 @@
                 <br>
                 <p><strong>Ціна:</strong>
                     <span id="priceDisplay" th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴
-<!--                    <input type="number" name="quantity" th:value="${order.quantity != null ? order.quantity : 1}"-->
-<!--                           id="quantity" min="1" max="100" value="1" required>-->
-<!--                    <input type="number"-->
-<!--                           name="quantity"-->
-<!--                           th:value="${order.quantity != null ? order.quantity : 1}"-->
-<!--                           id="quantity"-->
-<!--                           min="1"-->
-<!--                           max="100"-->
-<!--                           step="1"-->
-<!--                           required-->
-<!--                           onkeydown="return false;"> &lt;!&ndash; 🔒 запрещает ввод с клавиатуры &ndash;&gt;-->
-<!--                    <label for="quantity">шт.</label>-->
-<!--                <div style="display: flex; align-items: center; gap: 10px;">-->
-<!--                    <button type="button" onclick="changeQuantity(-1)">−</button>-->
-<!--                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="100" readonly>-->
-<!--                    <button type="button" onclick="changeQuantity(1)">+</button>-->
-<!--                </div>-->
 
                 <div class="quantity-control">
                     <button type="button" class="btn-qty" onclick="decreaseQty()">−</button>
-                    <input type="number" id="quantity" name="quantity"
-                           min="1" max="100" value="1" required />
+                    <label for="quantity"></label><input type="number" id="quantity" name="quantity"
+                                                         min="1" max="100" value="1" required
+                                                         onkeydown="return false;"/>
                     <button type="button" class="btn-qty" onclick="increaseQty()">+</button>
                 </div>
 
-                </p>
                 <p><strong>Сума до сплати:</strong> <span id="totalPrice">0</span> ₴</p>
             </div>
         </div>
@@ -179,49 +89,6 @@
             </div>
         </div>
 
-        <script>
-            function updateCharacterCount() {
-                let textArea = document.getElementById('personComment');
-                let charCount = textArea.value.length;
-                let maxLength = textArea.getAttribute('maxlength');
-                document.getElementById('charCount').textContent = charCount + '/' + maxLength;
-            }
-        </script>
-
-        <script>
-            const phoneInput = document.getElementById('personPhone');
-            // Инициализация значения поля телефона
-            if (!phoneInput.value) {
-                phoneInput.value = '380';
-            }
-
-            phoneInput.addEventListener('input', function () {
-                if (!phoneInput.value.startsWith('380')) {
-                    phoneInput.value = '380';
-                }
-                // Ограничение длины до 12 символов (380 + 9 цифр)
-                if (phoneInput.value.length > 12) {
-                    phoneInput.value = phoneInput.value.substring(0, 12);
-                }
-            });
-        </script>
-
-        <script>
-            function increaseQty() {
-                const input = document.getElementById('quantity');
-                let current = parseInt(input.value) || 1;
-                if (current < parseInt(input.max)) input.value = current + 1;
-            }
-
-            function decreaseQty() {
-                const input = document.getElementById('quantity');
-                let current = parseInt(input.value) || 1;
-                if (current > parseInt(input.min)) input.value = current - 1;
-            }
-        </script>
-
-
-
         <br>
         <p>
             <label for="pickupPoint">Виберіть точку видачі:</label>
@@ -255,6 +122,49 @@
 
     quantityInput.addEventListener('input', updateTotalPrice);
     window.addEventListener('DOMContentLoaded', updateTotalPrice);
+</script>
+
+<script>
+    // для поля "коментарий"
+    function updateCharacterCount() {
+        let textArea = document.getElementById('personComment');
+        let charCount = textArea.value.length;
+        let maxLength = textArea.getAttribute('maxlength');
+        document.getElementById('charCount').textContent = charCount + '/' + maxLength;
+    }
+</script>
+
+<script>
+    // для поля "номер телефона"
+    const phoneInput = document.getElementById('personPhone');
+    if (!phoneInput.value) {
+        phoneInput.value = '380';
+    }
+
+    phoneInput.addEventListener('input', function () {
+        if (!phoneInput.value.startsWith('380')) {
+            phoneInput.value = '380';
+        }
+
+        if (phoneInput.value.length > 12) {
+            phoneInput.value = phoneInput.value.substring(0, 12);
+        }
+    });
+</script>
+
+<script>
+    // для класса class="quantity-control"
+    function increaseQty() {
+        const input = document.getElementById('quantity');
+        let current = parseInt(input.value) || 1;
+        if (current < parseInt(input.max)) input.value = current + 1;
+    }
+
+    function decreaseQty() {
+        const input = document.getElementById('quantity');
+        let current = parseInt(input.value) || 1;
+        if (current > parseInt(input.min)) input.value = current - 1;
+    }
 </script>
 
 </body>

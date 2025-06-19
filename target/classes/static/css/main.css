@@ -198,6 +198,52 @@ input:valid + span::before {
     color: green;
 }
 
+/* кнопки формы ввода количества товаров - начало */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.quantity-control {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid limegreen;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.quantity-control input[type="number"] {
+    width: 40px;
+    text-align: center;
+    border: none;
+    height: 18px;
+    font-size: 16px;
+    outline: none;
+}
+
+.quantity-control .btn-qty {
+    width: 26px;
+    height: 28px;
+    border: none;
+    background-color: limegreen;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.3s;
+}
+
+.quantity-control .btn-qty:hover {
+    background-color: #2e7d32;
+}
+/* кнопки формы ввода количества товаров - конец */
+
+
 /*#leftSidebar {*/
 /*    background-color: white;*/
 /*    float: left;*/
@@ -338,15 +384,15 @@ p {
     max-height: 180px;
 }
 
-#quantity {
-    width: 60px;
-    text-align: center;
-    margin-left: 20px;
+/*#quantity {*/
+/*    width: 50px;*/
+/*    text-align: center;*/
+/*    margin-left: 20px;*/
 
-    /* Показываем стрелки всегда */
-    -moz-appearance: textfield;
-    appearance: textfield;
-}
+/*    !* Показываем стрелки всегда *!*/
+/*    -moz-appearance: textfield;*/
+/*    appearance: textfield;*/
+/*}*/
 
 /* Для Chrome, Edge, Safari */
 #quantity::-webkit-inner-spin-button,

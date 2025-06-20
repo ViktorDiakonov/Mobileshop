@@ -21,11 +21,11 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Size(min = 2, max = 20, message = "Не менше двох букв")
+    @Size(min = 2, max = 20, message = "Від 2 до 20 букв")
     @Column(name = "name")
     private String userName;
 
-    @Size(min = 4, message = "Довжина від 4 до 10 символів")
+    @Size(min = 4, message = "Від 4 до 10 символів")
     @Column(name = "password")
     private String password;
 

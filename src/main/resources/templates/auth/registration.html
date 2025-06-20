@@ -41,7 +41,7 @@ border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.
             </div>
             <label for="phoneNumber">Введіть номер телефону</label>
             <input type="tel" th:field="*{phoneNumber}" id="phoneNumber" name="phoneNumber"
-                   pattern="380\d{9}" placeholder="380XXXXXXXXX" required value="380"
+                   pattern="380\d{9}" placeholder="380XXXXXXXXX" maxlength="12" required value="380"
                    style="margin-bottom: 10px; padding: 5px; border: 2px solid #ccc; border-radius: 5px;">
         </div>
 

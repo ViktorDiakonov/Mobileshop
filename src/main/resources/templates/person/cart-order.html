@@ -39,7 +39,7 @@
                 <label for="personName" style="font-family: 'Grava Display', serif;">Ім'я покупця:</label>
                 <input style="border: 2px solid limegreen; border-radius: 5px; margin-bottom: 10px; padding: 5px;"
                        type="text"
-                       th:field="*{personName}" id="personName" placeholder="вiд 2 до 20 літер" required>
+                       th:field="*{personName}" id="personName" placeholder="вiд 2 до 20 літер" maxlength="20" required>
             </div>
             <!-- Поле телефона с валидацией -->
             <div>
@@ -48,7 +48,8 @@
                     Помилка номеру телефону
                 </div>
                 <label for="personPhone" style="font-family: 'Grava Display', serif;">Номер телефону:</label>
-                <input style="border: 2px solid limegreen; border-radius: 5px; padding: 8px;" type="tel"
+                <input style="border: 2px solid limegreen; border-radius: 5px; margin-bottom: 10px; padding: 5px;"
+                       type="tel"
                        th:field="*{personPhone}" id="personPhone" placeholder="380XXXXXXXXX" required>
             </div>
         </div>
@@ -56,31 +57,15 @@
 
         <div style="display: flex; margin-top: 7px; justify-content: flex-end;">
             <label for="personComment"></label><br>
-            <div style="display: flex; align-items: flex-end; gap: 18px;">
+            <div style="display: flex; align-items: flex-end; gap: 58px;">
                 <div id="charCount" style="font-size: 14px; color: #777; white-space: nowrap;">0/150</div>
                 <textarea id="personComment" th:field="*{personComment}" placeholder="Додати коментар:"
                           minlength="0" maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"
                           style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
             </div>
         </div>
-        <script>
-            function updateCharacterCount() {
-                let textArea = document.getElementById('personComment');
-                let charCount = textArea.value.length;
-                let maxLength = textArea.getAttribute('maxlength');
-                document.getElementById('charCount').textContent = charCount + '/' + maxLength;
-            }
-        </script>
-        <script>
-            const phoneInput = document.getElementById('personPhone');
-
-            phoneInput.addEventListener('input', function () {
-                if (!phoneInput.value.startsWith('380')) {
-                    phoneInput.value = '380';
-                }
-            });
-        </script>
         <br>
+
         <p>
             <label for="pickupPoint">Виберіть точку видачі:</label>
             <select id="pickupPoint" th:field="*{point}" required>
@@ -111,6 +96,30 @@
 
     quantityInput.addEventListener('input', updateTotalPrice);
     window.addEventListener('DOMContentLoaded', updateTotalPrice);
+
+    // ====== СКРИПТ ДЛЯ КОММЕНТАРИЯ ======
+    function updateCharacterCount() {
+        let textArea = document.getElementById('personComment');
+        let charCount = textArea.value.length;
+        let maxLength = textArea.getAttribute('maxlength');
+        document.getElementById('charCount').textContent = charCount + '/' + maxLength;
+    }
+
+    // ====== СКРИПТ ДЛЯ НОМЕРА ТЕЛЕФОНА ======
+    const phoneInput = document.getElementById('personPhone');
+    if (!phoneInput.value) {
+        phoneInput.value = '380';
+    }
+
+    phoneInput.addEventListener('input', function () {
+        if (!phoneInput.value.startsWith('380')) {
+            phoneInput.value = '380';
+        }
+
+        if (phoneInput.value.length > 12) {
+            phoneInput.value = phoneInput.value.substring(0, 12);
+        }
+    });
 </script>
 </body>
 </html>

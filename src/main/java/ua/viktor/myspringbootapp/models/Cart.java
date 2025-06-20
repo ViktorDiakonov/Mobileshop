@@ -53,11 +53,6 @@ public class Cart {
         }
     }
 
-//    public double getTotal() {
-//        return items.values().stream()
-//                .mapToDouble(item -> item.getPhone().getPrice() * item.getQuantity())
-//                .sum();
-//    }
 public int getTotal() {
     return items.values().stream()
             .mapToInt(item -> item.getPhone().getPrice() * item.getQuantity())

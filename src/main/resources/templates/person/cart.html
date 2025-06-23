@@ -41,15 +41,6 @@
             display: flex;
             flex-direction: column;
         }
-
-        #total-block {
-            opacity: 0;
-            height: 0;
-            overflow: hidden;
-            margin: 0;
-            padding: 0;
-            transition: all 0.3s ease;
-        }
     </style>
 </head>
 <body>
@@ -60,17 +51,26 @@
     <a href="/mobileshop/" style="color: black; text-decoration: none;"><span><i class="fas fa-home home-icon"></i> Головна</span></a>
 </nav>
 
-<h1>Ваш кошик<span th:if="${items.isEmpty()}" style="text-align: center"> порожній.</span></h1>
+
+<h1>
+    Ваш кошик
+    <span id="empty-cart-message" style="display: none; text-align: center;"> порожній.</span>
+</h1>
 
 <!-- Список товаров -->
 <div th:each="item : ${items}" class="item-container">
     <a th:href="@{/mobileshop/phone/{id}(id=${item.phone.id})}" class="item-link">
         <img th:src="${item.phone.imagePath}" alt="Фото телефону" class="phone-image">
         <div class="phone-info">
+
             <p>
                 <span th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' + ${item.phone.memorySize} + ' Gb -'"></span>
-                <strong th:text="${#numbers.formatInteger(item.phone.price, 0, 'DEFAULT')} + ' ₴'"></strong>
+                <strong class="item-price"
+                        th:attr="data-unit-price=${item.phone.price}"
+                        th:text="${#numbers.formatInteger(item.phone.price * item.quantity, 0, 'DEFAULT')} + ' ₴'">
+                </strong>
             </p>
+
         </div>
     </a>
 
@@ -88,7 +88,7 @@
     </form>
 </div>
 
-<div id="total-block" th:classappend="${total <= 0} ? 'hidden' : ''">
+<div id="total-sum-block">
     <hr>
     <br>
     <h3>Сума до сплати:
@@ -96,7 +96,7 @@
     </h3>
 </div>
 <!-- Кнопка оформления заказа -->
-<div th:unless="${items.isEmpty()}" class="checkout-section">
+<div id="checkout-section" class="checkout-section" th:unless="${items.isEmpty()}">
     <form th:action="@{/mobileshop/cart-order}" method="get">
         <button type="submit" class="btn-submit">
             Оформити замовлення
@@ -107,7 +107,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Обработка изменения количества
+        // Обработка изменения количества товара
         document.querySelectorAll('.quantity-btn').forEach(btn => {
             btn.addEventListener('click', async function () {
                 const phoneId = parseInt(this.dataset.id);
@@ -130,9 +130,22 @@
 
                     const data = await response.json();
 
-                    // Обновляем интерфейс
-                    quantityElement.textContent = data.items.find(i => i.phone.id === phoneId).quantity;
-                    updateTotalDisplay(data.total);
+                    // Обновляем количество на экране
+                    const updatedItem = data.items.find(i => i.phone.id === phoneId);
+                    quantityElement.textContent = updatedItem.quantity;
+
+                    // Обновляем цену за товар
+                    const priceElement = this.closest('.item-container').querySelector('.item-price');
+                    if (priceElement) {
+                        const unitPrice = parseFloat(priceElement.dataset.unitPrice);
+                        const totalItemPrice = unitPrice * updatedItem.quantity;
+                        priceElement.textContent = totalItemPrice.toLocaleString('uk-UA') + ' ₴';
+                    }
+
+                    // Обновляем общую сумму
+                    updateTotalDisplay();
+
+                    // НЕ обновляем бейдж при изменении количества!
 
                 } catch (error) {
                     console.error('Ошибка:', error);
@@ -141,9 +154,9 @@
             });
         });
 
-        // Обработка удаления
+        // Обработка удаления товара
         document.querySelectorAll('.remove-item').forEach(btn => {
-            btn.addEventListener('click', async function (e) {
+            btn.addEventListener('click', async function () {
                 if (confirm('Видалити товар з кошика?')) {
                     try {
                         const form = this.closest('form');
@@ -158,9 +171,11 @@
                             const data = await response.json();
                             form.closest('.item-container').remove();
 
-                            // Обновляем отображение
-                            updateTotalDisplay(data.total);
+                            // Обновляем сумму, бейдж, надпись о пустой корзине и кнопку оформления
+                            updateTotalDisplay();
                             updateCartBadge(data.count);
+                            updateEmptyCartMessage();
+                            updateCheckoutVisibility();
                         }
                     } catch (error) {
                         console.error('Помилка видалення:', error);
@@ -168,24 +183,41 @@
                 }
             });
         });
+
+        // Инициализация при загрузке страницы
+        updateTotalDisplay();
+        updateEmptyCartMessage();
+        updateCheckoutVisibility();
     });
 
-    // Функция обновления отображения суммы
-    function updateTotalDisplay(total) {
-        const totalBlock = document.getElementById('total-block');
+    // Функция обновления общей суммы
+    function updateTotalDisplay() {
+        const totalContainer = document.querySelector('#total-price')?.closest('div');
         const totalPrice = document.getElementById('total-price');
+        let total = 0;
 
-        if (totalBlock && totalPrice) {
-            totalPrice.textContent = total.toLocaleString('uk-UA') + ' ₴';
-            totalBlock.classList.toggle('hidden', total <= 0);
+        document.querySelectorAll('.item-price').forEach(priceEl => {
+            const unitPrice = parseFloat(priceEl.dataset.unitPrice) || 0;
+            const itemContainer = priceEl.closest('.item-container');
+            const quantityText = itemContainer.querySelector('.quantity')?.textContent || "1";
+            const quantity = parseInt(quantityText) || 1;
+            total += unitPrice * quantity;
+        });
+
+        if (totalPrice && totalContainer) {
+            if (total > 0) {
+                totalPrice.textContent = total.toLocaleString('uk-UA') + ' ₴';
+                totalContainer.style.display = 'block';
+            } else {
+                totalContainer.style.display = 'none';
+            }
         }
     }
 
-    // Универсальная функция для обновления бейджа
+    // Функция обновления бейджа корзины
     function updateCartBadge(count) {
         const badge = document.querySelector('.cart-badge');
         if (!badge) {
-            // Создаем бейдж если его нет
             const cartLink = document.querySelector('.cart-link');
             if (cartLink) {
                 const newBadge = document.createElement('span');
@@ -199,6 +231,27 @@
         badge.textContent = count;
         badge.style.display = count > 0 ? 'flex' : 'none';
     }
+
+    // Функция показа/скрытия надписи о пустой корзине
+    function updateEmptyCartMessage() {
+        const emptyMessage = document.getElementById('empty-cart-message');
+        const itemsCount = document.querySelectorAll('.item-container').length;
+
+        if (emptyMessage) {
+            emptyMessage.style.display = itemsCount === 0 ? 'inline' : 'none';
+        }
+    }
+
+    // Функция показа/скрытия кнопки оформления заказа
+    function updateCheckoutVisibility() {
+        const checkoutSection = document.getElementById('checkout-section');
+        const itemsCount = document.querySelectorAll('.item-container').length;
+
+        if (checkoutSection) {
+            checkoutSection.style.display = itemsCount === 0 ? 'none' : 'block';
+        }
+    }
+
 </script>
 </body>
 </html>

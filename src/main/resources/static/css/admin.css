@@ -83,22 +83,22 @@ button:hover, input[type="submit"]:hover {
     gap: 5px; /* Отступы между полями */
 }
 
-.form-group {
+.confirm-order {
     display: flex; /* Горизонтальное выравнивание */
     align-items: center; /* Выравнивание по центру */
     margin-bottom: 15px; /* Отступ между группами полей */
     font-size: 18px;
 }
 
-.form-group input[type="text"],
-.form-group input[type="file"] {
+.confirm-order input[type="text"],
+.confirm-order input[type="file"] {
     flex: 1; /* Поля ввода займут больше места */
     padding: 8px; /* Внутренний отступ */
     border: 1px solid #ccc; /* Граница серого цвета */
     border-radius: 5px; /* Скругление углов */
 }
 
-.form-group label {
+.confirm-order label {
     flex: 1; /* Лейбл займет 1 часть */
     text-align: right; /* Выравнивание текста вправо */
     margin-right: 15px; /* Отступ между лейблом и полем ввода */
@@ -118,7 +118,7 @@ label {
     min-width: 180px; /* Минимальная ширина для надписей */
 }
 
-.order-container {
+.phone-container {
     display: flex; /* Вертикальное размещение */
     flex-direction: column; /* В столбик */
     align-items: center; /* Центрирование */

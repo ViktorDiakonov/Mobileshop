@@ -1,0 +1,179 @@
+
+/* Стили для ссылок */
+a {
+    text-decoration: none; /* Убираем подчеркивание текста ссылки */
+    color: black; /* Устанавливаем черный цвет текста */
+    font-family: "Grava Display", serif;
+}
+
+/* Кнопка отправки формы */
+.btn-submit {
+    background-color: forestgreen; /* Цвет фона кнопки */
+    color: white; /* Цвет текста кнопки */
+    border: none; /* Убираем границу */
+    display: inline-block; /* Для захвата всех отступов вокруг текста */
+    padding: 12px 20px; /* Внутренние отступы */
+    border-radius: 10px; /* Скругление углов */
+    cursor: pointer; /* Изменяем курсор при наведении */
+    font-size: 16px; /* Размер шрифта */
+    transition: background-color 0.3s; /* Плавное изменение цвета фона */
+}
+
+/* Изменение фона кнопки при наведении */
+.btn-submit:hover {
+    background-color: #4CAF50;/* Темно-зеленый цвет при наведении */
+}
+
+/* Общий стиль кнопок */
+.btn {
+    padding: 10px 15px; /* Внутренние отступы */
+    text-decoration: none; /* Убираем подчеркивание */
+    color: #fff; /* Белый цвет текста */
+    border-radius: 5px; /* Скругление углов */
+}
+
+/* Стили для кнопок */
+button {
+    font-family: "Arial", serif; /* Устанавливаем шрифт */
+}
+
+/* Стили для ссылок внутри кнопок */
+button a {
+    color: white; /* Белый текст */
+    text-decoration: none; /* Убираем подчеркивание */
+}
+
+/* Изменение фона при наведении на кнопку */
+.button:hover {
+    background-color: darkgreen; /* Темно-зеленый фон */
+}
+
+/* Форма с группами полей */
+.confirm-order {
+    margin: 15px 0; /* Отступы сверху и снизу */
+    text-align: center; /* Центрируем текст */
+    flex-direction: column; /* Элементы в колонку */
+}
+
+/* Подписи к полям формы */
+.confirm-order label {
+    margin-bottom: 2px; /* Отступ между подписью и полем */
+}
+
+h1, h2, h3, h4 {
+    text-align: center;
+    font-family: "Arial", serif;
+}
+
+input {
+    text-decoration: none;
+}
+
+input + span {
+    position: relative;
+}
+
+input + span::before {
+    position: absolute;
+    right: -20px;
+}
+
+input:invalid {
+    border: 2px solid coral;
+}
+
+input:invalid + span::before {
+    min-font-size: 9;
+    content: "*";
+    color: red;
+}
+
+input:valid + span::before {
+    content: "✓";
+    color: green;
+}
+
+/* кнопки формы ввода количества товаров - начало */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+li {
+    font-family: "Grava Display", serif;
+}
+
+p {
+    text-align: center;
+    font-family: "Grava Display", serif;
+}
+
+#phones-container {
+    max-width: 90%; /* Или другое значение в зависимости от дизайна */
+    margin: 0 auto;
+}
+
+#phoneImage {
+    max-height: 180px;
+}
+
+/* Для Chrome, Edge, Safari */
+#quantity::-webkit-inner-spin-button,
+#quantity::-webkit-outer-spin-button {
+    opacity: 1;
+    display: block;
+}
+
+/*поле выбора количества телефонов*/
+#quantity {
+    width: 50px;
+    text-align: center;
+    font-size: 16px;
+
+    /* Показываем стрелки всегда */
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Для Chrome, Edge, Safari */
+#quantity::-webkit-inner-spin-button,
+#quantity::-webkit-outer-spin-button {
+    opacity: 1;
+    display: block;
+}
+
+#rightSidebar {
+    background-color: white;
+    float: right;
+    width: 100%;
+}
+
+#rightHeader li {
+    margin-bottom: 15px; /* Увеличиваем отступ между элементами списка */
+}
+
+table {
+    margin: auto;
+}
+
+td {
+    width: auto;
+    font-family: "Grava Display", serif;
+}
+
+#totalPrice {
+    font-weight: bold;
+    color: #2e7d32;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}

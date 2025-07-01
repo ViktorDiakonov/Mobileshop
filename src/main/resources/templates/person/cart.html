@@ -3,107 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Кошик</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/order.css">
+    <link rel="stylesheet" type="text/css" href="/css/cart.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .item-container {
-            max-width: 800px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 20px auto;
-            padding: 10px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .item-container:hover {
-            background-color: #f9f9f9;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .item-link {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: inherit;
-            flex-grow: 1;
-        }
-
-        .phone-image {
-            height: 100px;
-            object-fit: contain;
-        }
-
-        .phone-info {
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
 </head>
+
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 <br>
 
-<nav style="margin-left: 50px;">
-    <a href="/mobileshop/" style="color: black; text-decoration: none;"><span><i class="fas fa-home home-icon"></i> Головна</span></a>
+<nav class="breadcrumb-nav">
+    <a href="/mobileshop/" class="breadcrumb-link">
+        <span><i class="fas fa-home home-icon"></i> Головна</span>
+    </a>
 </nav>
 
+<div class="phone-container">
+    <h1>
+        Ваш кошик
+        <span id="empty-cart-message" style="display: none; text-align: center;"> порожній.</span>
+    </h1>
 
-<h1>
-    Ваш кошик
-    <span id="empty-cart-message" style="display: none; text-align: center;"> порожній.</span>
-</h1>
+    <div th:each="item : ${items}" class="item-container">
+        <a th:href="@{/mobileshop/phone/{id}(id=${item.phone.id})}" class="item-link">
+            <img th:src="${item.phone.imagePath}" alt="Фото телефону" class="phone-image">
+            <div class="phone-info">
+                <p>
+                    <span th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' + ${item.phone.memorySize} + ' Gb -'"></span>
+                    <strong class="item-price"
+                            th:attr="data-unit-price=${item.phone.price}"
+                            th:text="${#numbers.formatInteger(item.phone.price * item.quantity, 0, 'DEFAULT')} + ' ₴'">
+                    </strong>
+                </p>
+            </div>
+        </a>
 
-<!-- Список товаров -->
-<div th:each="item : ${items}" class="item-container">
-    <a th:href="@{/mobileshop/phone/{id}(id=${item.phone.id})}" class="item-link">
-        <img th:src="${item.phone.imagePath}" alt="Фото телефону" class="phone-image">
-        <div class="phone-info">
-
-            <p>
-                <span th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' + ${item.phone.memorySize} + ' Gb -'"></span>
-                <strong class="item-price"
-                        th:attr="data-unit-price=${item.phone.price}"
-                        th:text="${#numbers.formatInteger(item.phone.price * item.quantity, 0, 'DEFAULT')} + ' ₴'">
-                </strong>
-            </p>
-
+        <div class="quantity-controls">
+            <button class="quantity-btn minus" th:data-id="${item.phone.id}">-</button>
+            <span class="quantity" th:text="${item.quantity}"></span>
+            <button class="quantity-btn plus" th:data-id="${item.phone.id}">+</button>
         </div>
-    </a>
 
-    <div class="quantity-controls">
-        <button class="quantity-btn minus" th:data-id="${item.phone.id}">-</button>
-        <span class="quantity" th:text="${item.quantity}"></span>
-        <button class="quantity-btn plus" th:data-id="${item.phone.id}">+</button>
+        <!-- Кнопка удаления -->
+        <form th:action="@{/mobileshop/cart/remove/{id}(id=${item.phone.id})}" method="post">
+            <button type="button" class="remove-item" style="color: red">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </form>
     </div>
 
-    <!-- Кнопка удаления -->
-    <form th:action="@{/mobileshop/cart/remove/{id}(id=${item.phone.id})}" method="post">
-        <button type="button" class="remove-item" style="color: red">
-            <i class="fas fa-trash-alt"></i>
-        </button>
-    </form>
-</div>
+    <div id="total-sum-block">
+        <br>
+        <h3>Сума до сплати:
+            <strong id="total-price" th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong>
+        </h3>
+    </div>
 
-<div id="total-sum-block">
-    <hr>
-    <br>
-    <h3>Сума до сплати:
-        <strong id="total-price" th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')} + ' ₴'"></strong>
-    </h3>
+    <!-- Кнопка оформления заказа -->
+    <div id="checkout-section" class="checkout-section" th:unless="${items.isEmpty()}">
+        <form th:action="@{/mobileshop/cart-order}" method="get">
+            <button type="submit" class="btn-submit">
+                Оформити замовлення
+            </button>
+        </form>
+    </div>
 </div>
-<!-- Кнопка оформления заказа -->
-<div id="checkout-section" class="checkout-section" th:unless="${items.isEmpty()}">
-    <form th:action="@{/mobileshop/cart-order}" method="get">
-        <button type="submit" class="btn-submit">
-            Оформити замовлення
-        </button>
-    </form>
-</div>
-<br>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -146,7 +112,6 @@
                     updateTotalDisplay();
 
                     // НЕ обновляем бейдж при изменении количества!
-
                 } catch (error) {
                     console.error('Ошибка:', error);
                     alert('Не вдалося оновити кількість');
@@ -253,5 +218,6 @@
     }
 
 </script>
+
 </body>
 </html>

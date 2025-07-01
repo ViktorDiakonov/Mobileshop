@@ -3,32 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Оформлення замовлення</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/order.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-
 <div th:replace="~{fragments/brand-sidebar :: brand-sidebar}"></div>
 
-<nav style="margin-left: 50px;">
-    <a href="/mobileshop/" style="color: black; text-decoration: none;"> <span><i class="fas fa-home home-icon"></i> Головна</span></a>
-    <span style="color: gray;"> &gt; </span>
-    <a th:href="@{/mobileshop/phones/{id}(id=${phone.getBrand().toLowerCase()})}"
-       style="color: black; text-decoration: none; font-family: Grava Display, serif">
+<nav class="breadcrumb-nav">
+    <a href="/mobileshop/" class="breadcrumb-link">
+        <span><i class="fas fa-home home-icon"></i> Головна</span>
+    </a>
+    <span class="breadcrumb-separator"> &gt; </span>
+    <a th:href="@{/mobileshop/phones/{id}(id=${phone.getBrand().toLowerCase()})}" class="breadcrumb-link">
         Смартфони <span th:text="${phone.getBrand()}"></span>
     </a>
-    <span style="color: gray;"> &gt; </span>
-    <span th:text="${phone.getModel()}"
-          style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
+    <span class="breadcrumb-separator"> &gt; </span>
+    <span th:text="${phone.getModel()}" class="breadcrumb-current"></span>
 </nav>
 
-<div class="order-container" style="margin-top: 50px">
+<div class="phone-container">
     <h2>Оформлення замовлення</h2>
     <br>
 
-    <form method="POST" th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.id})}"
-          th:object="${order}" novalidate>
+    <form method="POST" th:action="@{/mobileshop/{id}/quick-order-confirmation(id=${phone.id})}" th:object="${order}"
+          novalidate>
         <div class="phone-details">
             <img id="phoneImage" th:src="${phone.imagePath}" alt="Фото телефону">
             <div class="phone-info">
@@ -38,59 +40,46 @@
                 <br>
                 <p><strong>Ціна:</strong>
                     <span id="priceDisplay" th:text="${#numbers.formatInteger(phone.price, 0, 'DEFAULT')}"></span> ₴
-
-                <div style="display: flex; align-items: center;">
+                </p>
+                <div class="quantity-wrapper">
                     <div class="quantity-control">
                         <button type="button" class="btn-qty" onclick="decreaseQty()">−</button>
-                        <label for="quantity"></label><input type="number" id="quantity" name="quantity"
-                                                             min="1" max="100" value="1" required
-                                                             onkeydown="return false;"/>
+                        <label for="quantity"></label>
+                        <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required
+                               onkeydown="return false;"/>
                         <button type="button" class="btn-qty" onclick="increaseQty()">+</button>
                     </div>
-                    <span style="font-size: 16px; font-family: Grava Display, serif">&nbsp;шт.</span>
+                    <span class="unit-label">&nbsp;шт.</span>
                 </div>
                 <br>
-
                 <p><strong>Сума до сплати:</strong> <span id="totalPrice">0</span> ₴</p>
             </div>
         </div>
-        <hr style="width: 80%; margin: 0 auto; border: 1px solid grey;"/>
+
+        <hr class="divider">
         <br>
 
-        <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">
-            <!-- Поле имени с валидацией -->
+        <div class="form-wrapper">
             <div>
-                <div th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}"
-                     style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
-                    Помилка імені
-                </div>
-                <label for="personName" style="font-family: 'Grava Display', serif;">Ім'я покупця:</label>
-                <input style="border: 2px solid limegreen; border-radius: 5px; margin-bottom: 10px; padding: 5px;"
-                       type="text"
-                       th:field="*{personName}" id="personName" placeholder="вiд 2 до 20 літер" maxlength="20" required>
+                <div th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}" class="error-message"></div>
+                <label for="personName" class="form-label">Ім'я покупця:</label>
+                <input type="text" th:field="*{personName}" id="personName" placeholder="вiд 2 до 20 літер"
+                       maxlength="20" required class="input-green">
             </div>
-            <!-- Поле телефона с валидацией -->
             <div>
-                <div th:if="${#fields.hasErrors('personPhone')}" th:errors="*{personPhone}"
-                     style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
-                    Помилка номеру телефону
-                </div>
-                <label for="personPhone" style="font-family: 'Grava Display', serif;">Номер телефону:</label>
-                <input style="border: 2px solid limegreen; border-radius: 5px; margin-bottom: 10px; padding: 5px;"
-                       type="tel"
-                       th:field="*{personPhone}" id="personPhone" placeholder="380XXXXXXXXX" required>
+                <div th:if="${#fields.hasErrors('personPhone')}" th:errors="*{personPhone}" class="error-message"></div>
+                <label for="personPhone" class="form-label">Номер телефону:</label>
+                <input type="tel" th:field="*{personPhone}" id="personPhone" placeholder="380XXXXXXXXX" required
+                       class="input-green">
             </div>
         </div>
 
-        <!-- Поле комментария -->
-        <div style="display: flex; margin-top: 7px; justify-content: flex-end;">
-            <label for="personComment"></label><br>
-            <div style="display: flex; align-items: flex-end; gap: 58px;">
-                <div id="charCount" style="font-size: 14px; color: #777; white-space: nowrap;">0/150</div>
-                <textarea id="personComment" th:field="*{personComment}" placeholder="Додати коментар:"
-                          maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"
-                          style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px;
-                      font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+        <div class="comment-wrapper">
+            <label for="personComment"></label>
+            <div class="comment-box">
+                <div id="charCount" class="char-counter">0/150</div>
+                <textarea id="personComment" th:field="*{personComment}" placeholder="Додати коментар:" maxlength="150"
+                          rows="3" cols="50" oninput="updateCharacterCount()" class="comment-textarea"></textarea>
             </div>
         </div>
 
@@ -104,14 +93,14 @@
             </select>
         </p>
 
-        <div class="form-group">
+        <div class="confirm-order">
             <button type="submit" class="btn-submit">Підтвердити замовлення</button>
         </div>
     </form>
 </div>
 
 <script>
-    // ====== СКРИПТ ДЛЯ ПЕРЕСЧЕТА СУММЫ ======
+    // ====== ПЕРЕСЧЕТ СУММЫ ======
     const priceElement = document.getElementById('priceDisplay');
     const quantityInput = document.getElementById('quantity');
     const totalPriceElement = document.getElementById('totalPrice');
@@ -126,8 +115,7 @@
         if (totalPriceElement) {
             totalPriceElement.innerText = total.toLocaleString('uk-UA');
             // Анимация изменения цвета (опционально)
-            totalPriceElement.style.color = '#2e7d32';
-            setTimeout(() => totalPriceElement.style.color = '', 500);
+            totalPriceElement.style.color = 'black';
         }
     }
 
@@ -152,7 +140,7 @@
     quantityInput.addEventListener('change', updateTotalPrice);
     window.addEventListener('DOMContentLoaded', updateTotalPrice);
 
-    // ====== СКРИПТ ДЛЯ КОММЕНТАРИЯ ======
+    // ====== ДЛЯ КОММЕНТАРИЯ ======
     function updateCharacterCount() {
         let textArea = document.getElementById('personComment');
         let charCount = textArea.value.length;
@@ -160,7 +148,7 @@
         document.getElementById('charCount').textContent = charCount + '/' + maxLength;
     }
 
-    // ====== СКРИПТ ДЛЯ НОМЕРА ТЕЛЕФОНА ======
+    // ====== ДЛЯ НОМЕРА ТЕЛЕФОНА ======
     const phoneInput = document.getElementById('personPhone');
     if (!phoneInput.value) {
         phoneInput.value = '380';

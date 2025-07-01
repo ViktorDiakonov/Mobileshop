@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Замовлення оформлено</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/order.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-
 <div th:replace="~{fragments/header :: header}"></div>
-
 <div th:replace="~{fragments/brand-sidebar :: brand-sidebar}"></div>
 
-<div class="order-container">
+<nav class="breadcrumb-nav">
+    <a href="/mobileshop/" class="breadcrumb-link">
+        <i class="fas fa-home home-icon"></i> Головна
+    </a>
+</nav>
+
+<div class="phone-container" style="max-width: 620px">
     <h2 style="color: green">Ваше замовлення прийнято!</h2>
     <br>
 
@@ -24,8 +31,8 @@
             <p><strong>Вбудована пам'ять:</strong> <a th:text="${order.getMemorySize()}">VALUE</a> ГБ</p>
             <p><strong>Кількість:</strong> <a th:text="${order.getQuantity()}">VALUE</a> шт.</p>
             <br>
-            <p><strong>Сума до сплати:</strong> <a th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}">VALUE</a>
-                ₴</p>
+            <p><strong>Сума до сплати:</strong>
+                <a th:text="${#numbers.formatInteger(order.getPrice(), 0, 'DEFAULT')}">VALUE</a>₴</p>
         </div>
     </div>
     <br>
@@ -35,16 +42,16 @@
     </p>
     <br>
 
-    <p class="buy-info">Замовлення отримувати за адресою: <a th:text="${order.getPoint()}">VALUE</a></p>
+    <p>Замовлення отримувати за адресою: <a th:text="${order.getPoint()}">VALUE</a></p>
     <br>
 
-    <p class="buy-info"><b style="color: green">Чекайте на дзвінок оператора на вказаний Вами номер</b></p>
+    <p><b style="color: green">Чекайте на дзвінок оператора на вказаний Вами номер</b></p>
 </div>
 <br>
 
-<p>
-    <button type="submit" class="btn-submit"><a href="/mobileshop/">Повернутись на головну сторінку</a></button>
-</p>
+<!--<p>-->
+<!--    <button type="submit" class="btn-submit"><a href="/mobileshop/">Повернутись на головну сторінку</a></button>-->
+<!--</p>-->
 
 </body>
 </html>

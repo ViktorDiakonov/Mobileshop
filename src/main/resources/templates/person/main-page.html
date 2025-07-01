@@ -3,48 +3,21 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile shop</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
+    <link rel="stylesheet" type="text/css" href="/css/phone.css">
+    <link rel="stylesheet" type="text/css" href="/css/order.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Добавьте эти стили для кнопки корзины в списке */
-        .add-to-cart-btn {
-            padding: 7px 7px; /* Внутренние отступы */
-            outline: none; /* Убирает контур */
-            border: none; /* Если нужно убрать границу */
-            background-color: transparent; /* Прозрачный фон */
-        }
-
-        .add-to-cart-btn:hover {
-            background-color: #D3FDD6; /* Полупрозрачный фон при наведении */
-        }
-
-        .cart-icon {
-            width: 30px; /* или нужный вам размер */
-            height: 30px;
-        }
-
-        .btn-submit .cart-icon {
-            transition: transform 0.2s;
-        }
-
-        .btn-submit:hover .cart-icon {
-            transform: scale(1.1);
-        }
-
-        nav {
-             margin-left: 50px;
-             font-family: "Grava Display", serif;
-         }
-
-    </style>
 </head>
+
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-
 <div th:replace="~{fragments/brand-sidebar :: brand-sidebar}"></div>
 
-<nav>
-    <span><i class="fas fa-home home-icon"></i> Головна</span>
+<nav class="breadcrumb-nav">
+    <span class="breadcrumb-home">
+        <i class="fas fa-home home-icon"></i> Головна
+    </span>
 </nav>
 
 <h2 style="color: limegreen; font-family: 'Grava Display', serif;">Останні надходження</h2>
@@ -53,8 +26,7 @@
 <div id="phones-container" class="grid-view">
     <div th:each="phones : ${phone}" class="phone-item">
         <a th:href="@{/mobileshop/phone/{id}(id=${phones.getId()})}">
-            <img th:src="@{${phones.imagePath}}" alt="Фото телефону" style="max-height: 100px;"
-                 title="Перейти на товар">
+            <img th:src="@{${phones.imagePath}}" alt="Фото телефону" class="phone-image" title="Перейти на товар">
             <div>
                 <p title="Перейти на товар">
                     <span th:text="${phones.getBrand()}"></span>
@@ -64,18 +36,20 @@
             </div>
         </a>
 
-        <div style="display: flex; justify-content: center; align-items: center; gap: 20px">
-            <b><span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')} + ' ₴'"
-                     style="font-family: 'Grava Display', serif; font-size: 20px;"></span></b>
+        <div class="price-cart-container">
+            <b>
+                <span th:text="${#numbers.formatInteger(phones.getPrice(), 0, 'DEFAULT')} + ' ₴'"
+                      class="phone-price"></span>
+            </b>
             <button class="btn-submit add-to-cart-btn"
                     th:data-id="${phones.id}"
                     th:disabled="${cart != null && cart.containsItem(phones.id)}">
-            <span th:if="${cart != null && cart.containsItem(phones.id)}">
-                <img th:src="@{/img/site/add-cart.svg}" alt="У кошику" class="cart-icon">
-            </span>
+                <span th:if="${cart != null && cart.containsItem(phones.id)}">
+                    <img th:src="@{/img/site/add-cart.svg}" alt="У кошику" class="cart-icon">
+                </span>
                 <span th:unless="${cart != null && cart.containsItem(phones.id)}">
-                <img th:src="@{/img/site/photo-cart.png}" alt="Додати в кошик" class="cart-icon" title="До кошику">
-            </span>
+                    <img th:src="@{/img/site/photo-cart.png}" alt="Додати в кошик" class="cart-icon" title="До кошику">
+                </span>
             </button>
         </div>
     </div>
@@ -136,5 +110,6 @@
         badge.style.display = count > 0 ? 'flex' : 'none';
     }
 </script>
+
 </body>
 </html>

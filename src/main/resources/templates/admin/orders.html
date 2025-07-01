@@ -70,24 +70,6 @@
 </p>
 </body>
 <script>
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const timeSpans = document.querySelectorAll('#orderTable tbody tr td:nth-child(6) span');
-    //     let colorIndex = 0;
-    //     const colors = ['#ff5252', '#ffc107']; // Ярко-красный и желтый
-    //     let prevTime = '';
-    //
-    //     timeSpans.forEach(span => {
-    //         const currentTime = span.textContent.trim();
-    //
-    //         if (currentTime !== prevTime) {
-    //             colorIndex = (colorIndex + 1) % colors.length;
-    //             prevTime = currentTime;
-    //         } else {
-    //             span.style.color = colors[colorIndex];
-    //             span.style.fontWeight = 'bold';
-    //         }
-    //     });
-    // });
     document.addEventListener('DOMContentLoaded', function() {
         const rows = document.querySelectorAll('#orderTable tbody tr');
         const colorClasses = ['highlight-row-red', 'highlight-row-yellow']; // Классы для строк

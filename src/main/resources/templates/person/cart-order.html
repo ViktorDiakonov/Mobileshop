@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Оформлення замовлення</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/order.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
+<br>
 
-<div class="order-container">
+<nav class="breadcrumb-nav">
+    <a href="/mobileshop/" class="breadcrumb-link">
+        <i class="fas fa-home home-icon"></i> Головна
+    </a>
+</nav>
+
+<div class="phone-container">
     <h2>Оформлення замовлення</h2>
     <br>
-    <div th:each="item : ${cartItems}" class="cart-item"
-         style="display: flex; align-items: center; gap: 15px;">
+    <div th:each="item : ${cartItems}" class="cart-item">
 
-        <img th:src="@{${item.phone.imagePath}}" height="100" alt="Фото товару">
+        <img th:src="@{${item.phone.imagePath}}" height="80" alt="Фото товару">
 
         <div>
             <p th:text="${item.phone.brand} + ' ' + ${item.phone.model} + ' ' +
@@ -29,39 +38,27 @@
     <form th:action="@{/mobileshop/cart-order-confirmation}" method="post" th:object="${order}" novalidate>
         <br>
 
-        <div style="display: flex; flex-direction: column; align-items: flex-end; margin-right: 80px">
-            <!-- Поле имени с валидацией -->
+        <div class="form-wrapper">
             <div>
-                <div th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}"
-                     style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
-                    Помилка імені
-                </div>
-                <label for="personName" style="font-family: 'Grava Display', serif;">Ім'я покупця:</label>
-                <input style="border: 2px solid limegreen; border-radius: 5px; margin-bottom: 10px; padding: 5px;"
-                       type="text"
-                       th:field="*{personName}" id="personName" placeholder="вiд 2 до 20 літер" maxlength="20" required>
+                <div th:if="${#fields.hasErrors('personName')}" th:errors="*{personName}" class="error-message"></div>
+                <label for="personName" class="form-label">Ім'я покупця:</label>
+                <input type="text" th:field="*{personName}" id="personName" placeholder="вiд 2 до 20 літер"
+                       maxlength="20" required class="input-green">
             </div>
-            <!-- Поле телефона с валидацией -->
             <div>
-                <div th:if="${#fields.hasErrors('personPhone')}" th:errors="*{personPhone}"
-                     style="color: red; font-size: 14px; margin-bottom: 5px; text-align: right;">
-                    Помилка номеру телефону
-                </div>
-                <label for="personPhone" style="font-family: 'Grava Display', serif;">Номер телефону:</label>
-                <input style="border: 2px solid limegreen; border-radius: 5px; margin-bottom: 10px; padding: 5px;"
-                       type="tel"
-                       th:field="*{personPhone}" id="personPhone" placeholder="380XXXXXXXXX" required>
+                <div th:if="${#fields.hasErrors('personPhone')}" th:errors="*{personPhone}" class="error-message"></div>
+                <label for="personPhone" class="form-label">Номер телефону:</label>
+                <input type="tel" th:field="*{personPhone}" id="personPhone" placeholder="380XXXXXXXXX" required
+                       class="input-green">
             </div>
         </div>
 
-
-        <div style="display: flex; margin-top: 7px; justify-content: flex-end;">
-            <label for="personComment"></label><br>
-            <div style="display: flex; align-items: flex-end; gap: 58px;">
-                <div id="charCount" style="font-size: 14px; color: #777; white-space: nowrap;">0/150</div>
-                <textarea id="personComment" th:field="*{personComment}" placeholder="Додати коментар:"
-                          minlength="0" maxlength="150" rows="3" cols="50" oninput="updateCharacterCount()"
-                          style="text-align: left; vertical-align: top; resize: none; width: 70%; padding: 8px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+        <div class="comment-wrapper">
+            <label for="personComment"></label>
+            <div class="comment-box">
+                <div id="charCount" class="char-counter">0/150</div>
+                <textarea id="personComment" th:field="*{personComment}" placeholder="Додати коментар:" maxlength="150"
+                          rows="3" cols="50" oninput="updateCharacterCount()" class="comment-textarea"></textarea>
             </div>
         </div>
         <br>
@@ -74,29 +71,12 @@
                 <option value="Одеса, вул. Дерибасівська 3Д">Одеса, вул. Дерибасівська 3Д (09:00-22:00)</option>
             </select>
         </p>
-        <div class="form-group">
+        <div class="confirm-order">
             <button type="submit" class="btn-submit">Підтвердити замовлення</button>
         </div>
     </form>
 </div>
 <script>
-    // Автоматический расчет общей стоимости
-    const priceElement = document.getElementById('priceDisplay');
-    const quantityInput = document.getElementById('quantity');
-    const totalPriceElement = document.getElementById('totalPrice');
-
-    const unitPrice = parseFloat(priceElement.innerText.replace(/\s/g, ''));
-
-    function updateTotalPrice() {
-        const quantity = parseInt(quantityInput.value) || 1;
-        const total = unitPrice * quantity;
-        totalPriceElement.innerText = total.toLocaleString('uk-UA');
-        setTimeout(() => totalPriceElement.style.color = '#2e7d32', 500);
-    }
-
-    quantityInput.addEventListener('input', updateTotalPrice);
-    window.addEventListener('DOMContentLoaded', updateTotalPrice);
-
     // ====== СКРИПТ ДЛЯ КОММЕНТАРИЯ ======
     function updateCharacterCount() {
         let textArea = document.getElementById('personComment');
@@ -105,21 +85,24 @@
         document.getElementById('charCount').textContent = charCount + '/' + maxLength;
     }
 
-    // ====== СКРИПТ ДЛЯ НОМЕРА ТЕЛЕФОНА ======
+    // ====== ДЛЯ НОМЕРА ТЕЛЕФОНА ======
     const phoneInput = document.getElementById('personPhone');
-    if (!phoneInput.value) {
+    if (phoneInput && !phoneInput.value) {
         phoneInput.value = '380';
     }
 
-    phoneInput.addEventListener('input', function () {
-        if (!phoneInput.value.startsWith('380')) {
-            phoneInput.value = '380';
-        }
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function () {
+            if (!phoneInput.value.startsWith('380')) {
+                phoneInput.value = '380';
+            }
 
-        if (phoneInput.value.length > 12) {
-            phoneInput.value = phoneInput.value.substring(0, 12);
-        }
-    });
+            if (phoneInput.value.length > 12) {
+                phoneInput.value = phoneInput.value.substring(0, 12);
+            }
+        });
+    }
 </script>
+
 </body>
 </html>

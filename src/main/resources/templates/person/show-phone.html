@@ -3,56 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Телефон</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
+    <link rel="stylesheet" type="text/css" href="/css/phone.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .cart-icon {
-            width: 30px; /* или нужный вам размер */
-            height: 30px;
-        }
-
-        .add-to-cart-btn {
-            padding: 7px 7px; /* Внутренние отступы */
-            outline: none; /* Убирает контур */
-            border: none; /* Если нужно убрать границу */
-            background-color: transparent; /* Прозрачный фон */
-        }
-
-        .add-to-cart-btn:hover {
-            background-color: #D3FDD6; /* Полупрозрачный фон при наведении */
-        }
-
-        .cart-icon {
-            width: 30px; /* или нужный вам размер */
-            height: 30px;
-        }
-
-        .btn-submit .cart-icon {
-            transition: transform 0.2s;
-        }
-
-        .btn-submit:hover .cart-icon {
-            transform: scale(1.1);
-        }
-    </style>
 </head>
+
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-
 <div th:replace="~{fragments/brand-sidebar :: brand-sidebar}"></div>
 
-<nav style="margin-left: 50px;">
-    <a href="/mobileshop/" style="color: black; text-decoration: none;">  <span><i class="fas fa-home home-icon"></i> Головна</span></a>
-    <span style="color: gray;"> &gt; </span>
-    <a th:href="@{/mobileshop/phones/{id}(id=${phone.getBrand().toLowerCase()})}"
-       style="color: black; text-decoration: none; font-family: Grava Display, serif">
+<nav class="breadcrumb-nav">
+    <a href="/mobileshop/" class="breadcrumb-link">
+        <span><i class="fas fa-home home-icon"></i> Головна</span>
+    </a>
+    <span class="breadcrumb-separator"> &gt; </span>
+    <a th:href="@{/mobileshop/phones/{id}(id=${phone.getBrand().toLowerCase()})}">
         Смартфони <span th:text="${phone.getBrand()}"></span>
     </a>
-    <span style="color: gray;"> &gt; </span>
-    <span th:text="${phone.getModel()}" style="font-weight: bold; color: black; font-family: Grava Display, serif;"></span>
+    <span class="breadcrumb-separator"> &gt; </span>
+    <span th:text="${phone.getModel()}" class="breadcrumb-current"></span>
 </nav>
 
-<div class="order-container" style="margin-top: 50px">
+<div class="phone-container" style="margin-top: 50px">
     <h2>Смартфон:</h2>
     <br>
 
@@ -68,10 +41,10 @@
             <p><strong>Вбудована пам'ять: </strong><a th:text="${phone.getMemorySize()}">VALUE</a> Gb</p>
             <br>
 
-            <div class="price-and-cart-container" style="display: flex; align-items: center; gap: 10px;">
-                <p style="margin: 0;"><strong>Ціна: </strong><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴</p>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <p><strong>Ціна: </strong><a th:text="${#numbers.formatInteger(phone.getPrice(), 0, 'DEFAULT')}">VALUE</a> ₴</p>
 
-                <form th:action="@{/mobileshop/cart/add/{id}(id=${phone.id})}" method="post" style="margin: 0;">
+                <form th:action="@{/mobileshop/cart/add/{id}(id=${phone.id})}" method="post">
                     <button class="btn-submit add-to-cart-btn"
                             th:disabled="${cart != null && cart.containsItem(phone.id)}">
                     <span th:if="${cart != null && cart.containsItem(phone.id)}">
@@ -87,7 +60,7 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="confirm-order">
     <a th:href="@{/mobileshop/{id}/quick-order(id=${phone.getId()})}" class="btn-submit">Швидке замовлення</a>
 </div>
 

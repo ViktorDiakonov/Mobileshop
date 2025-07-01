@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
+    <link rel="stylesheet" type="text/css" href="/css/order.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Мои заказы</title>
 </head>
+
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
 <br>
 
-<nav style="margin-left: 50px;">
-    <a href="/mobileshop/" style="color: black; text-decoration: none;"><span><i class="fas fa-home home-icon"></i> Головна</span></a>
+<nav class="breadcrumb-nav">
+    <a href="/mobileshop/" class="breadcrumb-link">
+        <span><i class="fas fa-home home-icon"></i> Головна</span>
+    </a>
 </nav>
 
 <div th:if="${person != null}">
@@ -21,12 +26,12 @@
 <br>
 
 <div style="display: flex; justify-content: center; align-items: center; gap: 15px;">
-<!--    <a href="/mobileshop/" style="margin-right: 180px;" class="btn-submit">На головну</a>-->
     <a href="/mobileshop/logout" class="btn-submit">Вийти з облікового запису</a>
 </div>
 
-<div class="order-container" style="max-width: 700px">
+<div class="phone-container">
     <h3>Історія замовлень:</h3>
+    <br>
 
     <div th:each="order : ${orders}" class="cart-item">
         <div>
@@ -41,7 +46,6 @@
         </div>
     </div>
 </div>
-
 <br>
 <br>
 

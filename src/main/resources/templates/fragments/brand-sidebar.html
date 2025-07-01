@@ -3,67 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Mobile shop</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
 </head>
 <body>
 
-<div th:fragment="brand-sidebar" style="margin-top: 5px; width: 100%">
-    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-        <div style="width: 200px; text-align: center; border-right: 1px solid gray; padding-right: 20px; margin-right: 20px;">
+<div th:fragment="brand-sidebar" class="brand-sidebar">
+    <div class="brand-row">
+        <div class="brand-item">
             <a href="/mobileshop/phones/apple">
                 <img src="/img/site/iphone.png" width="30" height="30" alt="Apple">
             </a>
             <p><a href="/mobileshop/phones/apple">Apple</a></p>
         </div>
 
-        <div style="width: 200px; text-align: center; border-right: 1px solid gray; padding-right: 20px; margin-right: 20px;">
+        <div class="brand-item">
             <a href="/mobileshop/phones/xiaomi">
                 <img src="/img/site/mi.png" width="30" height="30" alt="Xiaomi">
             </a>
             <p><a href="/mobileshop/phones/xiaomi">Xiaomi</a></p>
         </div>
 
-        <div style="width: 200px; text-align: center;">
+        <div class="brand-item no-border">
             <a href="/mobileshop/phones/samsung">
                 <img src="/img/site/samsung.png" width="120" height="29" alt="Samsung">
             </a>
             <p><a href="/mobileshop/phones/samsung">Samsung</a></p>
         </div>
-    </div><hr style="border: none; height: 1px; background-color: limegreen; margin-top: 5px; margin-bottom: 5px">
+    </div>
+    <hr class="brand-divider">
 </div>
-
-
-
-<!--<div th:fragment="leftSidebar">-->
-<!--    <div class="widget" id="leftSidebar">-->
-<!--        <ul>-->
-<!--            <li>-->
-<!--                <div class="brand-item">-->
-<!--                    <a href="/mobileshop/phones/apple">-->
-<!--                        <img src="/img/site/iphone.png" alt="Apple">-->
-<!--                        <p>Apple</p>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <div class="brand-item">-->
-<!--                    <a href="/mobileshop/phones/xiaomi">-->
-<!--                        <img src="/img/site/mi.png" alt="Xiaomi">-->
-<!--                        <p>Xiaomi</p>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--            <li>-->
-<!--                <div class="brand-item">-->
-<!--                    <a href="/mobileshop/phones/samsung">-->
-<!--                        <img src="/img/site/samsung.png" alt="Samsung">-->
-<!--                        <p>Samsung</p>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
-
 </body>
 </html>

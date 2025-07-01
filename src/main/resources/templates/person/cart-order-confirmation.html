@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Замовлення оформлено</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/css/order.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
+<br>
 
-<div class="order-container">
+<nav class="breadcrumb-nav">
+    <a href="/mobileshop/" class="breadcrumb-link">
+        <i class="fas fa-home home-icon"></i> Головна
+    </a>
+</nav>
+
+<div class="phone-container" style="max-width: 620px">
     <h2 style="color: green">Ваше замовлення прийнято!</h2>
-    <div th:each="order : ${orders}" class="order-item" style="display: flex; align-items: center; gap: 15px;">
+    <div class="order-item" th:each="order : ${orders}">
         <img th:src="@{${order.imagePath}}" height="100" alt="Зображення товару">
         <div>
             <p th:text="${order.brand} + ' ' + ${order.model} + ' ' + ${order.getMemorySize()} +
@@ -19,9 +29,7 @@
         </div>
     </div>
 
-    <h2>Сума до сплати:
-        <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span>₴
-    </h2>
+    <h2>Сума до сплати: <span th:text="${#numbers.formatInteger(total, 0, 'DEFAULT')}"></span>₴</h2>
     <br>
 
     <p th:if="${order.personComment != null && !order.personComment.isEmpty()}">
@@ -29,14 +37,14 @@
     </p>
     <br>
 
-    <p class="buy-info">Замовлення отримувати за адресою: <span th:text="${orders[0].point}">VALUE</span></p>
+    <p>Замовлення отримувати за адресою: <span th:text="${orders[0].point}">VALUE</span></p>
     <br>
 
-    <p class="buy-info"><b style="color: green">Чекайте на дзвінок оператора</b></p>
+    <p><b style="color: green">Чекайте на дзвінок оператора</b></p>
 </div>
 
-<p>
-    <a href="/mobileshop/" class="btn-submit">Повернутись на головну</a>
-</p>
+<!--<p>-->
+<!--    <a href="/mobileshop/" class="btn-submit">Повернутись на головну</a>-->
+<!--</p>-->
 </body>
 </html>

@@ -1,0 +1,49 @@
+.checkout-section {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.item-container {
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.item-container:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.item-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+    flex-grow: 1;
+}
+
+.phone-image {
+    height: 80px;
+    object-fit: contain;
+}
+
+.phone-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ??? */
+}
+
+.phone-info p {
+    margin: 2px 0; /* Минимальные внешние отступы сверху и снизу */
+    padding: 3px; /* Убираем внутренние отступы */
+    line-height: 1; /* Уменьшаем межстрочный интервал */
+}
+
+

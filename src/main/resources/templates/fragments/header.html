@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobile shop</title>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/fragments.css">
 </head>
 <body>
 
 <div th:fragment="header">
-    <div id="header" class="flex-container">
+    <div class="header flex-container">
         <div id="leftHeader" class="sidebar">
             <a href="/mobileshop/" title="На головну">
                 <h1>Mobile Shop</h1>
@@ -32,13 +32,6 @@
                 <i class="fa-solid fa-user-large"></i> Кабінет
             </a>
 
-<!--            <a href="/mobileshop/cart" class="cart-link">-->
-<!--                <i class="fas fa-shopping-cart"></i>-->
-<!--                <span th:if="${#ctx.containsVariable('cart') and cart.items.size() > 0}"-->
-<!--                      th:text="${cart.items.size()}"-->
-<!--                      class="cart-badge"></span>-->
-<!--                <span>Кошик</span>-->
-<!--            </a>-->
             <a href="/mobileshop/cart" class="cart-link">
                 <i class="fas fa-shopping-cart"></i>
                 <span th:if="${cart?.items != null and not cart.items.isEmpty()}"

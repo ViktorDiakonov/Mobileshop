@@ -118,14 +118,6 @@ label {
     min-width: 180px; /* Минимальная ширина для надписей */
 }
 
-.phone-container {
-    display: flex; /* Вертикальное размещение */
-    flex-direction: column; /* В столбик */
-    align-items: center; /* Центрирование */
-    text-align: left; /* Текст слева */
-    margin-top: 20px; /* Отступ сверху */
-}
-
 .order-container-admin {
     text-align: left; /* Текст выровнен по левому краю */
     max-width: 700px; /* Максимальная ширина */
@@ -159,6 +151,14 @@ label {
 .phone-image img {
     max-height: 250px; /* Максимальная высота изображения */
     border-radius: 5px; /* Скругление углов */
+}
+
+.phone-container {
+    display: flex; /* Вертикальное размещение */
+    flex-direction: column; /* В столбик */
+    align-items: center; /* Центрирование */
+    text-align: left; /* Текст слева */
+    margin-top: 20px; /* Отступ сверху */
 }
 
 .submit-button {

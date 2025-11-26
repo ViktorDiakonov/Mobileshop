@@ -122,29 +122,27 @@
         // Обработка удаления товара
         document.querySelectorAll('.remove-item').forEach(btn => {
             btn.addEventListener('click', async function () {
-                if (confirm('Видалити товар з кошика?')) {
-                    try {
-                        const form = this.closest('form');
-                        const response = await fetch(form.action, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            }
-                        });
-
-                        if (response.ok) {
-                            const data = await response.json();
-                            form.closest('.item-container').remove();
-
-                            // Обновляем сумму, бейдж, надпись о пустой корзине и кнопку оформления
-                            updateTotalDisplay();
-                            updateCartBadge(data.count);
-                            updateEmptyCartMessage();
-                            updateCheckoutVisibility();
+                try {
+                    const form = this.closest('form');
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
                         }
-                    } catch (error) {
-                        console.error('Помилка видалення:', error);
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        form.closest('.item-container').remove();
+
+                        // Обновляем сумму, бейдж, надпись о пустой корзине и кнопку оформления
+                        updateTotalDisplay();
+                        updateCartBadge(data.count);
+                        updateEmptyCartMessage();
+                        updateCheckoutVisibility();
                     }
+                } catch (error) {
+                    console.error('Помилка видалення:', error);
                 }
             });
         });
@@ -216,7 +214,6 @@
             checkoutSection.style.display = itemsCount === 0 ? 'none' : 'block';
         }
     }
-
 </script>
 
 </body>

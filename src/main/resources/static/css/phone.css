@@ -217,6 +217,13 @@
     font-size: 18px; /* размер шрифта*/
 }
 
+.results-count {
+    color: #666;
+    font-size: 17px;
+    margin-top: 20px;
+    text-align: center;
+}
+
 .search-header {
     margin-left: 50px;
     margin-bottom: 20px;
@@ -225,13 +232,6 @@
 .search-query {
     font-weight: bold;
     color: #2a5885;
-}
-
-.results-count {
-    color: #666;
-    font-size: 17px;
-    margin-top: 20px;
-    text-align: center;
 }
 
 .sort-container {

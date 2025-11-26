@@ -1,4 +1,38 @@
 
+.brand-sidebar {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.brand-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.brand-item {
+    width: 200px;
+    text-align: center;
+    border-right: 1px solid gray;
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.brand-item.no-border {
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.brand-divider {
+    border: none;
+    height: 1px;
+    background-color: limegreen;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .cart-badge {
     position: absolute;
     top: -10px;
@@ -15,7 +49,14 @@
     line-height: 1;
 }
 
-/* Подключение Font Awesome для иконки корзины ???*/
+.cart-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
 .fa-shopping-cart {
     font-size: 1.2em;
     margin-right: 5px;
@@ -31,16 +72,27 @@
     left: 0;                  /* Выравнивание по левому краю */
 }
 
+/*.header {*/
+/*    height: 120px;*/
+/*    padding: 5px;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    width: 100%;*/
+/*    box-sizing: border-box; !* Важно! *!*/
+/*    flex-wrap: wrap; !* Чтобы всё переносилось на маленьких экранах *!*/
+/*    gap: 20px;*/
+/*}*/
+
 .header {
-    height: 120px;
-    padding: 5px;
+    padding: 1px;
+    box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap; /* позволяет сжиматься и переноситься */
+    gap: 30px; /* расстояние между элементами */
     align-items: center;
-    width: 100%;
-    box-sizing: border-box; /* Важно! */
-    flex-wrap: wrap; /* Чтобы всё переносилось на маленьких экранах */
-    gap: 20px;
+    flex: 1; /* гибкий блок */
+    width: 100%
 }
 
 .right-header {
@@ -103,57 +155,4 @@
     .search-form input[type="text"] {
         width: 100%;
     }
-}
-
-.header {
-    padding: 1px;
-    box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap; /* позволяет сжиматься и переноситься */
-    gap: 30px; /* расстояние между элементами */
-    align-items: center;
-    flex: 1; /* гибкий блок */
-    width: 100%
-}
-
-.cart-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-}
-
-.brand-sidebar {
-    margin-top: 5px;
-    width: 100%;
-}
-
-.brand-row {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.brand-item {
-    width: 200px;
-    text-align: center;
-    border-right: 1px solid gray;
-    padding-right: 20px;
-    margin-right: 20px;
-}
-
-.brand-item.no-border {
-    border-right: none;
-    padding-right: 0;
-    margin-right: 0;
-}
-
-.brand-divider {
-    border: none;
-    height: 1px;
-    background-color: limegreen;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }

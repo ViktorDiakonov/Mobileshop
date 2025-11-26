@@ -15,51 +15,19 @@
     color: gray;
 }
 
-.quantity-wrapper {
-    display: flex;
+.cart-item {
     align-items: center;
-}
-
-.unit-label {
-    font-size: 16px;
-    font-family: 'Grava Display', serif;
-}
-
-.divider {
-    width: 80%;
-    margin: 0 auto;
-    border: 1px solid grey;
-}
-
-.form-wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-right: 80px;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
 }
 
-.input-green {
-    border: 2px solid limegreen;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    padding: 5px;
-}
-
-.form-label {
-    font-family: 'Grava Display', serif;
-}
-
-.error-message {
-    color: red;
+.char-counter {
     font-size: 14px;
-    margin-bottom: 5px;
-    text-align: right;
-}
-
-.comment-wrapper {
-    display: flex;
-    margin-top: 7px;
-    justify-content: flex-end;
+    color: #777;
+    white-space: nowrap;
 }
 
 .comment-box {
@@ -79,36 +47,34 @@
     border: 1px solid #ccc;
 }
 
-.char-counter {
-    font-size: 14px;
-    color: #777;
-    white-space: nowrap;
-}
-
-.cart-item {
-    align-items: center;
+.comment-wrapper {
     display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
+    margin-top: 7px;
+    justify-content: flex-end;
 }
 
-/*.phone-container {*/
-/*    max-width: 620px;*/
-/*    margin: 30px auto;*/
-/*    border: 1px solid #ccc;*/
-/*    border-radius: 10px;*/
-/*    padding: 20px;*/
-/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);*/
-/*}*/
-.phone-container {
-    width: fit-content;           /* ширина под контент */
-    margin: 30px auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 50px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+.divider {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid grey;
+}
+
+.form-label {
+    font-family: 'Grava Display', serif;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 80px;
+}
+
+.input-green {
+    border: 2px solid limegreen;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
 }
 
 .order-item {
@@ -119,6 +85,50 @@
     padding: 15px;
     background: #f9f9f9;
     border-radius: 8px;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.phone-container {
+    width: fit-content;           /* ширина под контент */
+    margin: 30px auto;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.pickup-select {
+    width: 100%;
+    max-width: 390px;
+    margin-top: 6px;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    appearance: none; /* убирает стандартную стрелку */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+.pickup-select:focus {
+    border-color: #2e7d32;
+    outline: none;
+}
+
+.pickup-select option {
+    padding: 8px;
+    font-size: 15px;
 }
 
 .phone-details {
@@ -173,4 +183,14 @@
 
 .quantity-control .btn-qty:hover {
     background-color: #2e7d32;
+}
+
+.quantity-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.unit-label {
+    font-size: 16px;
+    font-family: 'Grava Display', serif;
 }
